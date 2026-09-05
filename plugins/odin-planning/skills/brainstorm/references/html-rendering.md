@@ -1,17 +1,17 @@
 # HTML Rendering
 
-This is a format-rendering reference — it describes how to render any artifact in HTML, independent of which skill is producing it.
+This is a format-rendering reference: it describes how to render any artifact in HTML, independent of which skill is producing it.
 
 It is paired with a section contract (`brainstorm-sections.md`, etc.) that describes *what* the artifact contains. This reference describes *how* HTML specifically presents it.
 
-The HTML artifact is the *only* artifact the skill produces for that run — output mode is exclusive (markdown OR HTML, never both). Readers of the HTML artifact (`/work`, humans) use it directly. `/doc-review` is *not* currently an HTML consumer — its mutation mechanics are markdown-only, so the Phase 4 handoff gates the doc-review pass to `OUTPUT_FORMAT=md` runs and skips it for HTML.
+The HTML artifact is the *only* artifact the skill produces for that run, output mode is exclusive (markdown OR HTML, never both). Readers of the HTML artifact (`/work`, humans) use it directly. `/doc-review` is *not* currently an HTML consumer, its mutation mechanics are markdown-only, so the Phase 4 handoff gates the doc-review pass to `OUTPUT_FORMAT=md` runs and skips it for HTML.
 
 ## Hard invariants
 
 These hold regardless of which skill produced the artifact.
 
 - Single self-contained HTML5 file. No companion `.css`, `.js`, or `.svg` files. CSS lives in `<style>`. SVG lives inline. Images are base64 data URIs or inline SVG. The one permitted exception is a `<link rel="stylesheet">` to a CDN webfont CSS endpoint (Google Fonts, Bunny Fonts, etc.), paired with an offline-readable fallback font stack.
-- All metadata appears as visible text — single source of truth. The artifact's metadata (title, type, date, etc. — exact fields per-skill, defined in the section contract) renders as visible HTML elements. No hidden machine-readable copy: no `<script type="application/json">` frontmatter block, no `data-*` attribute mirror, and no `<meta name="created">` / `<meta name="origin">` in `<head>` duplicating visible values.
+- All metadata appears as visible text: single source of truth. The artifact's metadata (title, type, date, etc.; exact fields per-skill, defined in the section contract) renders as visible HTML elements. No hidden machine-readable copy: no `<script type="application/json">` frontmatter block, no `data-*` attribute mirror, and no `<meta name="created">` / `<meta name="origin">` in `<head>` duplicating visible values.
 
   The text-and-attribute redundancy in `<time datetime="2026-05-12">2026-05-12</time>` is acceptable because the attribute is a parser hint, not a hidden copy.
 - Stable IDs as anchor IDs AND visible text. Every ID-bearing item (R-IDs, U-IDs, A-IDs, F-IDs, AE-IDs, KTDs) gets `id="r1"` on its element AND appears as visible text inside the element.
@@ -24,10 +24,10 @@ These hold regardless of which skill produced the artifact.
 
 Honor user style preferences in this order (highest to lowest):
 
-1. **In-session conversation** — explicit direction the user gave this run.
+1. **In-session conversation**: explicit direction the user gave this run.
 2. **Preferred stylesheet reference** named in loaded agent-instruction context (typically `AGENTS.md` / `CLAUDE.md`, but scan loaded context; do not enumerate locations). The reference may be a file path, a URL, a named library, or a style brand. Agent-instruction files carry deliberate agent-aware preferences, so this tier sits above `DESIGN.md`.
 3. **`DESIGN.md` discovered on the filesystem** (see "DESIGN.md discovery" below).
-4. **Fallback default** — the palette / typography choices the agent makes when no preference exists.
+4. **Fallback default**: the palette / typography choices the agent makes when no preference exists.
 
 ### Active-recall at compose time
 
@@ -44,7 +44,7 @@ When tier 3 applies, look for `DESIGN.md` in these locations, first match wins:
 
 Read once at compose time. Absent → fall through to the fallback default.
 
-Worktree-root only — do not fall through to a main checkout.
+Worktree-root only: do not fall through to a main checkout.
 
 **DESIGN.md is a partial override, not all-or-nothing.** Take the brand's scale-independent identity literally, own the scale-dependent layout values yourself, and skip decoration.
 
@@ -56,14 +56,14 @@ Specific cases:
 
 - **Fonts: load only open webfonts; never attempt a proprietary brand face.** A self-contained doc can only load an open webfont via the permitted webfont `<link>` plus an offline fallback stack. Assume a bespoke brand face is proprietary and do not attempt to load it. Load a named face only when it is a known open webfont (Inter, Geist, Cal Sans, Roboto…). Honor the DESIGN.md's declared roles (`body` / `display` / `mono`) and never promote a display/decorative face into a body or small-text role.
 - **Typography-scale mismatch.** When the size scale looks product-scaled (the common case), use the **family**, **weight**, and **OpenType feature** assignments and pick the agent's own size scale. Apply DESIGN.md sizes literally only when clearly doc-scaled.
-- **Scope mismatch (product UI vs doc surface).** A DESIGN.md aimed at product marketing or app UI may name button states, input borders, or hero backgrounds tied to *that* surface, not a generic doc. A reading canvas transfers literally and should be the doc background; a bright product/marketing-hero surface does not — extract the principle rather than the literal value.
+- **Scope mismatch (product UI vs doc surface).** A DESIGN.md aimed at product marketing or app UI may name button states, input borders, or hero backgrounds tied to *that* surface, not a generic doc. A reading canvas transfers literally and should be the doc background; a bright product/marketing-hero surface does not; extract the principle rather than the literal value.
 - **Partial coverage.** When DESIGN.md defines some categories but not others, use it for what it covers and the fallback default for the rest.
 
 ## Format principles
 
 ### Readable measure, not full bleed
 
-Long-form text is unreadable at full viewport width — past ~80 characters per line the eye loses the return sweep. As a fallback default, center the document in a content container and hold prose to a comfortable measure.
+Long-form text is unreadable at full viewport width: past ~80 characters per line the eye loses the return sweep. As a fallback default, center the document in a content container and hold prose to a comfortable measure.
 
 - **Page container.** A centered column with max-width in the ~820-960px band (`margin-inline: auto`) keeps the doc off the far edges of wide monitors.
 - **Prose measure.** Hold running paragraphs to roughly 65-80 characters (`max-width: ~70ch` on text blocks).
@@ -73,7 +73,7 @@ Express the constraint in `ch`/`rem` rather than a single hardcoded pixel value 
 
 ### Markdown source is content, not design
 
-When markdown (or markdown-shaped chat context) is part of the input, use it for semantic content — what the doc is about, what sections exist, what facts each section establishes. Do NOT treat its bullet-vs-table presentation choices as authoritative; re-choose the rendering per content shape in HTML's richer affordance space.
+When markdown (or markdown-shaped chat context) is part of the input, use it for semantic content: what the doc is about, what sections exist, what facts each section establishes. Do NOT treat its bullet-vs-table presentation choices as authoritative; re-choose the rendering per content shape in HTML's richer affordance space.
 
 ### Prose is authoritative
 
@@ -126,7 +126,7 @@ Reserve accent text color for status chips, ID chips, links, and section borders
 
 ### Chips and pills: uniform shape, no one-sided accent
 
-Status chips, ID chips, and metric pills in the same row share one shape — same border-radius, border weight, and fill treatment. Differentiate categories only by the chip's overall fill/text color (applied to the whole pill), never by an accent on one edge.
+Status chips, ID chips, and metric pills in the same row share one shape: same border-radius, border weight, and fill treatment. Differentiate categories only by the chip's overall fill/text color (applied to the whole pill), never by an accent on one edge.
 
 ### No JS framework runtimes
 
@@ -136,12 +136,12 @@ A small inline `<script>` for active-section TOC tracking or anchor-permalink be
 
 How section types commonly render in HTML. These are patterns, not contracts.
 
-- Summary / Problem Frame — semantic `<section>` with prose paragraphs. Optionally precede with an eyebrow label.
-- Requirements — `<table>` is the default at 5+ uniform items; bullets at smaller counts. Concern-grouping takes precedence: group under bold inline headers (or per-group sections) first, then apply the 5+ table default *within* each group. Each row has the R-ID as visible text in its own column.
-- Implementation Units — repeating `<article>` cards with a stable ID chip, a metadata strip (`<dl>` with field labels and values), and secondary content inside `<details>` collapsibles, **default-closed**. At 3+ units the default-closed rule is load-bearing. The metadata strip is for *descriptive* fields; a *directive* field (e.g., "start with a failing integration test") belongs in an advisory callout.
-- Key Technical Decisions — repeating cards with the decision ID, bold decision title, and prose rationale. Flat cards, not collapsibles.
-- Risks — cards with a color-coded status eyebrow and prose body.
-- Scope Boundaries — callout cards distinguished by colored eyebrow/label plus subtle full-card tint.
+- Summary / Problem Frame: semantic `<section>` with prose paragraphs. Optionally precede with an eyebrow label.
+- Requirements: `<table>` is the default at 5+ uniform items; bullets at smaller counts. Concern-grouping takes precedence: group under bold inline headers (or per-group sections) first, then apply the 5+ table default *within* each group. Each row has the R-ID as visible text in its own column.
+- Implementation Units: repeating `<article>` cards with a stable ID chip, a metadata strip (`<dl>` with field labels and values), and secondary content inside `<details>` collapsibles, **default-closed**. At 3+ units the default-closed rule is load-bearing. The metadata strip is for *descriptive* fields; a *directive* field (e.g., "start with a failing integration test") belongs in an advisory callout.
+- Key Technical Decisions: repeating cards with the decision ID, bold decision title, and prose rationale. Flat cards, not collapsibles.
+- Risks: cards with a color-coded status eyebrow and prose body.
+- Scope Boundaries: callout cards distinguished by colored eyebrow/label plus subtle full-card tint.
 
 The agent picks more elaborate or simpler shapes based on content.
 
@@ -151,7 +151,7 @@ When the section contract calls for a diagram (architecture, sequence, flowchart
 
 **Conceptual diagrams are not wireframes.** The wireframe affordance below is scoped to *UI-shaped requirements*; a data model, sync protocol, or agent workflow earns a conceptual diagram.
 
-**Diagrams complement prose; they never replace it.** The IDed prose stays complete and standalone — a reader who ignores every diagram still gets the full content in text, and a text-reading downstream agent is never left with a relationship that exists only in the picture.
+**Diagrams complement prose; they never replace it.** The IDed prose stays complete and standalone; a reader who ignores every diagram still gets the full content in text, and a text-reading downstream agent is never left with a relationship that exists only in the picture.
 
 ### Layout legibility for hand-authored SVG
 
@@ -176,19 +176,19 @@ When a wireframe is included:
 - **Fidelity ceiling: wireframe, not mockup.** Gray boxes for layout regions, text labels for content placeholders, intentional placeholder copy (`[Product name]`, `[CTA label]`, `[user avatar]`). No pixel-perfect colors, typography, component-library references.
 - **Static only.** Inline SVG or simple HTML/CSS for layout. No JS interaction, working form fields, state changes, live data.
 - **Anti-padding.** One wireframe per distinct visual concept.
-- **Mandatory directional caption.** Every wireframe carries a "directional, not the spec" note: *"Directional only — illustrates the intended user-facing shape. Exact colors, spacing, copy, and component choices are placeholders for review, not requirements."*
+- **Mandatory directional caption.** Every wireframe carries a "directional, not the spec" note: *"Directional only: illustrates the intended user-facing shape. Exact colors, spacing, copy, and component choices are placeholders for review, not requirements."*
 
 ## Affordance idioms
 
 Common HTML affordances the agent can reach for when content benefits:
 
-- Sticky TOC sidebar — available when navigation will materially help and implementation is reliable. For most long docs, default-closed `<details>` on repeating cards already cuts visible scroll length enough.
+- Sticky TOC sidebar: available when navigation will materially help and implementation is reliable. For most long docs, default-closed `<details>` on repeating cards already cuts visible scroll length enough.
 - Within-section sub-nav for sections with 6+ repeating cards.
 - Eyebrow labels (small-caps tag above section titles) for editorial polish.
 - Stats strip at the top when the artifact has 3+ quantifiable signals.
 - `<details>` + `<summary>` for collapsible secondary content inside repeating cards. All collapsibles start closed.
 - Side-by-side columns for parallel content.
-- Tinted callout cards for content that is "different in kind" — Deferred, Open Questions, advisory notes. Tint the whole card; avoid a colored stripe on one edge.
+- Tinted callout cards for content that is "different in kind": Deferred, Open Questions, advisory notes. Tint the whole card; avoid a colored stripe on one edge.
 
 ## Agent-consumability rules
 
@@ -197,7 +197,7 @@ Downstream agents that read HTML today (`/work`, a skill re-reading its own prio
 - Use semantic HTML over `<div>` soup. `<article>` per unit card, `<dl>` for metadata pairs, `<table>` for tabular content, `<details>` / `<summary>` for collapsibles, `<section>` for top-level doc sections.
 - Render field labels as visible text, not attributes. Emit `<dt>GOAL</dt><dd>...</dd>`, not `<dd data-field="goal">...</dd>`.
 - Keep U-IDs, R-IDs, and similar as visible text in headings and table cells, not only as `id=""` attributes.
-- Match section heading vocabulary to the section contract. When the contract says "Implementation Units," the HTML heading is "Implementation Units" — not "How we'll build it."
+- Match section heading vocabulary to the section contract. When the contract says "Implementation Units," the HTML heading is "Implementation Units", not "How we'll build it."
 - All semantic content lives in actual HTML text. No CSS `::before { content: "..." }` carrying meaning, no background images as content.
 - Stable structure is the public API. Element types, ID/label scheme, and field-label vocabulary do not break across versions. Visual styling can change freely.
 
@@ -215,7 +215,7 @@ Before returning the artifact, scan for common slips:
 - Body `<strong>` is not colored with accent palette.
 - No one-edge colored accent on chips, pills, or callout cards.
 - `<details>` inside repeating cards have no `open` attribute.
-- Diagram labels are legible — no arrow paths crossing text.
+- Diagram labels are legible, no arrow paths crossing text.
 - Diagrams complement prose, not replace it.
 - No JS framework runtimes included.
 - Each heading level is visually distinct.

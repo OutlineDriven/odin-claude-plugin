@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual Diagram"
+  short_description: "Use when asked to diagram, or a tool or --quick flag renders a structured spec to HTML."

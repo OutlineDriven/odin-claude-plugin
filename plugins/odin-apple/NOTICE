@@ -9,12 +9,11 @@ EveryInc/compound-engineering-plugin
 Source: https://github.com/EveryInc/compound-engineering-plugin/tree/a1f601f17137f648be439965f8fdd9123303de5d
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2025 Every
-Local adaptations: autolearn, autopilot, brainstorm,
-  changed-route-browser-testing, commit, compound, diff-scoped-browser-qa,
-  doc-review, document-collaboration, explainer-artifact, feedback-sweep,
-  ideate, model-retuning, optimize, plan, pov, product-signal-pulse,
-  recorded-feedback-analysis, release-promotion, resolve-pr-feedback, review,
-  simplify, strategy, subagent-driven, work, worktree, xcode-simulator-testing
+Local adaptations: autolearn, autopilot, brainstorm, changed-route-browser-testing, commit,
+  compound, diff-scoped-browser-qa, doc-review, document-collaboration, explainer-artifact,
+  feedback-sweep, model-retuning, optimize, plan, pov, product-signal-pulse,
+  recorded-feedback-analysis, release-promotion, resolve-pr-feedback, review, simplify,
+  strategy, subagent-driven, work, worktree, xcode-simulator-testing
 
 EveryInc/compound-knowledge-plugin
 Source: https://github.com/EveryInc/compound-knowledge-plugin/tree/766942e9eaee5204adbfe180f1d0651ffecf2575/plugins/compound-knowledge
@@ -32,23 +31,19 @@ Leonxlnx/unlazy
 Source: https://github.com/Leonxlnx/unlazy/tree/ed9e8d2b5919698cf2c54bda270d507e10b69617
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Leonxlnx
-Local adaptations: unlazy
+Local adaptations: gate-file-completion
 
 LilMGenius/paperthin
 Source: https://github.com/LilMGenius/paperthin/tree/3bca079a51bcfff5dafb53d1d7f9f523d66ee317
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 LilMGenius
-Local adaptations: autolearn, catchup, clarify, clean-and-true, commit-economy,
-  cross-lens-converge, cross-run-playbook, cycle-memo,
-  debloat-respect-richness, decision-rationale-gaps, deslop,
-  evaluation-leakage-audit, framing-divergence-fanout, fresh-reader-review,
-  generalize, guardrail-carve-run, instruction-understanding-gate,
-  intent-proposal, land-contribution, mutual-sync, next-best-action,
-  post-change-check-gate, prism, release-gate, reorder,
-  reorder-respect-deliberate, restart-keeping-lessons, rewrite-clean-v0,
-  rewrite-denoise-v0, seed-casebook, size-the-run, ssotize-audit-fold,
-  todos-update, unslop, upgrade-catalog, validation-self-audit,
-  verify-both-ways
+Local adaptations: autolearn, catchup, askme, clean-and-true, commit, cross-lens-converge,
+  cross-run-playbook, cycle-memo, debloat-respect-richness, decision-rationale-gaps, deslop,
+  evaluation-leakage-audit, fresh-reader-review, generalize, guardrail-carve-run,
+  instruction-understanding-gate, land-contribution, mutual-sync, next-best-action,
+  post-change-check-gate, prism, release-gate, reorder, reorder-respect-deliberate,
+  restart-keeping-lessons, rewrite-clean-v0, rewrite-denoise-v0, seed-casebook,
+  size-the-run, ssotize-audit-fold, todos-update, unslop, upgrade-catalog, verify-both-ways
 
 WhatIfWeDigDeeper/agent-skills
 Source: https://github.com/WhatIfWeDigDeeper/agent-skills
@@ -60,11 +55,10 @@ addyosmani/agent-skills
 Source: https://github.com/addyosmani/agent-skills/tree/d2c37ef6225dd8726cdd369a8030307f48592d26
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2025 Addy Osmani
-Local adaptations: api-and-interface-design, browser-testing, ci-cd,
-  code-simplification, constraint-driven-development, context-engineering,
-  deprecate-and-migrate, docs-and-adrs, doubt-driven, frontend-ui-engineering,
-  git-workflow-and-versioning, incremental-implementation, interview-me,
-  observability, orchestration-patterns, planning-and-task-breakdown,
+Local adaptations: api-and-interface-design, browser-testing, ci-cd, code-simplification,
+  constraint-driven-development, context-engineering, deprecate-and-migrate, docs-and-adrs,
+  doubt-driven, frontend-ui-engineering, git-workflow-and-versioning,
+  incremental-implementation, askme, observability, orchestration-patterns, plan,
   security-hardening, shipping, skill-gap-finder, source-driven, spec-driven
 
 agent-sh
@@ -76,18 +70,17 @@ Local adaptations: audit-project, can-i-help, deslop, drift-detect, onboard, syn
 bentossell/visualise
 Source: https://github.com/bentossell/visualise/tree/35cd185b58af5db2f9d0fe13d9872b544a467483
 License: MIT (README declaration, no LICENSE file) (https://opensource.org/licenses/MIT)
-Local adaptations: visual-diagram, visualise-chart, visualise-explainer, visualise-widget
+Local adaptations: visual-diagram, visualise-widget
 
 cobusgreyling/loop-engineering
 Source: https://github.com/cobusgreyling/loop-engineering/tree/d03dcb92cc1e0efb59789a2557131c6ad5897ccc
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Cobus Greyling and contributors
-Local adaptations: append-run-log, audit-loop-scaffold, capture-isolated-patch, changelog-updates,
-  ci-sweeper, classify-ci-failure, corroborate-by-independent-reruns, dependency-sweeper,
+Local adaptations: append-run-log, audit-loop-scaffold, capture-isolated-patch,
+  changelog-updates, ci-fix, corroborate-by-independent-reruns, dependency-sweeper,
   diagnose-loop-health, enforce-workflow-constraints, gate-proposed-change, goal-init,
-  isolate-work-in-worktree, issue-triage, negotiate-run-budget, post-merge-cleanup,
-  propose-external-change, punishing-practices, repo-health-triage, thin-repo-pulse,
-  watch-and-repair-pr
+  worktree, issue-triage, negotiate-run-budget, post-merge-cleanup, propose-external-change,
+  punishing-practices, repo-health-triage, thin-repo-pulse, watch-and-repair-pr
 
 cursor/plugins
 Source: https://github.com/cursor/plugins/tree/68836ddaf5697224520f1847d90cdb90ca8babaa/pstack
@@ -95,14 +88,13 @@ License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Lauren Tan
 Local adaptations: artifact-arena, automate-me, blast-radius, check-agent-compatibility,
   cli-for-agents, cloud-task-orchestrator, continual-learning, control-cli, control-ui,
-  create-learning-path, create-plugin-scaffold, create-verification-skill, cursor-sdk, docs-canvas,
-  figure-it-out, get-pr-comments, how, interrogate, learning-retrospective,
-  maintain-verification-skill, make-bot-ui, make-pr-easy-to-review, new-branch-and-pr, no-comments,
-  paced-explanation, poteto-mode, pr-review-canvas, pr-review-canvas-html, principles,
-  rationale-by-source, recall, reflect, reproduce-and-fix-issues, review-and-ship,
-  review-plugin-submission, run-smoke-tests, setup-benny, setup-pstack, show-me-your-work, swarm,
-  technical-writing, typescript-best-practices, verify-this, weekly-review, what-did-i-get-done,
-  workflow-from-chats, x-api-mcp-guide
+  create-learning-path, create-plugin-scaffold, create-verification-skill, cursor-sdk,
+  docs-canvas, figure-it-out, resolve-pr-feedback, how, interrogate, learning-retrospective,
+  maintain-verification-skill, make-bot-ui, make-pr-easy-to-review, new-branch-and-pr,
+  no-comments, paced-explanation, pr-review-canvas, principles, why, recall, reflect,
+  reproduce-and-fix-issues, review-and-ship, review-plugin-submission, run-smoke-tests,
+  show-me-your-work, swarm, technical-writing, typescript-best-practices, verify-this,
+  weekly-review, workflow-from-chats, x-api-mcp-guide
 
 evilmartians/agent-skills
 Source: https://github.com/evilmartians/agent-skills/tree/a2a83b280a2c5b9a6176c5934298fad0224bbce4
@@ -122,11 +114,11 @@ Source: https://github.com/garrytan/gstack/tree/07b59e396c6be5a86619a43151cb9ed6
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Garry Tan
 Local adaptations: autoplan, browse, browser-cookie-store, browser-qa, canary-deploy,
-  deployment-setup, design-consultation, design-variants, developer-experience-review, docs-update,
+  deployment-setup, design, design-variants, developer-experience-review, docs-update,
   docs-writing, engineering-retrospective, idea-to-design, ios-build-cleanup, ios-build-fix,
-  ios-device-qa, ios-visual-review, issue-intake, markdown-to-pdf, merge-and-deploy,
-  plan-review-tune, polished-web-prototype, publish-release-pr, release-landing-report, scrape,
-  skill-benchmark, toolchain-health, web-design-review, workspace-unfreeze, xcode-project-sync
+  ios-visual-review, issue-intake, markdown-to-pdf, merge-and-deploy, plan-review,
+  polished-web-prototype, release-gate, release-landing-report, scrape, skill-benchmark,
+  toolchain-health, web-design-review, workspace-unfreeze
 
 humanlayer/skills
 Source: https://github.com/humanlayer/skills
@@ -138,25 +130,22 @@ mattpocock/skills
 Source: https://github.com/mattpocock/skills/tree/6654f6b60cd9d5be8b54c6fafe44346dabeb3b76
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Matt Pocock
-Local adaptations: agent-environment-retrospective, answer-stub-questionnaire,
-  architect, batch-ask-me, codebase-design, design-it-twice, docs-and-adrs,
-  domain-modeling, git-guardrails, grill-with-docs, handoff, implement-spec,
-  journey-trace-wizard, loop-me, mutation-proven-boundaries,
-  package-native-pre-commit, prototype, prototype-logic,
-  record-design-decisions, replace-unsafe-typescript-assertions, research,
-  resolve-merge-conflicts, review, scaffold-exercises, setup-pre-commit,
-  setup-repo-skills, setup-ts-deep-modules, sourced-learning-workspace,
-  spec-driven, teach, to-questionnaire, to-spec, to-tickets, wait-what,
-  wayfinder, wizard, writing-beats, writing-for-agents, writing-fragments,
-  writing-shape, writing-skills
+Local adaptations: agent-environment-retrospective, answer-stub-questionnaire, architect,
+  askme, design-it-twice, docs-and-adrs, domain-modeling, git-guardrails, grill-with-docs,
+  handoff, implement-spec, journey-trace-wizard, loop-me, mutation-proven-boundaries,
+  package-native-pre-commit, prototype, replace-unsafe-typescript-assertions, research,
+  resolve-merge-conflicts, review, scaffold-exercises, setup-pre-commit, setup-repo-skills,
+  setup-ts-deep-modules, sourced-learning-workspace, spec-driven, teach, to-questionnaire,
+  to-spec, to-tickets, wait-what, wayfinder, wizard, writing-beats, writing-for-agents,
+  writing-fragments, writing-shape
 
 mblode/agent-skills
 Source: https://github.com/mblode/agent-skills/tree/e97a3b383f5944f90d41eb92b24b4fb3b917a7f9
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Matthew Blode
 Local adaptations: agents-md, autoship, ax-audit, copywriting, docs-writing, dx-audit, eli5,
-  multi-tenant-architecture, optimise-seo, planning, presentation-creator, product-design, save-md,
-  scaffold-cli, scaffold-nextjs, typography-audit, ui-animation, ui-design
+  multi-tenant-architecture, optimise-seo, plan, presentation-creator, product-design,
+  save-md, scaffold-cli, scaffold-nextjs, typography-audit, ui-animation, ui-design
 
 mcollina/skills
 Source: https://github.com/mcollina/skills/tree/856efd268ae85482d882f3d0bed869fd020b5c06
@@ -166,25 +155,23 @@ Local adaptations: agents-md, diataxis-docs-authoring, eslint-to-biome-migration
   fastify-inject-testing, fastify-production-hardening, fastify-schema-first-service,
   github-gh-cli-operations, node-core-contribution-cycle, node-internals-diagnosis,
   nodejs-graceful-shutdown, nodejs-hanging-test-diagnosis, nodejs-service-foundations,
-  nodejs-stream-pipeline, oauth2-flow-implementation, skill-benchmark-gate, snippet-image-rendering,
-  typescript-type-hardening
+  nodejs-stream-pipeline, oauth2-flow-implementation, skill-benchmark,
+  snippet-image-rendering, typescript-type-hardening
 
 nicobailon/visual-explainer
 Source: https://github.com/nicobailon/visual-explainer/tree/7163c3e10660912e0b89e1af465db9f387282b88
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2025 Nico Bailon
 Local adaptations: lockstep-version-guard, plan-review, quick-spec-render, visual-diagram,
-  visual-diff-review, visual-fact-check, visual-plan, visual-project-recap, visual-render-tool,
-  visual-slides
+  visual-diff-review, verify-both-ways, plan, catchup, presentation-creator
 
 obra/superpowers
 Source: https://github.com/obra/superpowers/tree/b36e0829c6d0140e93cfef2ca599b1b07d4a7797
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2025 Jesse Vincent
-Local adaptations: cost-reduction, design-gate-brainstorming,
-  finish-branch-menu, harness-port-guide, instruction-phrasing-microtest,
-  isolate-workspace-gate, review-reception-protocol, subagent-driven,
-  test-migration-coverage-gate, visual-brainstorm-companion
+Local adaptations: cost-reduction, design-gate-brainstorming, finish-branch-menu,
+  harness-port-guide, instruction-phrasing-microtest, worktree, resolve, subagent-driven,
+  test-migration-coverage-gate, brainstorm
 
 oliver-zehentleitner/keep-the-why
 Source: https://github.com/oliver-zehentleitner/keep-the-why/tree/c01597a506efa24652d7ecb9e18b6a8ccc97b175
@@ -198,19 +185,19 @@ openclaw/agent-skills
 Source: https://github.com/openclaw/agent-skills/tree/ae75f60e8d454f1cf44ec4613e10ec9ea7f2ade7
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 openclaw
-Local adaptations: agent-transcript, behavior-validator, handoff-prompt, session-share,
+Local adaptations: agent-transcript, behavior-validator, handoff, session-share,
   session-viewer
 
 samber/cc-skills
 Source: https://github.com/samber/cc-skills/tree/f9953962e135235137628ea92d06ea085688031f
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Samuel Berthe
-Local adaptations: chrome-extension, conventional-git, copywriting-cta, copywriting-hooks,
-  copywriting-prose-creator, copywriting-tone-of-voice-creator, deep-research,
-  frontend-design-deslop, humaniseur-fr, humanizer-en-asd-ste100, influence-and-negotiation,
-  linkedin-ghostwriting, press-release-writer, promql-cli, site-launch-checklist,
-  skill-progressive-disclosure-design, snyk-agent-scan-compliance, substack-ghostwriting,
-  technical-article-writer, training-report
+Local adaptations: chrome-extension, conventional-git, copywriting,
+  copywriting-tone-of-voice-creator, deep-research, frontend-design-deslop, humaniseur-fr,
+  humanizer-en-asd-ste100, influence-and-negotiation, linkedin-ghostwriting,
+  press-release-writer, promql-cli, site-launch-checklist, writing-for-agents,
+  snyk-agent-scan-compliance, substack-ghostwriting, technical-article-writer,
+  training-report
 
 tt-a1i/archify
 Source: https://github.com/tt-a1i/archify/tree/b36d79fdbc3aec3728744341485a7e79f03c0071
@@ -239,26 +226,26 @@ Source: https://github.com/warpdotdev/common-skills/tree/f589e224907eda566c13755
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Denver Technologies, Inc.
 Local adaptations: brand-authority, check-impl-against-spec, council, cross-critique,
-  pr-walkthrough, readout, reproduce-bug-report, respond-to-pr-comments-in-blocklist, saga,
-  skill-doctor, spec-driven-implementation, subagent-survey-research, validate-changes-match-specs,
-  write-feature-docs, write-pr-description, write-product-spec, write-tech-spec
+  pr-walkthrough, readout, reproduce-bug-report, resolve-pr-feedback, saga, skill-doctor,
+  spec-driven-implementation, subagent-survey-research, validate-changes-match-specs,
+  write-feature-docs, create-pull-request, write-product-spec
 
 warpdotdev/competitive-intelligence-agent-oss
 Source: https://github.com/warpdotdev/competitive-intelligence-agent-oss/tree/9e0363e810a14405ef876fb354562735002797fb
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Denver Technologies, Inc.
-Local adaptations: competitor-changelog, competitor-feature-research, customer-feedback-report,
-  fix-p0-issues, git-history-analysis, notion-writer, post-to-slack, pricing-projection,
-  read-google-doc, setup, social-sentiment, summarize-google-docs, voice-of-customer, weekly-wynk,
-  write-google-doc, write-prd
+Local adaptations: competitor-feature-research, customer-feedback-report, fix-p0-issues,
+  git-history-analysis, notion-writer, post-to-slack, pricing-projection, read-google-doc,
+  setup, social-sentiment, summarize-google-docs, voice-of-customer, weekly-wynk,
+  write-google-doc, write-product-spec
 
 warpdotdev/oz-skills
 Source: https://github.com/warpdotdev/oz-skills/tree/6c08c49fc6c51b8f768bf8c53c041bc06a160765
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Warp
 Local adaptations: analysis-artifacts, create-pull-request, dbt-model-index, docs-update,
-  github-bug-report-triage, github-issue-dedupe, mcp-builder, scheduler, seo-aeo-audit,
-  slack-qa-investigate, terraform-style-check, web-accessibility-audit, web-performance-audit,
+  github-bug-report-triage, github-issue-dedupe, mcp-builder, repo-qa-investigate, scheduler,
+  seo-aeo-audit, terraform-style-check, web-accessibility-audit, web-performance-audit,
   webapp-testing
 
 The MIT permission text below applies to every work in the preceding section. Each work retains the
@@ -291,9 +278,10 @@ License: Apache-2.0 (https://www.apache.org/licenses/LICENSE-2.0)
 Copyright: Copyright 2025 Functional Software, Inc. dba Sentry
 Local adaptations: agents-md, blog-writing-guide, brand-guidelines, claude-settings-audit,
   confirmed-security-review, create-branch, django-access-review, django-perf-review,
-  doc-coauthoring, document-api-endpoint, gh-review-requests, gha-security-review,
-  infrastructure-mentor, pr-link-issue, prompt-optimizer, publish-pr, single-file-html-deck,
-  skill-scanner, skill-writer, sred-project-organizer, sred-work-summary, typing-exclusion-worker
+  doc-coauthoring, document-api-endpoint, eligibility-batch-organizer, gh-review-requests,
+  gha-security-review, infrastructure-mentor, create-pull-request, presentation-creator,
+  prompt-optimizer, publish-pr, skill-scanner, skill-writer, typing-exclusion-worker,
+  work-records-summary
 
 The Apache License, Version 2.0 applies to the preceding work. The full license is included in this
 distribution as LICENSE and is also available at https://www.apache.org/licenses/LICENSE-2.0.
@@ -304,30 +292,29 @@ trailofbits/skills
 Source: https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3
 License: CC-BY-SA-4.0 (https://creativecommons.org/licenses/by-sa/4.0/legalcode)
 Copyright: Made by Trail of Bits
-Local adaptations: address-sanitizer, aflpp, agentic-actions-injection-audit, atheris,
-  audit-context-building, burp-search-command, burpsuite-project-parser, c-security-review,
-  cargo-fuzz, chain-vulnerability-scanner, chrome-mcp-troubleshooting, codeql-security-analysis,
-  constant-time-analysis, constant-time-testing, crypto-protocol-diagram, culture-burnout-detection,
-  culture-conflict-mediation, culture-interview-debrief, culture-interview-profile-prediction,
-  culture-manager-coaching, culture-onboarding-plan, devcontainer-setup, diagramming-code,
-  differential-security-review, dimensional-analysis, dwarf-expert, entropy-assisted-planning,
-  entry-point-analyzer, firebase-apk-scanner, function-audit-context-analyzer, fuzz-harness-writing,
-  fuzzing-coverage-analysis, fuzzing-dictionary, fuzzing-obstacles, git-cleanup,
-  github-backlog-triage, goal-prompt-drafting, graph-evolution, insecure-default-discovery, libafl,
-  libfuzzer, mermaid-to-proverif, model-challenge, modern-cpp-practices, modern-python,
+Local adaptations: address-sanitizer, agentic-actions-injection-audit, atheris,
+  audit-context-building, burpsuite-project-parser, c-security-review, cargo-fuzz,
+  chain-vulnerability-scanner, chrome-mcp-troubleshooting, codeql-security-analysis,
+  constant-time-analysis, crypto-protocol-diagram, culture-burnout-detection,
+  culture-conflict-mediation, culture-interview-debrief,
+  culture-interview-profile-prediction, culture-manager-coaching, culture-onboarding-plan,
+  devcontainer-setup, diagramming-code, security-review, dimensional-analysis, dwarf-expert,
+  entropy-assisted-planning, entry-point-analyzer, firebase-apk-scanner,
+  function-audit-context-analyzer, fuzz-harness-writing, fuzzing-coverage-analysis,
+  fuzzing-dictionary, fuzzing-obstacles, git-cleanup, github-backlog-triage,
+  goal-prompt-drafting, graph-evolution, insecure-default-discovery, libafl, libfuzzer,
+  mermaid-to-proverif, model-challenge, modern-cpp-practices, modern-python,
   mutation-campaign-configuration, mutation-triage-genotoxic, open-source-license-selection,
   open-source-readiness-audit, oss-fuzz, prepare-repository-for-public-release,
-  property-test-authoring, property-test-failure-triage, property-test-review,
-  property-testing-fit-assessment, rust-security-review, ruzzy, sarif-parsing,
+  property-test-authoring, rust-security-review, ruzzy, sarif-parsing,
   security-finding-verification, semgrep-rule-authoring, semgrep-rule-variant-creator,
-  semgrep-security-scan, sharp-edges, sharp-edges-analyzer, skill-improver, slicing-code-context,
-  smart-contract-audit-prep, smart-contract-code-maturity-assessor,
-  smart-contract-guidelines-advisor, smart-contract-secure-workflow, spec-to-code-compliance,
-  supply-chain-risk-auditor, testing-handbook-generator, token-integration-analyzer,
-  trailmark-audit-augmentation, trailmark-code-graph, trailmark-finding-triage,
-  trailmark-review-gate, trailmark-structural, trailmark-summary, variant-hunt,
-  variant-neighborhood-seeding, vector-forge, vulnerability-triage-brocards, writing-lean-proofs,
-  wycheproof, yara-rule-authoring, zeroize-audit
+  semgrep-security-scan, sharp-edges, agent-surface-forge, slicing-code-context,
+  smart-contract-audit-prep, smart-contract-guidelines-advisor,
+  smart-contract-secure-workflow, spec-to-code-compliance, supply-chain-risk-auditor,
+  testing-handbook-generator, token-integration-analyzer, trailmark-audit-augmentation,
+  trailmark-code-graph, trailmark-finding-triage, trailmark-review-gate,
+  trailmark-structural, variant-hunt, vector-forge, vulnerability-triage-brocards,
+  writing-lean-proofs, wycheproof, yara-rule-authoring, zeroize-audit
 
 The preceding material is attributed to Trail of Bits and was modified for ODIN 2.0. It is
 distributed under the Creative Commons Attribution-ShareAlike 4.0 International License. Legal code:
@@ -347,9 +334,4 @@ Local adaptations: prompt-optimizer
 coleam00/excalidraw-diagram-skill
 Source: https://github.com/coleam00/excalidraw-diagram-skill/tree/8646fcc9f74f38539c6cdb4c969723336a96ddcd
 License: NOASSERTION
-Local adaptations: render-excalidraw-diagram, visual-argument-diagram
-
-warpdotdev/warp-factories-skills
-Source: https://github.com/warpdotdev/warp-factories-skills/tree/d91db3403d27c85adf2a57bd642047e29e98a51a
-License: NOASSERTION
-Local adaptations: factory-mcp-bootstrap
+Local adaptations: visual-argument-diagram

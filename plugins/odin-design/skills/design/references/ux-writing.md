@@ -1,6 +1,6 @@
 # UX writing
 
-Copy is design. Load this reference when drafting UI labels, error messages, empty states, and call-to-action text — wording carries meaning that visual hierarchy alone cannot.
+Copy is design. Load this reference when drafting UI labels, error messages, empty states, and call-to-action text; wording carries meaning that visual hierarchy alone cannot.
 
 ---
 
@@ -44,8 +44,8 @@ Good: "Email address isn't valid. Please include an @ symbol."
 
 Reframe errors:
 
-- "Please enter a date in MM/DD/YYYY format" — not "You entered an invalid date".
-- "This field needs at least 8 characters" — not "Your password is too short".
+- "Please enter a date in MM/DD/YYYY format", not "You entered an invalid date".
+- "This field needs at least 8 characters", not "Your password is too short".
 
 ---
 
@@ -60,7 +60,7 @@ Good: "No projects yet. Create your first one to get started."
 
 ## Voice vs. tone
 
-**Voice** is brand personality — consistent everywhere.
+**Voice** is brand personality, consistent everywhere.
 **Tone** adapts to the moment.
 
 | Moment | Tone shift |
@@ -76,11 +76,9 @@ Never use humor for errors. The user is already frustrated; help, do not joke.
 
 ## Writing for accessibility
 
-**Link text** must have standalone meaning — "View pricing plans", not "Click here".
-
-**Alt text** describes information, not the image — "Revenue increased 40% in Q4", not "Chart". Use `alt=""` for decorative images.
-
-**Icon buttons** need `aria-label` for screen-reader context.
+- Link text has standalone meaning: "View pricing plans", not "Click here".
+- Alt text describes information, not the image: "Revenue increased 40% in Q4", not "Chart". Use `alt=""` for decorative images.
+- Icon buttons need `aria-label` for screen-reader context.
 
 ---
 
@@ -133,18 +131,18 @@ Be specific: "Saving your draft…", not "Loading…". For long waits, set expec
 
 ## Confirmation dialogs: use sparingly
 
-Most confirmation dialogs are design failures — consider undo instead (see `interaction-design.md` "Destructive actions"). When you must confirm: name the action, explain consequences, use specific button labels.
+Most confirmation dialogs are design failures; consider undo instead (see `interaction-design.md` "Destructive actions"). When you must confirm: name the action, explain consequences, use specific button labels.
 
-- "Delete project" / "Keep project" — not "Yes" / "No".
+- "Delete project" / "Keep project", not "Yes" / "No".
 
 ---
 
 ## Form instructions
 
-Show format with placeholders, not instructions. For non-obvious fields, explain *why* you are asking — not just *what* to enter.
+Show format with placeholders, not instructions. For non-obvious fields, explain *why* you are asking, not just *what* to enter.
 
 ---
 
 **Avoid.** Jargon without explanation. Blaming users ("You made an error" → "This field is required"). Vague errors ("Something went wrong"). Varying terminology for variety. Humor for errors.
 
-**Cross-refs.** See `interaction-design.md` for confirmation-dialog mechanics and undo patterns; `personas.md` Jordan and Sam for the audiences this guidance most directly serves; `anti-slop.md §1.4` for AI-slop prose smells in product copy.
+**Cross-refs.** See `interaction-design.md` for confirmation-dialog mechanics and undo patterns; `personas.md` Jordan and Sam for the audiences this guidance most directly serves; the `unslop` skill for AI-slop prose smells in product copy.

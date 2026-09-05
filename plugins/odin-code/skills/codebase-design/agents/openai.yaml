@@ -1,3 +1,0 @@
-interface:
-  display_name: "Codebase Design"
-  short_description: "Use when designing or improving a module interface, locating a seam, or increasing testability; the chosen module ends up with a small interface that hides complexity and is testable through seams."

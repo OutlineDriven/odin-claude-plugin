@@ -1,6 +1,6 @@
 ---
 name: fastify-schema-first-service
-description: 'Use when asked to build or extend a Fastify application: routes, plugins, JSON Schema validation/serialization, hooks/lifecycle, decorators, content types, and database wiring. Not for testing — use fastify-inject-testing; not for hardening — use fastify-production-hardening.'
+description: 'Use when building or extending a Fastify application: routes, plugins, hooks, database wiring. Not for testing: use fastify-inject-testing. Not for hardening: use fastify-production-hardening.'
 ---
 
 # Fastify schema first service
@@ -10,7 +10,7 @@ description: 'Use when asked to build or extend a Fastify application: routes, p
 | Field | Bound contract |
 |---|---|
 | Trigger | Building or extending a Fastify application: routes, plugins, JSON Schema validation/serialization, hooks/lifecycle, decorators, content types, database wiring. |
-| Authority | Reversible local writes to Fastify application code only; no deployment, credential, or remote mutation. |
+| Authority | Reversible local: writes only Fastify application code; rollback is version control. No deployment, credential, or remote mutation. |
 | Side effect | Writes Fastify application code: route handlers, plugins, schemas, hooks, decorators, content-type parsers, and database wiring. |
 | Done | Routes carry request+response schemas, validation errors are schema-shaped, decorators/hooks respect encapsulation, app boots with plugins in dependency order. |
 

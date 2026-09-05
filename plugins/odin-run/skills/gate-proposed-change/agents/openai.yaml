@@ -1,0 +1,3 @@
+interface:
+  display_name: "Gate Proposed Change"
+  short_description: "Use when asked to evaluate a proposed commit, merge, or auto-merge against a gate config."

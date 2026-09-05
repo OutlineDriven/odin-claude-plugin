@@ -1,6 +1,6 @@
 ---
 name: codeql-security-analysis
-description: 'Use when building or reusing a CodeQL database, running CodeQL security analysis, or modeling project-specific sources and sinks. Produces a quality-gated database, nonzero query suite, and final SARIF. Not for manual vulnerability review — use confirmed-security-review.'
+description: 'Use when building or reusing a CodeQL database, running CodeQL security analysis, or modeling project-specific sources and sinks. Not for manual vulnerability review: use confirmed-security-review.'
 ---
 
 # CodeQL security analysis
@@ -10,7 +10,7 @@ description: 'Use when building or reusing a CodeQL database, running CodeQL sec
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to build or reuse a CodeQL database, run CodeQL security analysis, perform interprocedural taint/data-flow analysis, or model project-specific sources and sinks. |
-| Authority | Reversible local writes only: a dedicated CodeQL output directory, an optional target-project dependency or query-pack install performed with explicit user authority, a built or reused database, and CodeQL execution that writes logs, data extensions, suites, and SARIF results. Roll back by deleting the output directory; never mutate the target project source. |
+| Authority | Reversible local: writes only a dedicated CodeQL output directory, an optional target-project dependency or query-pack install performed with explicit user authority, a built or reused database, and CodeQL execution logs, data extensions, suites, and SARIF results; rollback is deleting the output directory. No remote mutation. Never mutate the target project source. |
 | Side effect | Creates a dedicated CodeQL output directory, may install target-project dependencies or query packs with user authority, builds a database, executes CodeQL, and writes logs, extensions, suites, and SARIF results. |
 | Done | The selected database resolves and passes the applicable quality gate; the explicit query suite resolves nonzero; analysis completes; raw and final SARIF, ruleset selections, and build evidence are present; skipped coverage and zero findings are explained. |
 

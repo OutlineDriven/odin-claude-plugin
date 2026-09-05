@@ -1,6 +1,6 @@
 ---
 name: todo-add
-description: 'Use when a message contains `TODO ADD: <requirement>`, adding it to the durable source and the native todo in the same turn. Not for deepening coarse task lists — use todos-enhance; not for re-syncing stale lists — use todos-update; not for retitling, reordering, or completing existing todos.'
+description: 'Use when a message contains `TODO ADD: <requirement>`. Not for deepening coarse lists: use todos-enhance. Not for resyncing lists: use todos-update. Not for retitling/reordering/completing todos.'
 ---
 
 # Todo add
@@ -10,7 +10,7 @@ description: 'Use when a message contains `TODO ADD: <requirement>`, adding it t
 | Field | Bound contract |
 |---|---|
 | Trigger | A message contains `TODO ADD: <requirement>`. |
-| Authority | Reversible local update to one durable requirement source and one native todo item. |
+| Authority | Reversible local: writes only one durable requirement source and one native todo item; rollback is version control or undo. No remote mutation. |
 | Side effect | Native todo is written first; the same requirement is then written to its durable source. |
 | Done | Both representations contain the same requirement in the same turn, or a classified duplicate/conflict/artifact-failure result is reported exactly as defined below. |
 
@@ -23,7 +23,7 @@ Use the current durable plan or specification when one clearly owns the work. If
 - Will not accept an empty requirement.
 - Will not touch the durable source if native todo creation fails.
 - Will not silently remove a retained todo on partial failure.
-- Will not write when a conflict exists — ask one clarifying question first.
+- Will not write when a conflict exists: ask one clarifying question first.
 
 ## Procedure
 

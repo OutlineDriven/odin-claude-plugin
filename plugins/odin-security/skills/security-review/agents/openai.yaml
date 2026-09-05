@@ -1,3 +1,3 @@
 interface:
   display_name: "Security Review"
-  short_description: "Use when changes touch auth, input parsing, dependencies, network I/O, or pre-release of a public-facing service."
+  short_description: "Use when changes touch auth, parsing, dependencies, network, or pre-release, or a diff or baseline needs regression review."

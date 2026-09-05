@@ -1,0 +1,3 @@
+interface:
+  display_name: "Explainer Artifact"
+  short_description: "Use when asked to create an explainer document for a concept, diff, idea, or work recap."

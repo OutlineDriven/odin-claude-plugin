@@ -1,3 +1,0 @@
-interface:
-  display_name: "Competitor Changelog"
-  short_description: "Use when the user asks to summarize competitor changelogs or analyze recent competitor releases into a deduplicated report opened as a PR."

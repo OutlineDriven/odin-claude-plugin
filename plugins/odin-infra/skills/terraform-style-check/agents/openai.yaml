@@ -1,0 +1,3 @@
+interface:
+  display_name: "Terraform Style Check"
+  short_description: "Use when writing, reviewing, or generating Terraform HCL that must pass fmt and validate."

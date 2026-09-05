@@ -1,6 +1,6 @@
 ---
 name: show-me-your-work
-description: 'Use when the user invokes it to append a structured decision record to an append-only TSV decision log and end with an Attention section for reviewer review. Not for an ephemeral visual — use show-me.'
+description: 'Use when the user invokes it to append a structured decision record to an append-only TSV log, ending with an Attention section for reviewers. Not for an ephemeral visual: use show-me.'
 ---
 
 # Show me your work
@@ -10,7 +10,7 @@ description: 'Use when the user invokes it to append a structured decision recor
 | Field | Bound contract |
 |---|---|
 | Trigger | Keep an auditable decision trail for unattended work. |
-| Authority | Write only named local artifacts; append-only TSV with manual revert possible. |
+| Authority | Reversible local: writes only named local artifacts; append-only TSV with manual revert possible. |
 | Side effect | Writes decision log and invokes reviewer. |
 | Done | Resolvable evidence trail ending in Attention section. |
 

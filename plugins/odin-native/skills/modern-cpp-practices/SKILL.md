@@ -1,6 +1,6 @@
 ---
 name: modern-cpp-practices
-description: 'Use when C++ code is being written or reviewed and the compiler supports modern safe idioms. Returns a structured guidance report on supported features, anti-pattern replacements, and compiler-compatible hardening flags. Read-only; no source or remote-system changes.'
+description: 'Use when C++ code is being written or reviewed and the compiler supports modern safe idioms. Read-only. No source or remote-system changes.'
 ---
 
 # Modern C++ practices
@@ -24,14 +24,14 @@ description: 'Use when C++ code is being written or reviewed and the compiler su
 ## Procedure
 
 1. Identify the compiler vendor, version, and active C++ standard level from build files (`CMakeLists.txt`, `Makefile`, `meson.build`, compiler command lines) or from the supplied inputs. If the compiler or standard level cannot be determined, report the ambiguity and stop. Done when: the compiler, version, and standard are identified, or the ambiguity is reported.
-2. For each modern C++ idiom or feature the code uses or the review proposes, check the corresponding feature-test macro (e.g., `__cpp_concepts >= 202002L`, `__cpp_lib_format >= 202110L`, `__cpp_constexpr >= 202211L`, `__cpp_modules >= 202207L`, `__cpp_lib_expected >= 202211L`, `__cpp_lib_print >= 202207L`, `__cpp_lib_ranges >= 202110L`, `__cpp_lib_generator >= 202207L`, `__cpp_lib_mdspan >= 202207L`). A feature is available only when its macro is defined and meets the required value for the compiler and standard in use. Done when: every relevant feature-test macro is checked.
+2. For each modern C++ idiom or feature the code uses or the review proposes, check the corresponding feature-test macro (e.g., `__cpp_concepts >= 201907L`, `__cpp_lib_format >= 202110L`, `__cpp_constexpr >= 202211L`, `__cpp_modules >= 201907L`, `__cpp_lib_expected >= 202211L`, `__cpp_lib_print >= 202207L`, `__cpp_lib_ranges >= 202110L`, `__cpp_lib_generator >= 202207L`, `__cpp_lib_mdspan >= 202207L`). A feature is available only when its macro is defined and meets the required value for the compiler and standard in use. Done when: every relevant feature-test macro is checked.
 3. Catalog applicable C++20 features: concepts, ranges, coroutines (`co_await`/`co_yield`/`co_return`), `std::format`, three-way comparison (`<=>`), `consteval`, `constinit`, modules, designated initializers, `std::span`, `std::jthread`, `std::source_location`. Done when: the C++20 feature catalog is complete for the identified compiler.
 4. Catalog applicable C++23 features: `std::expected`, `std::print`/`std::println`, `std::generator`, `std::mdspan`, `std::flat_map`/`std::flat_set`, `if consteval`, multidimensional subscript operator, `std::stacktrace`, deducing this. Done when: the C++23 feature catalog is complete for the identified compiler.
-5. Catalog conditionally available C++26 features: `std::inplace_vector`, `std::contract` (contracts), reflection (`^`/`[:`/`:]`), pattern matching (`inspect`). Gate each on its feature-test macro; if the macro is absent or below threshold, mark the feature as unavailable for this compiler. Done when: the C++26 feature catalog is complete with availability gates.
+5. Catalog conditionally available C++26 features and proposals: `std::inplace_vector`, `<contracts>` (`pre`/`post`/`contract_assert`), reflection (`^`/`[:`/`:]`), and pattern matching (`inspect`, proposal-only). Gate each standardized feature on its feature-test macro; if the macro is absent or below threshold, mark the feature as unavailable for this compiler. Done when: the C++26 feature and proposal catalog is complete with availability gates, and proposals are marked as not available for production use.
 6. Scan the code for cataloged anti-patterns and recommend each modern equivalent in the report. Do not modify source files. Done when: every identified anti-pattern has a recommended modern replacement in the report.
    - Raw `new`/`delete` -> smart pointers (`std::unique_ptr`, `std::shared_ptr`) or RAII wrappers.
    - C-style casts -> `static_cast`, `reinterpret_cast`, `std::bit_cast`.
-   - Manual resource management in destructors -> RAII types or `std::scope_success`/`std::scope_fail` (C++26) / `std::unique_resource`.
+   - Manual resource management in destructors -> RAII types or `std::experimental::scope_success`/`std::experimental::scope_fail` (LFTS TS) / `std::experimental::unique_resource`.
    - `NULL`/`0` for null pointers -> `nullptr`.
    - Unscoped `enum` -> `enum class`.
    - `typedef` for type aliases -> `using`.

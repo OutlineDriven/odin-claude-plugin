@@ -1,8 +1,8 @@
 # ODIN Planning
 
-ODIN workflows for shaping requirements and implementation plans.
+ODIN workflows for shaping intent into approved plans, specs, and task lists.
 
-17 skills, category Productivity.
+39 skills, category Productivity.
 
 ## Install
 
@@ -18,20 +18,42 @@ codex plugin add odin-planning@odin-marketplace
 
 ## Skills
 
+- abstract-well
+- all-scenarios-storm
 - askme
 - autoplan
 - backlog
-- batch-ask-me
 - brainstorm
-- clarify
+- converge
 - decide
+- define-goalstate
+- diverge
+- entropy-assisted-planning
+- fail-design
+- from-first-principle
 - generalize
+- goal-init
+- graph-backbone
+- idea-sparkbox
+- leave-only-first-principle
+- loop-me
+- minimap
+- next-best-action
 - plan
 - plan-review
+- possible-worlds
 - pov
-- shape
+- readiness-assessment
+- show-way
+- solidate
+- spec-driven
+- state-machine-workflow
+- tasty-abstraction
+- to-questionnaire
+- to-spec
 - to-tickets
 - todo-add
 - todos-enhance
 - todos-update
+- waterfall-guide
 - wayfinder

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Good Readme"
+  short_description: "Use when the user asks to create, rewrite, review, or polish an open-source README, including shop-window READMEs."

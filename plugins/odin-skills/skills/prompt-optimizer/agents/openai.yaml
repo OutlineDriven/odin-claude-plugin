@@ -1,0 +1,3 @@
+interface:
+  display_name: "Prompt Optimizer"
+  short_description: "Use when asked to improve, optimize, rewrite, tune, or port a prompt, skill, or tool description."

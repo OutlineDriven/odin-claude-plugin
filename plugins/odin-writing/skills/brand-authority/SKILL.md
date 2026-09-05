@@ -1,6 +1,6 @@
 ---
 name: brand-authority
-description: 'Use when the user asks for branded or style-governed output. Produces a deliverable that follows a fetched brand authority and states the material constraints that shaped it. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user asks for branded or style-governed output. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Brand authority
@@ -10,7 +10,7 @@ description: 'Use when the user asks for branded or style-governed output. Produ
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks for branded or style-governed output. |
-| Authority | reversible-local — write only the named local deliverable file(s); the brand authority itself is read, never mutated. Rollback is deleting or overwriting the local deliverable file(s). |
+| Authority | Reversible local: write only the named local deliverable file(s); the brand authority itself is read, never mutated. Rollback is deleting or overwriting the local deliverable file(s). |
 | Side effect | Local deliverable file(s) written under the working directory; no publish, deploy, remote, credential, or hosted-authority mutation. |
 | Done | The deliverable follows the fetched brand authority and states the material constraints that shaped it. |
 
@@ -34,4 +34,4 @@ description: 'Use when the user asks for branded or style-governed output. Produ
 - Non-mutation: the hosted or local authority is read-only; recovery from a wrong local deliverable is overwrite or delete of that local file only.
 
 ## Output
-One or more local deliverable file(s) conforming to the fetched authority, plus a short note of the material brand constraints that shaped the result — if the authority was unavailable, the output is the unavailability notice and the user prompt, no branded artifact.
+One or more local deliverable file(s) conforming to the fetched authority, plus a short note of the material brand constraints that shaped the result, if the authority was unavailable, the output is the unavailability notice and the user prompt, no branded artifact.

@@ -4,184 +4,208 @@
     {
       "id": "odin-core",
       "displayName": "ODIN Core",
-      "description": "Core ODIN workflows for planning, executing, and checking changes.",
-      "version": "2.0.4",
+      "description": "Core ODIN gates every session runs: intent, scope, verification, and hand-off checks.",
+      "version": "2.1.0",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "source": "../plugins/odin-core"
     },
     {
-      "id": "odin-code",
-      "displayName": "ODIN Code",
-      "description": "ODIN workflows for writing, reviewing, and maintaining code.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-code"
-    },
-    {
-      "id": "odin-code-advanced",
-      "displayName": "ODIN Code Advanced",
-      "description": "Advanced ODIN workflows for complex code changes and technical audits.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-code-advanced"
-    },
-    {
-      "id": "odin-create",
-      "displayName": "ODIN Create",
-      "description": "ODIN workflows for turning ideas into working artifacts.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-create"
-    },
-    {
-      "id": "odin-create-advanced",
-      "displayName": "ODIN Create Advanced",
-      "description": "Advanced ODIN workflows for ambitious, multi-part creative work.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-create-advanced"
-    },
-    {
-      "id": "odin-research",
-      "displayName": "ODIN Research",
-      "description": "ODIN workflows for focused research and source-backed findings.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-research"
-    },
-    {
-      "id": "odin-research-advanced",
-      "displayName": "ODIN Research Advanced",
-      "description": "Advanced ODIN workflows for deep research and evidence synthesis.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-research-advanced"
-    },
-    {
-      "id": "odin-run",
-      "displayName": "ODIN Run",
-      "description": "ODIN workflows for executing plans and shipping finished changes.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-run"
-    },
-    {
-      "id": "odin-run-advanced",
-      "displayName": "ODIN Run Advanced",
-      "description": "Advanced ODIN workflows for complex execution and delivery.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-run-advanced"
-    },
-    {
-      "id": "odin-agent",
-      "displayName": "ODIN Agent",
-      "description": "ODIN workflows for designing and improving AI agents.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-agent"
-    },
-    {
-      "id": "odin-security",
-      "displayName": "ODIN Security",
-      "description": "ODIN workflows for security reviews and defensive implementation.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-security"
-    },
-    {
-      "id": "odin-security-advanced",
-      "displayName": "ODIN Security Advanced",
-      "description": "Advanced ODIN workflows for threat analysis and security hardening.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-security-advanced"
-    },
-    {
-      "id": "odin-design",
-      "displayName": "ODIN Design",
-      "description": "ODIN workflows for practical interface and visual design.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-design"
-    },
-    {
-      "id": "odin-design-advanced",
-      "displayName": "ODIN Design Advanced",
-      "description": "Advanced ODIN workflows for polished interfaces and design systems.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-design-advanced"
-    },
-    {
-      "id": "odin-writing",
-      "displayName": "ODIN Writing",
-      "description": "ODIN workflows for clear, useful technical writing.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-writing"
-    },
-    {
-      "id": "odin-writing-advanced",
-      "displayName": "ODIN Writing Advanced",
-      "description": "Advanced ODIN workflows for substantial writing and editorial work.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-writing-advanced"
-    },
-    {
-      "id": "odin-product",
-      "displayName": "ODIN Product",
-      "description": "ODIN workflows for product strategy and developer adoption.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-product"
-    },
-    {
-      "id": "odin-loop",
-      "displayName": "ODIN Loop",
-      "description": "ODIN workflows for bounded iteration with explicit completion checks.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-loop"
-    },
-    {
       "id": "odin-planning",
       "displayName": "ODIN Planning",
-      "description": "ODIN workflows for shaping requirements and implementation plans.",
-      "version": "2.0.4",
+      "description": "ODIN workflows for shaping intent into approved plans, specs, and task lists.",
+      "version": "2.1.0",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "source": "../plugins/odin-planning"
     },
     {
-      "id": "odin-python",
-      "displayName": "ODIN Python",
-      "description": "ODIN workflows for modern Python development.",
-      "version": "2.0.4",
+      "id": "odin-critique",
+      "displayName": "ODIN Critique",
+      "description": "ODIN workflows for pressure-testing a decision from independent seats and lenses.",
+      "version": "2.1.0",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-python"
+      "source": "../plugins/odin-critique"
+    },
+    {
+      "id": "odin-product",
+      "displayName": "ODIN Product",
+      "description": "ODIN workflows for product strategy, market signals, and developer adoption.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-product"
+    },
+    {
+      "id": "odin-code",
+      "displayName": "ODIN Code",
+      "description": "ODIN workflows for writing, changing, and simplifying code.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-code"
+    },
+    {
+      "id": "odin-review",
+      "displayName": "ODIN Review",
+      "description": "ODIN workflows for reviewing diffs, branches, and implementations against their specs.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-review"
+    },
+    {
+      "id": "odin-testing",
+      "displayName": "ODIN Testing",
+      "description": "ODIN workflows for tests, properties, mutation, and behavioral verification.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-testing"
+    },
+    {
+      "id": "odin-git",
+      "displayName": "ODIN Git",
+      "description": "ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-git"
+    },
+    {
+      "id": "odin-release",
+      "displayName": "ODIN Release",
+      "description": "ODIN workflows for cutting, gating, publishing, and announcing releases.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-release"
+    },
+    {
+      "id": "odin-run",
+      "displayName": "ODIN Run",
+      "description": "ODIN workflows for executing plans, orchestrating subagents, and bounded autonomous loops.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-run"
+    },
+    {
+      "id": "odin-infra",
+      "displayName": "ODIN Infra",
+      "description": "ODIN workflows for CI, deployment, observability, cost, and infrastructure tooling.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-infra"
+    },
+    {
+      "id": "odin-security",
+      "displayName": "ODIN Security",
+      "description": "ODIN workflows for security review, vulnerability triage, and defensive implementation.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-security"
+    },
+    {
+      "id": "odin-fuzzing",
+      "displayName": "ODIN Fuzzing",
+      "description": "ODIN workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-fuzzing"
+    },
+    {
+      "id": "odin-research",
+      "displayName": "ODIN Research",
+      "description": "ODIN workflows for source-backed investigation, verification, and design rationale.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-research"
+    },
+    {
+      "id": "odin-knowledge",
+      "displayName": "ODIN Knowledge",
+      "description": "ODIN workflows for memory, session continuity, decision records, and retrospectives.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-knowledge"
+    },
+    {
+      "id": "odin-learn",
+      "displayName": "ODIN Learn",
+      "description": "ODIN workflows for teaching, explaining, drilling, and onboarding.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-learn"
+    },
+    {
+      "id": "odin-people",
+      "displayName": "ODIN People",
+      "description": "ODIN workflows for team dynamics, culture profiles, and negotiation.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-people"
+    },
+    {
+      "id": "odin-agent",
+      "displayName": "ODIN Agent",
+      "description": "ODIN workflows for configuring agent harnesses, MCP servers, and repository agent surfaces.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-agent"
+    },
+    {
+      "id": "odin-skills",
+      "displayName": "ODIN Skills",
+      "description": "ODIN workflows for authoring, auditing, benchmarking, and publishing agent skills.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-skills"
+    },
+    {
+      "id": "odin-writing",
+      "displayName": "ODIN Writing",
+      "description": "ODIN workflows for documentation, editorial prose, and copy.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-writing"
+    },
+    {
+      "id": "odin-visual",
+      "displayName": "ODIN Visual",
+      "description": "ODIN workflows for diagrams, decks, canvases, and visual explainers.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-visual"
+    },
+    {
+      "id": "odin-design",
+      "displayName": "ODIN Design",
+      "description": "ODIN workflows for interface design, prototypes, and visual fidelity.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-design"
+    },
+    {
+      "id": "odin-web",
+      "displayName": "ODIN Web",
+      "description": "ODIN workflows for browser testing, web performance, SEO, and extensions.",
+      "version": "2.1.0",
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "source": "../plugins/odin-web"
     },
     {
       "id": "odin-typescript",
       "displayName": "ODIN TypeScript",
       "description": "ODIN workflows for modern TypeScript development.",
-      "version": "2.0.4",
+      "version": "2.1.0",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "source": "../plugins/odin-typescript"
     },
     {
-      "id": "odin-web",
-      "displayName": "ODIN Web",
-      "description": "ODIN workflows for building and refining web applications.",
-      "version": "2.0.4",
+      "id": "odin-python",
+      "displayName": "ODIN Python",
+      "description": "ODIN workflows for modern Python development.",
+      "version": "2.1.0",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-web"
+      "source": "../plugins/odin-python"
     },
     {
       "id": "odin-native",
       "displayName": "ODIN Native",
       "description": "ODIN workflows for native systems, toolchains, and performance.",
-      "version": "2.0.4",
+      "version": "2.1.0",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "source": "../plugins/odin-native"
     },
@@ -189,7 +213,7 @@
       "id": "odin-apple",
       "displayName": "ODIN Apple",
       "description": "ODIN workflows for software on Apple platforms.",
-      "version": "2.0.4",
+      "version": "2.1.0",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "source": "../plugins/odin-apple"
     },
@@ -197,33 +221,9 @@
       "id": "odin-lean",
       "displayName": "ODIN Lean",
       "description": "ODIN workflows for Lean proofs and formal verification.",
-      "version": "2.0.4",
+      "version": "2.1.0",
       "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
       "source": "../plugins/odin-lean"
-    },
-    {
-      "id": "odin-terraform",
-      "displayName": "ODIN Terraform",
-      "description": "ODIN workflows for safe Terraform infrastructure changes.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-terraform"
-    },
-    {
-      "id": "odin-bigquery",
-      "displayName": "ODIN BigQuery",
-      "description": "ODIN workflows for BigQuery data work and cost-aware queries.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-bigquery"
-    },
-    {
-      "id": "odin-prometheus",
-      "displayName": "ODIN Prometheus",
-      "description": "ODIN workflows for Prometheus metrics and monitoring.",
-      "version": "2.0.4",
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "source": "../plugins/odin-prometheus"
     }
   ]
 }

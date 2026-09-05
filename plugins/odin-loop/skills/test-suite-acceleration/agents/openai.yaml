@@ -1,3 +1,0 @@
-interface:
-  display_name: "Test Suite Acceleration"
-  short_description: "Use when a test suite is too slow and must be accelerated without weakening behavior or coverage."

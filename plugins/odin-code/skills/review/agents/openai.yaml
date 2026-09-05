@@ -1,3 +1,0 @@
-interface:
-  display_name: "Review"
-  short_description: "Use when asked to review a pull request, examine code changes, find bugs, or audit a branch."

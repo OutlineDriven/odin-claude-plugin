@@ -1,3 +1,3 @@
 interface:
   display_name: "Polished Web Prototype"
-  short_description: "Use when the user runs /polished-web-prototype or asks to turn an approved mockup, design plan, or freeform description into a polished responsive Pretext-native HTML artifact refined through a live preview loop."
+  short_description: "Use when /polished-web-prototype runs or a user builds an artifact from a mockup, design plan, or brief."

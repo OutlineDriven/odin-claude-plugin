@@ -1,6 +1,6 @@
 ---
 name: rust-security-review
-description: 'Use when the user requests a security or correctness audit of a Rust crate, service, library, or subtree, especially unsafe, FFI, concurrency, async, or untrusted-input code. Dispatches cluster-based review workers with dedup and false-positive judging, and writes report.md and findings.sarif. Not for a general security audit. Use security-review.'
+description: 'Use when asked for a Rust security or correctness audit of a crate, service, or library with unsafe, FFI, concurrency, async, or untrusted-input code. Not for general review: use security-review.'
 ---
 
 # Rust security review
@@ -10,7 +10,7 @@ description: 'Use when the user requests a security or correctness audit of a Ru
 | Field | Bound contract |
 |---|---|
 | Trigger | The user requests a security or correctness audit of a Rust crate, service, library, or Rust subtree, especially code using unsafe blocks, FFI, concurrency, async runtimes, or untrusted inputs. |
-| Authority | Reversible local: read-only source analysis; write only named local artifacts (review directory, findings, SARIF). Roll back by deleting the review directory. |
+| Authority | Reversible local: writes only named local artifacts (review directory, findings, SARIF); rollback is deleting the review directory. No remote mutation. Source analysis is read-only. |
 | Side effect | Read project source, run read-only searches, and write a scoped findings report and SARIF artifacts without changing audited production code. |
 | Done | Every capability-selected review cluster has a recorded outcome, duplicate and false-positive judging completed or explicitly marked partial, and final Markdown and SARIF reports identify scope, coverage, surviving findings, severity, and incomplete workers. |
 

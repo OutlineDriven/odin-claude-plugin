@@ -1,3 +1,3 @@
 interface:
   display_name: "Watch For"
-  short_description: "Use when the user wants to monitor a file, log, endpoint, or stateful artifact for drift, errors, or unexpected changes and receive a per-tick anomaly verdict."
+  short_description: "Use when monitoring a file, log, endpoint, or artifact for drift or errors, or polling a target until a predicate holds."

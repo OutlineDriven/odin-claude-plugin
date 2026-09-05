@@ -5,6 +5,247 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-09-04
+### Changed
+- Shortened every skill description to at most 200 characters (median 174, down from 269).
+  Each keeps its trigger phrases and `Not for` pointer and drops mechanism narration;
+  a fresh read-only review of every rewrite restored 95 lost triggers or pointers.
+- Folded `setup-tool-credentials` into `setup`: the credentials mechanism now makes `.env` safe
+  before writing, validates credential formats, never overwrites existing keys, and verifies
+  repository, tool access, and prerequisites.
+- Folded `record-design-decisions` into `docs-and-adrs`: resolved codebase terms are routed to
+  `domain-modeling`, which owns `CONTEXT.md` and its entry schema, and an unavailable ADR
+  directory no longer halts the pass.
+- Folded `single-file-html-deck` into `presentation-creator`: the web-deck format now builds one
+  self-contained, keyboard-navigable HTML file from caller-supplied brand tokens with a frozen
+  pnpm lockfile and browser verification.
+
+### Changed
+
+- Plugins are reorganized by job. Twelve ids that named a tier (`-advanced`) or a
+  grab bag (`odin-create`, `odin-loop`) are retired, and twelve job-named plugins
+  are created: `odin-critique`, `odin-fuzzing`, `odin-git`, `odin-infra`,
+  `odin-knowledge`, `odin-learn`, `odin-people`, `odin-release`, `odin-review`,
+  `odin-skills`, `odin-testing`, and `odin-visual`. 442 skills moved by `git mv`:
+  225 out of the retired ids and 217 between surviving ids; 275 of them landed
+  in the new plugins and the rest in surviving ones. Every skill keeps its slug, and
+  the move touched no body except one description (`lockstep-version-guard`, which
+  dropped a hardcoded plugin count). The 28
+  plugins are ordered in the catalog by workflow with kin adjacent: think, build,
+  ship, operate, protect, know, tooling, communicate, stacks. A plugin id now names
+  a job or a stack, never a tier; `check-plugin-surfaces` rejects a tier suffix.
+- The doctrine cascade is converged. `system-prompt-baseline.md` loses its duplicate
+  rule families (delete-not-deprecate into Posture, wrappers into Craft), its
+  reading clamp, its `[MANDATORY]`, `[HARD-REJECT]`, `[REJECT]`, and `[INTERNAL]`
+  tags, its arrow-chain and pseudo-math jargon, and the harness tool layer, which
+  splits into a shared `<change_discipline>` section and a per-carrier
+  `<code_tools>` layer. `<languages>` is rewritten to one row per stack: the LTS
+  or current-stable target and one first principle. The six output styles carry
+  the regenerated tail; the two external carriers are realigned in place.
+- Every skill body passed three prose waves and one judgment wave: em-dashes
+  replaced by the punctuation their grammatical role needs, incidental harness
+  nouns replaced by the mechanism they stood for, stale `packages/` paths fixed,
+  the Contract `Authority` row canonized to four leads (`Read-only.`,
+  `Reversible local:`, `Human-gated:`, `Remote:`) with each skill's specifics kept,
+  a full unslop pass, and a prompt-optimizer audit with one skill-improver cycle
+  per skill: 104 audit findings, 60 applied and the rest recorded in the plugin
+  reports, plus 34 skill-improver fixes. A pre-push review then
+  restored 46 Authority rows the canon had narrowed or widened.
+- Four slugs that named an upstream vendor rename to their jobs:
+  `sred-project-organizer` to `eligibility-batch-organizer`,
+  `sred-work-summary` to `work-records-summary`, `unlazy` to
+  `gate-file-completion`, and `slack-qa-investigate` to
+  `repo-qa-investigate`.
+
+### Fixed
+
+- `lockstep-version-guard` no longer requires exactly 28 catalog entries; the
+  catalog is the member list.
+- Install examples name a skill's real plugin (`askme` lives in `odin-planning`),
+  the README contents list points only at sections that exist, and
+  `docs/specs/skill-lifecycle.md` describes the five dotdir manifests and five
+  registries the tree ships.
+- `AGENTS.md` names the gate commands (`just check`, `just verify`), the carrier
+  generator, the tier-suffix assertion, and the worktree gotcha in the Devin mirror
+  target.
+- Nine review findings repaired eight skill contracts whose Authority rows
+  contradicted their bodies: memory-clean and memory-update claimed version
+  control as the rollback for data outside version control;
+  github-bug-report-triage, docs-update, saga, and poteto-mode misplaced their
+  write or approval boundaries; resolve-merge-conflicts orders
+  `git stash drop` after the resolution is committed; and
+  influence-and-negotiation permits a conditional sub-step to be skipped with
+  a reason.
+- `watch-for-harness-mode` regains its no-VCS-commit, no-remote-call,
+  no-credential-use, no-published-artifact ban, which the Authority canon had
+  compressed to a weaker no-remote-mutation clause.
+- cubic P1: `refactor-break-compat` now previews the demolition and waits
+  for confirmation before deleting, and deletes only flags used by the old
+  path; `gh-review-requests` drops the invalid `requestedReviewers` field;
+  `setup-tool-credentials` never echoes a colliding `.env` value and
+  refuses to write credentials into a tracked or unignored path.
+- Codex P1: the Everyday code changes install row includes `odin-git`; `spec-driven` names
+  `odin-testing` for `tdd`; `model-retuning` restores the first-match
+  outcome classifier; `retaxonomize-plugins` leaves the generated README
+  plugin table to `just render`; tournament failure terminals map onto
+  the cascade set (`stalled`, `blocked`).
+- Tournament Output listed `capped` and `pending`, terminals no procedure
+  step produces. Output now matches the four defined terminals.
+- `memory-update` and `memory-clean` claimed `$MEMORY_DIR` is outside
+  version control; that is true for the default (gitignored) path and
+  false for an override git would track. The resolver refuses a path
+  git would track, whether already tracked or merely unignored;
+  it canonicalizes a relative override against the caller's directory
+  rather than the repository root, and it treats a leading hyphen as a
+  pathname.
+- A `MEMORY_DIR` override pointing at a directory that does not exist
+  now fails the same existence check the derived default always paid;
+  the resolver no longer prints a nonexistent path and exits 0.
+- `memory-clean` and `memory-sanitize` now call `memory-update`'s
+  `resolve-paths.sh`; the extra copies are gone, so a tracked `MEMORY_DIR`
+  is refused for sanitize too.
+- `pov` now calls `brainstorm`'s repo-profile cache; the extra copies are
+  gone.
+- `setup-tool-credentials` can start in a directory with no `.gitignore`
+  by creating ignore coverage for `.env` after confirmation, and it
+  checks tracked vs ignored with `git ls-files` and `git check-ignore`
+  rather than ordinary `git status`, which omits ignored files.
+- `retaxonomize-plugins` writes catalog entries with `index`,
+  `display_name`, `homepage`, and `directory`, the fields the generators
+  require.
+- `sync-carriers --check` reuses the `check-carriers` audit, so a carrier
+  with an unknown section, a missing tool layer, or a malformed overlay
+  fails even when shared bodies already match. An overlay-only `<role>`
+  is kept and the canonical block is inserted after it. An existing
+  non-file `--carrier` override is an error, not a traceback.
+
+### Added
+
+- `retaxonomize-plugins` (odin-skills): moves skills between plugins and creates,
+  merges, or retires plugins in a catalog-generated marketplace, then proves the
+  gates.
+- `scripts/sync-carriers.py`, run as `just sync-carriers`: rewrites each external
+  carrier's shared doctrine from the baseline; `--check` is the gate.
+- `docs/specs/skill-index.md`, generated by `scripts/render-skill-index.mjs`: one
+  row per skill with its plugin and category, the migration index for per-skill
+  installs.
+
+### Removed
+
+- `AST-GREP-AGENT-REFERENCE.md`: a third copy of the `ast-grep` reference already
+  carried by the `ast-grep` skill and the baseline.
+- `docs/specs/graph.yaml` and its pointer in `docs/specs/skill-lifecycle.md`: a
+  hand-maintained second model of the tree with no executable consumer.
+- The historical 657-skill, 2.0.0 proof blocks in `docs/specs/install-proof.md` and
+  `docs/specs/distribution-surfaces.md`, replaced by proofs run against this tree.
+- Duplicate root copies of `implementer-prompt.md` and `task-reviewer-prompt.md`
+  under `subagent-driven`; only the `references/` copies were cited.
+- `setup-benny`: folded into `setup`; the archive-install verification now lives there.
+- `setup-pstack`: folded into `setup`; the role-to-model mapping now lives there.
+- `poteto-mode`: folded into `figure-it-out`; the 23-playbook contracts now live there.
+- `xcode-project-sync`: folded into `ios-build-fix` as the XcodeGen regeneration mode.
+- `ios-device-qa`: removed; the vendor daemon has no public equivalent.
+- `factory-mcp-bootstrap`: removed; the Warp Factory endpoint is vendor-internal,
+  and `mcp-builder` covers MCP server authoring.
+
+- Folded 62 skills into 45 survivors (605 to 543 skills, 10.2 percent). Each survivor
+  absorbs its retired members' unique steps as inputs or named modes; a retired
+  slug that names a mode of its survivor keeps that name in the survivor's `mode`
+  input. Retired skills, slug to survivor:
+
+  | Retired | Survivor |
+  |---|---|
+  | `aflpp` | `libfuzzer` |
+  | `batch-ask-me` | `askme` |
+  | `burp-search-command` | `burpsuite-project-parser` |
+  | `ci-sweeper` | `ci-fix` |
+  | `clarify` | `askme` |
+  | `classify-ci-failure` | `ci-fix` |
+  | `codebase-design` | `architect` |
+  | `commit-economy` | `commit` |
+  | `competitor-changelog` | `competitor-feature-research` |
+  | `constant-time-testing` | `constant-time-analysis` |
+  | `copywriting-cta` | `copywriting` |
+  | `copywriting-hooks` | `copywriting` |
+  | `copywriting-prose-creator` | `copywriting-tone-of-voice-creator` |
+  | `design-consultation` | `design` |
+  | `differential-security-review` | `security-review` |
+  | `engineering-blog-writing` | `technical-article-writer` |
+  | `framing-divergence-fanout` | `prism` |
+  | `get-pr-comments` | `resolve-pr-feedback` |
+  | `handoff-prompt` | `handoff` |
+  | `ideate` | `brainstorm` |
+  | `intent-proposal` | `askme` |
+  | `interview-me` | `askme` |
+  | `isolate-work-in-worktree` | `worktree` |
+  | `isolate-workspace-gate` | `worktree` |
+  | `plan-review-tune` | `plan-review` |
+  | `planning` | `plan` |
+  | `planning-and-task-breakdown` | `plan` |
+  | `port-static-analysis-rule` | `semgrep-rule-authoring` |
+  | `pr-link-issue` | `create-pull-request` |
+  | `pr-review-canvas-html` | `pr-review-canvas` |
+  | `property-test-failure-triage` | `property-test-authoring` |
+  | `property-test-review` | `property-test-authoring` |
+  | `property-testing-fit-assessment` | `property-test-authoring` |
+  | `prototype-logic` | `prototype` |
+  | `publish-release-pr` | `release-gate` |
+  | `rationale-by-source` | `why` |
+  | `render-excalidraw-diagram` | `visual-argument-diagram` |
+  | `respond-to-pr-comments-in-blocklist` | `resolve-pr-feedback` |
+  | `review-reception-protocol` | `resolve` |
+  | `shape` | `plan` |
+  | `sharp-edges-analyzer` | `sharp-edges` |
+  | `skill-benchmark-gate` | `skill-benchmark` |
+  | `skill-improver` | `agent-surface-forge` |
+  | `skill-progressive-disclosure-design` | `writing-for-agents` |
+  | `smart-contract-code-maturity-assessor` | `smart-contract-guidelines-advisor` |
+  | `trailmark-summary` | `trailmark-structural` |
+  | `validation-self-audit` | `evaluation-leakage-audit` |
+  | `variant-neighborhood-seeding` | `variant-hunt` |
+  | `visual-brainstorm-companion` | `brainstorm` |
+  | `visual-fact-check` | `verify-both-ways` |
+  | `visual-plan` | `plan` |
+  | `visual-project-recap` | `catchup` |
+  | `visual-render-tool` | `visual-diagram` |
+  | `visual-slides` | `presentation-creator` |
+  | `visualise-chart` | `visualise-widget` |
+  | `visualise-explainer` | `visualise-widget` |
+  | `watch-until` | `watch-for` |
+  | `what-did-i-get-done` | `weekly-review` |
+  | `write-pr-description` | `create-pull-request` |
+  | `write-prd` | `write-product-spec` |
+  | `write-tech-spec` | `write-product-spec` |
+  | `writing-skills` | `writing-for-agents` |
+
+### Migration
+
+Retired id to successor; the count is how many of the retired plugin's skills
+went to the named successor.
+
+| Retired | Successor | Skills |
+|---|---|---|
+| `odin-bigquery` | `odin-infra` | 2 of 2 |
+| `odin-code-advanced` | `odin-code` | 17 of 50; the rest to `odin-testing` (17), `odin-review` (5), `odin-git` (2), `odin-security` (2), `odin-knowledge` (2), `odin-skills` (2), `odin-planning` (1), `odin-infra` (1), `odin-design` (1) |
+| `odin-create` | `odin-writing` | 15 of 45; the rest to `odin-visual` (15), `odin-planning` (10), `odin-design` (2), `odin-critique` (1), `odin-product` (1), `odin-release` (1) |
+| `odin-create-advanced` | `odin-visual` | 10 of 22; the rest to `odin-planning` (6), `odin-writing` (2), `odin-critique` (1), `odin-product` (1), `odin-code` (1), `odin-learn` (1) |
+| `odin-design-advanced` | `odin-design` | 4 of 4 |
+| `odin-loop` | `odin-design` | 4 of 21; the rest to `odin-review` (3), `odin-testing` (3), `odin-infra` (2), `odin-product` (1), `odin-code` (1), `odin-git` (1), `odin-run` (1), `odin-research` (1), `odin-knowledge` (1), `odin-agent` (1), `odin-skills` (1), `odin-web` (1) |
+| `odin-prometheus` | `odin-infra` | 1 of 1 |
+| `odin-research-advanced` | `odin-critique` | 6 of 13; the rest to `odin-research` (4), `odin-product` (2), `odin-review` (1) |
+| `odin-run-advanced` | `odin-run` | 19 of 21; the rest to `odin-release` (2) |
+| `odin-security-advanced` | `odin-security` | 27 of 39; the rest to `odin-fuzzing` (12) |
+| `odin-terraform` | `odin-infra` | 1 of 1 |
+| `odin-writing-advanced` | `odin-writing` | 6 of 6 |
+
+To find a moved skill's new plugin, look up its slug in `docs/specs/skill-index.md`.
+Reinstall a single skill from its new path:
+
+```shell
+gh skill install OutlineDriven/odin-claude-plugin plugins/<new-id>/skills/<slug> \
+  --agent claude-code --scope user
+```
+
 ## [2.0.4] - 2026-09-03
 
 ### Fixed

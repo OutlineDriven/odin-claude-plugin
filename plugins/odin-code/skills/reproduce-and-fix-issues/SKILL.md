@@ -1,6 +1,6 @@
 ---
 name: reproduce-and-fix-issues
-description: 'Use when a trusted bug or performance report needs reproduction and fix. Drives the application, captures reproduction evidence, implements the minimal fix, and opens one draft PR with human approval. Not for untrusted reports or scope beyond the named feature.'
+description: 'Use when a trusted bug or performance report needs reproduction and fix. Not for untrusted reports or scope beyond the named feature.'
 disable-model-invocation: true
 ---
 
@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Reproduce and fix a trusted bug or performance report. |
-| Authority | Human-only for external or irreversible actions. Preview the target and consequence before credentials, data-at-rest changes, paid actions, publishing, deployment, remote bulk mutation, or irreversible deletion. |
+| Authority | Human-gated: asks before credentials, data-at-rest changes, paid actions, publishing, deployment, remote bulk mutation, or irreversible deletion (preview target and consequence); otherwise reversible local: writes only the fix and reproduction evidence; rollback is version control. No remote mutation except the human-approved draft PR. |
 | Side effect | Drives the application under test, captures reproduction evidence, and may open one draft PR. No other remote operations. |
 | Done | Verified operational-thread outcome with cleanup. |
 

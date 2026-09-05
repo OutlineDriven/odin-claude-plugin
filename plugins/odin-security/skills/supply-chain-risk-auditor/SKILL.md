@@ -1,6 +1,6 @@
 ---
 name: supply-chain-risk-auditor
-description: 'Use when assessing npm, PyPI, or Go dependency supply-chain risk. Produces deterministic findings.json and report.md with lockfile-aware advisories, three-state coverage, and separate remediation guidance. Handles lockfile-absent paths by marking transitive dependencies unassessable. Do not use for remote or irreversible changes.'
+description: 'Use when assessing npm, PyPI, or Go dependency supply-chain risk, with lockfile-absent paths marked unassessable. Not for remote or irreversible changes.'
 ---
 
 # Supply chain risk auditor
@@ -10,7 +10,7 @@ description: 'Use when assessing npm, PyPI, or Go dependency supply-chain risk. 
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to assess third-party package or dependency supply-chain risk for a project using npm, PyPI, or Go manifests, with lockfile-wide advisory coverage where supported. |
-| Authority | Reversible local: writes only the named local artifacts (`findings.json`, `report.md`) outside the audited repository. Delete both files to roll back. |
+| Authority | Reversible local: writes only the named local artifacts (`findings.json`, `report.md`) outside the audited repository; rollback is deleting both files. No remote mutation. |
 | Side effect | Never installs, builds, imports, or executes the audited project or dependencies and never reads dependency source. Performs network metadata queries and writes deterministic findings.json plus report.md outside the audited repository. |
 | Done | The report contains direct-dependency risk findings, supported lockfile-wide version-matched advisories, three-state assessed-clean/assessed-flagged/unassessable coverage, exact measured data, and clearly separated remediation judgment without treating unavailable data as risk or absence as safety. |
 

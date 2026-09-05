@@ -1,6 +1,6 @@
 ---
 name: strategy
-description: 'Use when defining product strategy, starting or redirecting a product, or repairing stale STRATEGY.md. Interviews the user with reject-by-default pushback against a drafted strategy document, then writes accepted updates back. Not for project plans, roadmaps, scheduling, or work needing no interview.'
+description: 'Use when defining product strategy, starting or redirecting a product, or repairing stale STRATEGY.md. Not for project plans, roadmaps, scheduling, or work needing no interview.'
 disable-model-invocation: true
 ---
 
@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants product strategy, is starting or redirecting a product, or an existing STRATEGY.md has gone stale. |
-| Authority | Read-only on the repository aside from the target strategy document. Write accepted updates back to that document only. No other file is touched. |
+| Authority | Reversible local: writes only the target strategy document at the operating repository root; rollback is version control. No remote mutation. No other file is touched. |
 | Side effect | Writes updates to one strategy document at the operating repository root. |
 | Done | Required sections cleared the reject-by-default gate; accepted updates written back to the document and read back to confirm. |
 

@@ -1,6 +1,6 @@
 ---
 name: typography-audit
-description: 'Use when asked to audit typography across a codebase. Produces a file:line report with concrete CSS and HTML fixes ordered by impact across 10 categories, and records rules that need rendered metrics as not-verifiable-from-source instead of fabricating violations. Not for building a type system or token scale.'
+description: 'Use when asked to audit typography across a codebase. Produces a file:line report with concrete fixes ordered by impact and flags unverifiable rules. Not for building a type system or token scale.'
 ---
 
 # Typography audit
@@ -10,7 +10,7 @@ description: 'Use when asked to audit typography across a codebase. Produces a f
 | Field | Bound contract |
 |---|---|
 | Trigger | User says audit my typography, fix the fonts, review my type, font pairing, type scale, or web typography |
-| Authority | Read-only scan of project files; no file, VCS, credential, paid, published, deployed, or remote mutation. May apply fixes only when user explicitly requests. |
+| Authority | Human-gated: applies fixes only when the user explicitly requests them; otherwise read-only with no file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output: file:line findings with concrete CSS/HTML fix suggestions, plus not-verifiable-from-source verdicts for rules that need rendered metrics |
 | Done | Report covers all 10 categories; every finding is either a verified file:line violation with a concrete fix or a not-verifiable-from-source verdict naming the rendered metric that would decide it; findings are ordered by impact with no fabricated file:line violations |
 

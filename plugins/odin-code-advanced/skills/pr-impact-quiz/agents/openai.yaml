@@ -1,3 +1,0 @@
-interface:
-  display_name: "PR Impact Quiz"
-  short_description: "Use when a user invokes this skill to generate three targeted questions that prove the author understands how the submitted change affects the existing codebase."

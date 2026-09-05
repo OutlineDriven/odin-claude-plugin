@@ -1,3 +1,0 @@
-interface:
-  display_name: "Writing Skills"
-  short_description: "Use when a SKILL.md or AGENTS.md/CLAUDE.md is being authored, refactored, ported, or upgraded, or the user asks to write a skill, improve one, or fix unreliable skill firing."

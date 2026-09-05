@@ -1,3 +1,0 @@
-interface:
-  display_name: "Project Findings Onto Graph"
-  short_description: "Use when SARIF results, reviewer annotations, or a third-party finding export must be projected onto an existing program graph and cross-referenced with precomputed reachability or blast-radius evidence, with every finding left at its source status."

@@ -1,0 +1,21 @@
+{
+  "name": "odin-learn",
+  "version": "2.1.0",
+  "description": "ODIN workflows for teaching, explaining, drilling, and onboarding.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "learn"
+  ],
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "OutlineDriven"
+  },
+  "skills": "./skills",
+  "interface": {
+    "displayName": "ODIN Learn",
+    "shortDescription": "ODIN workflows for teaching, explaining, drilling, and onboarding."
+  }
+}

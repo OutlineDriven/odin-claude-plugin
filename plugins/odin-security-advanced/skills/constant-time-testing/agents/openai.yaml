@@ -1,3 +1,0 @@
-interface:
-  display_name: "Constant Time Testing"
-  short_description: "Use when a cryptographic implementation must be checked at runtime for timing side-channel leakage."

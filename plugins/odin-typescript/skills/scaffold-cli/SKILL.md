@@ -1,6 +1,6 @@
 ---
 name: scaffold-cli
-description: 'Use when asked to create a complete Node.js 24 TypeScript 7 command-line project with ESM, pnpm 11, tsdown, Biome, Vitest, Changesets, a locked CI workflow, and one observable command test. Not for a Next.js app scaffold; use scaffold-nextjs.'
+description: 'Use when asked to create a complete Node.js 24 TypeScript 7 command-line project. Not for a Next.js app scaffold: use scaffold-nextjs.'
 ---
 
 # Scaffold CLI
@@ -10,7 +10,7 @@ description: 'Use when asked to create a complete Node.js 24 TypeScript 7 comman
 | Field | Bound contract |
 |---|---|
 | Trigger | Create or scaffold a new TypeScript command-line package. |
-| Authority | Reversible local writes inside a new project directory. No remote repository, registry, credential, or publish mutation. |
+| Authority | Reversible local: writes only inside a new project directory; rollback is deleting it. No remote repository, registry, credential, or publish mutation. |
 | Side effect | Creates the project tree, installs dependencies with pnpm, and writes `pnpm-lock.yaml`. |
 | Done | `pnpm run check`, `pnpm test`, `pnpm run build`, and one invocation of the built executable through the package-manager-resolved bin path all pass on Node.js 24; the lockfile is present and CI uses frozen installation. |
 

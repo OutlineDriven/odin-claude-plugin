@@ -1,3 +1,0 @@
-interface:
-  display_name: "Smart Contract Guidelines Advisor"
-  short_description: "Use when a smart-contract project needs architecture, implementation, dependency, or testing guidance."

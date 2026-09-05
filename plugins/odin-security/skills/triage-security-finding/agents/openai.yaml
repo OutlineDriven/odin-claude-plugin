@@ -1,0 +1,3 @@
+interface:
+  display_name: "Triage Security Finding"
+  short_description: "Use when exactly one concrete security finding with a source anchor needs a verdict before PoC work."

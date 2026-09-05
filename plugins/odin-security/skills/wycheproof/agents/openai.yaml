@@ -1,0 +1,3 @@
+interface:
+  display_name: "Wycheproof"
+  short_description: "Use when validating crypto against Project Wycheproof vectors, or explaining a disagreement with a vector."

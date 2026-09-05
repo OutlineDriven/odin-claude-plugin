@@ -1,0 +1,3 @@
+interface:
+  display_name: "Capture Isolated Patch"
+  short_description: "Use when a candidate change must be produced without touching the working tree."

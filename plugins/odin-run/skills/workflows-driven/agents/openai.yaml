@@ -1,0 +1,3 @@
+interface:
+  display_name: "Workflows Driven"
+  short_description: "Use when work decomposes across subagents or phases: audits, migrations, research sweeps, or scale one context cannot hold."

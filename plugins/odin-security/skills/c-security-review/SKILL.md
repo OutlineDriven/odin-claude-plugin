@@ -1,6 +1,6 @@
 ---
 name: c-security-review
-description: 'Use when the user requests a userspace C or C++ security review with an explicit threat model, severity filter, and model. Runs a partitioned read-only audit and writes report, SARIF, and findings to a .c-review-results run directory. Not for kernel drivers, managed languages, or embedded code.'
+description: 'Use when the user requests a userspace C or C++ security review with an explicit threat model, severity filter, and model. Not for kernel drivers, managed languages, or embedded code.'
 ---
 
 # C security review
@@ -10,8 +10,8 @@ description: 'Use when the user requests a userspace C or C++ security review wi
 | Field | Bound contract |
 |---|---|
 | Trigger | The user requests a complete userspace C or C++ security review with an explicit threat model, severity filter, and model. |
-| Authority | Reversible local: write only the `.c-review-results/<stamp>/` run directory under the current working directory. Roll back by deleting that directory; no reviewed source tree, VCS, credential, or remote is mutated. |
-| Side effect | A `.c-review-results/<iso-timestamp>/` directory holding REPORT.md, REPORT.sarif, and findings.json. |
+| Authority | Reversible local: writes only the `.c-review-results/<stamp>/` run directory under the current working directory; rollback is deleting that directory. No remote mutation. No reviewed source tree, VCS, or credential is mutated. |
+| Side effect | A `.c-review-results/<stamp>/` directory holding REPORT.md, REPORT.sarif, and findings.json. |
 | Done | Every source file in scope is reviewed or named as uncovered, REPORT.md and REPORT.sarif agree, findings are filtered by severity, and the report discloses that no false-positive review ran. |
 
 ## Inputs

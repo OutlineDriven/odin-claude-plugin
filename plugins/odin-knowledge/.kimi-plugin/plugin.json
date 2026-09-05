@@ -1,0 +1,21 @@
+{
+  "name": "odin-knowledge",
+  "version": "2.1.0",
+  "description": "ODIN workflows for memory, session continuity, decision records, and retrospectives.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "knowledge"
+  ],
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "OutlineDriven"
+  },
+  "skills": "./skills",
+  "interface": {
+    "displayName": "ODIN Knowledge",
+    "shortDescription": "ODIN workflows for memory, session continuity, decision records, and retrospectives."
+  }
+}

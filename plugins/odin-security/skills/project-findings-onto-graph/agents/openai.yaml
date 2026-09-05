@@ -1,0 +1,3 @@
+interface:
+  display_name: "Project Findings Onto Graph"
+  short_description: "Use when SARIF, reviewer annotations, or third-party findings must be projected onto a program graph."

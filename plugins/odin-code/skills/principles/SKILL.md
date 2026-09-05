@@ -1,11 +1,11 @@
 ---
 name: principles
-description: 'Use when a request names a working principle (subtract before you add, idempotent operations, never block on the human) or asks which principle governs a decision. Returns the law and its bite point; routes to the owning skill for execution. Not for running a repair — use fix.'
+description: 'Use when a request names a working principle (subtract before you add, idempotent operations, never block on the human) or asks which principle applies. Not for running a repair: use strike-the-root.'
 ---
 
 # Principles
 
-Indexed anchor register: 21 named principles, each a law plus the moment it bites. Read the index, jump to the anchor, apply the law. Principles governs judgment only and never executes or mutates. When an anchor requires mutation or execution, route the user to the owning skill (`fix`, `debug`, `architect`, `deslop`, `commit`, `ci-cd`) instead of instructing execution. Come here to decide, not to run a repair.
+Indexed anchor register: 21 named principles, each a law plus the moment it bites. Read the index, jump to the anchor, apply the law. Principles governs judgment only and never executes or mutates. When an anchor requires mutation or execution, route the user to the owning skill (`strike-the-root`, `architect`, `deslop`, `commit`, `ci-cd`) instead of instructing execution. Come here to decide, not to run a repair.
 
 Five anchors carry procedure-dense references (linked inline); the rest are complete at anchor length.
 
@@ -14,7 +14,7 @@ Five anchors carry procedure-dense references (linked inline); the rest are comp
 | Field | Bound contract |
 |---|---|
 | Trigger | A request names a working principle by name or example, or asks which principle governs a decision. |
-| Authority | Read-only. Names the owning skill for execution; never mutates files, VCS, credentials, or remote state. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Names the owning skill for execution. |
 | Side effect | Guidance in chat output only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Done | The governing principle is named with its law and bite point, and the owning skill is named when the anchor requires execution. |
 
@@ -68,7 +68,7 @@ Execute a planned migration stepwise against a rollback anchor, verifying each s
 
 **Bites when** a plan names a target architecture and the intermediate breakage is reversible.
 
-Establish the anchor before the first mutation; release it only after the end state verifies. Procedure and failure codes: `references/outcome-oriented-execution.md`. When this anchor requires executing the migration, route to `fix`.
+Establish the anchor before the first mutation; release it only after the end state verifies. Procedure and failure codes: `references/outcome-oriented-execution.md`. When this anchor requires executing the migration, route to `strike-the-root`.
 
 ### Migrate callers, then delete
 
@@ -120,7 +120,7 @@ Reproduce first, trace the why-chain to a decision in this project's source, fix
 
 **Bites when** a defect is reported with wrong behavior (not a feature request).
 
-Instrument rather than guess; a guard is legal only where the why-chain proves the state invalid. Procedure, symptom-fix rejection list, and failure classes: `references/fix-root-causes.md`. For the guarded repair loop with retry budgets, use `fix`; this anchor governs the diagnosis.
+Instrument rather than guess; a guard is legal only where the why-chain proves the state invalid. Procedure, symptom-fix rejection list, and failure classes: `references/fix-root-causes.md`. For the guarded repair loop with retry budgets, use `strike-the-root`; this anchor governs the diagnosis.
 
 ### Prove it works
 
@@ -170,7 +170,7 @@ Fix shared-write races by splitting per-actor state out of shared scope before c
 
 **Bites when** two or more actors write one mutable location.
 
-Shared residue gets the narrowest primitive that covers the write path; a merge that cannot be expressed without a papering-over lock is a stop, not a lock. Procedure and failure classes: `references/separate-before-serializing.md`. When this anchor requires executing the split, route to `fix`.
+Shared residue gets the narrowest primitive that covers the write path; a merge that cannot be expressed without a papering-over lock is a stop, not a lock. Procedure and failure classes: `references/separate-before-serializing.md`. When this anchor requires executing the split, route to `strike-the-root`.
 
 ## Economy
 

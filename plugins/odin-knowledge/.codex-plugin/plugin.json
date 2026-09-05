@@ -1,0 +1,20 @@
+{
+  "name": "odin-knowledge",
+  "version": "2.1.0",
+  "description": "ODIN workflows for memory, session continuity, decision records, and retrospectives.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "knowledge"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Knowledge",
+    "shortDescription": "ODIN workflows for memory, session continuity, decision records, and retrospectives.",
+    "category": "Productivity"
+  }
+}

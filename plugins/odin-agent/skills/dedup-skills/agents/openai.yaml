@@ -1,3 +1,0 @@
-interface:
-  display_name: "Dedup Skills"
-  short_description: "Use when asked to deduplicate skills or prompt directories, find repeated rules, or check a skill tree for contradictions."

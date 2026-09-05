@@ -1,3 +1,3 @@
 interface:
   display_name: "Verify Both Ways"
-  short_description: "Use when a load-bearing claim is unverified, a plausible statement has never been checked, the user says \"fact-check this\" or \"verify this claim\", or an artifact or sentence about to be written asserts something as plausible, absurd, novel, or impossible and doubt arises."
+  short_description: "Use when a claim needs checking both ways, \"fact-check this\", or an artifact or HTML document needs claims verified and corrected in place."

@@ -1,3 +1,3 @@
 interface:
   display_name: "UI Design"
-  short_description: "Use when directing, building, or auditing React/Next.js UI in Tailwind: visual direction, responsive or dark-mode retrofits, and file:line UX findings with a ship verdict."
+  short_description: "Use when directing, building, or auditing React/Next.js Tailwind UI: visual direction, responsive/dark-mode retrofits, UX audits."

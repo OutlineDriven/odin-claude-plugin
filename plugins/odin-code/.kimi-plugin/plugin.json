@@ -1,7 +1,7 @@
 {
   "name": "odin-code",
-  "version": "2.0.4",
-  "description": "ODIN workflows for writing, reviewing, and maintaining code.",
+  "version": "2.1.0",
+  "description": "ODIN workflows for writing, changing, and simplifying code.",
   "keywords": [
     "odin",
     "outlinedriven",
@@ -16,6 +16,6 @@
   "skills": "./skills",
   "interface": {
     "displayName": "ODIN Code",
-    "shortDescription": "ODIN workflows for writing, reviewing, and maintaining code."
+    "shortDescription": "ODIN workflows for writing, changing, and simplifying code."
   }
 }

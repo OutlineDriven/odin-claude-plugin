@@ -1,0 +1,3 @@
+interface:
+  display_name: "Diagramming Code"
+  short_description: "Use when asked for a call graph, class hierarchy, dependency map, containment or complexity view, or data-flow view."

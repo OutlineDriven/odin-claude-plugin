@@ -1,3 +1,0 @@
-interface:
-  display_name: "Resolve PR Feedback"
-  short_description: "Use when addressing GitHub PR review comments or resolving review threads."

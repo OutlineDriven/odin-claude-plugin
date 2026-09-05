@@ -1,6 +1,6 @@
 ---
 name: typing-exclusion-worker
-description: 'Use when removing modules from pyproject mypy exclusions or running a typing-debt worker batch. Fixes surfaced typing issues in scope and returns a batch summary backed by passing targeted mypy, tests, and pre-commit. Not for cross-team or out-of-scope typing work.'
+description: 'Use when removing modules from pyproject mypy exclusions or running a typing-debt worker batch. Not for cross-team or out-of-scope typing work.'
 ---
 
 # Typing exclusion worker
@@ -10,7 +10,7 @@ description: 'Use when removing modules from pyproject mypy exclusions or runnin
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to remove modules from `pyproject.toml` mypy exclusions or to run one typing-debt worker batch. |
-| Authority | Reversible-local: write only the `pyproject.toml` mypy exclusion entries for assigned modules and source or test files inside the assigned ownership boundary. Rollback restores file contents from a content-complete baseline recorded before the first edit. |
+| Authority | Reversible local: write only the `pyproject.toml` mypy exclusion entries for assigned modules and source or test files inside the assigned ownership boundary. Rollback restores file contents from a content-complete baseline recorded before the first edit. |
 | Side effect | Removes assigned module entries from the mypy exclusion override and fixes the typing issues those exclusions surface. No cross-team modules, no unrelated files, no dependency or config changes beyond the exclusion list. |
 | Done | Every assigned module is removed from the exclusion list and a batch summary reports removed modules, changed files, key fixes, and passing targeted mypy, targeted tests, and pre-commit on changed files. |
 

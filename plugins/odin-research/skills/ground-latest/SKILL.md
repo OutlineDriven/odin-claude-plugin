@@ -1,6 +1,6 @@
 ---
 name: ground-latest
-description: 'Use when starting a codebase or service, scaffolding, migrating or refactoring, picking a language edition, runtime, framework, or dependency, or when the user asks for the latest, current, LTS, or modern way. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when starting or scaffolding a codebase or service, migrating, refactoring, or picking language, framework, or dependency, or latest, LTS, or modern way. Not for remote or irreversible changes.'
 ---
 
 # Ground latest
@@ -10,7 +10,7 @@ description: 'Use when starting a codebase or service, scaffolding, migrating or
 | Field | Bound contract |
 |---|---|
 | Trigger | Starting a new codebase or service, scaffolding, migrating or refactoring, picking a language edition, runtime, framework, or dependency, or the user asks for the latest, current, LTS, or modern way |
-| Authority | reversible-local: write a dated grounded set into the change (plan, ADR, or PR body); no VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Reversible local: writes only a dated grounded set into the change (plan, ADR, or PR body); rollback is version control or undo. No remote mutation. |
 | Side effect | local write of a dated grounded set of pinned versions with release-channel links and LTS-vs-latest decisions; drops pre-release and deprecated choices with named replacements |
 | Done | every pinned choice has a release-channel version plus link; LTS-vs-latest decided per project; grounded set written and dated |
 

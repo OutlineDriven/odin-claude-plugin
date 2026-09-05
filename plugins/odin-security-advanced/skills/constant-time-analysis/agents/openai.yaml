@@ -1,3 +1,0 @@
-interface:
-  display_name: "Constant Time Analysis"
-  short_description: "Use when reviewing cryptographic code for timing side-channels (C, C++, Go, Rust, Swift, Java, Kotlin, C#, PHP, JS, TS, Python, Ruby)."

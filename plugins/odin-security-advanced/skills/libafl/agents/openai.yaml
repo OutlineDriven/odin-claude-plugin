@@ -1,3 +1,0 @@
-interface:
-  display_name: "Libafl"
-  short_description: "Use when a custom LibAFL fuzzer needs an executor, observer, feedback, mutator, scheduler, or objective composed around a target."

@@ -1,6 +1,6 @@
 ---
 name: tailwind-best-practices
-description: 'Use when writing, editing, cleaning, or refactoring Tailwind classes, components, or configuration. Reorders and deduplicates classes, replaces arbitrary values with project tokens, and checks component extraction. Not for read-only audits of Tailwind code, or general CSS without Tailwind.'
+description: 'Use when writing, editing, cleaning, or refactoring Tailwind classes, components, or configuration. Not for read-only audits of Tailwind code, or general CSS without Tailwind.'
 ---
 
 # Tailwind best practices
@@ -10,7 +10,7 @@ description: 'Use when writing, editing, cleaning, or refactoring Tailwind class
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to write, edit, clean, or refactor Tailwind classes, components, or configuration. Read-only review or audit requests are out of scope. |
-| Authority | Reversible local writes only. Edit class lists and component variants in place; every mutation is reversible by restoring the prior class string or file content. |
+| Authority | Reversible local: writes only class lists and component variants in place; rollback is undo. No remote mutation. Every mutation is reversible by restoring the prior class string or file content. |
 | Side effect | Edits class lists and component variants; flags ad-hoc tokens, @apply-heavy styles, magic values, and missing minification. |
 | Done | Token and component prerequisites exist; unnecessary utilities, semantics, ordering, @apply avoidance, and fixed variants are checked with version-aware minification. |
 

@@ -1,6 +1,6 @@
 ---
 name: writing-lean-proofs
-description: 'Use when asked to design, write, review, refactor, lint, or performance-diagnose Lean 4 proofs, libraries, or tactic extensions under Mathlib conventions. Not for non-Lean code or changes outside Lean source, library API, proof structure, and linter configuration.'
+description: 'Use when asked to design, write, review, refactor, lint, or performance-diagnose Lean 4 proofs, libraries, or tactics. Not for non-Lean code or changes outside source, API, proof, or linter scope.'
 ---
 
 # Writing Lean proofs
@@ -10,7 +10,7 @@ description: 'Use when asked to design, write, review, refactor, lint, or perfor
 | Field | Bound contract |
 |---|---|
 | Trigger | The task is to design, write, review, refactor, lint, or performance-diagnose Lean 4 proofs, libraries, or tactic extensions under Mathlib conventions. |
-| Authority | Reversible local writes to Lean source files, library API, proof structure, project linter configuration, and scoped mechanical Lean checks. Rollback via version control restore of changed files. |
+| Authority | Reversible local: writes only Lean source files, library API, proof structure, and project linter configuration, plus scoped mechanical Lean checks; rollback is version control. No remote mutation. |
 | Side effect | Local writes to Lean source, library API, proof structure, project linter configuration, and scoped mechanical Lean checks. No remote mutation, credential change, paid action, or deployment. |
 | Done | The requested Lean declarations have stable statements and structured proofs, compile under the project toolchain, and satisfy the selected axiom and linter policy. |
 

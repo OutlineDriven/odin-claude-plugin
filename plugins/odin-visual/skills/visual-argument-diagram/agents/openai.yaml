@@ -1,0 +1,3 @@
+interface:
+  display_name: "Visual Argument Diagram"
+  short_description: "Use when a user wants a conceptual, workflow, or architecture diagram, a layout repair, or a PNG render of an existing .excalidraw file."

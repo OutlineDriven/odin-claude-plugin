@@ -1,3 +1,0 @@
-interface:
-  display_name: "CI Sweeper"
-  short_description: "Use when a requested sweep monitors CI failures over a bounded attempt window."

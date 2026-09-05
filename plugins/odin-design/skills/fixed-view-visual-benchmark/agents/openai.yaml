@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fixed View Visual Benchmark"
+  short_description: "Use when a visual needs repeatable fixed-view rendering and independent rubric scoring."

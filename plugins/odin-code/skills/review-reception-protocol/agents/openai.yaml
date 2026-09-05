@@ -1,3 +1,0 @@
-interface:
-  display_name: "Review Reception Protocol"
-  short_description: "Use when asked to receive code review feedback: clarify every item, implement accepted items locally with tests, draft technical pushback for questionable items, and stop before any GitHub reply or remote mutation."

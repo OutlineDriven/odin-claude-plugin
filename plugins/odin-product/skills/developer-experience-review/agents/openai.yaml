@@ -1,0 +1,3 @@
+interface:
+  display_name: "Developer Experience Review"
+  short_description: "Use when dogfooding a developer-facing product or workflow to produce an evidence-backed DX scorecard."

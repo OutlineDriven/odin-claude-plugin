@@ -1,6 +1,6 @@
 ---
 name: linkedin-ghostwriting
-description: 'Use when a user provides a founder story or result and asks for a LinkedIn post with a chosen hook and humanized body. No file or credential mutations. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when a user gives a founder story or result and asks for a LinkedIn post with a chosen hook and humanized body. Not for tasks that require source or remote-system changes.'
 ---
 
 # LinkedIn ghostwriting
@@ -10,7 +10,7 @@ description: 'Use when a user provides a founder story or result and asks for a 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to turn a founder story or result into a LinkedIn post. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Delivers drafted hook and post text; no writes beyond the conversation. |
 | Done | Chosen hook plus post body, humanized with the hook preserved. |
 
@@ -60,4 +60,4 @@ Partial-result rule: if the user provides additional material mid-draft, incorpo
 
 ## Output
 
-A single LinkedIn post: chosen hook (bold, verbatim from user selection) followed by post body (2-4 short paragraphs, under 1,300 characters, in founder voice, humanized) — no hashtags unless explicitly requested, no images or link attachments, no draft saved to any file or external service.
+A single LinkedIn post: chosen hook (bold, verbatim from user selection) followed by post body (2-4 short paragraphs, under 1,300 characters, in founder voice, humanized): no hashtags unless explicitly requested, no images or link attachments, no draft saved to any file or external service.

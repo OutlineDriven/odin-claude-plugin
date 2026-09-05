@@ -1,6 +1,6 @@
 ---
 name: frontend-ui-engineering
-description: 'Use when asked to build or modify user-facing interfaces and pages with production quality: components, layouts, state management, WCAG 2.1 AA accessibility, and real content, with output that looks hand-crafted rather than AI-generated. Not for token-system design with slop-audit gates; use frontend-design-deslop. Local writes only.'
+description: 'Use when asked to build or modify production-quality components, layouts, state, and pages with WCAG 2.1 AA and real content. Not for token-system design: use frontend-design-deslop.'
 ---
 
 # Frontend UI engineering
@@ -10,7 +10,7 @@ description: 'Use when asked to build or modify user-facing interfaces and pages
 | Field | Bound contract |
 |---|---|
 | Trigger | Building or modifying user-facing interfaces and pages: creating components, implementing layouts, managing state, meeting WCAG requirements, or when the output must look production-quality and hand-crafted. |
-| Authority | Write only the named UI component and page files in the local working tree. Revert by discarding the uncommitted changes or restoring the prior file state. No remote, VCS, credential, paid, published, or deployed mutation. |
+| Authority | Reversible local: writes only named UI component and page files in the local working tree; rollback is undo. No remote mutation. |
 | Side effect | UI components and pages created or modified in the local working tree. |
 | Done | The UI meets the project design system, passes WCAG 2.1 AA keyboard and focus checks, is responsive at the required breakpoints, uses real content instead of placeholders, and rejects every named AI-aesthetic tell. |
 

@@ -1,6 +1,6 @@
 # `simplify`: orchestration recipe
 
-Dispatch shape, composition rule, Reviewer audit contract, fix sequencing, and behavior gate for the `simplify` skill. Read alongside `SKILL.md` Phase 1 / 2 / 3.
+Dispatch shape, composition rule, Reviewer audit contract, fix sequencing, and behavior gate for the `simplify` skill. Read alongside `../SKILL.md` Phase 1 / 2 / 3.
 
 ## Phase 1: diff scope resolution (shell snippet)
 
@@ -69,7 +69,7 @@ Agent type for each invocation: `Explore` (read-only).
 
 ### Composition
 
-After all three findings lists return, merge by `{file, line}`. Tag each finding with its axis. When two axes report the same `{file, line}` with structurally identical patterns, deduplicate — keep the finding once, attribute to the first reporter, note the second axis as a co-signer.
+After all three findings lists return, merge by `{file, line}`. Tag each finding with its axis. When two axes report the same `{file, line}` with structurally identical patterns, deduplicate: keep the finding once, attribute to the first reporter, note the second axis as a co-signer.
 
 ### Reviewer audit (single adjudication authority)
 
@@ -110,7 +110,7 @@ A commit that would bundle survivors from more than one class is split before me
 
 ## Behavior gate (after every commit)
 
-After each fix commit, run the repo-native verifier per the matrix in `fix/references/verifiers.md`, derived from the project's manifest in this order: a task-runner target (`just test`, `make test`), then the ecosystem's own test command (`cargo test`, `pytest`, `npm test`, `dune runtest`, `go test ./...`), or the equivalent for the current language. On red:
+After each fix commit, run the repo-native verifier per the matrix derived from the project's manifest in this order: a task-runner target (`just test`, `make test`), then the ecosystem's own test command (`cargo test`, `pytest`, `npm test`, `dune runtest`, `go test ./...`), or the equivalent for the current language. On red:
 
 ```bash
 git revert HEAD --no-edit

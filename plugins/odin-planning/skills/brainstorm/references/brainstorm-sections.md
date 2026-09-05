@@ -112,7 +112,7 @@ Plan artifacts have no `status` field and no `active → completed` lifecycle. W
 
 ### Field-name stability
 
-Field names are stable across brainstorm revisions, never rename or repurpose a field. Agents composing new brainstorms MUST use these exact names.
+Field names are stable across brainstorm revisions, never rename or repurpose a field. Agents composing new brainstorms use these exact names so downstream tools can find them by heading scan.
 
 ## ID and content rules
 

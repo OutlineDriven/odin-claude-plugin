@@ -1,3 +1,0 @@
-interface:
-  display_name: "Setup Tool Credentials"
-  short_description: "Use when the user asks to gather tool credentials into a non-overwriting .env and verify repository and tool access."

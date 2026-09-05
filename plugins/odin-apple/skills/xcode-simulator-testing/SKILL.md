@@ -1,6 +1,6 @@
 ---
 name: xcode-simulator-testing
-description: 'Use when asked to run /xcode-simulator-testing with a scheme name or current to build and launch an iOS app in a simulator and capture per-surface evidence. Not for project regeneration — use xcode-project-sync.'
+description: 'Use when asked to run /xcode-simulator-testing with a scheme name or current to build and launch an iOS app in a simulator. Not for project regeneration: use ios-build-fix.'
 ---
 
 # Xcode simulator test
@@ -37,8 +37,8 @@ description: 'Use when asked to run /xcode-simulator-testing with a scheme name 
 - Failed screen or flow: preserve its screenshot, relevant logs, and reproduction steps. Ask whether to investigate now or continue testing the remaining scope without investigation; that routing choice does not change the observed `FAIL`.
   - Investigate now: pause this run and hand the failure evidence and simulator reproduction context back. Any diagnosis or fix proceeds under separate authority narrowed to no commit, push, or PR. Only an applied fix triggers rebuild and retest; derive any replacement status from the completed retest evidence, and until that evidence exists retain `FAIL` and continue the remaining scoped checks.
   - Continue without investigation: retain `FAIL`, preserve the observed failure evidence, and proceed with the rest of the scoped checks.
-- **Non-mutation**: this skill does not modify project source, commit, push, or open a PR. Simulator state it creates is reversible by shutting the simulator and uninstalling the app.
+- This skill does not modify project source, commit, push, or open a PR. Simulator state it creates is reversible by shutting the simulator and uninstalling the app.
 - Never swallow errors or pretend the done predicate holds. The blocked or non-converged result is the summary with residual `FAIL` or `SKIP` preserved.
 
 ## Output
-Xcode test report — fields in order: project or workspace, scheme, simulator, build result, screens tested, per-surface PASS/FAIL/SKIP evidence, console errors, human verifications, residual failures, overall PASS/FAIL/PARTIAL result.
+Xcode test report: fields in order: project or workspace, scheme, simulator, build result, screens tested, per-surface PASS/FAIL/SKIP evidence, console errors, human verifications, residual failures, overall PASS/FAIL/PARTIAL result.

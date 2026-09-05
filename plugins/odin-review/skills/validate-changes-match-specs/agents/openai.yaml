@@ -1,0 +1,3 @@
+interface:
+  display_name: "Validate Changes Match Specs"
+  short_description: "Use when asked to compare implementation against repository specs, report mismatches, resolve by user decision, or check PR-review commitments."

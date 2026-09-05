@@ -1,6 +1,6 @@
 ---
 name: to-tickets
-description: 'Use when a settled plan needs implementation tickets published as blocker-linked slices, tracer bullets, or expand-contract sequencing, and a human invokes the publication. Publishes GitHub issues or local ticket files and writes their URLs back into the plan. Not for implementation — use work; not for unsupervised publication.'
+description: 'Use when a settled plan needs implementation tickets published as blocker-linked slices, tracer bullets, or expand-contract sequencing. Not for implementation: use work.'
 disable-model-invocation: true
 ---
 
@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A settled plan needs implementation tickets, tracer bullets, or expand-contract sequencing published, and a human invokes the publication. |
-| Authority | Requires explicit human invocation. Before anything is published, present the complete ticket draft, the exact targets (every GitHub issue to be created or local file to be written), and the consequence of publishing; proceed only on the human's approval. |
+| Authority | Remote: creates GitHub issues and writes local ticket files; requires explicit human invocation. Present the complete draft, exact targets, and consequence of publishing, and proceed only on the human's approval. |
 | Side effect | Creates GitHub issues or local ticket files at the single resolved storage scheme, and writes the issue URLs or file paths back into the source plan's Delivery section. Limited to the approved draft's tickets and that Delivery section; no other remote or local mutation. |
 | Done | Every approved ticket is published and linked in the plan's Delivery section, each ticket declares its blockers, the vertical end-to-end path comes first, and a per-ticket blocked-by report is produced. Complete only when every approved ticket is published and linked; otherwise blocked with the exact remainder. |
 

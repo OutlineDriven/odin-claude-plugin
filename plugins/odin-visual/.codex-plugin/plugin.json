@@ -1,0 +1,20 @@
+{
+  "name": "odin-visual",
+  "version": "2.1.0",
+  "description": "ODIN workflows for diagrams, decks, canvases, and visual explainers.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "visual"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Visual",
+    "shortDescription": "ODIN workflows for diagrams, decks, canvases, and visual explainers.",
+    "category": "Design"
+  }
+}

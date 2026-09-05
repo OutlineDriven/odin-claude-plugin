@@ -1,0 +1,3 @@
+interface:
+  display_name: "Possible Worlds"
+  short_description: "Use when a design dispute has at least two live interpretations and the caller wants worlds made explicit or a plain-language recommendation."

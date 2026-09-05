@@ -1,6 +1,6 @@
 ---
 name: webapp-testing
-description: 'Use when asked to verify frontend functionality, debug UI behavior, or capture browser screenshots and console logs against a local dev server. Generates a Playwright assertion script, executes it, and classifies PASS or FAIL from the exit code. Not for read-only browser inspection (use browser-testing) or remote, credential, publish, or deploy changes.'
+description: 'Use when asked to verify frontend or UI behavior, or capture browser screenshots and console logs. Not for read-only inspection: use browser-testing. Not for remote or deploy changes.'
 ---
 
 # Webapp testing
@@ -10,7 +10,7 @@ description: 'Use when asked to verify frontend functionality, debug UI behavior
 | Field | Bound contract |
 |---|---|
 | Trigger | Verify frontend functionality, debug UI behavior, capture browser screenshots, or inspect browser logs |
-| Authority | Write only to named local artifacts: Playwright scripts, screenshots, console logs, and verification results. Rollback any persistent state the skill introduced. |
+| Authority | Reversible local: writes only named local artifacts (Playwright scripts, screenshots, console logs, and verification results); rollback is undo. No remote mutation. |
 | Side effect | Local file writes of test scripts, screenshots, console logs, and structured results. No remote or credential mutation. |
 | Done | The generated Playwright script exits zero; screenshots and console logs are captured evidence, never an alternative pass oracle. |
 
@@ -26,7 +26,7 @@ description: 'Use when asked to verify frontend functionality, debug UI behavior
 
 1. Confirm `playwright` is installed and `playwright install chromium` has been run. Done when: playwright and chromium are confirmed installed, or the step has stopped with `No playwright-chromium`.
 2. If `server command` is supplied, start the server. If the server fails to start within 30 seconds, stop with `Server failed to start`. If `server command` is absent, confirm the human has started the server; if not confirmed, stop with `No Server`. Then probe the URL with an HTTP GET and a 10-second timeout; on failure stop with `Server unreachable`. Done when: server is running and reachable, or the step has stopped with the named failure class.
-3. Write the Playwright script to the designated path. Use `playwright.sync_api.sync_playwright()` and open the URL with `page.goto(url, wait_until='networkidle')`. When `console log` is requested, capture console output via `page.on('console', ...)`. When `screenshot` is requested, save screenshots to `<slug>-<timestamp>.png`. Include the supplied assertions as explicit `page.expect()` or `assert` checks. Done when: script is written with assertions and evidence capture.
+3. Write the Playwright script to the designated path. Use `playwright.sync_api.sync_playwright()` and open the URL with `page.goto(url, wait_until='networkidle')`. When `console log` is requested, capture console output via `page.on('console', ...)`. When `screenshot` is requested, derive a slug from the page URL or test name and save screenshots to `<slug>-<timestamp>.png`. Include the supplied assertions as `expect(page.locator(...))` calls each carrying an explicit matcher (`.to_be_visible()`, `.to_have_text(...)`, or the check the user named) from `playwright.sync_api`, or plain `assert` checks; a bare `expect(...)` without a matcher asserts nothing and exits zero, so it never satisfies a requested UI check. Done when: script is written with assertions and evidence capture.
 4. Execute the script. Collect exit code, stdout, stderr, and any captured screenshots or console logs. Done when: script execution completes with exit code and evidence collected.
 5. If the script exits non-zero, save evidence and stop with `Test assertion failed`. The script itself is rollback-eligible generated content and may be deleted. Done when: failure is recorded with evidence saved, or the step is skipped because exit code is zero.
 6. If the script exits zero, the pass verdict holds. Screenshots and console logs are evidence, not an alternative oracle. Proceed to the Output section. Done when: pass verdict is confirmed by the zero exit code.

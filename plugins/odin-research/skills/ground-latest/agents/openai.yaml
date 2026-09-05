@@ -1,3 +1,3 @@
 interface:
   display_name: "Ground Latest"
-  short_description: "Use when starting a codebase or service, scaffolding, migrating or refactoring, picking a language edition, runtime, framework, or dependency, or when the user asks for the latest, current, LTS, or modern way."
+  short_description: "Use when starting or scaffolding a codebase or service, migrating, refactoring, or picking language, framework, or dependency, or latest, LTS, or modern way."

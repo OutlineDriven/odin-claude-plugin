@@ -1,3 +1,0 @@
-interface:
-  display_name: "Shape"
-  short_description: "Use when the user says \"shape this\", \"pitch this\", \"gut check the shape\", \"fix this pitch\", or asks whether a result matches the bet."

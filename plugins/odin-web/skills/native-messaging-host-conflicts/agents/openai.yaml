@@ -1,0 +1,3 @@
+interface:
+  display_name: "Native Messaging Host Conflicts"
+  short_description: "Use when a browser extension native messaging host fails, times out, or the wrong host spawns."

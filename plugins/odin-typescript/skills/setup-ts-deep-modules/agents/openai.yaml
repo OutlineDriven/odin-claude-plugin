@@ -1,3 +1,3 @@
 interface:
   display_name: "Setup Ts Deep Modules"
-  short_description: "Use when the user asks to enforce package boundaries, set up deep modules, stop deep imports, mutation-prove boundary rules, or ensure packages are reachable only through entry points in a TypeScript repo."
+  short_description: "Use when asked to enforce boundaries, set up deep modules, stop deep imports, mutation-prove rules, or make entry-point packages."

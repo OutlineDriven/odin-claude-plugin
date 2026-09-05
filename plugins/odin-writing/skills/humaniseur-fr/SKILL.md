@@ -1,6 +1,6 @@
 ---
 name: humaniseur-fr
-description: 'Use when the user supplies French text that reads like AI output and asks to naturalize it. One pass removes AI tells while preserving register; returns the rewritten French text. Not for English STE rewriting — use humanizer-en-asd-ste100.'
+description: 'Use when the user supplies French text that reads like AI output and asks to naturalize it. Not for English STE rewriting: use humanizer-en-asd-ste100.'
 ---
 
 # Humaniseur fr
@@ -12,7 +12,7 @@ Naturalize French text that reads as AI-generated.
 | Field | Bound contract |
 |---|---|
 | Trigger | User supplies French text and asks to naturalize, dérobotiser, rendre naturel, or similar |
-| Authority | Read-only; no file, VCS, credential, paid, published, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Returns rewritten French text in the same turn; no durable writes |
 | Done | Text is in the preserved register with no three AI signals co-occurring |
 
@@ -30,16 +30,16 @@ Naturalize French text that reads as AI-generated.
 
 Apply **one pass only**. Do not iterate or re-apply.
 
-**Rule 1 — Register preservation.** Before rewriting, determine the register from the source text:
+**Rule 1: Register preservation.** Before rewriting, determine the register from the source text:
 - soutenu: formal vocabulary, subjunctive mood, complex syntax, passive constructions, literary forms
 - courant: neutral formal, standard written French, the default register for professional prose
 - familier: informal vocabulary, colloquialisms, first-person constructions
 
 Preserve the detected register throughout. Do not downgrade or upgrade.
 
-**Rule 2 — 80 % rule.** If a pattern appears in every sentence, fix it in no more than 80 % of those sentences. Fixing every instance makes the result read as over-corrected. Leave at least one raw instance per pattern class per paragraph.
+**Rule 2: 80 % rule.** If a pattern appears in every sentence, fix it in no more than 80 % of those sentences. Fixing every instance makes the result read as over-corrected. Leave at least one raw instance per pattern class per paragraph.
 
-**Rule 3 — No three-signal co-occurrence.** Do not fix three different signal classes in the same sentence. Cap at two fix types per sentence.
+**Rule 3: No three-signal co-occurrence.** Do not fix three different signal classes in the same sentence. Cap at two fix types per sentence.
 
 ### Pattern catalog (38 patterns)
 
@@ -64,7 +64,7 @@ Apply per-sentence. Stop scanning once a sentence has received its two-class cap
 
 10. **Synonymes en cascade.** `` le projet → la démarche → l'initiative → l'action '' in the same paragraph. Pick one term and hold it.
 11. **« Bien que / malgré le fait que » redondants.** `` Malgré le fait que '', `` Au regard du fait que ''. Replace with `` bien que '', `` puisque '', `` car ''.
-12. **« Etc. » à la fin de phrases.** `` Les composants incluent le serveur, la base de données, le cache, etc. '' — `` etc. '' rarely appears in careful French prose. Either list all items or write `` et d'autres composants ''.
+12. **« Etc. » à la fin de phrases.** `` Les composants incluent le serveur, la base de données, le cache, etc. ''; `` etc. '' rarely appears in careful French prose. Either list all items or write `` et d'autres composants ''.
 13. **Tournures emphatiques.** `` Ce qui est particulièrement digne de mention, c'est que '', `` Il convient de souligner le fait que '', `` Il est à noter que '', `` Il est un fait que ''. Replace with the plain statement.
 14. **Hyperonymies vides.** `` lesdites mesures '', `` à n'en pas douter '', `` il va sans dire '' (outside of `` il va sans dire que ''). Cut or replace.
 
@@ -72,7 +72,7 @@ Apply per-sentence. Stop scanning once a sentence has received its two-class cap
 
 15. **Atténuations systématiques.** `` dans une large mesure '', `` dans une certaine mesure '', `` dans une proportion significative '', `` il semble que '', `` il appert que '', `` il s'avère que '', `` en apparence '', `` à première vue '', `` sous certains aspects '', `` sous un certain angle '', `` force est de constater que '', `` il convient de relever ''. If the statement is factually supported, make it direct. If not, say `` nous ne disposons pas de données suffisantes pour … ''.
 16. **Modaux superlatifs.** `` il est permis de croire que '', `` on serait tenté de penser que '', `` il ne serait pas exagéré de dire que '', `` il n'est pas aventureux d'affirmer que ''. Remove the modal framing and state the claim directly.
-17. **Atténuations de conclusion.** `` En définitive / en dernière analyse / en dernier recours '', `` Force est de constater que '', `` force est de constater '', `` Tout compte fait '' — used as sentence openers rather than as genuine summaries. Replace with a specific conclusion tied to the content.
+17. **Atténuations de conclusion.** `` En définitive / en dernière analyse / en dernier recours '', `` Force est de constater que '', `` force est de constater '', `` Tout compte fait '': used as sentence openers rather than as genuine summaries. Replace with a specific conclusion tied to the content.
 
 #### Phrases de reformulation
 
@@ -97,7 +97,7 @@ Apply per-sentence. Stop scanning once a sentence has received its two-class cap
 #### Patterns supplémentaires
 
 29. **Ponctuation emphatique.** Triple point (`` … ''), tiret d'incise en cascade (`` — — ''), deux-points après une seule phrase (`` : ''). Natural French uses shorter emphatic punctuation. Reduce.
-30. **Formules de clôture.** `` En définitive '', `` Pour tout dire '', `` En dernière analyse '', `` En dernier ressort '', `` Tout bien considéré '', `` En conclusion de quoi '' — when used as pure closers without new content. Integrate the conclusion into the last sentence or cut.
+30. **Formules de clôture.** `` En définitive '', `` Pour tout dire '', `` En dernière analyse '', `` En dernier ressort '', `` Tout bien considéré '', `` En conclusion de quoi '', when used as pure closers without new content. Integrate the conclusion into the last sentence or cut.
 31. **Formules protocolaires.** `` Eu égard à '', `` Attendu que '', `` Vu que '', `` Dans la mesure où '' (when not establishing a legal condition). Replace with `` comme '', `` puisque '', `` car ''.
 32. **Métaphores techniques non fieldées.** `` Cela ouvre la voie à '', `` Cela permet de '', `` Cela constitue un pas en avant '', `` Cela représente un enjeu majeur '', `` Cela constitue un défi de taille ''. Replace with the concrete consequence.
 33. **Doubles comparatifs.** `` plus ⋯ plus ⋯ '' or `` moins ⋯ moins ⋯ '' used without proportional content. `` Plus le projet avance, plus les coûts augmentent '' is acceptable. `` Plus ⋯ plus '' without a logical link is not.
@@ -117,7 +117,7 @@ Apply per-sentence. Stop scanning once a sentence has received its two-class cap
 | Three-class cap reached | A sentence already has three classes flagged | Skip further fixes in that sentence; do not add more. |
 | Over-fix risk (80 % rule) | Pattern appears in every sentence | Leave at least one raw instance; do not fix all. |
 
-**Partial-result rule:** if the text is long, apply the catalog one paragraph at a time. If interrupted, return the paragraphs already processed and state: `` Naturalisation partielle — N paragraphes sur M traités.''
+**Partial-result rule:** if the text is long, apply the catalog one paragraph at a time. If interrupted, return the paragraphs already processed and state: `` Naturalisation partielle : N paragraphes sur M traités.''
 
 ## Output
 Return the rewritten French text in the preserved register, with no more than two pattern-class fixes per sentence, and no pattern fixed in more than 80 % of its instances across the whole text.

@@ -1,6 +1,6 @@
 ---
 name: web-design-review
-description: 'Use when the user runs /web-design-review with a URL to visually audit a live UI through the browser and fix findings in a screenshot-verified loop. Not for design direction picking; use design. Not for variant galleries; use design-variants.'
+description: 'Use when the user runs /web-design-review with a URL to visually audit and fix a live UI. Not for design direction: use design. Not for variant galleries: use design-variants.'
 ---
 
 # Web design review
@@ -10,7 +10,7 @@ description: 'Use when the user runs /web-design-review with a URL to visually a
 | Field | Bound contract |
 |---|---|
 | Trigger | the user runs `/web-design-review` with a URL |
-| Authority | reversible local edits to source files and a local design findings report; one atomic commit per fix |
+| Authority | Reversible local: writes only source-file edits and a local design findings report; rollback is version control. No remote mutation. One atomic commit per fix. |
 | Side effect | writes a web-design-audit report directory with screenshots and applies minimal source fixes |
 | Done | the design fix-and-verify loop has completed: every fixable finding fixed, re-tested, and classified, with final scores computed |
 

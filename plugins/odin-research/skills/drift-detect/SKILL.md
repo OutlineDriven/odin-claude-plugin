@@ -1,6 +1,6 @@
 ---
 name: drift-detect
-description: 'Use when roadmap, plans, or docs may have drifted from code, or when restarting a stalled project. Returns an evidence-cited Reality Check Report with drift analysis and a prioritized reconstruction plan. Not for PR doc sync — use docs-update.'
+description: 'Use when roadmap, plans, or docs may have drifted from code, or when restarting a stalled project. Not for PR doc sync: use docs-update.'
 ---
 
 # Drift detect
@@ -10,7 +10,7 @@ description: 'Use when roadmap, plans, or docs may have drifted from code, or wh
 | Field | Bound contract |
 |---|---|
 | Trigger | User says "plan drift", asks whether roadmap/plans/docs still match code, or decides what to rebuild when restarting a stalled project or cutting a release from stale plans |
-| Authority | Reversible local: write only to optional `.outline/drift-detect/` evidence or reality-check artifacts; no doc, issue, PR, or code mutation |
+| Authority | Reversible local: writes only optional `.outline/drift-detect/` evidence or reality-check artifacts; rollback is version control or undo. No remote mutation. No doc, issue, PR, or code mutation. |
 | Side effect | Optional local artifact under `.outline/drift-detect/`; rollback is deleting that directory |
 | Done | Reality Check Report returned with executive summary, drift analysis, gap analysis, cross-reference table, and prioritized reconstruction plan; every item evidence-cited |
 

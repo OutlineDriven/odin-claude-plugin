@@ -63,7 +63,13 @@ def main() -> int:
     if not CANONICAL.is_file():
         print(f"error: canonical baseline missing at {CANONICAL}", file=sys.stderr)
         return 2
-    canonical = CANONICAL.read_text(encoding="utf-8")
+    try:
+        canonical = CANONICAL.read_text(encoding="utf-8")
+    except (OSError, UnicodeDecodeError) as err:
+        # A crashed run must not share the rewrite exit 1, which the
+        # render recipe treats as success.
+        print(f"error: {err}", file=sys.stderr)
+        return 2
 
     targets = args.files or sorted(STYLES_DIR.glob("*.md"))
     # pre-commit passes every staged file; keep only the styles this script owns.
@@ -75,16 +81,17 @@ def main() -> int:
     for path in targets:
         try:
             expected = render(path, canonical)
-        except CascadeError as err:
+            drifted_now = path.read_text(encoding="utf-8") != expected
+            if drifted_now and not args.check:
+                path.write_text(expected, encoding="utf-8")
+                print(f"synced {path.relative_to(REPO_ROOT)}")
+        except (CascadeError, OSError, UnicodeDecodeError) as err:
+            # A crashed run must not share the rewrite exit 1, which the
+            # render recipe treats as success.
             print(f"error: {err}", file=sys.stderr)
             return 2
-        if path.read_text(encoding="utf-8") == expected:
-            continue
-        rel = path.relative_to(REPO_ROOT)
-        drifted.append(str(rel))
-        if not args.check:
-            path.write_text(expected, encoding="utf-8")
-            print(f"synced {rel}")
+        if drifted_now:
+            drifted.append(str(path.relative_to(REPO_ROOT)))
 
     if not drifted:
         return 0

@@ -1,6 +1,6 @@
 ---
 name: typescript-best-practices
-description: 'Use when TypeScript source must be shaped proactively toward narrow types, discriminated unions, readonly fields, exhaustive variants, typed trust boundaries, correct module resolution, and the TypeScript 7 strict-flag baseline. Not for concrete error repair; use typescript-type-hardening; not for language-agnostic domain modeling; use type-driven.'
+description: 'Use when TypeScript needs shaping toward narrow types, unions, exhaustive variants, and strict flags. Not for error repair: use typescript-type-hardening. Not for non-TS domains: use type-driven.'
 ---
 
 # TypeScript best practices
@@ -10,7 +10,7 @@ description: 'Use when TypeScript source must be shaped proactively toward narro
 | Field | Bound contract |
 |---|---|
 | Trigger | A proactive shaping pass on TypeScript source: narrow types, discriminated unions, readonly fields, exhaustive variants, typed trust boundaries, module resolution, TypeScript 7 strict flags. Not a concrete error report (routes to typescript-type-hardening) and not language-agnostic domain modeling (routes to type-driven). |
-| Authority | Reversible-local writes covering named TypeScript source files and the named `tsconfig.json`; rollback via VCS. No invented strict flags, no universal branded-type or `as` bans, no unvalidated external shapes. |
+| Authority | Reversible local: writes only named TypeScript source files and the named `tsconfig.json`; rollback is version control. No remote mutation. No invented strict flags, no universal branded-type or `as` bans, no unvalidated external shapes. |
 | Side effect | Shapes TypeScript source and tsconfig. |
 | Done | `tsc --noEmit` passes with no `any`, `!`, or double-assertion introduced: illegal states unrepresentable, variants exhaustive, boundaries validated. |
 

@@ -1,6 +1,6 @@
 ---
 name: web-performance-audit
-description: 'Use when asked to audit, profile, or debug page load performance, Lighthouse scores, or site speed. Returns a report with quantified Core Web Vitals, prioritized issues, and specific recommendations. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when asked to audit, profile, or debug page load performance, Lighthouse scores, or site speed. Don''t use for tasks that require source or remote-system changes.'
 ---
 
 # Web performance audit
@@ -18,7 +18,7 @@ description: 'Use when asked to audit, profile, or debug page load performance, 
 
 - Target URL (required): Page or application URL to audit. It must be reachable from the agent environment.
 - Viewport and throttling (optional): Device profile and network conditions. Defaults to mobile Moto G Power with slow 4G throttling.
-- Focus area (optional): Narrow the audit to a specific concern such as LCP, CLS, FID, bundle size, or accessibility. When omitted, all areas are audited.
+- Focus area (optional): Narrow the audit to a specific concern such as LCP, CLS, bundle size, or accessibility. When omitted, all areas are audited.
 
 ## Procedure
 

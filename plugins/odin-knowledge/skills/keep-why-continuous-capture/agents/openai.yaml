@@ -1,0 +1,3 @@
+interface:
+  display_name: "Keep Why Continuous Capture"
+  short_description: "Use when a non-trivial change lands or is abandoned and its decision, rejected alternatives, and reason must be captured."

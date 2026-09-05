@@ -2,7 +2,7 @@
 
 Read this when a repo-grounding skill needs the question-agnostic **project profile** (stack, deps, conventions, structure). The profile is derived once and reused within a session and across sessions and skills at an unchanged commit, only the *question-specific* grounding for the current run is ever re-derived.
 
-This file is **byte-duplicated** into every consuming skill (the plugin has no cross-skill import mechanism). The deterministic cache I/O lives in the co-located `scripts/repo-profile-cache.py`; the derivation-on-miss is done by the co-located `references/agents/repo-profiler.md` persona.
+Owner. pov calls ../brainstorm/scripts/repo-profile-cache.py and this file. Do not recopy.
 
 ## What is cached (the agnostic profile)
 
@@ -35,10 +35,10 @@ Two checkouts at the same commit share the same entry. Lookup is git metadata on
 
 ## Protocol, how a skill uses it
 
-Invoke the helper via the `SKILL_DIR` anchor (set `SKILL_DIR` to the absolute path of the directory containing the SKILL.md you just read; the Bash tool's cwd is the user's project, not the skill dir):
+Invoke the helper via the `SKILL_DIR` anchor (set `SKILL_DIR` to the absolute path of the brainstorm skill directory, `plugins/odin-planning/skills/brainstorm`; the Bash tool's cwd is the user's project, not the skill dir):
 
 ```bash
-SKILL_DIR="<absolute path of this skill's directory>"
+SKILL_DIR="<absolute path of the brainstorm skill directory>"
 python3 "$SKILL_DIR/scripts/repo-profile-cache.py" get
 ```
 
@@ -47,7 +47,7 @@ python3 "$SKILL_DIR/scripts/repo-profile-cache.py" get
 - `HIT` then the profile JSON on the following lines → load it as the agnostic profile; skip derivation.
 - `MISS` then a write-path on the next line → dispatch the `repo-profiler` persona to derive the profile, write its JSON output to a file, then persist it. This `put` runs after the profiler, so it is a **separate Bash-tool call** from the `get` above: shell variables do not persist between calls, so **re-set `SKILL_DIR` in the same command**:
   ```bash
-  SKILL_DIR="<absolute path of this skill's directory>"
+  SKILL_DIR="<absolute path of the brainstorm skill directory>"
   python3 "$SKILL_DIR/scripts/repo-profile-cache.py" put <profile-json-file>
   ```
 - `NO-CACHE` → no git repo or no writable cache. Derive the profile fresh for this run and **skip** `put`.

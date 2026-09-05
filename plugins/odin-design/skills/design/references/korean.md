@@ -126,7 +126,7 @@ Citations: `toss.tech/category/design`; `letterformarchive.org/news/contemporary
 - **단청 (dancheong) colors as primary brand palette**: festival-seasonal cliché; absent from every major KR product DS.
 - Ignoring `word-break: keep-all`: shipping `break-all` on Korean prose breaks mid-word; reads as "didn't set the language."
 
-See `cjk.md §8` for cross-CJK summary and `anti-slop.md §1.9` for the integrated CJK ban-list.
+See `cjk.md §8` for cross-CJK summary and `anti-slop.md §1.7` for the integrated CJK ban-list.
 
 ## 9. Citations
 

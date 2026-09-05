@@ -1,3 +1,0 @@
-interface:
-  display_name: "Docs And Adrs"
-  short_description: "Use when making an architectural decision, changing a public API, or shipping a feature needing rationale."

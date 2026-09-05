@@ -1,6 +1,6 @@
 ---
 name: no-comments
-description: 'Use when asked to audit comments in code files and propose structural replacements or deletions with per-candidate approval. Enumerates comments in C, JavaScript, TypeScript, HTML, CSS, and shell-style syntax, classifies each as earned or unearned, drafts structural alternatives, and returns a complete accounting ledger. Not for deterministic commented-out-code removal; use deslop.'
+description: 'Use when asked to audit comments in code files and propose structural replacements or deletions with per-candidate approval. Not for deterministic commented-out-code removal: use deslop.'
 ---
 
 # No comments
@@ -10,7 +10,7 @@ description: 'Use when asked to audit comments in code files and propose structu
 | Field | Bound contract |
 |---|---|
 | Trigger | Audit comments in code files and propose structural replacements or deletions with per-candidate approval. |
-| Authority | Read target files and write the audit ledger. Does not modify source files without per-candidate user approval. Approved edits are reversible local writes; revert each edited file to its captured pre-edit state on failure. |
+| Authority | Human-gated: asks per-candidate approval before modifying source files; otherwise reversible local: writes only the audit ledger and approved source edits; rollback is undo (revert each edited file to its captured pre-edit state). No remote mutation. |
 | Side effect | Writes an audit ledger. Applies accepted edits only after the user chooses an action for each candidate. |
 | Done | A complete audit ledger with one decision per comment and no unprocessed candidates. |
 

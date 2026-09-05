@@ -1,3 +1,0 @@
-interface:
-  display_name: "Visual Render Tool"
-  short_description: "Use when a model-invoked tool renders visual explanations of plans, architectures, diffs, or implementations into self-contained HTML files under the output jail; opens the browser or Glimpse viewer on demand."

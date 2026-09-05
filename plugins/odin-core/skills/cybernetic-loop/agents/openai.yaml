@@ -1,3 +1,0 @@
-interface:
-  display_name: "Cybernetic Loop"
-  short_description: "Use when the caller supplies one falsifiable out-of-happy-path invariant and a finite patch budget."

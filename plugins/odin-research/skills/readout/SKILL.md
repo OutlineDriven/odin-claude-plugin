@@ -1,6 +1,6 @@
 ---
 name: readout
-description: 'Use when a user wants a readable, shareable HTML document of findings. Produces a self-contained HTML readout under ~/.readouts, embedding cited source text and refreshing the local index. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a user wants a readable, shareable HTML document of findings. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Readout
@@ -12,7 +12,7 @@ Produce a readable, shareable HTML document of findings.
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants a readable, shareable document of findings. |
-| Authority | Reversible local write restricted to `~/.readouts/<output_name>.html` and `~/.readouts/index.html`. Rollback restores the prior index and removes the new readout. |
+| Authority | Reversible local: writes only `~/.readouts/<output_name>.html` and `~/.readouts/index.html`; rollback is undo. No remote mutation. Rollback restores the prior index and removes the new readout. |
 | Side effect | Writes self-contained HTML under `~/.readouts`. No remote mutation, VCS change, credential use, or external asset write. |
 | Done | A self-contained HTML findings document exists at `~/.readouts/<output_name>.html` and the index at `~/.readouts/index.html` is transactionally updated. |
 

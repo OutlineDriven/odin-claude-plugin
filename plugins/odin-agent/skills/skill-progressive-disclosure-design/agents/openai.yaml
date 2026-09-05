@@ -1,3 +1,0 @@
-interface:
-  display_name: "Skill Progressive Disclosure Design"
-  short_description: "Use when the model is creating or refactoring a skill, faces a SKILL.md over 300-400 lines, or confuses triggering with disclosure."

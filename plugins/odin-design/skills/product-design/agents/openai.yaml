@@ -1,3 +1,3 @@
 interface:
   display_name: "Product Design"
-  short_description: "Use when deciding what an interface should do before UI is built or audited: interaction consequences, action scope, reachable states, naming, and accessibility of the product decision."
+  short_description: "Use when deciding what an interface should do before UI is built or audited: consequences, action scope, reachable states, naming, and accessibility."

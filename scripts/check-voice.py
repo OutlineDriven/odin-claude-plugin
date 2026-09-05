@@ -55,9 +55,9 @@ BANNED = re.compile(
 BAN_LIST_SUBJECTS = frozenset(
     {
         "docs/specs/voice.md",
-        "plugins/odin-research/skills/knowledge-refresh/SKILL.md",
+        "plugins/odin-knowledge/skills/knowledge-refresh/SKILL.md",
         "plugins/odin-writing/skills/copywriting/SKILL.md",
-        "plugins/odin-writing-advanced/skills/copywriting-prose-creator/SKILL.md",
+        "plugins/odin-writing/skills/copywriting-prose-creator/SKILL.md",
     }
 )
 # Three shapes are the same pseudo-list, so the pattern covers all three. The colon may sit

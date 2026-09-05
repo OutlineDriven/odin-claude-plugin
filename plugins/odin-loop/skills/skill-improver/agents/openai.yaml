@@ -1,3 +1,0 @@
-interface:
-  display_name: "Skill Improver"
-  short_description: "Use when a user asks to iteratively improve a skill, fix skill-quality findings, or resolve scanner alerts (W001, W011, W012) on a skill."

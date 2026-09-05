@@ -91,9 +91,23 @@ repos:
         pass_filenames: false
         always_run: true
 
+      - id: check-skill-routes-self-test
+        name: check the pointer-target gate catches a planted dangling pointer
+        entry: node scripts/check-skill-routes.mjs --self-test
+        language: system
+        pass_filenames: false
+        always_run: true
+
       - id: render-skill-manifests
         name: check skill manifests match SKILL.md frontmatter
         entry: node scripts/render-skill-manifests.mjs --check
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: render-skill-index
+        name: check generated skill index matches the tree
+        entry: node scripts/render-skill-index.mjs --check
         language: system
         pass_filenames: false
         always_run: true
@@ -115,6 +129,13 @@ repos:
       - id: check-carriers-self-test
         name: check the carrier gate's own fixtures still catch a planted divergence
         entry: python3 scripts/check-carriers.py --self-test
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: sync-carriers-self-test
+        name: check the carrier rewriter preserves overlays and reuses the audit
+        entry: python3 scripts/sync-carriers.py --self-test
         language: system
         pass_filenames: false
         always_run: true

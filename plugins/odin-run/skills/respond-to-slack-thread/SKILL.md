@@ -1,6 +1,6 @@
 ---
 name: respond-to-slack-thread
-description: 'Use when the user asks to reply to or follow up on a specific Slack thread. Converts a permalink to channel and thread_ts, posts one reply, and returns its permalink. Not for top-level messages, deleting messages, or composing the reply text.'
+description: 'Use when the user asks to reply to or follow up on a specific Slack thread. Not for top-level messages, deleting messages, or composing the reply text.'
 disable-model-invocation: true
 ---
 
@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to reply to or follow up on a specific Slack thread. |
-| Authority | Irreversible remote mutation via Slack API using operator-provided credentials. Explicit human invocation required with all required inputs present. |
+| Authority | Remote: posts a reply through the Slack API with operator-provided credentials, an irreversible mutation; requires explicit human invocation with every required input present. |
 | Side effect | Posts one reply to the specified Slack channel and thread. |
 | Done | The reply is posted and its permalink is returned. |
 

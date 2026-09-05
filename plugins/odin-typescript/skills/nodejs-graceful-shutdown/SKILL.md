@@ -1,6 +1,6 @@
 ---
 name: nodejs-graceful-shutdown
-description: 'Use when asked to implement or fix service termination handling: SIGTERM or SIGINT, connection draining, health-check shutdown signaling, zero-downtime deploys. Not for general service scaffolding; use nodejs-service-foundations.'
+description: 'Use when asked to implement or fix service termination: SIGTERM or SIGINT, connection draining, health-check signaling. Not for general service scaffolding: use nodejs-service-foundations.'
 ---
 
 # Node.js graceful shutdown
@@ -10,7 +10,7 @@ description: 'Use when asked to implement or fix service termination handling: S
 | Field | Bound contract |
 |---|---|
 | Trigger | Implementing or fixing service termination handling: SIGTERM or SIGINT, connection draining, health-check shutdown signaling, zero-downtime deploys. |
-| Authority | Reversible local edits to the service shutdown handler; writes a companion test. |
+| Authority | Reversible local: writes only the service shutdown handler and a companion test; rollback is version control. No remote mutation. |
 | Side effect | Edits server shutdown code; runs a short-lived server to verify drain. |
 | Done | On signal the service stops accepting new connections, drains active requests within the deadline, closes external dependencies, exits with code 0 on success or non-zero on deadline, and the companion test passes. |
 

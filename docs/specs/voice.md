@@ -147,7 +147,7 @@ be ignored, and an ignored directory the gate can see is the escape hatch the sc
 ## Known limits
 
 Two senses of `leverage` and `underscore` are legitimate here and the pattern spares both:
-Ousterhout's noun, as in high leverage through a small interface, which `codebase-design` uses as
+Ousterhout's noun, as in high leverage through a small interface, which `architect` uses as
 vocabulary, and the underscore character in a slug. The pattern reaches the verb forms only. It
 once matched `leverage and` because the determiner alternation lacked a word boundary, and two
 files were edited to dodge it before the pattern was fixed; that is the shape of error to expect

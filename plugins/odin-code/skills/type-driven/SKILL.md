@@ -1,6 +1,6 @@
 ---
 name: type-driven
-description: 'Use when the work is modeling a domain, encoding a state machine, hardening an API boundary, making invalid states unrepresentable, or parsing instead of validating. Not for TypeScript-specific doctrine — use typescript-best-practices; not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when modeling a domain, encoding a state machine, hardening APIs, making invalid states unrepresentable, or parsing instead of validating. Not for TypeScript: use typescript-best-practices.'
 ---
 
 # Type-driven development
@@ -10,7 +10,7 @@ description: 'Use when the work is modeling a domain, encoding a state machine, 
 | Field | Bound contract |
 |---|---|
 | Trigger | The work is modeling a domain, encoding a state machine, hardening an API boundary, making invalid states unrepresentable, or parsing instead of validating. |
-| Authority | Reversible local. No file, VCS, credential, paid, published, or remote mutation. |
+| Authority | Reversible local: writes only domain types, public signatures, and affected callers and tests; rollback is version control or undo. No remote mutation. |
 | Side effect | Rewrites domain types, public signatures, and affected callers and tests to the new algebraic model. |
 | Done | Invalid states are unconstructible, matches are exhaustive, boundaries parse, and no scattered post-hoc validation remains. |
 
@@ -21,10 +21,10 @@ Optional: existing types or callers to refactor.
 
 ## Refusals
 
-- Will not add runtime guards to fix a type-design failure — fix the type design.
-- Will not add a wildcard arm to silence a non-exhaustive match — add the missing variant.
+- Will not add runtime guards to fix a type-design failure: fix the type design.
+- Will not add a wildcard arm to silence a non-exhaustive match: add the missing variant.
 - Will not proceed with type holes or incomplete bodies.
-- Will not use this approach when the language lacks ADTs, sealed hierarchies, or equivalent sum-type support — skip and report.
+- Will not use this approach when the language lacks ADTs, sealed hierarchies, or equivalent sum-type support: skip and report.
 
 ## Procedure
 

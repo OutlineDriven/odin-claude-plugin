@@ -4,11 +4,11 @@
 
 ## §1. Posture
 
-Design systems are tokens + behavior, expressed as code. The token spec (DTCG) is now W3C-stable; the export tooling (Style Dictionary 5) is mature; the production exemplars (Radix Colors, Material 3 Expressive, Fluent 2, Apple HIG 2025-2026) each commit to a different *register* — pick by what the picked direction needs, not by familiarity. Direction comes first, framework second; see `references/paradigms.md` for paradigm-to-system fit before reaching for a library. A system imported without a direction yields the default-Material-palette tell — recognizable to anyone who has seen Compose's defaults more than twice.
+Design systems are tokens + behavior, expressed as code. The token spec (DTCG) is now W3C-stable; the export tooling (Style Dictionary 5) is mature; the production exemplars (Radix Colors, Material 3 Expressive, Fluent 2, Apple HIG 2025-2026) each commit to a different *register*; pick by what the picked direction needs, not by familiarity. Direction comes first, framework second; see `references/paradigms.md` for paradigm-to-system fit before reaching for a library. A system imported without a direction yields the default-Material-palette tell; recognizable to anyone who has seen Compose's defaults more than twice.
 
 ## §2. DTCG W3C Tokens 2025.10
 
-The W3C Design Tokens Format Module (DTCG) reached its first stable spec on **Oct 28 2025**. **10+ tools** ship support — Figma, Sketch, Framer, Penpot, Tokens Studio, Style Dictionary, and others. File extension: `.tokens.json`.
+The W3C Design Tokens Format Module (DTCG) reached its first stable spec on **Oct 28 2025**. **10+ tools** ship support: Figma, Sketch, Framer, Penpot, Tokens Studio, Style Dictionary, and others. File extension: `.tokens.json`.
 
 Shape: JSON with `$type` discriminator (`color`, `dimension`, `typography`, `shadow`, `gradient`, `cubicBezier`, `duration`, `fontFamily`, `fontWeight`, `number`, `strokeStyle`, `transition`), `$value`, `$description`. Aliases reference siblings via `{group.name}` braces. Groups nest arbitrarily.
 
@@ -42,11 +42,11 @@ Shape: JSON with `$type` discriminator (`color`, `dimension`, `typography`, `sha
 }
 ```
 
-Aliases compose; a token whose `$value` is `{group.name}` resolves transitively. Avoid alias cycles — most resolvers detect them but error messages vary.
+Aliases compose; a token whose `$value` is `{group.name}` resolves transitively. Avoid alias cycles; most resolvers detect them but error messages vary.
 
 ## §2.5. DTCG transition tokens
 
-DTCG 2025.10 introduces `$type: "transition"` for motion tokens, composed from `cubicBezier`, `duration`, and `delay` sub-types. A transition token references its parts via DTCG aliases — the result is a single named transition that token transforms can target without reverse-engineering the constituent properties.
+DTCG 2025.10 introduces `$type: "transition"` for motion tokens, composed from `cubicBezier`, `duration`, and `delay` sub-types. A transition token references its parts via DTCG aliases; the result is a single named transition that token transforms can target without reverse-engineering the constituent properties.
 
 ```json
 {
@@ -92,14 +92,14 @@ export default {
 }
 ```
 
-`outputReferences: true` preserves DTCG aliases as CSS `var()` references in the build, so theme switches at runtime work. Posture: keep DTCG source as the source of truth; never edit derived outputs — they regenerate.
+`outputReferences: true` preserves DTCG aliases as CSS `var()` references in the build, so theme switches at runtime work. Posture: keep DTCG source as the source of truth; never edit derived outputs; they regenerate.
 
 ## §3.5. Style Dictionary worked example
 
 Two flags carry most of the weight in production token pipelines:
 
-- **`outputReferences: true`** — preserves DTCG aliases as CSS `var()` references rather than flattening them. Critical for runtime theme switches (light / dark / high-contrast); without it, every theme ships its own concrete values and the cascade cannot pivot on a single root variable.
-- **Custom transforms** — when the built-in `transformGroup` misses a project-specific naming convention (e.g., kebab-case-but-not-the-tailwind-flavor, or per-platform prefixes), register a one-off transform. The transform API has been async-aware since v4; earlier versions required workarounds for asynchronous color-space conversion or remote-asset resolution.
+- **`outputReferences: true`**: preserves DTCG aliases as CSS `var()` references rather than flattening them. Critical for runtime theme switches (light / dark / high-contrast); without it, every theme ships its own concrete values and the cascade cannot pivot on a single root variable.
+- **Custom transforms**: when the built-in `transformGroup` misses a project-specific naming convention (e.g., kebab-case-but-not-the-tailwind-flavor, or per-platform prefixes), register a one-off transform. The transform API has been async-aware since v4; earlier versions required workarounds for asynchronous color-space conversion or remote-asset resolution.
 
 ```js
 // style-dictionary.config.js
@@ -154,13 +154,13 @@ These commonly fail contrast, vibrate visually, or fail color-vision testing.
 | Combination | Why it fails |
 |-------------|--------------|
 | Light gray text on white | The #1 accessibility fail; nearly always sub-AA |
-| Gray text on any colored background | Gray reads washed-out and dead next to color — use a darker shade of the background hue, or a tinted-neutral aligned to the same hue |
+| Gray text on any colored background | Gray reads washed-out and dead next to color; use a darker shade of the background hue, or a tinted-neutral aligned to the same hue |
 | Red text on green (or vice versa) | ~8% of men cannot distinguish |
 | Blue text on red background | Visual vibration; chromatic aberration |
 | Yellow text on white | Almost always fails AA |
 | Thin light text over photographic images | Unpredictable per-pixel contrast |
 
-Placeholder text is bound by the same WCAG rule as body text — 4.5:1 against the input background. The default light-gray placeholder rendered by most form libraries usually fails.
+Placeholder text is bound by the same WCAG rule as body text, 4.5:1 against the input background. The default light-gray placeholder rendered by most form libraries usually fails.
 
 ### Dark mode is not inverted light mode
 
@@ -168,10 +168,10 @@ Color swap alone does not produce a working dark theme. Dark mode requires diffe
 
 | Axis | Light mode posture | Dark mode posture |
 |------|-------------------|-------------------|
-| Depth | Shadows | Surface-lightness layering — no shadows |
-| Text | Dark on light, normal weight | Light on dark, *reduced* weight (e.g. 350 instead of 400) — light-on-dark reads heavier |
+| Depth | Shadows | Surface-lightness layering, no shadows |
+| Text | Dark on light, normal weight | Light on dark, *reduced* weight (e.g. 350 instead of 400), light-on-dark reads heavier |
 | Accents | Vibrant chroma | Slightly desaturated; high chroma on dark backgrounds glares |
-| Background | Pure or near-pure white | Never pure black — use dark gray (oklch L 0.12–0.18) with the brand hue tint |
+| Background | Pure or near-pure white | Never pure black; use dark gray (oklch L 0.12–0.18) with the brand hue tint |
 
 Build a 3-step elevation scale where higher elevations are *lighter* (e.g. L 0.15 / 0.20 / 0.25). Hold the brand hue and chroma constant; only vary L. Dark-mode contrast against a true black surface (`oklch(0 0 0)`) creates harsh edges that read as broken.
 
@@ -179,11 +179,11 @@ Build a 3-step elevation scale where higher elevations are *lighter* (e.g. L 0.1
 
 Heavy use of `rgba()` / `hsla()` / OKLCH alpha usually means an incomplete palette. Alpha creates unpredictable contrast against whatever surface ends up underneath, performance overhead from per-pixel compositing, and inconsistency when the underlying surface changes.
 
-Define explicit overlay tokens for each context (`--surface-overlay-light`, `--surface-overlay-dark`) instead of leaning on `bg-black/10`. Exceptions where alpha is correct: focus rings (must show through to the underlying focused element), backdrop dims under modals, and translucent paradigm surfaces (glassmorphism — see `paradigms.md §3`, where translucence is the design choice not a workaround).
+Define explicit overlay tokens for each context (`--surface-overlay-light`, `--surface-overlay-dark`) instead of leaning on `bg-black/10`. Exceptions where alpha is correct: focus rings (must show through to the underlying focused element), backdrop dims under modals, and translucent paradigm surfaces (glassmorphism, see the Glassmorphism section of `paradigms.md`, where translucence is the design choice not a workaround).
 
 ## §5. Material 3 Expressive
 
-**Material 3 Expressive** is the current Material direction, but Compose support is not yet stable: the latest stable `androidx.compose.material3` is 1.4.x, and the Expressive APIs ship only in a 1.5.0 alpha behind `@ExperimentalMaterial3ExpressiveApi`. Adds emphasized motion curves, an expanded expressive type scale, and color-role tonal palettes generated from a seed via **HCT** (Hue / Chroma / Tone) — perceptually uniform unlike HSL.
+**Material 3 Expressive** is the current Material direction, but Compose support is not yet stable: the latest stable `androidx.compose.material3` is 1.4.x, and the Expressive APIs ship only in a 1.5.0 alpha behind `@ExperimentalMaterial3ExpressiveApi`. Adds emphasized motion curves, an expanded expressive type scale, and color-role tonal palettes generated from a seed via **HCT** (Hue / Chroma / Tone), perceptually uniform unlike HSL.
 
 Color roles: `primary`, `onPrimary`, `primaryContainer`, `onPrimaryContainer`, `secondary`, `tertiary`, `surface`, `surfaceVariant`, `surfaceContainer`, `error`, `outline`. Pair every fill with its `on*` for foreground; pair surfaces with their `surfaceVariant` for adjacency.
 
@@ -196,7 +196,7 @@ MaterialTheme(colorScheme = scheme, typography = expressiveTypography()) {
 }
 ```
 
-Failure mode: shipping with the default Material 3 palette and `MaterialTheme()` defaults reads as "I used Compose's defaults" — see `references/anti-slop.md` §1 row 9. A seed color and a token override at minimum.
+Failure mode: shipping with the default Material 3 palette and `MaterialTheme()` defaults reads as "I used Compose's defaults"; see `references/anti-slop.md` §1 row 9. A seed color and a token override at minimum.
 
 ## §6. Fluent 2
 
@@ -224,9 +224,9 @@ The two values are not two themes of the same shadow; they are two shadows for t
 
 ## §7. Apple HIG 2025-2026
 
-**Apple HIG 2025** introduced visionOS spatial design — depth, materials, gaze + pinch input. **Apple HIG 2026** documents **Liquid Glass**, shipped September 15 2025 across iOS 26, iPadOS 26, macOS 26, watchOS 26, and visionOS 26: luminosity-aware translucent layers that respond to the underlying content rather than apply uniform blur. **Adaptivity** is the through-line — design must scale across all Apple platforms, and tokens drive the adaptation.
+**Apple HIG 2025** introduced visionOS spatial design: depth, materials, gaze + pinch input. **Apple HIG 2026** documents **Liquid Glass**, shipped September 15 2025 across iOS 26, iPadOS 26, macOS 26, watchOS 26, and visionOS 26: luminosity-aware translucent layers that respond to the underlying content rather than apply uniform blur. **Adaptivity** is the through-line; design must scale across all Apple platforms, and tokens drive the adaptation.
 
-Liquid Glass posture: translucent layers respond to underlying content; never blur for blur's sake. Glass overdose is the slop tell — see `references/anti-slop.md` §1 row 4. visionOS spatial considerations: depth ≠ z-index; physical layers occupy 3D space, with parallax and gaze-driven affordances tied to actual distance. Platform-adaptive typography uses the SF Pro family; size and weight scale per platform (compact on watchOS, generous on visionOS).
+Liquid Glass posture: translucent layers respond to underlying content; never blur for blur's sake. Glass overdose is the slop tell; see `references/anti-slop.md` §1 row 4. visionOS spatial considerations: depth ≠ z-index; physical layers occupy 3D space, with parallax and gaze-driven affordances tied to actual distance. Platform-adaptive typography uses the SF Pro family; size and weight scale per platform (compact on watchOS, generous on visionOS).
 
 ```swift
 ZStack {
@@ -240,7 +240,7 @@ ZStack {
 
 ## §8. Token naming: semantic over output
 
-The non-negotiable bit: name tokens by what they MEAN, not by what they look like. Output-named tokens couple consumers to the look; semantic-named tokens decouple. This is the Radix Colors lesson — semantic step naming (1, 9, 12) is what makes Radix portable across themes; pure-grayscale naming would not.
+The non-negotiable bit: name tokens by what they MEAN, not by what they look like. Output-named tokens couple consumers to the look; semantic-named tokens decouple. This is the Radix Colors lesson; semantic step naming (1, 9, 12) is what makes Radix portable across themes; pure-grayscale naming would not.
 
 ```css
 /* Bad — output-named; couples to a specific shade and pixel count */
@@ -254,11 +254,11 @@ The non-negotiable bit: name tokens by what they MEAN, not by what they look lik
 
 When the brand shifts cooler or the section breathes wider, semantic names absorb the change at the token layer. Output names force a find-and-replace through every consumer.
 
-**Two-layer pattern.** Pair primitive tokens (`--blue-500`, `--gray-50`) with semantic tokens that reference them (`--color-primary: var(--blue-500)`, `--color-bg: var(--gray-50)`). Theming swaps redefine *only* the semantic layer — primitives stay constant. This is the same lesson Radix encodes through its 12-step semantic ramps; the two-layer pattern generalizes it to design-token files.
+**Two-layer pattern.** Pair primitive tokens (`--blue-500`, `--gray-50`) with semantic tokens that reference them (`--color-primary: var(--blue-500)`, `--color-bg: var(--gray-50)`). Theming swaps redefine *only* the semantic layer; primitives stay constant. This is the same lesson Radix encodes through its 12-step semantic ramps; the two-layer pattern generalizes it to design-token files.
 
 ## §8.5. Component state matrix
 
-Every interactive component ships the full state matrix — token-driven, never hardcoded. Missing states surface as bugs the first time a user hits the unhandled path; the matrix is the contract a component design must satisfy before shipping.
+Every interactive component ships the full state matrix, token-driven, never hardcoded. Missing states surface as bugs the first time a user hits the unhandled path; the matrix is the contract a component design must satisfy before shipping.
 
 | State | Trigger | Token shape |
 |---|---|---|
@@ -282,11 +282,11 @@ The 13 states are not optional. A button with default + hover only is ~15% compl
 
 ### Modular scale
 
-Too many sizes that are too close together produce muddy hierarchy. Commit to a 5-size system. Apply the ≥1.25 ratio rule to the *hierarchy* end of the scale (body → subheading → heading → display); the micro end (xs / sm / base) intentionally uses tighter ratios because those steps are functional differentiators (caption vs. metadata vs. body — different *roles*, not different hierarchy levels), not visual hierarchy steps.
+Too many sizes that are too close together produce muddy hierarchy. Commit to a 5-size system. Apply the ≥1.25 ratio rule to the *hierarchy* end of the scale (body → subheading → heading → display); the micro end (xs / sm / base) intentionally uses tighter ratios because those steps are functional differentiators (caption vs. metadata vs. body, different *roles*, not different hierarchy levels), not visual hierarchy steps.
 
 | Role | Typical size | Use | Adjacent ratio |
 |------|--------------|-----|----------------|
-| `xs` | 0.75rem | Captions, legal, footnotes | — |
+| `xs` | 0.75rem | Captions, legal, footnotes | none |
 | `sm` | 0.875rem | Secondary UI, metadata | 1.167 (functional) |
 | `base` | 1rem | Body text | 1.143 (functional) |
 | `lg` | 1.25–1.5rem | Subheadings, lead text | ≥1.25 (hierarchy) |
@@ -304,7 +304,7 @@ Pick *one* of: space between paragraphs, OR first-line indentation. Never both. 
 
 ### ALL-CAPS tracking
 
-Capitals at default spacing sit too close — letterforms designed for mixed-case rhythm pile up when the descenders disappear. Add 5–12% letter-spacing on short all-caps labels, eyebrows, and small headings.
+Capitals at default spacing sit too close; letterforms designed for mixed-case rhythm pile up when the descenders disappear. Add 5–12% letter-spacing on short all-caps labels, eyebrows, and small headings.
 
 ```css
 .eyebrow { text-transform: uppercase; letter-spacing: 0.08em; }
@@ -314,13 +314,13 @@ Real small-caps (`font-variant-caps: all-small-caps`) need the same treatment, s
 
 ### Fluid type, with bounds
 
-`clamp(min, preferred, max)` scales smoothly with the viewport — fine for headings and display on marketing surfaces where text dominates the layout. Keep `max ≤ ~2.5 × min`. Wider ratios break the browser's zoom and reflow behavior and make large viewports feel like the page is shouting.
+`clamp(min, preferred, max)` scales smoothly with the viewport, fine for headings and display on marketing surfaces where text dominates the layout. Keep `max ≤ ~2.5 × min`. Wider ratios break the browser's zoom and reflow behavior and make large viewports feel like the page is shouting.
 
 ```css
 h1 { font-size: clamp(2rem, 5vw + 1rem, 5rem); } /* max/min = 2.5; OK */
 ```
 
-App UIs, dashboards, and data-dense interfaces use *fixed* `rem` scales — Material, Polaris, Primer, and Carbon all do. Spatial predictability matters more than fluid scaling for container-based layouts. Body text stays fixed even on marketing pages; the per-viewport size difference is too small to be worth the layout-shift cost.
+App UIs, dashboards, and data-dense interfaces use *fixed* `rem` scales; Material, Polaris, Primer, and Carbon all do. Spatial predictability matters more than fluid scaling for container-based layouts. Body text stays fixed even on marketing pages; the per-viewport size difference is too small to be worth the layout-shift cost.
 
 ### Web font loading
 
@@ -357,7 +357,7 @@ body { font-family: 'CustomFont', 'CustomFont-Fallback', sans-serif; }
 
 ### Token shape
 
-Name typography tokens semantically — `--text-body`, `--text-heading-lg`, `--text-eyebrow` — not by value. Include the font stack, size scale, weights, line-heights, and letter-spacing in the token system; light-text-on-dark compensation (see §4.5 "Dark mode is not inverted light mode") becomes a per-theme override on the line-height and letter-spacing tokens.
+Name typography tokens semantically, `--text-body`, `--text-heading-lg`, `--text-eyebrow`, not by value. Include the font stack, size scale, weights, line-heights, and letter-spacing in the token system; light-text-on-dark compensation (see §4.5 "Dark mode is not inverted light mode") becomes a per-theme override on the line-height and letter-spacing tokens.
 
 ## §9. Cite-and-defer
 

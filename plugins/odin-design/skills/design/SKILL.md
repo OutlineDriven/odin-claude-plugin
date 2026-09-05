@@ -1,6 +1,6 @@
 ---
 name: design
-description: 'Use when starting UI work, defining palettes or design tokens, or fixing AI-generic, vibe-coded, or default-framework UI. Also handles TUI, CLI, and desktop surfaces when the runtime is named. Not for persisted design systems; use design-consultation. Not for live-URL audits; use web-design-review. No irreversible changes.'
+description: 'Use when starting UI work, defining palettes or tokens, fixing AI-generic UI, or persisting a design system to DESIGN.md (modes: implement, persist). Not for live URLs: use web-design-review.'
 ---
 
 # Design
@@ -9,33 +9,37 @@ description: 'Use when starting UI work, defining palettes or design tokens, or 
 
 | Field | Bound contract |
 |---|---|
-| Trigger | Starting UI work, defining palettes or design tokens, or correcting AI-generic, vibe-coded, or default-framework design. |
-| Authority | Reversible local: creates or revises local UI direction, token, and implementation artifacts appropriate to the chosen runtime. Roll back by reverting the touched files. |
-| Side effect | Local write to UI direction, token, and implementation artifacts only. No VCS, credential, paid, published, deployed, or remote mutation. |
-| Done | One defensible direction is implemented consistently across palette, typography, spacing, density, and motion; runtime and cross-surface checks pass without AI-generic or compensatory overkill tells. |
+| Trigger | Starting UI work, defining palettes or design tokens, correcting AI-generic, vibe-coded, or default-framework design, or persisting an approved design system to DESIGN.md. |
+| Authority | Reversible local: writes only local UI direction, token, and implementation artifacts; persist mode also writes DESIGN.md, CLAUDE.md pointers, and preview artifacts. Rollback is version control. No remote mutation. |
+| Side effect | Local writes to the picked mode's artifacts only, bounded to the current project directory. |
+| Done | Implement mode: one defensible direction is implemented consistently across palette, typography, spacing, density, and motion, and the audit passes clean. Persist mode: an approved design system is persisted in DESIGN.md. |
 
 ## Inputs
 
+- Mode: `implement` (direction and token implementation) or `persist` (propose, preview, and persist an approved system to DESIGN.md). Required; default `implement` when unstated.
 - The surface being designed (landing, dashboard, settings, docs, one-screen tool, TUI, CLI, desktop app). Required.
-- The runtime or framework in use (vanilla CSS/HTML, React/Tailwind/shadcn, Bubble Tea/Ratatui/Textual, clap/cobra/cmdliner/typer, Tauri/Slint/egui/Iced, Qt/QML). Required before implementation.
+- The runtime or framework in use (vanilla CSS/HTML, React/Tailwind/shadcn, Bubble Tea/Ratatui/Textual, clap/cobra/cmdliner/typer, Tauri/Slint/egui/Iced, Qt/QML). Required before step 6 in implement mode.
 - Primary user and density target. Required for framing; state assumptions if not supplied.
-- Existing project context (PRD, brand brief, design tokens, component library). Optional; load when present.
+- Existing project context (PRD, brand brief, design tokens, component library, an existing DESIGN.md to extend). Optional; load when present.
+- Persist mode only: user approval is the in-loop gate. No design system is persisted until the user approves it.
 
 ## Procedure
 
 Direction precedes tokens; tokens precede code. The picked direction is the contract. Restraint is the default; reach for decoration only when a named surface goal demands it. Balance, not maximalism, not minimalism.
 
-1. **Frame the surface.** Identify register first: **brand** (marketing, landing, campaign, long-form, portfolio; design IS the product) or **product** (app UI, admin, dashboard, tool; design SERVES the product). Detection rule, first match wins: (a) cue in the task ("landing page" / "campaign hero" → brand; "dashboard" / "settings panel" → product); (b) surface in focus or route segment (`/marketing/*` vs `/app/*`); (c) register field in project context. Then capture surface, primary user, density target, and motion budget in ms. Write one sentence of physical scene (who, where, ambient light, mood) that forces the dark/light decision; category names alone do not force the answer. **Done when:** register is named, the four framing fields are captured, and the dark/light sentence is written.
+1. **Frame the surface.** Identify register first: **brand** (marketing, landing, campaign, long-form, portfolio; design IS the product) or **product** (app UI, admin, dashboard, tool; design SERVES the product). Detection rule, first match wins: (a) cue in the task ("landing page" / "campaign hero" → brand; "dashboard" / "settings panel" → product); (b) surface in focus or route segment (`/marketing/*` vs `/app/*`); (c) register field in project context. Then capture surface, primary user, density target, and motion budget in ms. Write one sentence of physical scene (who, where, ambient light, mood) that forces the dark/light decision; category names alone do not force the answer. Mode persist: read any existing DESIGN.md, tokens, and brand guidance first; name missing context rather than inventing it. **Done when:** register is named, the four framing fields are captured, and the dark/light sentence is written.
 
 2. **Diverge: 3-4 directions in parallel with forced contrast.** Dispatch one exploration per direction with a constraint that forces contrast (post-minimalism vs neo-brutalism vs Material 3 vs Fluent, or named taste anchors pulling in opposite directions). Reject converged outputs; re-dispatch with sharpened constraints if two directions read alike. Diversity techniques: verbalized sampling, actor-critic per candidate, persona injection, temperature, most-unlikely reframing, anti-pattern catalog. **Done when:** 3-4 directions are produced and no two read alike under a headline-swap test.
 
-3. **Return a fixed shape per direction.** Each direction states: name (one or two words), 1-2 taste anchors (Linear / Stripe / Things 3 / Rosé Pine / Are.na; name the references), OKLCH palette stub (4-6 swatches, never the default Tailwind ramp), type pair (display + text, named families), spacing scale subset committed (e.g. 4/8/16/24/48), motion budget in ms with one easing curve. **Done when:** every direction carries all six fields with no defaults borrowed from a framework ramp.
+3. **Return a fixed shape per direction.** Each direction states: name (one or two words), 1-2 taste anchors (Linear / Stripe / Things 3 / Rosé Pine / Are.na; name the references), OKLCH palette stub (4-6 swatches, never the default Tailwind ramp), type pair (display + text, named families), spacing scale subset committed (e.g. 4/8/16/24/48), motion budget in ms with one easing curve. Mode persist: the fixed plan also covers component primitives and interaction states. **Done when:** every direction carries all six fields (eight in persist mode) with no defaults borrowed from a framework ramp.
 
 4. **Pick via per-axis single-select.** Each axis (direction, density, motion budget, type pair) is its own single-select question; the recommended option carries `(Recommended)` and is placed first. Ticking `(Recommended)` is accepting the default. Never use multiSelect for axis-with-default override semantics: it collapses N independent decisions into one ambiguous checklist. Reserve multiSelect for additive picks only. **Done when:** one option is selected per axis and the picked direction is named.
 
 5. **Derive tokens from the picked direction.** Color, type, space, radius, shadow, motion: each a token, each referenced, not hardcoded. Pick the color strategy before picking colors: **Restrained** (tinted neutrals plus one accent at ≤10% surface coverage; product default), **Committed** (one saturated color carries 30-60% of the surface; brand default for identity pages), **Full palette** (3-4 named roles, each deliberate; brand campaigns, product data viz), **Drenched** (the surface IS the color; brand heroes, campaign pages). The ≤10% accent cap applies only to Restrained. Express tokens in the runtime's native token system: CSS custom properties for web, theme or design-token objects for React, style structs for TUI and desktop, palette constants for CLI. Tokens precede component code; component code references tokens. **Done when:** the six token families are expressed in the runtime's native system and referenced, not hardcoded.
 
-6. **Implement against the runtime.** Apply the cross-surface invariants regardless of runtime. Audit the result against the anti-slop charter. **Done when:** implementation references the committed tokens and the audit flags no Side A or Side B tell and no invariant violation.
+6. **Apply the picked mode.**
+   - Mode implement: implement against the runtime. Apply the cross-surface invariants regardless of runtime. Audit the result against the anti-slop charter. **Done when:** implementation references the committed tokens and the audit flags no Side A or Side B tell and no invariant violation.
+   - Mode persist: produce a preview the user can react to (mockups or a self-contained HTML preview for the target surface) that reflects the proposed tokens, not generic defaults. Present the proposal and preview and request approval; approval is the gate, so do not write DESIGN.md before it. On approval, persist the system in DESIGN.md (tokens, component primitives, application rules), add CLAUDE.md pointers naming DESIGN.md as the design source of truth, and keep the preview artifacts alongside DESIGN.md. **Done when:** DESIGN.md and the CLAUDE.md pointers are written and the artifacts sit alongside DESIGN.md.
 
 Cross-surface invariants (apply on every runtime):
 
@@ -71,10 +75,13 @@ Side B: overkill compensation (slop's louder cousin):
 
 ## Failure and recovery
 - Converged directions: if two or more directions read alike, do not pick from a thin field. Re-dispatch with sharpened, opposing constraints until contrast is real.
-- Missing runtime: if the runtime is not identified before step 5, stop and ask; do not implement against an assumed runtime.
+- Missing runtime: if the runtime is not identified before step 5 in implement mode, stop and ask; do not implement against an assumed runtime.
+- Missing brief or target surface: stop and request the missing input rather than inferring a design from defaults.
 - Token drift mid-build: a new spacing value, third type family, or hardcoded color appearing mid-build is a smell. Revert to the committed token set; do not patch around it.
 - Audit failure: if the result triggers any Side A or Side B tell, or violates a cross-surface invariant, the done predicate does not hold. Fix the tell at its source; do not compensate with more decoration.
+- Persist mode, proposal rejected: revise the design system and preview, then re-present. Do not persist an unapproved system.
+- Persist mode, no approval within the session: leave DESIGN.md unchanged. Mark any produced artifacts unapproved; they are not the design source of truth.
 - Partial result: never present an unaudited or half-implemented direction as done. State which steps are complete and which remain.
 
 ## Output
-One picked direction plus a committed token set (color, type, space, radius, shadow, motion) in the runtime's native token system and implementation artifacts that reference those tokens, ordered frame → direction → tokens → implementation, passing the anti-slop charter and cross-surface invariants.
+Implement mode: one picked direction plus a committed token set (color, type, space, radius, shadow, motion) in the runtime's native token system and implementation artifacts that reference those tokens, ordered frame → direction → tokens → implementation, passing the anti-slop charter and cross-surface invariants. Persist mode: DESIGN.md with the approved design system (tokens, primitives, application rules), CLAUDE.md pointers naming DESIGN.md as source of truth, and preview artifacts alongside, ordered frame → direction → tokens → preview → approval → persist, gated on user approval before any persistence.

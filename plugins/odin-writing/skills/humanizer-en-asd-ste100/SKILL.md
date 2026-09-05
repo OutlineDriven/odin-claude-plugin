@@ -1,6 +1,6 @@
 ---
 name: humanizer-en-asd-ste100
-description: 'Use when asked to rewrite technical English for STE compliance, stripping ambiguity and AI-style patterns so non-native readers and downstream agents parse every sentence. Not for French de-AI-ification — use humaniseur-fr.'
+description: 'Use when asked to rewrite technical English for STE compliance, stripping ambiguity and AI-style patterns. Not for French de-AI-ification: use humaniseur-fr.'
 ---
 
 # Humanizer en ASD-STE100
@@ -10,7 +10,7 @@ description: 'Use when asked to rewrite technical English for STE compliance, st
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks for technical English rewrite, STE compliance, controlled-language rewrite, disambiguation, or de-slopping of a manual or document |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Returns the rewritten document to chat output; no durable writes |
 | Done | STE-compliant document with residuals flagged, in rewrite or write mode |
 
@@ -34,7 +34,7 @@ Walk the text sentence by sentence. Flag every violation of the rules below befo
 
 | Rule | Do | Do not |
 |---|---|---|
-| Active voice (Rule 3.6) | "The agent deletes the file." | "The file is deleted." — unless the actor is genuinely unknown |
+| Active voice (Rule 3.6) | "The agent deletes the file." | "The file is deleted," unless the actor is genuinely unknown |
 | No phrasal verbs (Rule 9.3) | "Remove the panel." / "Start the job." | "Take off the panel." / "Spin up the job." |
 | One instruction per sentence (Rule 5.2) | "Open the file. Read line 3." | "Open the file and read line 3, then check if it matches." |
 | Sentence length | ≤20 words (procedures), ≤25 words (descriptions) | Compound sentences with multiple clauses |

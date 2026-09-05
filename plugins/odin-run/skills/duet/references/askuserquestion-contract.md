@@ -15,6 +15,6 @@ Per question:
 - `description`: one-sentence trade-off/consequence rationale
 - `preview`: optional rendered content (markdown, monospace box), single-select only (tool constraint); use for visual comparisons (layout mockups, code diffs, file trees), skip when the difference is purely conceptual
 
-Built-in escapes (do not duplicate): Free-text "Other" is **auto-provided** on every question — never add an explicit "Other" option; free-text notes go in the `annotations` response field.
+Built-in escapes (do not duplicate): Free-text "Other" is **auto-provided** on every question; never add an explicit "Other" option; free-text notes go in the `annotations` response field.
 
-Plan-mode caveat: Use this tool only to *clarify requirements* or *choose between approaches* during planning — not "Is the plan ready?" / "Should I proceed?"; that's what `ExitPlanMode` is for.
+Plan-mode caveat: Use this tool only to *clarify requirements* or *choose between approaches* during planning, not "Is the plan ready?" / "Should I proceed?"; that's what `ExitPlanMode` is for.

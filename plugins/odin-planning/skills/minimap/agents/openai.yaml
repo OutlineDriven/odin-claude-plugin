@@ -1,0 +1,3 @@
+interface:
+  display_name: "Minimap"
+  short_description: "Use when the user needs a compact read-only current-work view from Git state, recorded test evidence, and optional graph.yaml."

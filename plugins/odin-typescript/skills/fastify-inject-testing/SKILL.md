@@ -1,6 +1,6 @@
 ---
 name: fastify-inject-testing
-description: 'Use when asked to test Fastify applications without network sockets: auth, validation errors, uploads, streams, plugins, hooks. Tests exercise routes via inject() with no listener. Not for building the app — use fastify-schema-first-service.'
+description: 'Use when asked to test Fastify applications without network sockets. Not for building the app: use fastify-schema-first-service.'
 ---
 
 # Fastify inject testing

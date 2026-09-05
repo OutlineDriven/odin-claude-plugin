@@ -1,0 +1,3 @@
+interface:
+  display_name: "Guillotine"
+  short_description: "Use when dead, duplicate, superseded, or generated residue must leave more than one artifact class of a repo or subsystem, preserving behavior."

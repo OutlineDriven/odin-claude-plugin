@@ -1,3 +1,0 @@
-interface:
-  display_name: "Aflpp"
-  short_description: "Use when the user needs to set up and run an AFL++ fuzzing campaign for a C/C++ target."

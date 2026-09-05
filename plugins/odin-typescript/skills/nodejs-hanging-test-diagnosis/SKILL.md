@@ -1,6 +1,6 @@
 ---
 name: nodejs-hanging-test-diagnosis
-description: 'Use when asked to diagnose Node.js tests that hang after the runner reports completion. Finds and closes the leaked resource so the isolated test passes repeatedly and the full suite exits 0. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to diagnose Node.js tests that hang after the runner reports completion. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Node.js hanging test diagnosis
@@ -10,7 +10,7 @@ description: 'Use when asked to diagnose Node.js tests that hang after the runne
 | Field | Bound contract |
 |---|---|
 | Trigger | node --test hangs, flaky tests, 'process did not exit', CI timeout after tests done, 'open handles', passes-alone-hangs-in-suite. |
-| Authority | Reversible local diagnosis and edits: run test binaries under timeouts and reporters; edit test and teardown code in this repository. Revert all edits on request. |
+| Authority | Reversible local: runs test binaries under timeouts and reporters and writes only test and teardown code in this repository; rollback is version control. No remote mutation. |
 | Side effect | Runs test binaries with timeouts/reporters; edits test and teardown code. |
 | Done | Isolated test passes repeatedly and the full suite exits 0; the previously leaked resource no longer keeps the process alive after the tests finish. |
 

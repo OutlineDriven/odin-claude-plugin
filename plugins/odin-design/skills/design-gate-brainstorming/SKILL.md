@@ -1,6 +1,6 @@
 ---
 name: design-gate-brainstorming
-description: 'Use when creative work is requested and no approved design exists, or when a raw idea or repository must be developed into an approved design document. Routes through idea, spike, bounded, or architectural design and fires before any implementation action. Not for work with an approved design already in context. No remote or irreversible changes.'
+description: 'Use when creative work is requested with no approved design, or a raw idea or repository must be developed into an approved design document. Not for work with an approved design in context.'
 ---
 
 # Design gate brainstorming
@@ -10,7 +10,7 @@ description: 'Use when creative work is requested and no approved design exists,
 | Field | Bound contract |
 |---|---|
 | Trigger | User requests creative work (a feature, component, or behavior change) or supplies a raw idea or repository to develop, and no approved design exists; fires before any implementation action on every such path. |
-| Authority | Reversible local: the idea path writes the named design document, builder profile, and analytics records; the architectural path writes only the named spec document; bounded and spike paths write no files. URL opens are reads. Rollback is deleting the written files before approval. |
+| Authority | Reversible local: writes only named design documents, builder profiles, analytics records, and spec documents depending on path; rollback is undo. No remote mutation. The idea path writes the named design document, builder profile, and analytics records; the architectural path writes only the named spec document; bounded and spike paths write no files. URL opens are reads. |
 | Side effect | Idea path: a redaction-checked design document, builder profile, and session analytics records on local disk. Architectural path: a spec document and optionally a spec-reviewer subagent dispatch. Bounded path: an in-chat design only. Spike path: a recommendation only; anything built is labeled throwaway. |
 | Done | The user explicitly approved the intent before any implementation. Idea path ends at an approved, saved, redaction-checked design document handed off with a tiered closing and next-skill offer; bounded at in-chat design approval; spike at a reported recommendation; architectural at a self-review-clean spec plus handoff to the plan writer. |
 

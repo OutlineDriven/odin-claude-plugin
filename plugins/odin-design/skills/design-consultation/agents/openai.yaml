@@ -1,3 +1,0 @@
-interface:
-  display_name: "Design Consultation"
-  short_description: "Use when /design-consultation proposes a design system with mockups or HTML and persists the approved system in DESIGN.md."

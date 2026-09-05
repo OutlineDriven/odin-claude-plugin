@@ -1,0 +1,3 @@
+interface:
+  display_name: "Feedback Sweep"
+  short_description: "Use when asked to /feedback-sweep [setup|reconfigure] [mode:non-interactive]."

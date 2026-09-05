@@ -1,3 +1,0 @@
-interface:
-  display_name: "Handoff"
-  short_description: "Use when substantive work reaches a session boundary, resumes after interruption, completes, or must move to another session, agent, harness, directory, or repository."

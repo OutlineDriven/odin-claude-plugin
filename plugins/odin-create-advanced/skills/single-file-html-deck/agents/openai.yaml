@@ -1,3 +1,0 @@
-interface:
-  display_name: "Single File HTML Deck"
-  short_description: "Use when an explicit request asks to create a Sentry presentation, build slides, or make a deck."

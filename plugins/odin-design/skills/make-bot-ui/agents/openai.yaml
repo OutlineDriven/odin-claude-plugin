@@ -1,0 +1,3 @@
+interface:
+  display_name: "Make Bot UI"
+  short_description: "Use when a human invokes this skill to build a webhook UI that wakes a bot."

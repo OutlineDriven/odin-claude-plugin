@@ -1,7 +1,7 @@
 {
   "name": "odin-research",
-  "version": "2.0.4",
-  "description": "ODIN workflows for focused research and source-backed findings.",
+  "version": "2.1.0",
+  "description": "ODIN workflows for source-backed investigation, verification, and design rationale.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

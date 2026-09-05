@@ -1,6 +1,6 @@
 ---
 name: multi-tenant-architecture
-description: 'Use when a request concerns multi-tenant app scaffolding, tenant isolation, custom domain wiring, or SaaS architecture for Cloudflare or Vercel. Scaffolds tenant routing, domain logic, platform config, and a management surface locally. Not for single-tenant apps; use standard project scaffolding.'
+description: 'Use when a request concerns multi-tenant scaffolding, tenant isolation, domain wiring, or SaaS architecture on Cloudflare or Vercel. Not for single-tenant apps: use scaffold-nextjs or scaffold-cli.'
 ---
 
 # Multi-tenant architecture
@@ -10,7 +10,7 @@ description: 'Use when a request concerns multi-tenant app scaffolding, tenant i
 | Field | Bound contract |
 |---|---|
 | Trigger | User requests multi-tenant app scaffolding, tenant isolation design, custom domain wiring, or SaaS architecture for Cloudflare or Vercel. |
-| Authority | Reversible local write: creates or modifies only named local project files; rollback by reverting or deleting the scaffolded output. No remote API calls; custom domain provisioning logic is defined, not executed. |
+| Authority | Reversible local: writes only named local project files; rollback is reverting or deleting the scaffolded output. No remote mutation. Custom domain provisioning logic is defined, never executed. |
 | Side effect | Scaffolds or designs a multi-tenant TypeScript package; may create files in the working directory. |
 | Done | All five method stages complete: tenant isolation strategy and model designed, request routing middleware implemented, custom domain wiring logic defined, platform-specific configuration applied, and tenant management surface scaffolded with isolation validated. |
 

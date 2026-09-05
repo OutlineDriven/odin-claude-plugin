@@ -1,8 +1,8 @@
 # ODIN Code
 
-ODIN workflows for writing, reviewing, and maintaining code.
+ODIN workflows for writing, changing, and simplifying code.
 
-52 skills, category Coding.
+38 skills, category Coding.
 
 ## Install
 
@@ -19,54 +19,40 @@ codex plugin add odin-code@odin-marketplace
 ## Skills
 
 - api-and-interface-design
+- architect
 - ast-grep
-- ci-cd
-- ci-fix
-- classify-ci-failure
+- breaking-driven
+- clean-clean-cut
 - code-simplification
-- codebase-design
-- commit
-- commit-economy
 - constraint-driven-development
 - contract-driven
-- create-branch
+- deprecate-and-migrate
 - deps-upgrade
+- design-it-twice
 - deslop
-- devcontainer-setup
-- diagramming-code
-- doubt-driven
-- dx-audit
+- dimensional-analysis
+- document-api-endpoint
 - explore
+- extremely-optimize
+- fastopt
+- fastopt-extreme
+- fromzero
+- guillotine
 - incremental-implementation
-- isolate-work-in-worktree
-- isolate-workspace-gate
-- lighter-checks
 - minimalism-driven
 - no-comments
-- observability
 - offense
-- planning-and-task-breakdown
+- optimize
 - principles
+- refactor-break-compat
 - reproduce-and-fix-issues
-- reproduce-bug-report
-- resolve-merge-conflicts
-- review
-- review-reception-protocol
-- review-speedread
-- run-smoke-tests
-- sarif-parsing
-- setup-gitignore
-- setup-pre-commit
+- restart-keeping-lessons
 - simplify
+- slicing-code-context
 - source-driven
-- spec-driven
 - spec-driven-implementation
-- tdd
-- tests-adversarial
-- to-spec
-- trailmark-summary
+- strike-the-root
+- to-greenfield
 - type-driven
 - universal-invariant-baseline
-- validate-changes-match-specs
-- visual-diff-review
-- worktree
+- unleak-abstraction

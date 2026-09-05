@@ -1,0 +1,3 @@
+interface:
+  display_name: "Interactive Drop Selector"
+  short_description: "Use when the user explicitly asks to choose which issues or pull requests to close interactively."

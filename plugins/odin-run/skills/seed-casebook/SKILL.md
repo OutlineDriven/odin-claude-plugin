@@ -1,6 +1,6 @@
 ---
 name: seed-casebook
-description: 'Use when a user opens a new build cycle in a repo with an established iteration convention and wants the casebook directory to exist with real content from the first observable moment. Builds the complete seed in a temporary sibling directory and atomically renames it into place. Not for ongoing triage or multi-repo setup.'
+description: 'Use when a user opens a build cycle in a repo with an iteration convention and wants the casebook seeded with real content. Not for ongoing triage or multi-repo setup.'
 ---
 
 # Seed iteration casebook
@@ -10,7 +10,7 @@ description: 'Use when a user opens a new build cycle in a repo with an establis
 | Field | Bound contract |
 |---|---|
 | Trigger | User opens a new build cycle in a repo with an established iteration convention. |
-| Authority | Reversible-local write of the named casebook directory and its seed files only. |
+| Authority | Reversible local: writes only the named casebook directory and its seed files; rollback is deleting that directory. No remote mutation. |
 | Side effect | Creates the iteration casebook directory already containing real seed content. The directory is never observable empty and a failed write never leaves a partial directory. |
 | Done | The casebook directory appeared atomically with non-empty seed content on exactly one weight path. Full path has DESIGN thesis/scope/gates, cycle-specific WORKFLOW steps, EVIDENCE gates each tracing to a DESIGN line. Lightweight path has a one-paragraph retro seed. The version token is provisional until forks resolve. |
 

@@ -20,8 +20,8 @@ Ask once at the decision point. Do not enable a session-wide mode.
 
 Use the platform's blocking question tool for the opt-in when available (`AskUserQuestion`, `request_user_input`, `ask_user`, or equivalent). Use plain chat only when no interactive question tool exists or the tool errors. The opt-in has two options:
 
-- Visual sketch — create rough options in a local browser
-- Text description — keep the decision in chat
+- Visual sketch: create rough options in a local browser
+- Text description: keep the decision in chat
 
 Use this wording:
 

@@ -1,3 +1,0 @@
-interface:
-  display_name: "PR Review Canvas HTML"
-  short_description: "Use when asked to render a GitHub PR as a standalone review HTML page."

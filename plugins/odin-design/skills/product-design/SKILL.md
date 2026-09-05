@@ -1,6 +1,6 @@
 ---
 name: product-design
-description: 'Use when deciding what an interface should do before UI is built or audited: interaction consequences, action scope, reachable states, naming, and accessibility of the product decision. Read-only analysis; produces a chat report with findings and routed follow-on work. Not for visual implementation; use prototype.'
+description: 'Use when deciding what an interface should do before UI is built or audited: consequences, action scope, reachable states, naming, and accessibility. Not for visual implementation: use prototype.'
 ---
 
 # Product design
@@ -10,7 +10,7 @@ description: 'Use when deciding what an interface should do before UI is built o
 | Field | Bound contract |
 |---|---|
 | Trigger | product design, what should this do, interface should do, before anyone builds it, product requirements |
-| Authority | Read-only analysis of the user request, existing project files, design system artifacts, and AGENTS.md. No code, no file mutation, no credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Analyzes the user request, existing project files, design system artifacts, and AGENTS.md. |
 | Side effect | Chat output only: product decisions, surface definitions, findings, and routed follow-on work. |
 | Done | A report is returned defining what the interface does, its surfaces and reachable states, scope and consequence per action, findings with rule IDs, and routed follow-on work; or the report is labeled INCOMPLETE with the blocking gap named. |
 

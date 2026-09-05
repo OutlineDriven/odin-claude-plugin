@@ -1,6 +1,6 @@
 ---
 name: code-simplification
-description: 'Use when the user asks to simplify, clean, or refine code. Measured mode cuts duplication or branch complexity under a green test gate; clarity mode refines readability while preserving behavior by reasoning. Not for new abstractions or whole-codebase refactors.'
+description: 'Use when the user asks to simplify, clean, or refine code. Not for new abstractions or whole-codebase refactors.'
 ---
 
 # Code simplification
@@ -12,7 +12,7 @@ Two modes share one authority: reversible local edits to a named target, no new 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to simplify, clean, refactor, or improve the readability of code, or review flags bloat beyond the current diff. |
-| Authority | Reversible local edits to the named target only. May refactor, extract, inline, and collapse conditionals; may not add new public surface or edit files outside the target. |
+| Authority | Reversible local: writes only the named target (may refactor, extract, inline, and collapse conditionals; may not add new public surface or edit files outside the target); rollback is version control or undo. No remote mutation. |
 | Side effect | Refactoring edits to the named target only; no new public surface. |
 | Done | Mode-specific done predicate holds (see each mode); behavior is preserved by tests (measured) or by recorded-contract reasoning (clarity). |
 
@@ -47,7 +47,7 @@ When the user names a test command or a bloat signal, use measured mode. When th
 
 1. Read the named target in full before changing anything. Record the observable behavior it must preserve: inputs, outputs, return paths, exceptions, side effects, and ordering. Done when: the target is read and its behavior contract is recorded.
 2. Bound scope to the named target. Do not edit files, functions, or ranges the user did not name. Done when: scope is bounded to the named target.
-3. Identify simplifications that preserve the recorded behavior: collapse special cases into the general case, inline trivial indirection, flatten deep nesting, remove dead branches and redundant conditions, replace verbose idioms with clearer equivalents, shorten long parameter lists by grouping related parameters. Done when: a candidate list is produced or the code is already clear and maintainable.
+3. Identify simplifications that preserve the recorded behavior: collapse special cases into the general case, inline trivial indirection, flatten deep nesting, remove dead branches and redundant conditions, replace verbose idioms with clearer equivalents. Done when: a candidate list is produced or the code is already clear and maintainable.
 4. Apply one change at a time. After each change, confirm the recorded behavior is unchanged: signatures match, outputs and side effects match, and no control path was added, removed, or reordered. Done when: the change is applied and behavior is confirmed identical, or the change is reverted.
 5. Stop when no further simplification preserves behavior or the remaining candidates add no clarity. Do not refactor for taste alone once the code is clear and maintainable. Done when: no candidate remains that both preserves behavior and adds clarity.
 

@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-agent",
   "displayName": "ODIN Agent",
-  "version": "2.0.4",
-  "description": "ODIN workflows for designing and improving AI agents.",
+  "version": "2.1.0",
+  "description": "ODIN workflows for configuring agent harnesses, MCP servers, and repository agent surfaces.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

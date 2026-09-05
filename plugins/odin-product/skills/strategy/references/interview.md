@@ -17,7 +17,7 @@ Each section maps one-to-one to a section in `assets/strategy-template.md`. For 
 
 ## 1. Target problem
 
-- Opening: "What's the core problem this product solves — and what makes it hard?"
+- Opening: "What's the core problem this product solves, and what makes it hard?"
 - Strong: names a specific situation the user is in, identifies what makes it hard *right now* (a crux that isn't easy to route around), and is falsifiable.
 - Anti-patterns → pushback:
   - Goal stated as problem ("we need to grow revenue") → "That's a goal. What in the world makes it hard? Whose situation are you changing?"
@@ -31,12 +31,12 @@ Each section maps one-to-one to a section in `assets/strategy-template.md`. For 
 
 ## 2. Our approach
 
-- Opening: "Given that problem, what's your approach — the commitment that makes it tractable?"
+- Opening: "Given that problem, what's your approach: the commitment that makes it tractable?"
 - Strong: a choice that implies alternatives *not* pursued; general enough to direct many decisions, specific enough to rule things out. Sounds like "we win by doing X differently," not "we do a list of things."
 - Anti-patterns → pushback:
   - Fluff / values ("customer-obsessed, move fast") → "Those apply to any company. What are you doing *differently* from the products users could pick instead of yours? If the answer applies to any company, it's not your approach."
   - Feature list ("AI-powered X, Y, Z") → "That's a feature list. What's the bet that makes you pick those over others? What principle is guiding what you ship?"
-  - Product description ("we use AI to draft replies") → "That's what the product does, but what's the *choice* inside it? Every competitor says the same thing. Name what you're doing that the obvious alternative isn't — is it a grounding choice, a trust-building commitment, a workflow bet?"
+  - Product description ("we use AI to draft replies") → "That's what the product does, but what's the *choice* inside it? Every competitor says the same thing. Name what you're doing that the obvious alternative isn't: is it a grounding choice, a trust-building commitment, a workflow bet?"
   - Goal restated ("be the market leader") → "Still the goal. How does the product win? What choice are competitors not making?"
   - Many approaches at once ("enterprise, self-serve, and consumer") → "Pick the one that organizes the rest. Which is it?"
   - Disconnected from the problem → "Draw the line from this approach to the problem you named. If there's none, one of the two is wrong."
@@ -51,7 +51,7 @@ Each section maps one-to-one to a section in `assets/strategy-template.md`. For 
 - Anti-patterns → pushback:
   - Too many primaries ("founders, PMs, engineers, designers") → "If it's for everyone, it's for no one. Who matters most? The others can still benefit, but one of them drives the product decisions."
   - Demographic ("25–45 professionals") → "That's a demographic, not a user. What are they trying to do that makes them pick up this product?"
-  - Role without situation ("PMs") → "PMs doing what — a roadmap review, a midnight spec, convincing a skeptical eng lead? The situation is where the product matters."
+  - Role without situation ("PMs") → "PMs doing what: a roadmap review, a midnight spec, convincing a skeptical eng lead? The situation is where the product matters."
   - Generic job ("be more productive") → "Productive at what? They're hiring this to do *what*, specifically?"
 - Capture: persona name + JTBD sentence. E.g. "Solo founders running their own roadmap, hiring the product to keep strategy and execution aligned without a PM on staff."
 
@@ -65,7 +65,7 @@ Each section maps one-to-one to a section in `assets/strategy-template.md`. For 
   - Vanity ("total signups, pageviews, cumulative users") → "Those rise while the product gets worse. What moves when users actually get value?"
   - Too many ("12 metrics") → "A dashboard isn't a strategy. Which 3–5 would you stake the quarter on?"
   - Outputs not outcomes ("deploys per week") → "Those measure the team, not the product. If velocity doubled but users didn't care, would you call it a win?"
-  - Can only go up ("cumulative hours saved") → "What's the rate or ratio — the thing that can regress?"
+  - Can only go up ("cumulative hours saved") → "What's the rate or ratio: the thing that can regress?"
   - Unmeasurable ("user delight") → "How would you check it on a Tuesday? If you can't, it's aspirational."
 - Capture: 3–5, each with a one-line definition and where it's measured. If measurement is undefined: "Where does this live today? If nowhere, can you start measuring it?"
 
@@ -87,7 +87,7 @@ Each section maps one-to-one to a section in `assets/strategy-template.md`. For 
 
 ## 6. Milestones (optional)
 
-**Opening:** "Any dated milestones worth anchoring — a launch, fundraise, conference, renewal? Skip if none."
+**Opening:** "Any dated milestones worth anchoring: a launch, fundraise, conference, renewal? Skip if none."
 
 Only externally visible, real milestones. Default skip. Don't push the user to invent any. If named, capture verbatim with dates.
 
@@ -95,7 +95,7 @@ Only externally visible, real milestones. Default skip. Don't push the user to i
 
 ## 7. Non-goals (optional)
 
-**Opening:** "Anything you've explicitly decided *not* to do right now that's worth naming — something the team keeps being tempted by?"
+**Opening:** "Anything you've explicitly decided *not* to do right now that's worth naming: something the team keeps being tempted by?"
 
 A clarity tool, not a blocker list. Default skip. One sentence each if named; don't encourage a long list.
 
@@ -103,7 +103,7 @@ A clarity tool, not a blocker list. Default skip. One sentence each if named; do
 
 ## 8. Marketing (optional)
 
-**Opening:** "Any positioning the doc should carry — a one-liner, tagline, key message? Skip if not yet."
+**Opening:** "Any positioning the doc should carry: a one-liner, tagline, key message? Skip if not yet."
 
 Default skip. 2–3 lines max if present.
 

@@ -1,6 +1,6 @@
 ---
 name: copywriting
-description: 'Use when asked to write or fix product/marketing copy, landing pages, CTAs, UI strings, brand voice, or remove AI writing tells. Not for end-of-article CTA design — use copywriting-cta; not for hooks — use copywriting-hooks.'
+description: 'Use when asked to write or fix product/marketing copy, landing pages, UI strings, brand voice, AI tells, an end-of-article CTA, or a hook/lede. Not for whole articles: use technical-article-writer.'
 ---
 
 # Copywriting
@@ -9,21 +9,24 @@ description: 'Use when asked to write or fix product/marketing copy, landing pag
 
 | Field | Bound contract |
 |---|---|
-| Trigger | Write product copy, marketing copy, remove AI-isms, landing page copy, brand voice, changelog |
-| Authority | Reversible local write; produces or edits user-facing copy and brand voice outputs in the working tree |
-| Side effect | Creates or edits copy files and brand voice outputs; no publish, deploy, credential, or remote mutation |
-| Done | Copy is free of AI-isms, matches the voice chart, and fits the page type |
+| Trigger | Write or fix product or marketing copy, landing pages, UI strings, or brand voice, or remove AI tells (page); design or review a bottom-of-article CTA (cta); write a hook, lede, or accroche for long-form content (hook). |
+| Authority | Reversible local. Writes only user-facing copy and brand voice outputs in the working tree; cta and hook modes emit chat output only. Rollback is version control. No remote mutation. |
+| Side effect | Creates or edits copy files and brand voice outputs in page mode; cta and hook modes produce conversation only. |
+| Done | Page: copy is free of AI-isms, matches the voice chart, and fits the page type. Cta: the full recommendation structure is composed. Hook: the user has selected a hook and its commitments are named. |
 
 ## Inputs
 
-- **Copy to fix (Mode B), or a page type and goal (Mode A).** Select Mode B when copy exists or the user pasted it. Select Mode A when nothing is written yet. For a genuinely ambiguous request ("improve this" with no copy in scope), ask one question, then commit.
+- Mode selector: `page`, `cta`, or `hook`. Auto-detect from the ask: a bottom-of-article call-to-action routes to `cta`; a hook, lede, or accroche for long-form content routes to `hook`; anything else routes to `page`. An explicit mode argument overrides auto-detection.
+- Mode page: copy to fix, or a page type and goal. Select the editing branch when copy exists or the user pasted it; the writing branch when nothing is written yet. For a genuinely ambiguous request ("improve this" with no copy in scope), ask one question, then commit.
+- Mode cta: article context, primary objective, audience and relationship, funnel stage, and mechanism preference, collected in the interview step.
+- Mode hook: topic, audience, target language (EN, FR, or both), approximate length, and publication venue; an optional existing draft opening, treated as Option 0 and never silently discarded.
 - Optional inputs, settled before writing: page purpose, audience, product, traffic source, and any voice file (`VOICE.md`, `BRAND.md`, `docs/voice.md`). If an input is missing, infer it and name the inference so the user can correct it against real copy.
 
 ## Procedure
 
-Auto-detect one of two modes. Do not ask which mode; infer it from whether copy is in scope.
+Auto-detect the mode. Do not ask which mode; infer it from the ask.
 
-### Mode A: writing new copy
+### Mode page: writing new copy
 
 1. **Gather context.** Settle four fields before writing, from the user or from files; infer and name any field the files do not settle. (1) Page purpose: the one action this page drives. (2) Audience: the specific reader, their job title, pain, and what they have already tried. (3) Product: what it does and the concrete user outcome. (4) Traffic source: where the reader comes from. Traffic source sets temperature: cold needs more Why; warm can lead with How or What. Done when: all four context fields are settled from the user or files, with inferences named.
 2. **State the brief, then write.** State the brief and keep going; mark every inferred field so the user corrects it against copy, not against a question. Stop and ask before writing only when a wrong guess makes the work useless or unsafe: the copy ships in this turn with no review, or the goal is genuinely unknown and each candidate goal produces different copy. Done when: the brief is stated with inferred fields marked, or the run stops because a wrong guess would make the work useless.
@@ -61,7 +64,7 @@ Auto-detect one of two modes. Do not ask which mode; infer it from whether copy 
 6. **Recommend and explain.** Pick one; state which and why in one sentence. For each unpicked option, give one specific edit note. Done when: one option is recommended with a one-sentence reason and one edit note per unpicked option.
 7. **Verify every line before handing back.** Check each line of every option: leads with Why, names a concrete outcome, no banned word, no em dash or stand-in. Check the option whole: it does not hand the brief's wording back (prompt echo), and every specific the user supplied appears rather than a stock default. New copy containing a banned word is not an option to present; rewrite it first. Done when: every line of every option passes the verification checks (Why-led, concrete outcome, no banned word, no em dash, no prompt echo, specifics present).
 
-### Mode B: editing existing copy
+### Mode page: editing existing copy
 
 Set the edit posture first. **Point edit:** the user named one line, word, or section; change only the target plus minimum connective tissue; do not turn a point edit into a page audit. **Restoration:** the copy has a clear voice, angle, or opinion; preserve its vocabulary level, emphasis, omissions, sentence shape, and positioning; fix specific failures without rebalancing the argument. **Rebuild:** the copy is generic, contradictory, or has no perspective; reconstruct from the brief, but never invent proof.
 
@@ -73,6 +76,30 @@ Set the edit posture first. **Point edit:** the user named one line, word, or se
 6. **Flag weakest elements.** Attach an inline label to every weak line, using exactly these labels: `[WHAT-NOT-WHY]` (leads with product, not motivation), `[FEATURE-NOT-BENEFIT]`, `[TELL-NOT-SHOW]` (adjective claim without proof), `[VAGUE]`, `[PASSIVE]`, `[VOICE-DRIFT]`, `[PAIN-NOT-NAMED]`, `[DEAD-WEIGHT]`, `[JARGON]`, `[NO-PROOF]`, `[WEAK-CTA]`, `[STATE-COPY]` (vague, leaky, or dead-end state string, or a destructive CTA labeled Confirm/OK/bare verb; apply the UI state copy rules below before using this label), `[AI-ISM]`. Flag the 3-7 weakest elements, prioritised by impact; over-flagging dilutes into a list nobody acts on. One occurrence is one flag; do not stack `[TELL-NOT-SHOW]` and `[AI-ISM]` on the same word. Done when: the 3-7 weakest elements are flagged with inline labels, prioritised by impact.
 7. **Rewrite flagged sections.** Cut hard (same meaning in half the words). Lead with Why, not What. Name the concrete outcome, not the capability. Replace adjectives with proof. Make CTAs outcome-specific. Every sentence adds new information or gets cut. A CTA stays short. When replacing AI-isms, rewrite the sentence; do not swap the flagged word for a synonym. Done when: every flagged section is rewritten with the same meaning in fewer words, leading with Why and naming concrete outcomes.
 8. **Output before/after diff.** For each flagged section, show the original, the labels, the rewritten text, and one sentence explaining the change. End with a summary: issue count, top pattern, and confidence (note if copy context was limited). Verify each "After" line: leads with Why, names a concrete outcome, no banned word, no em dash or stand-in, and every fact, number, and link from the "Before" still present. Then apply the leave-it-alone test: every change must fix a named failure from the audit; if it is merely different, restore the original. Done when: a before/after diff is output for each flagged section with labels, rationale, and a summary, and every "After" line passes verification.
+
+### Mode cta: end-of-article call-to-action
+
+The archetype decision tree, the exact recommendation structure, and the operating principles live in `references/cta-playbook.md`.
+
+1. **Interview.** Ask the five inputs in order, one at a time with 2-4 tappable options, skipping any already supplied; fall back to free text only when the answer cannot be enumerated. (1) Article context: personal or independent blog or essay, newsletter or paid publication, brand or company content-marketing blog, other. (2) Primary objective: newsletter or email subscription, social follow, lead generation (gated asset), product or service signup or free trial, demo or sales call booking, direct purchase, community join, engagement (reply, comment, share), reader support (paid sub or tip), try-it or direct action, other; if the user lists more than one, ask which is primary, because choosing multiple objectives is the dominant cause of CTA failure. (3) Audience and relationship: first-time visitor, returning reader not subscribed, existing subscriber or customer, mixed or unknown. (4) Funnel stage: TOFU (discovery, no buying intent), MOFU (evaluating, comparing), BOFU (ready to act), not applicable. (5) Mechanism preference, asked only if a mechanism could legitimately help (for skeptical or repeat-reader audiences default to none or value-only without asking): none or value-only, curiosity gap, reciprocity (free asset first), discount or offer, urgency (real deadline), scarcity or FOMO, social proof. Capture volunteered constraints (length limit, brand voice, no popups, language, formality). Done when: all five inputs are collected or reported missing.
+2. **Diagnose.** Map the inputs to one archetype via the decision tree in `references/cta-playbook.md`. Done when: the inputs are mapped to one archetype.
+3. **Compose the recommendation** in the exact structure given in `references/cta-playbook.md`: archetype with rationale, content copy (headline, body, button, risk reversal), form (placement, visual weight, layout, proof), mechanism, A/B test plan, and a WCAG 2.2 accessibility check. Done when: the recommendation is composed in the exact structure with all sections filled.
+4. **Anti-pattern warnings.** After the recommendation, list 2-3 anti-patterns the user is at risk of given their inputs, as a contrarian check. Failure modes to call out by name: multiple competing CTAs, generic "Subscribe for more" or "Learn More", mechanism mismatch (urgency or scarcity where none exists), SaaS landing-page voice on a personal essay, proofless ask, "Book a Demo" on TOFU content, open-ended reply questions on social. Done when: 2-3 anti-patterns are listed as a contrarian check.
+5. **Enforce the operating principles** in `references/cta-playbook.md` during composition: one primary CTA per post, publication voice, specificity over cleverness, proof co-located with the ask, mechanisms only when the context supports them, and pushback on bad asks. Done when: the operating principles are enforced during composition.
+6. **Language and style.** Adapt copy to the user's stated brand voice, the article's language (never default to English), the publication's existing cadence, and the reader's expertise level. Honor formality cues (tu/vous, du/Sie) and flag the choice. If non-English, translate the content section but keep structure headings in English. Done when: copy is adapted to brand voice, language, cadence, and expertise level with formality cues flagged.
+7. **Offer next moves.** Suggest 2-3 follow-ups: steelman the opposite CTA, a variant for a different audience or platform, or an end-to-end article review for CTA-supporting signals. Done when: 2-3 follow-ups are suggested.
+
+### Mode hook: hook, lede, or accroche
+
+A hook's only job is to make the reader want sentence 2, through one of five levers (a strong hook usually pulls two at once): open a gap, break a prediction, drop into a scene, promise a payoff, borrow weight. The five levers in detail, the type-fit table, the 18-hook catalog, the anti-pattern cull, and language handling live in `references/hook-catalog.md`.
+
+1. **Confirm the brief.** Ask before generating if a material input field is missing. Done when: the brief is confirmed or missing material fields are requested.
+2. **Pick 3-4 hooks** from the catalog that are genuinely different, different levers, not three flavors of the same technique. Diversification rule: across the options include at minimum one intellectual hook (contrarian, definition reversal, historical analogy, curiosity gap), one sensory hook (in medias res, concrete detail), and one reader-direct hook (conditional, direct problem, promise). Done when: 3-4 genuinely different hooks are selected, each pulling a different lever.
+3. **Write 2 candidates per hook**, specific to the user's article. The two candidates within one hook explore different angles (different anecdote, statistic, or scene), not rewordings of each other. Done when: 2 candidates per hook are written, each exploring a different angle.
+4. **Apply the quality gates** to every candidate: specific beats abstract (replace "many companies" with "Stripe, Shopify, Vercel"; replace "recently" with a date; replace "studies show" with the actual finding or cut the claim); the first sentence must force the second (read each candidate cold; if sentence 2 would not be clicked after sentence 1, rewrite); match technique to article type using the type-fit table. Done when: every candidate passes the quality gates.
+5. **Run the anti-pattern cull** on every candidate. If a candidate matches any entry, rewrite it before presenting. Done when: every candidate passes the cull or is rewritten.
+6. **Present and let the user pick.** Present using the Output format, ask the user through the question tool, and wait. Do not pick for them. Done when: options are presented and the user is asked to pick.
+7. **Name the commitment.** After the pick, name what the choice commits the rest of the article to. A contrarian hook commits paragraphs 2-3 to defending the non-consensus claim. A scene opener commits the next section to resolving or productively delaying the scene. Done when: the chosen hook's opening commitments are named in one sentence.
 
 ### UI state copy rules (for product-state strings and the `[STATE-COPY]` label)
 
@@ -102,7 +129,17 @@ Three to five concepts. Each concept has three parts: (1) a brand principle, one
 - Restoration over-reach. Do not rebalance the argument or replace a clear lead with a cleverer one; fix named failures only.
 - AI-ism reintroduced or specific dropped. A rewrite that reintroduces an AI tell, or quietly drops a fact, number, or link from the original, is a regression; restore and rewrite again.
 - Non-convergent result. If the value proposition cannot be stated in one sentence, the copy is unfixable until it is clarified; report this blocked state with the unresolved value proposition rather than shipping copy that does not serve one.
-- Partial results are never presented as done. The done predicate (free of AI-isms, matches the voice, fits the page type) must hold for every line handed back; lines that fail it are rewritten or withheld.
+- Missing cta inputs. If any of the five required inputs cannot be obtained, stop and report which input is missing rather than guessing; a CTA designed on assumed inputs produces the universal failure mode (generic "Subscribe for more").
+- Multiple primary objectives (cta). If the user insists on more than one primary objective after pushback, flag it as a failure mode, deliver the strongest single-primary recommendation, and note the competing objectives as anti-patterns.
+- No valid archetype (cta). If the input combination maps to no archetype (for example, product or demo on a personal blog where the author is not the product), report the conflict and propose the closest valid alternative. Do not fabricate an archetype.
+- Missing hook brief. If topic, audience, language, length, or publication venue is unclear and material, stop and ask before generating. Do not invent a brief.
+- Anti-pattern match (hook). If a candidate matches the cull list, rewrite it before presenting. Never present a matched candidate.
+- No genuine choice (hook). If the 3-4 options collapse to flavors of one technique, regenerate across different levers per the diversification rule before presenting.
+- User says "more" or "none" (hook). Produce 3 different hooks (different techniques), not new candidates for the same hooks.
+- User says "blend 1A and 2B" (hook). Write one combined hook and check in again before proceeding.
+- Unverifiable statistic or quote (hook). If a candidate leans on a number or quote that cannot be cited accurately, replace it with a verifiable detail or cut the claim. Do not present an unsupported authority hook.
+- Partial results are never presented as done. The done predicate (free of AI-isms, matches the voice, fits the page type) must hold for every line handed back; lines that fail it are rewritten or withheld. Cta mode returns either the full structure or the blocked result naming the missing input; hook mode never presents fewer than 3 distinct options, and stops with the blocker named if 3 cannot be produced.
+- Non-mutation rule for cta and hook: those modes write nothing outside the conversation; recovery is re-running the interview or regenerating in conversation.
 
 ## Output
-Return, in order: Mode A brief with marked inferences, 2-3 labeled alternatives, recommendation, edit notes, and pass result; or Mode B before/after diffs with labels, rationale, issue count, top pattern, and confidence; then `VOICE.md` only when offered and accepted.
+Return, in order: for page mode, the writing-branch brief with marked inferences, 2-3 labeled alternatives, recommendation, edit notes, and pass result, or the editing-branch before/after diffs with labels, rationale, issue count, top pattern, and confidence; then `VOICE.md` only when offered and accepted. For cta mode, a single in-conversation recommendation: archetype selection with rationale, copy (headline, body, button, risk reversal), form (placement, visual weight, layout, proof), mechanism, A/B test plan, WCAG 2.2 accessibility check, 2-3 anti-pattern warnings, and 2-3 suggested next moves. For hook mode: working title, 3-4 numbered hook types with two A/B candidates each, the user's selection prompt, and after selection the chosen hook plus one sentence naming what it commits the opening to.

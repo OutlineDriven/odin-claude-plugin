@@ -1,3 +1,0 @@
-interface:
-  display_name: "Swarm"
-  short_description: "Use when asked to run partitioned parallel coverage or races across isolated workers, producing a consolidated evidence table with gaps and dropouts."

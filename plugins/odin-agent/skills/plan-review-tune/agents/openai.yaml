@@ -1,3 +1,0 @@
-interface:
-  display_name: "Plan Review Tune"
-  short_description: "Use when plan-mode enforcement hooks intercept a plan review or the user runs /plan-review-tune to tune which plan-review questions fire."

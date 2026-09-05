@@ -2,7 +2,7 @@
 
 ODIN workflows for modern TypeScript development.
 
-17 skills, category Coding.
+16 skills, category Coding.
 
 ## Install
 
@@ -28,7 +28,6 @@ codex plugin add odin-typescript@odin-marketplace
 - nodejs-hanging-test-diagnosis
 - nodejs-service-foundations
 - nodejs-stream-pipeline
-- optimise-seo
 - replace-unsafe-typescript-assertions
 - scaffold-cli
 - scaffold-nextjs

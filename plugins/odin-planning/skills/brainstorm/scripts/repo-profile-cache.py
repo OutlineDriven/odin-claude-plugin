@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 """Shared repo-grounding project-profile cache: deterministic get/put.
 
+Owner copy; pov invokes this by relative path.
+
 This helper owns the *deterministic* cache I/O for the question-agnostic
 project profile that repo-grounding skills reuse. The non-deterministic
 derivation (reading manifests, summarizing conventions) is done by the
@@ -49,7 +51,9 @@ import os
 import subprocess
 import sys
 import tempfile
+import stat
 from datetime import datetime, timezone
+from pathlib import Path
 
 # Bump when the profile schema changes so a newer reader never reuses an
 # entry written under an older (narrower) schema.
@@ -211,6 +215,55 @@ def changed_paths() -> "list[str] | None":
 def cache_path(root: str, head: str) -> str:
     return os.path.join(CACHE_ROOT, root, f"{head}.json")
 
+# The first directory in the cache path that we own (e.g. /tmp/odin).
+CACHE_ROOT_PATH = Path(CACHE_ROOT)
+CACHE_PREFIX = CACHE_ROOT_PATH.parent
+
+
+def _in_cache_namespace(p: Path) -> bool:
+    """True for the prefix and every path below CACHE_ROOT."""
+    return p == CACHE_PREFIX or CACHE_PREFIX in p.parents
+
+
+def _is_safe_dir(p: Path, require_owner: bool) -> bool:
+    """True when path is a directory, not a symlink, and optionally owned by us."""
+    try:
+        st = os.lstat(p)
+    except OSError:
+        return False
+    if stat.S_ISLNK(st.st_mode) or not stat.S_ISDIR(st.st_mode):
+        return False
+    if require_owner and st.st_uid != os.geteuid():
+        return False
+    return True
+
+
+def _ensure_dir(p: Path) -> bool:
+    """Create p as a safe directory if missing; validate p and owned ancestors if it exists."""
+    try:
+        os.lstat(p)
+    except FileNotFoundError:
+        parent = p.parent
+        if parent == p:  # reached filesystem root without resolving path
+            return False
+        if not _ensure_dir(parent):
+            return False
+        try:
+            p.mkdir(mode=0o700)
+        except OSError:
+            return False
+        return _is_safe_dir(p, _in_cache_namespace(p))
+    except OSError:
+        return False
+    # lstat on an existing leaf follows intermediate symlinks, so a linked
+    # CACHE_PREFIX would otherwise pass. Walk owned ancestors; stop at the
+    # prefix so a symlinked /tmp (macOS) stays out of scope.
+    if not _is_safe_dir(p, _in_cache_namespace(p)):
+        return False
+    if p == CACHE_PREFIX or not _in_cache_namespace(p):
+        return True
+    return _ensure_dir(p.parent)
+
 
 def resolve_keys() -> "tuple[str, str] | None":
     """The (root-sha, head-sha) cache key, or None if not a usable git repo."""
@@ -308,10 +361,17 @@ def do_put(profile_file: str) -> int:
     }
 
     path = cache_path(root, head)
+    cache_dir = Path(path).parent
+    if not _ensure_dir(cache_dir):
+        sys.stderr.write(
+            "repo-profile-cache: cache directory is not safe; not caching\n"
+        )
+        print("NO-CACHE")
+        return 0
+
     try:
-        os.makedirs(os.path.dirname(path), exist_ok=True)
         fd, tmp = tempfile.mkstemp(
-            dir=os.path.dirname(path), prefix=".tmp-", suffix=".json"
+            dir=str(cache_dir), prefix=".tmp-", suffix=".json"
         )
         try:
             with os.fdopen(fd, "w") as f:

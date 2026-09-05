@@ -1,0 +1,3 @@
+interface:
+  display_name: "Eligibility Batch Organizer"
+  short_description: "Use when the user asks to classify a batch of projects against eligibility rules and generate an approval preview before creating hierarchical child documents."

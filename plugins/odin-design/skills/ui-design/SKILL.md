@@ -1,6 +1,6 @@
 ---
 name: ui-design
-description: 'Use when directing, building, or auditing React/Next.js UI in Tailwind: visual direction, responsive or dark-mode retrofits, and file:line UX findings with a ship verdict. Not for deep typography or motion passes; use typography-audit or ui-animation.'
+description: 'Use when directing, building, or auditing React/Next.js Tailwind UI: visual direction, responsive/dark-mode retrofits, UX audits. Not for typography or motion: use typography-audit or ui-animation.'
 ---
 
 # UI design
@@ -10,9 +10,9 @@ description: 'Use when directing, building, or auditing React/Next.js UI in Tail
 | Field | Bound contract |
 |---|---|
 | Trigger | visual direction, Tailwind build, screenshot to markup, dark mode, responsive, UX audit, design QA, deslop UI |
-| Authority | reversible-local: write files under the project directory only; no VCS, credential, paid, published, or deployed mutation |
+| Authority | Reversible local: writes only files under the project directory; rollback is version control. No credential, paid, published, deployed, or remote mutation. |
 | Side effect | Builds, audits, or provides direction for React/Next.js UI; may edit files |
-| Done | UI has a track, loaded references, built or audited with ship-readiness, and no AI slop |
+| Done | UI has a track, is built or audited with ship-readiness, and has no AI slop |
 
 ## Inputs
 
@@ -50,7 +50,7 @@ description: 'Use when directing, building, or auditing React/Next.js UI in Tail
    **Done when:** the design is implemented in existing project conventions and ready for verification.
 
 4. **Audit mode: find user-facing defects and fix the ones in scope.** Unlike Build, default to flagging; approval is earned.
-   - Scope: diff-aware by default (`git diff --name-only` against the base branch for UI files, or the named files). A full sweep needs an explicit request.
+   - Scope: diff-aware by default (`git diff --name-only <base-branch> --` against the base branch for UI files, or the named files). A full sweep needs an explicit request.
    - Detect features in scope and run per-feature checks in order.
    - Confirm each finding at its file:line. Never present a finding without evidence; with no evidence the result is `unknown` with a reason, never a fail.
    - Tier each finding: reserve `release-blocker` for data loss, broken critical paths, and dark patterns. No slop rule is ever a release-blocker.

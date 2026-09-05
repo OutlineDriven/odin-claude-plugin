@@ -1,3 +1,0 @@
-interface:
-  display_name: "Engineering Retrospective"
-  short_description: "Use when the user requests an engineering retrospective for a named period."

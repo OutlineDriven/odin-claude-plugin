@@ -1,3 +1,0 @@
-interface:
-  display_name: "Unleak Abstraction"
-  short_description: "Use when a user names an abstraction leak and wants it sealed as a module seam, configuration option, or explicit override, or deliberately exposed as a named boundary."

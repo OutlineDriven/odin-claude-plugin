@@ -1,3 +1,3 @@
 interface:
   display_name: "Pov"
-  short_description: "Use when asked to judge whether this project should adopt, switch to, reject, or revisit a technology, library, pattern, or architecture, or give a mid-session second opinion."
+  short_description: "Use when asked to judge whether to adopt, switch, reject, or revisit technology, library, pattern, or architecture, or a second opinion."

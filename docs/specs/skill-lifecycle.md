@@ -7,8 +7,7 @@ modeled here, and the machine says nothing about what a skill does once a consum
 Every guard below is either a gate command this repository already runs or an adjudication record it
 already keeps. That is the point of writing the ladder down: a state becomes provable instead of
 asserted, and a skipped rung becomes a named illegal transition instead of an oversight nobody
-noticed. The companion topology lives in `graph.yaml`; the gates themselves live in
-`.pre-commit-config.yaml`.
+noticed. The gates themselves live in `.pre-commit-config.yaml`.
 
 ## States
 

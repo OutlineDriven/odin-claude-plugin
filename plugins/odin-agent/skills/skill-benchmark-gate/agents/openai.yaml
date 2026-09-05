@@ -1,3 +1,0 @@
-interface:
-  display_name: "Skill Benchmark Gate"
-  short_description: "Use when a skill change is about to ship and must pass a release gate."

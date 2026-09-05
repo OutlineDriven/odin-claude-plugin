@@ -1,3 +1,0 @@
-interface:
-  display_name: "Visualise Explainer"
-  short_description: "Use when asked to create an interactive HTML concept explainer with controls and live state, returned in a visualizer fence for sandboxed rendering."

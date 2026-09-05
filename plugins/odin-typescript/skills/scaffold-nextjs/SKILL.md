@@ -1,6 +1,6 @@
 ---
 name: scaffold-nextjs
-description: 'Use when asked to scaffold a Next.js turborepo end to end and verify it. Produces a working local turborepo with verified app setup, turbo configuration, and passing root gates. Deployment and launch are deferred to a human. Not for a CLI scaffold; use scaffold-cli; for course exercises; use scaffold-exercises.'
+description: 'Use when asked to scaffold a Next.js turborepo end to end and verify it. Not for a CLI scaffold: use scaffold-cli. Not for course exercises: use scaffold-exercises.'
 ---
 
 # Scaffold Next.js
@@ -10,7 +10,7 @@ description: 'Use when asked to scaffold a Next.js turborepo end to end and veri
 | Field | Bound contract |
 |---|---|
 | Trigger | Scaffold Next.js, Next.js turborepo, Vercel app, Next.js app with turborepo. |
-| Authority | Reversible-local: runs `git init` and makes an initial commit before any generation so the rollback boundary is real. Writes stay inside the named project directory. No remote mutation. |
+| Authority | Reversible local: runs `git init` and makes an initial commit before any generation so the rollback boundary is real. Writes stay inside the named project directory. No remote mutation. |
 | Side effect | Scaffolds and verifies a working local Next.js turborepo, then stops before deployment or launch. |
 | Done | A turborepo at `{{name}}/` whose root `pnpm install --frozen-lockfile`, `pnpm run build`, `pnpm run check-types`, and lint or format check have all been run and passed, with no unresolved template variables and no product-specific dependency the user did not choose. |
 

@@ -1,6 +1,6 @@
 ---
 name: browser-testing
-description: 'Use when building, debugging, or verifying browser-rendered code, or when asked to run browser tests for pages affected by a PR or branch. Interactive mode drives an attached browser via Chrome DevTools MCP to inspect runtime state with console, network, accessibility, and performance evidence. Diff-scoped mode derives affected routes from a git diff, exercises each against the local dev server, and reports every route as Pass, Fail, or Skip. Not for source, remote-system, credential, publish, or deploy changes.'
+description: 'Use when building, debugging, or verifying browser-rendered code, or running browser tests for PR- or branch-affected pages. Not for source, remote-system, credential, publish, or deploy changes.'
 ---
 
 # Browser testing
@@ -10,7 +10,7 @@ description: 'Use when building, debugging, or verifying browser-rendered code, 
 | Field | Bound contract |
 |---|---|
 | Trigger | Browser UI implementation, debugging, or runtime verification; or a PR number, branch name, or `current` to test pages affected by a diff. |
-| Authority | Read-only. Drives an attached browser to inspect runtime state. No source, VCS, credential, paid, published, deployed, or remote mutation. Fixes are requested from the user, never applied. |
+| Authority | Reversible local: writes only evidence artifacts (screenshots, console logs, test reports); rollback is deletion. Source, VCS, credential, paid, published, deployed, and remote mutation stay prohibited. Fixes are requested from the user, never applied. |
 | Side effect | Drives an attached browser or a selected browser driver against the local dev server. Writes only local evidence artifacts (screenshots, console logs, test reports). |
 | Done | Interactive: the changed runtime surface is exercised with clean console/network and correct visual, accessibility, or performance evidence. Diff-scoped: the summary reports every affected route as Pass, Fail, or Skip with reasons, or reports the preflight blocker and what would clear it. |
 
@@ -49,7 +49,7 @@ description: 'Use when building, debugging, or verifying browser-rendered code, 
 
 6. Exercise the changed surface: load the page, interact with the affected component, and capture a screenshot before and after the change for visual regression comparison (layout, spacing, color, responsive viewport sizes, loading/empty/error states). Done when: before and after screenshots are captured covering the changed surface.
 
-7. Read the console. A production-quality page has zero console errors and warnings: uncaught exceptions indicate code bugs, failed network requests indicate API or CORS issues, framework warnings indicate component issues, security warnings indicate CSP or mixed-content problems. Report or fix every entry before declaring done. Done when: the console is clean or every error and warning is reported.
+7. Read the console. A production-quality page has zero console errors and warnings: uncaught exceptions indicate code bugs, failed network requests indicate API or CORS issues, framework warnings indicate component issues, security warnings indicate CSP or mixed-content problems. Report every entry and propose fixes; never apply them. Done when: the console is clean or every error and warning is reported.
 
 8. Capture network requests for the affected flows. Verify expected status codes and payloads, and investigate every failed request. Done when: all network requests for affected flows are verified or investigated.
 

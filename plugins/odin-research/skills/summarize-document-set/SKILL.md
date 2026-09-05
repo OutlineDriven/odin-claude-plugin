@@ -1,6 +1,6 @@
 ---
 name: summarize-document-set
-description: 'Use when the user asks to summarize a set of documents, identify recurring themes and conflicting statements across multiple files, or synthesize internal docs. Reads a provided document set, extracts cited themes and conflicts, and writes a report. Not for single-document summaries or non-text sources.'
+description: 'Use when the user asks to summarize a set of documents, identify themes and conflicts across multiple files, or synthesize internal docs. Not for single-document summaries or non-text sources.'
 ---
 
 # Summarize document set
@@ -10,7 +10,7 @@ description: 'Use when the user asks to summarize a set of documents, identify r
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to summarize a set of documents, identify themes and conflicts across multiple files, or synthesize internal docs. |
-| Authority | Reversible-local: writes one report file to the working directory. No external calls, no credentials, no remote mutation. |
+| Authority | Reversible local: writes only one report file to the working directory; rollback is version control or undo. No remote mutation. |
 | Side effect | Writes one Markdown report file to `reports/document_summaries/<timestamp>.md`. No other files are written. |
 | Done | A report file exists containing identified themes, identified conflicts with citing document names, and citations for each claim. |
 

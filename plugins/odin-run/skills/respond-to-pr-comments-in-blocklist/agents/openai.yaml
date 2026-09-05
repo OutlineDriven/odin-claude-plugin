@@ -1,3 +1,0 @@
-interface:
-  display_name: "Respond To PR Comments In Blocklist"
-  short_description: "Use when the user explicitly wants to walk PR review comments, collect per-comment decisions, and post approved replies or resolve threads on GitHub."

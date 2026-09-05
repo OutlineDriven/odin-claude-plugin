@@ -1,6 +1,6 @@
 # anti-slop.md, taste anchors and ban-lists
 
-Depth for the SKILL.md §4 charter. Restraint anchored on production exemplars is the antidote to both flavors of slop.
+Depth for the anti-slop charter inlined in `design/SKILL.md` (Procedure step 6).
 
 **Grounded: 2026-08-31**
 
@@ -220,7 +220,7 @@ Counter: cut decoration; sharpen the headline; ship the surface or kill it.
    | `rounded-lg` uniform | `rounded-xl` uniform, `rounded-2xl` uniform |
    | Glassmorphism global | Neumorphism global, mesh-gradient global |
 
-   **Font reflex-reject list** (snapshot 2026-04-28 from impeccable/brand.md; review yearly when font fashion clearly shifts; treat as second-order reflex-reject: banned by default; pick anyway when the surface has a defensible historical / homage rationale): Fraunces, Newsreader, Lora, Crimson, Crimson Pro, Crimson Text, Playfair Display, Cormorant, Cormorant Garamond, Syne, IBM Plex Mono, IBM Plex Sans, IBM Plex Serif, Space Mono, Space Grotesk, Inter, DM Sans, DM Serif Display, DM Serif Text, Outfit, Plus Jakarta Sans, Instrument Sans, Instrument Serif.
+   **Font reflex-reject list** (snapshot 2026-04-28; review yearly when font fashion clearly shifts; treat as second-order reflex-reject: banned by default; pick anyway when the surface has a defensible historical / homage rationale): Fraunces, Newsreader, Lora, Crimson, Crimson Pro, Crimson Text, Playfair Display, Cormorant, Cormorant Garamond, Syne, IBM Plex Mono, IBM Plex Sans, IBM Plex Serif, Space Mono, Space Grotesk, Inter, DM Sans, DM Serif Display, DM Serif Text, Outfit, Plus Jakarta Sans, Instrument Sans, Instrument Serif.
 
 2. **Style anchoring on production exemplars.** Every direction names 1-2 taste anchors from §4 below; vague references ("clean", "modern") underspecify and the model defaults to slop.
 3. **Density commitment (2-3x default LLM output).** Vertical rhythm, line-height, and information density tighten 2-3x relative to the model's default. Default LLM output is sparse and air-padded; the sparseness itself reads as slop.

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Gate File Completion"
+  short_description: "Use when a task needs gate-file proof before a done claim."

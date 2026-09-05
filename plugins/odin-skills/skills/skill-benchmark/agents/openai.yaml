@@ -1,0 +1,3 @@
+interface:
+  display_name: "Skill Benchmark"
+  short_description: "Use when the user runs /skill-benchmark to score skills, compare models, or gate a skill release."

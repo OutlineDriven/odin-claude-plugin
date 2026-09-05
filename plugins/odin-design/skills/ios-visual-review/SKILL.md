@@ -1,6 +1,6 @@
 ---
 name: ios-visual-review
-description: 'Use when the user invokes /ios-visual-review to audit an iOS app''s visuals on a real device. Produces a per-screen visual-review report scoring ten dimensions 0-10 with a biggest-leverage fix for each. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user invokes /ios-visual-review to audit an iOS app''s visuals on a real device. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # iOS visual review
@@ -10,7 +10,7 @@ description: 'Use when the user invokes /ios-visual-review to audit an iOS app''
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs `/ios-visual-review`. |
-| Authority | Reversible-local: write only the named review-report artifact; delete or overwrite it to roll back. |
+| Authority | Reversible local: writes only the named review-report artifact; rollback is undo. No remote mutation. |
 | Side effect | Local-write to iOS screen visual-review findings (one Markdown report file). |
 | Done | An iOS visual-review report is produced. |
 
@@ -41,7 +41,7 @@ description: 'Use when the user invokes /ios-visual-review to audit an iOS app''
    9. Information density. Per-screen content fits without horizontal scroll. Long screens carry section anchors. Lists use real iOS list patterns (swipe actions, contextual menus).
    10. AI-slop check. No generic stock layouts, leftover placeholder data, cargo-culted Material Design imported from Android, or gradients that read as AI-generated.
 5. For every dimension scoring below 7 on any screen, surface the issue with a recommended fix and its tradeoff and let the user decide whether to address it. Do not auto-apply fixes.
-6. Write the report artifact described under Output. Done when: every reviewed screen has ten scores, concrete findings, and one biggest-leverage fix per dimension, while unscored screens carry their blocker.
+6. Write the report artifact described under Output. Done when: every reviewed screen has ten scores, concrete findings, and one highest-impact fix per dimension, while unscored screens carry their blocker.
 
 ## Failure and recovery
 - Observation session unavailable or rejects read-only access: stop and report the exact error. Do not attempt to start, upgrade, or re-mint the session. Roll back is trivial: no report is written.
@@ -51,4 +51,4 @@ description: 'Use when the user invokes /ios-visual-review to audit an iOS app''
 - Non-mutation rule: the device and app are never mutated. The only written artifact is the report file, which can be deleted or overwritten to roll back.
 - Blocked result: report BLOCKED with the exact blocker and what was attempted; do not emit a done predicate that does not hold.
 
-A Markdown report written to a local path under the project directory, named `ios-visual-review-<date>.md`. It contains, per screen: the screenshot, the 0-10 score for each of the ten dimensions, the what-would-make-it-a-10 note for each dimension, and one biggest-leverage fix per dimension. Screens scoring below 7 on any dimension are flagged with the surfaced fix and tradeoff. The report is the terminal deliverable; no source, device, or app state is changed.
+A Markdown report written to a local path under the project directory, named `ios-visual-review-<date>.md`. It contains, per screen: the screenshot, the 0-10 score for each of the ten dimensions, the what-would-make-it-a-10 note for each dimension, and one highest-impact fix per dimension. Screens scoring below 7 on any dimension are flagged with the surfaced fix and tradeoff. The report is the terminal deliverable; no source, device, or app state is changed.

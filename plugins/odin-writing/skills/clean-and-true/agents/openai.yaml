@@ -1,0 +1,3 @@
+interface:
+  display_name: "Clean And True"
+  short_description: "Use when the user just edited a durable artifact, or says \\\"clean and true\\\", \\\"run the hygiene pass\\\", or \\\"taste the output\\\"."

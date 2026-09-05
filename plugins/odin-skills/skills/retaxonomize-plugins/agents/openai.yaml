@@ -1,0 +1,3 @@
+interface:
+  display_name: "Retaxonomize Plugins"
+  short_description: "Use when skills must move between plugins, or plugins be created, merged, or retired."

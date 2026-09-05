@@ -1,3 +1,3 @@
 interface:
   display_name: "Copywriting"
-  short_description: "Use when asked to write or fix product/marketing copy, landing pages, CTAs, UI strings, brand voice, or remove AI writing tells."
+  short_description: "Use when asked to write or fix product/marketing copy, landing pages, UI strings, brand voice, AI tells, an end-of-article CTA, or a hook/lede."

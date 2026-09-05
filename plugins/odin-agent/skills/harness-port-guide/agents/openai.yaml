@@ -1,3 +1,3 @@
 interface:
   display_name: "Harness Port Guide"
-  short_description: "Use when the user asks to make the skills framework work in a new harness, IDE, or CLI; the run delivers a port whose bootstrap auto-injects every session and passes the captured acceptance transcript."
+  short_description: "Use when the user asks to make the skills framework work in a new harness, IDE, or CLI."

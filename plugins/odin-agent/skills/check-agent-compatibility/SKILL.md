@@ -1,6 +1,6 @@
 ---
 name: check-agent-compatibility
-description: 'Use when a human explicitly asks for a full repository agent-compatibility pass. Validates agent configuration surfaces, runs read-only startup and config loading, and returns a scored compatibility report with prioritized fixes. Not for tasks that require source or remote-system changes.'
+description: 'Use when a human explicitly asks for a full repository agent-compatibility pass returning a scored report with prioritized fixes. Not for tasks that require source or remote-system changes.'
 ---
 
 # Check agent compatibility
@@ -10,7 +10,7 @@ description: 'Use when a human explicitly asks for a full repository agent-compa
 | Field | Bound contract |
 |---|---|
 | Trigger | Full repository agent-compatibility pass, invoked explicitly by a human |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
 | Side effect | Chat output only; target is read-only CLI and review passes. No repository, configuration, or remote state is changed |
 | Done | A scored compatibility report with prioritized fixes and broken-down dimension results is returned |
 

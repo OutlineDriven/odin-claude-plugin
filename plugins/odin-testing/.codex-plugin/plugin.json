@@ -1,0 +1,20 @@
+{
+  "name": "odin-testing",
+  "version": "2.1.0",
+  "description": "ODIN workflows for tests, properties, mutation, and behavioral verification.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "testing"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Testing",
+    "shortDescription": "ODIN workflows for tests, properties, mutation, and behavioral verification.",
+    "category": "Coding"
+  }
+}

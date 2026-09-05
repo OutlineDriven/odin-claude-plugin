@@ -1,6 +1,6 @@
 ---
 name: necessary-work
-description: 'Use when work is about to grow past the ask, the task may already be done, or the user requests only the minimum. Produce a bounded contract whose every admitted action is necessary, then stop at proof. Not for executing the work — use the appropriate build or fix skill.'
+description: 'Use when work is about to grow past the ask, the task may already be done, or the user requests only the minimum. Not for executing the work: use tdd to build or strike-the-root to fix.'
 ---
 
 # Necessary work
@@ -10,7 +10,7 @@ description: 'Use when work is about to grow past the ask, the task may already 
 | Field | Bound contract |
 |---|---|
 | Trigger | Work is about to grow past the ask, the task may already be done, or the user requests the minimum, only what is needed, or a stop once it works. |
-| Authority | Read and assess available request, environment, policy, and evidence only; do not mutate files, version control, credentials, paid services, publications, deployments, or remote state. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Reads and assesses request, environment, policy, and evidence only. |
 | Side effect | Narrow the scope of work by classification only; produce no operational side effect. |
 | Done | The contract is written before work, every admitted action fails the delete test, and classification stops once the minimum proof is identified. |
 
@@ -38,4 +38,4 @@ A partial classification may be returned only with unresolved items named; it is
 
 ## Output
 
-A scope decision: outcome, minimum proof, admitted actions (each with its contract gap), rejected candidates (each with its delete-test result), and status (`sufficient`, `already done`, or `blocked`) — ordered by the procedure steps that produced them.
+A scope decision: outcome, minimum proof, admitted actions (each with its contract gap), rejected candidates (each with its delete-test result), and status (`sufficient`, `already done`, or `blocked`), ordered by the procedure steps that produced them.

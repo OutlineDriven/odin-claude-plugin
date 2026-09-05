@@ -1,3 +1,0 @@
-interface:
-  display_name: "Property Test Authoring"
-  short_description: "Use when adding or improving property tests for invariants, oracles, parsers, algorithms, data structures, or smart-contract state machines."

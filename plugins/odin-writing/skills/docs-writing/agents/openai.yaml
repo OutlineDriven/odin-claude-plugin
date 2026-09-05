@@ -1,0 +1,3 @@
+interface:
+  display_name: "Docs Writing"
+  short_description: "Use when asked to write, restructure, or audit documentation with Diataxis types, or to draft a feature docs page or diagram source."

@@ -1,0 +1,20 @@
+{
+  "name": "odin-review",
+  "version": "2.1.0",
+  "description": "ODIN workflows for reviewing diffs, branches, and implementations against their specs.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "review"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Review",
+    "shortDescription": "ODIN workflows for reviewing diffs, branches, and implementations against their specs.",
+    "category": "Coding"
+  }
+}

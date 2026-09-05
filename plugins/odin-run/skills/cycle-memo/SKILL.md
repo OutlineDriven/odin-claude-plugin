@@ -1,6 +1,6 @@
 ---
 name: cycle-memo
-description: 'Use after a build, QA pass, demo, user complaint, or abandoned attempt when the next pass needs lessons rather than code. Writes an evidence-backed memo and next-cycle plan so a fresh agent can preserve working assets, reject failed patterns, and test the right gates first. Not for changelog extraction; not for session handoff — use handoff.'
+description: 'Use when a build, QA pass, demo, user complaint, or abandoned attempt leaves the next pass needing lessons rather than code. Not for changelog extraction. Not for session handoff: use handoff.'
 ---
 
 # Cycle memo
@@ -10,7 +10,7 @@ description: 'Use after a build, QA pass, demo, user complaint, or abandoned att
 | Field | Bound contract |
 |---|---|
 | Trigger | After a build, QA pass, demo, user complaint, or abandoned attempt when the useful output is what the next pass must learn rather than the code itself. |
-| Authority | Reversible local writes: may write or refresh local docs under the project. No VCS, credential, published, deployed, or remote mutation. |
+| Authority | Reversible local: writes or refreshes only local docs under the project; rollback is restoring or deleting those docs. No VCS, credential, published, deployed, or remote mutation. |
 | Side effect | Writes or refreshes local docs for the cycle: a memo for lessons and a plan for next-cycle contracts, gates, and vocabulary. |
 | Done | Every lesson traces to observed cycle evidence; every anti-pattern names a concrete failure mode and the gate that catches it; no lesson is a single reported case in disguise (each covers a class with specifics as evidence); a fresh agent can tell what to preserve, discard, and test first without reading the whole old session. |
 

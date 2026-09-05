@@ -1,6 +1,6 @@
 ---
 name: modern-python
-description: 'Use when creating or migrating a Python project or script to uv, Ruff, ty, and pytest. Handles single-file scripts, multi-file projects, reusable packages, and migrations from legacy tooling. Not for pushing to a remote or publishing — use new-branch-and-pr for that.'
+description: 'Use when creating or migrating a Python project or script to uv, Ruff, ty, and pytest. Not for pushing to a remote or publishing: use new-branch-and-pr for that.'
 ---
 
 # Modern Python
@@ -10,7 +10,7 @@ description: 'Use when creating or migrating a Python project or script to uv, R
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to create or migrate a Python project or script to uv, Ruff, ty, pytest, and current packaging conventions. |
-| Authority | Reversible-local: init bare, add, remove, and sync; create, delete, and rewrite local project files only; commit or abort but never push. |
+| Authority | Reversible local: writes only local project files through init, add, remove, and sync; rollback is version control, and it commits or aborts but never pushes. No remote mutation. |
 | Side effect | Local write to Python project metadata, dependency lock, tooling config, and source layout appropriate to the project type. |
 | Done | The project uses one coherent modern toolchain and its lint, type, and test checks pass for the detected project type. |
 

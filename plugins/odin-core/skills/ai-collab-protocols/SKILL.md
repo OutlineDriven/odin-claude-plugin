@@ -1,6 +1,6 @@
 ---
 name: ai-collab-protocols
-description: 'Use when the user describes an AI workflow gap or uses an ambiguous cross-session reference such as ''the PR Bob mentioned''. Resolves each to a stable handle and surfaces collaboration anti-patterns when reached. Don''t use for tasks that require source or remote-system changes.'
+description: 'Use when the user describes an AI workflow gap or uses an ambiguous cross-session reference such as ''the PR Bob mentioned''. Not for tasks that require source or remote-system changes.'
 ---
 
 # AI collab protocols
@@ -10,7 +10,7 @@ description: 'Use when the user describes an AI workflow gap or uses an ambiguou
 | Field | Bound contract |
 |---|---|
 | Trigger | User describes an AI workflow gap or uses an ambiguous cross-session reference such as 'the PR Bob mentioned' or 'that bug from last week'. |
-| Authority | Read-only: reply content only; no file, VCS, credential, paid, published, deployed, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Reply content only. |
 | Side effect | None; reply content only. |
 | Done | Every ambiguous reference resolves to a stable handle; anti-patterns surface when reached. |
 
@@ -20,10 +20,10 @@ The user's message may contain ambiguous references: names or descriptions witho
 
 ## Procedure
 
-1. Scan the user's message for ambiguous references — a name or description without a locator — or a described workflow gap. If none is present, do not route. Done when: every ambiguous reference or workflow gap is identified.
+1. Scan the user's message for ambiguous references, a name or description without a locator, or a described workflow gap. If none is present, do not route. Done when: every ambiguous reference or workflow gap is identified.
 2. For each ambiguous reference, stop and ask the user for a stable handle: a GitHub PR/comment permalink, an MCP resource URI (e.g. `@github:pr/owner/repo/123#comment-456`), or a file:line reference. State why: names are ambiguous in long-context sessions and unrecoverable across sessions, while a stable URL survives compaction and enables exact match. Done when: each reference has a stable handle or is marked unresolved.
-3. Surface one tactic at a time, not a lecture. When the user is handing off multi-session work, recommend leaving a comment on the PR — an addressable, compaction-surviving thread — over a chat-only handoff, so the next session, colleague, or agent can resume without replaying context. Done when: one tactic is surfaced.
-4. When an anti-pattern is reached, surface it: (a) screenshot-only context loses URL grounding, copy-paste, and search — pair every screenshot with its URL or text export; (b) token-usage or lines-of-code framing as a quality proxy — quantity is not capability; surface the rejection. Done when: each reached anti-pattern is named.
+3. Surface one tactic at a time, not a lecture. When the user is handing off multi-session work, recommend leaving a comment on the PR, an addressable, compaction-surviving thread, over a chat-only handoff, so the next session, colleague, or agent can resume without replaying context. Done when: one tactic is surfaced.
+4. When an anti-pattern is reached, surface it: (a) screenshot-only context loses URL grounding, copy-paste, and search: pair every screenshot with its URL or text export; (b) token-usage or lines-of-code framing as a quality proxy: quantity is not capability; surface the rejection. Done when: each reached anti-pattern is named.
 5. Stop once every ambiguous reference has a stable handle and any reached anti-pattern has been named. Do not widen scope or invent handles the user did not supply. Done when: every reference has a handle and reached anti-patterns are named.
 
 ## Failure and recovery

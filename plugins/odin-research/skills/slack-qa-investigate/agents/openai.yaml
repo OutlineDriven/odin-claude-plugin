@@ -1,3 +1,0 @@
-interface:
-  display_name: "Slack QA Investigate"
-  short_description: "Use when asked for a research-backed answer requiring codebase and documentation investigation, or when answering requires reading many files or conducting a wide survey."

@@ -1,6 +1,6 @@
 ---
 name: backlog
-description: 'Use when asked to park an undecided idea without representing it as decided or active work. Creates or updates one reversible local backlog entry with evidence and a readiness threshold. Not for decided or active work — use the project task system.'
+description: 'Use when asked to park an undecided idea without representing it as decided or active work. Not for decided or active work: use the project task system.'
 ---
 
 # Backlog
@@ -10,14 +10,14 @@ description: 'Use when asked to park an undecided idea without representing it a
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to park an undecided idea without representing it as decided or active work. |
-| Authority | Reversible local write only: create or update one backlog entry file. No VCS commit, no remote call, no credential use, no published artifact. |
+| Authority | Reversible local: writes only one backlog entry file; rollback is deleting or reverting that file. No remote mutation. No VCS commit or credential use. |
 | Side effect | One backlog entry as a reversible local state change with recorded evidence. |
 | Done | The idea is parked in the backlog and ready to be promoted when it meets the readiness threshold. |
 
 ## Inputs
 
 - Idea statement (required): one or two sentences naming the idea and the problem it would address.
-- Undecided reason (required): the specific missing input that blocks a decision now — an unverified assumption, absent evidence, an open question, or a competing alternative.
+- Undecided reason (required): the specific missing input that blocks a decision now: an unverified assumption, absent evidence, an open question, or a competing alternative.
 - Readiness threshold (required): the concrete, falsifiable condition that, when met, would make the idea promotable (a measurement, a resolved question, or a confirmed constraint that yields a yes/no).
 - Existing evidence (optional): links, measurements, or notes already in hand that bear on the idea.
 - Backlog location (optional): path to the backlog file or directory; default is a `backlog.md` file in the current workspace.
@@ -38,4 +38,4 @@ description: 'Use when asked to park an undecided idea without representing it a
 - Partial result: no partial state is valid. Either the full entry is written or nothing is written. A failed write leaves the backlog unchanged.
 
 ## Output
-One backlog entry in the local backlog store, marked `parked`, carrying its idea statement, undecided reason, readiness threshold, evidence, and timestamp — ready to be promoted by a later decision step that tests the threshold.
+One backlog entry in the local backlog store, marked `parked`, carrying its idea statement, undecided reason, readiness threshold, evidence, and timestamp, ready to be promoted by a later decision step that tests the threshold.

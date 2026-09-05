@@ -1,3 +1,0 @@
-interface:
-  display_name: "PR Link Issue"
-  short_description: "Use when a human explicitly asks to link a GitHub issue and Linear ticket to a pull request body."

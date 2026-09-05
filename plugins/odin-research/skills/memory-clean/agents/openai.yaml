@@ -1,3 +1,0 @@
-interface:
-  display_name: "Memory Clean"
-  short_description: "Use when a human asks to audit memory or find stale or duplicate memories."

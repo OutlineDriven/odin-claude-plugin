@@ -1,6 +1,6 @@
 ---
 name: append-run-log
-description: 'Use when a completed agent run must be recorded as durable, queryable evidence. Appends one entry to the JSONL run log under an ISO date guard, prunes expired entries, and updates the last-run pointer. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a completed agent run must be recorded as durable, queryable evidence. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Append run log
@@ -10,7 +10,7 @@ description: 'Use when a completed agent run must be recorded as durable, querya
 | Field | Bound contract |
 |---|---|
 | Trigger | A completed agent run must be recorded as durable, queryable evidence. |
-| Authority | Reversible local write to the run log only; prior entries are never rewritten. |
+| Authority | Reversible local: writes only the run log by appending; prior entries are never rewritten; rollback is version control. No remote mutation. |
 | Side effect | Appends one entry to the append-only JSONL run log under an ISO-only date guard, prunes entries older than the declared retention window, and updates the last-run pointer. |
 | Done | Exactly one entry exists per run with a unique run id, malformed lines are ignored rather than corrupting the log, and aggregate metrics are derivable from the log alone. |
 

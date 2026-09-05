@@ -1,6 +1,6 @@
 ---
 name: llms-visibility
-description: 'Use when asked to make a public site discoverable and readable by LLM agents using llms.txt, Markdown content negotiation, and alternate link headers. Emits standards-grounded artifacts, validates them by fetching each route, and reports per-route verification. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to make a site discoverable by LLM agents using llms.txt, Markdown content-negotiation, and alternate link headers. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # LLMs visibility
@@ -10,7 +10,7 @@ description: 'Use when asked to make a public site discoverable and readable by 
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants a public site readable and discoverable by LLMs, or mentions llms.txt, Markdown Accept negotiation, or alternate link headers. |
-| Authority | Reversible local writes to named generated artifacts only: llms.txt, optional llms-full.txt, route negotiation code, HTML link tags. Preview before overwriting existing files. No credentials, remote mutation, or VCS changes. |
+| Authority | Reversible local: writes only named generated artifacts (llms.txt, optional llms-full.txt, route negotiation code, HTML link tags); rollback is undo. No remote mutation. Previews before overwriting existing files; no credentials or VCS changes. |
 | Side effect | Writes llms.txt, optional llms-full.txt, adds text/markdown content negotiation on eligible routes, adds Link headers and HTML link tags where HTML exists. |
 | Done | Every eligible route serves text/markdown with correct Content-Type and Vary on Accept: text/markdown; llms.txt parses under the documented Markdown-structured format; Link headers and HTML link tags are present where applicable; validation report lists every route and its headers. |
 

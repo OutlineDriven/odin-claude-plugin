@@ -1,12 +1,12 @@
 # Persona-based testing
 
-A surface should survive five distinct user archetypes. Each persona exposes failure modes that a single design-director perspective would miss. Load this reference when auditing a surface against user archetypes — it is a *testing* framework that runs in parallel with direction-setting, not a substitute for it.
+A surface should survive five distinct user archetypes. Each persona exposes failure modes that a single design-director perspective would miss. Load this reference when auditing a surface against user archetypes; it is a *testing* framework that runs in parallel with direction-setting, not a substitute for it.
 
 **How to use.** Select 2–3 personas most relevant to the surface being critiqued (see the selection matrix below). Walk through the primary user action as each persona. Report specific red flags, not generic concerns.
 
 ---
 
-## 1. Impatient power user — "Alex"
+## 1. Impatient power user: "Alex"
 
 **Profile.** Expert with similar products. Expects efficiency, hates hand-holding. Will find shortcuts or leave.
 
@@ -33,7 +33,7 @@ A surface should survive five distinct user archetypes. Each persona exposes fai
 
 ---
 
-## 2. Confused first-timer — "Jordan"
+## 2. Confused first-timer: "Jordan"
 
 **Profile.** Never used this type of product. Needs guidance at every step. Will abandon rather than figure it out.
 
@@ -60,7 +60,7 @@ A surface should survive five distinct user archetypes. Each persona exposes fai
 
 ---
 
-## 3. Accessibility-dependent user — "Sam"
+## 3. Accessibility-dependent user: "Sam"
 
 **Profile.** Uses a screen reader (VoiceOver / NVDA), keyboard-only navigation. May have low vision, motor impairment, or cognitive differences.
 
@@ -88,7 +88,7 @@ A surface should survive five distinct user archetypes. Each persona exposes fai
 
 ---
 
-## 4. Deliberate stress tester — "Riley"
+## 4. Deliberate stress tester: "Riley"
 
 **Profile.** Methodical user who pushes interfaces beyond the happy path. Tests edge cases, tries unexpected inputs, probes for gaps.
 
@@ -115,12 +115,12 @@ A surface should survive five distinct user archetypes. Each persona exposes fai
 
 ---
 
-## 5. Distracted mobile user — "Casey"
+## 5. Distracted mobile user: "Casey"
 
 **Profile.** Using phone one-handed on the go. Frequently interrupted. Possibly on a slow connection.
 
 **Behaviors.**
-- Uses thumb only — prefers bottom-of-screen actions
+- Uses thumb only, prefers bottom-of-screen actions
 - Gets interrupted mid-flow and returns later
 - Switches between apps frequently
 - Limited attention span, low patience
@@ -135,7 +135,7 @@ A surface should survive five distinct user archetypes. Each persona exposes fai
 
 **Red flags (report specifically).**
 - Important actions positioned at the top of the screen (unreachable by thumb)
-- No state persistence — progress lost on tab switch or interruption
+- No state persistence: progress lost on tab switch or interruption
 - Large text inputs required where selection would work
 - Heavy assets loading on every page (no lazy loading)
 - Tiny tap targets, or targets too close together
@@ -175,7 +175,7 @@ When the surface has a defined audience (PRD, user-research notes, brand brief, 
 **Red flags.** 3–4 things that would alienate this specific user type.
 ```
 
-Only generate project-specific personas when real audience data exists. Do not invent audience details — fall back to the five predefined personas when no context is available.
+Only generate project-specific personas when real audience data exists. Do not invent audience details; fall back to the five predefined personas when no context is available.
 
 ---
 

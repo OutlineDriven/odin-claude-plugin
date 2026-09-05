@@ -1,3 +1,0 @@
-interface:
-  display_name: "Get PR Comments"
-  short_description: "Use when asked to summarize feedback on the active PR."

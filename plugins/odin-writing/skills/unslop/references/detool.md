@@ -1,4 +1,4 @@
-# Detool mode — role classification and protection rules
+# Detool mode: role classification and protection rules
 
 ## Role classes
 
@@ -6,7 +6,7 @@ Classify the whole artifact, or each section if mixed, before any edit.
 
 | Role | Definition | Treatment |
 |---|---|---|
-| Durable / portable | Meant to travel across stacks | Subject to detool — neutralize incidental couplings |
+| Durable / portable | Meant to travel across stacks | Subject to detool; neutralize incidental couplings |
 | Provenance / operational | Build logs, install guides, runbooks, command transcripts, reproduction steps | Keep concrete stack nouns |
 | Tool-subject claim | The named tool, vendor, model, bug, or measured limit is the subject of the sentence | Keep the name |
 

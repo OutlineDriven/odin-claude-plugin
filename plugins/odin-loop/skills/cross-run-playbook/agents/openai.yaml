@@ -1,3 +1,0 @@
-interface:
-  display_name: "Cross Run Playbook"
-  short_description: "Use when a long agentic project needs each cycle to produce a learning memo with lessons, a keep/iterate/restart decision, and version labels only on quality-cleared artifacts."

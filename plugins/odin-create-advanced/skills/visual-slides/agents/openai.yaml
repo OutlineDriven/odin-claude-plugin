@@ -1,3 +1,0 @@
-interface:
-  display_name: "Visual Slides"
-  short_description: "Use when the user explicitly requests a slide deck by command, flag, or natural language."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Work Records Summary"
+  short_description: "Use when the user asks to discover, group, and summarize work records across multiple systems for a given period or project."

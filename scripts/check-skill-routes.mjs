@@ -13,12 +13,58 @@
 //       an unquoted colon-space plain scalar is invalid YAML for strict parsers)
 //   (c) display_name is unique across every generated agents/openai.yaml, so two
 //       skills never present the same label in a harness picker
+//   (d) the description states a trigger a harness can route on
+//   (e) every `Not for <x>: use <slug>` pointer names a skill that exists, so a
+//       fold or rename cannot leave a description routing into nothing
+//
+// `--self-test` runs the pointer check against planted descriptions and exits
+// non-zero unless the dangling pointer is caught and the valid ones pass.
 //
 // Frontmatter is parsed with a tiny built-in structural YAML parser (no dependency)
 // so nested and hyphenated keys like metadata.short-description validate correctly.
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { ROOT, loadCatalog, skillRows } from "./plugin-surfaces.mjs";
+
+// --- (e) pointer targets ---
+// A pointer is `use <target>` after a colon, semicolon, comma, or open paren:
+// the `Not for <x>: use <y>` form every description carries. The target is a
+// slug or a slug glob (`from-*-perspective`), and it dangles when it matches no
+// skill directory. An article after `use` (`use the mewt CLI`) is prose, not a
+// pointer.
+const POINTER_RE = /(?:[:;,]|\() use `?([a-z0-9][a-z0-9*-]*[a-z0-9*])`?/g;
+const ARTICLES = new Set(["a", "an", "the", "your", "its"]);
+export function danglingPointers(descriptions, slugs) {
+  const out = [];
+  for (const [dir, description] of descriptions) {
+    for (const m of description.matchAll(POINTER_RE)) {
+      const target = m[1];
+      if (ARTICLES.has(target)) continue;
+      const rx = new RegExp(`^${target.replace(/[.+?^${}()|[\]\\]/g, "\\$&").replace(/\*/g, "[a-z0-9-]*")}$`);
+      if (![...slugs].some((s) => rx.test(s))) out.push(`${dir}: dangling pointer use ${target}`);
+    }
+  }
+  return out;
+}
+
+if (process.argv.includes("--self-test")) {
+  const slugs = new Set(["design", "from-moat-perspective", "from-skeptic-perspective"]);
+  const planted = new Map([
+    ["p/skills/a", "Use when x. Not for picking: use design."],
+    ["p/skills/b", "Use when y. Not for a seat take: use from-*-perspective seats."],
+    ["p/skills/c", "Use when z (use design). Not for running it: use the mewt CLI."],
+    ["p/skills/d", "Use when w. Not for review: use no-such-skill."],
+    ["p/skills/e", "Use when v. Not for seats: use nothing-*-here."],
+  ]);
+  const got = danglingPointers(planted, slugs);
+  const want = ["p/skills/d: dangling pointer use no-such-skill", "p/skills/e: dangling pointer use nothing-*-here"];
+  if (JSON.stringify(got) !== JSON.stringify(want)) {
+    process.stderr.write(`check-skill-routes self-test: expected ${JSON.stringify(want)}, got ${JSON.stringify(got)}\n`);
+    process.exit(1);
+  }
+  process.stdout.write("check-skill-routes self-test: 5 planted descriptions, 2 dangling caught\n");
+  process.exit(0);
+}
 
 const errors = [];
 // [slug, repository-relative directory] for every authored skill.
@@ -177,6 +223,15 @@ if (badDescription.length)
   errors.push(
     `unroutable descriptions: ${badDescription.slice(0, 5).join("; ")} (${badDescription.length} total)`,
   );
+
+const descriptions = new Map();
+for (const [, dir] of skills) {
+  const description = parsed.get(dir)?.entries.find((e) => e.path === "description")?.value;
+  if (description) descriptions.set(dir, description);
+}
+const dangling = danglingPointers(descriptions, new Set(skills.map(([slug]) => slug)));
+if (dangling.length)
+  errors.push(`${dangling.slice(0, 5).join("; ")} (${dangling.length} total)`);
 
 // --- (c) display_name uniqueness across generated manifests ---
 const byName = new Map();

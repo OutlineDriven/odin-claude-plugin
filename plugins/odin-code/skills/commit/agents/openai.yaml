@@ -1,3 +1,0 @@
-interface:
-  display_name: "Commit"
-  short_description: "Use when a user asks to commit or save staged or unstaged changes, create a typed branch, or format history for changelog generation."

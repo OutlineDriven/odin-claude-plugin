@@ -1,3 +1,0 @@
-interface:
-  display_name: "Create Pull Request"
-  short_description: "Use when the user asks to create a PR, open or update a draft PR, write or refresh a PR description, or summarize changes for review."

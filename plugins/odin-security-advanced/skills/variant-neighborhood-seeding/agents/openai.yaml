@@ -1,3 +1,0 @@
-interface:
-  display_name: "Variant Neighborhood Seeding"
-  short_description: "Use when a confirmed or plausible issue maps to a graph node and the user needs a ranked handoff packet of graph-neighborhood review targets to seed variant analysis."

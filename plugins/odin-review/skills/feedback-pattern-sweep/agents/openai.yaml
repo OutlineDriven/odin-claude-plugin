@@ -1,0 +1,3 @@
+interface:
+  display_name: "Feedback Pattern Sweep"
+  short_description: "Use when recent resolved feedback may reveal a broader recurring defect pattern across the project surface."

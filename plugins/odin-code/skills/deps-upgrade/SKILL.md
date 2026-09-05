@@ -1,6 +1,6 @@
 ---
 name: deps-upgrade
-description: 'Use when dependency upgrades need tiered batches for CVEs, a major release, forced compatibility, scheduled hygiene, a pre-release lockfile audit, or a cadence-driven or vulnerability-triggered sweep. Classifies each update on a risk ladder, verifies it, or defers it with a reason. Not for PR queue triage; use github-backlog-triage.'
+description: 'Use when dependency upgrades need batching for CVEs, a major release, forced compatibility, a scheduled or vulnerability-triggered sweep. Not for PR queue triage: use github-backlog-triage.'
 ---
 
 # Deps upgrade
@@ -10,7 +10,7 @@ description: 'Use when dependency upgrades need tiered batches for CVEs, a major
 | Field | Bound contract |
 |---|---|
 | Trigger | CVE remediation, major upstream release, compatibility-forced sweep, scheduled dependency hygiene, pre-release lockfile audit, or a cadence-driven or vulnerability-triggered dependency sweep. |
-| Authority | Reversible local writes only: manifests, lockfiles, and compatibility code in the current repository, recorded as concern-atomic local commits, plus a temporary lockfile snapshot outside the tree for the pre/post audit. No push, publish, deploy, credential, paid, or remote mutation. Rollback path is version control: revert the campaign commits or reset to the recorded pre-campaign HEAD. |
+| Authority | Reversible local: writes only manifests, lockfiles, and compatibility code in the current repository (concern-atomic local commits) plus a temporary lockfile snapshot outside the tree for the pre/post audit; rollback is version control (revert the campaign commits or reset to the recorded pre-campaign HEAD). No remote mutation. |
 | Side effect | Updates local manifests, lockfiles, and compatibility code; creates concern-atomic local commits. No feature work, no refactors beyond compatibility code, no silent lockfile drift. |
 | Done | Selected upgrades are locked, tested at the required depth, migration guidance applied for majors, license/SBOM churn checked, and the final vulnerability scan is recorded. For a sweep, each update is classified on the risk ladder and verified, or deferred with a recorded reason. |
 

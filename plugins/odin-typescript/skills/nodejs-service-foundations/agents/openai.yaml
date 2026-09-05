@@ -1,3 +1,3 @@
 interface:
   display_name: "Nodejs Service Foundations"
-  short_description: "Use when asked to set up or harden Node.js service foundations: env validation, structured logging with redaction, typed error catalogue with instanceof and HTTP mapping, native TypeScript type stripping, and AbortController shutdown wiring."
+  short_description: "Use when asked to set up or harden Node.js service foundations: env validation, logging, typed errors, type stripping, and shutdown wiring."

@@ -2,8 +2,8 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-core",
   "displayName": "ODIN Core",
-  "version": "2.0.4",
-  "description": "Core ODIN workflows for planning, executing, and checking changes.",
+  "version": "2.1.0",
+  "description": "Core ODIN gates every session runs: intent, scope, verification, and hand-off checks.",
   "author": {
     "name": "OutlineDriven",
     "url": "https://github.com/OutlineDriven"

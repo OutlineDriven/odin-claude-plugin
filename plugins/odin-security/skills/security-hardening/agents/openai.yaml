@@ -1,3 +1,3 @@
 interface:
   display_name: "Security Hardening"
-  short_description: "Use when handling untrusted input, auth/authz, data storage, or external integrations to add security controls during construction."
+  short_description: "Use when adding security controls for untrusted input, auth/authz, data storage, or external integrations."

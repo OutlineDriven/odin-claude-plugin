@@ -1,6 +1,6 @@
 # Interaction design
 
-Cross-runtime interactive-element grammar — states, focus, dropdowns, modals, keyboard navigation. Surface-specific references (`web.md`, `react.md`, `tui.md`, `qt.md`, `desktop.md`) build on this; load this file first when an interaction pattern needs to land correctly across runtimes.
+Cross-runtime interactive-element grammar: states, focus, dropdowns, modals, keyboard navigation. Surface-specific references (`web.md`, `react.md`, `tui.md`, `qt.md`, `desktop.md`) build on this; load this file first when an interaction pattern needs to land correctly across runtimes.
 
 **Grounded: 2026-08-26**
 
@@ -27,7 +27,7 @@ The common miss: designing hover without focus, or vice versa. They are differen
 
 ## Focus rings: do them right
 
-Never `outline: none` without replacement — it is an accessibility violation. Use `:focus-visible` to show the ring only for keyboard users.
+Never `outline: none` without replacement; it is an accessibility violation. Use `:focus-visible` to show the ring only for keyboard users.
 
 ```css
 button:focus {
@@ -60,7 +60,7 @@ Validate on blur, not on every keystroke. Exception: password strength meters.
 
 ## Loading states
 
-**Optimistic updates** — show success immediately, roll back on failure. Use for low-stakes actions (likes, follows). Never use for payments or destructive actions.
+**Optimistic updates**: show success immediately, roll back on failure. Use for low-stakes actions (likes, follows). Never use for payments or destructive actions.
 
 **Skeleton screens beat spinners.** They preview content shape and feel faster than generic indeterminate spinners.
 
@@ -68,7 +68,7 @@ Validate on blur, not on every keystroke. Exception: password strength meters.
 
 ## Modals: the inert approach
 
-Focus trapping in modals used to require complex JavaScript. Now use the `inert` attribute and the native `<dialog>` element.
+Use the `inert` attribute and the native `<dialog>` element for focus trapping in modals.
 
 ```html
 <main inert>
@@ -85,9 +85,9 @@ const dialog = document.querySelector('#my-dialog');
 dialog.showModal(); // opens as modal with focus trap, closes on Escape
 ```
 
-The `<dialog>` markup must NOT carry the `open` attribute when `showModal()` will be used — `open` creates a non-modal dialog, and `showModal()` throws if called on an already-open dialog. Use either the attribute (non-modal, no focus trap) or `showModal()` (modal, focus-trapped), never both.
+The `<dialog>` markup must NOT carry the `open` attribute when `showModal()` will be used; `open` creates a non-modal dialog, and `showModal()` throws if called on an already-open dialog. Use either the attribute (non-modal, no focus trap) or `showModal()` (modal, focus-trapped), never both.
 
-Default-banned: see `anti-slop.md §1.6` "Modal as first thought" — exhaust inline / progressive alternatives before reaching for a modal.
+Default-banned: see `anti-slop.md §1.6` "Modal as first thought": exhaust inline / progressive alternatives before reaching for a modal.
 
 ---
 
@@ -115,7 +115,7 @@ A dropdown rendered with `position: absolute` inside a container that has `overf
 
 ### CSS anchor positioning
 
-Modern solution — tether an overlay to its trigger without JavaScript.
+Modern solution: tether an overlay to its trigger without JavaScript.
 
 ```css
 .trigger {
@@ -135,7 +135,7 @@ Modern solution — tether an overlay to its trigger without JavaScript.
 }
 ```
 
-`position: fixed` escapes any `overflow` clipping on ancestors. `@position-try` handles viewport edges. **Browser support:** not Baseline — webstatus.dev reports limited availability. Keep the fallback path below.
+`position: fixed` escapes any `overflow` clipping on ancestors. `@position-try` handles viewport edges. **Browser support:** not Baseline. webstatus.dev reports limited availability. Keep the fallback path below.
 
 ### Popover + anchor combo
 
@@ -166,7 +166,7 @@ Check viewport boundaries before rendering. If the dropdown would overflow the b
 
 ### Anti-patterns
 
-- **`position: absolute` inside `overflow: hidden`** — the dropdown will be clipped. Use `position: fixed` or the top layer instead.
+- **`position: absolute` inside `overflow: hidden`**: the dropdown will be clipped. Use `position: fixed` or the top layer instead.
 - Arbitrary z-index like `z-index: 9999`. Use a semantic scale: `dropdown (100) → sticky (200) → modal-backdrop (300) → modal (400) → toast (500) → tooltip (600)`.
 - **Inline dropdown markup** without an escape hatch from the parent's stacking context. Use `popover` (top layer), a portal, or `position: fixed`.
 
@@ -174,7 +174,7 @@ Check viewport boundaries before rendering. If the dropdown would overflow the b
 
 ## Destructive actions: undo > confirm
 
-Undo is better than confirmation dialogs — users click through confirmations mindlessly. Remove from UI immediately, show an undo toast, actually delete after the toast expires.
+Undo is better than confirmation dialogs; users click through confirmations mindlessly. Remove from UI immediately, show an undo toast, actually delete after the toast expires.
 
 Reserve confirmation dialogs for: truly irreversible actions (account deletion), high-cost actions, batch operations affecting many items.
 
@@ -206,9 +206,9 @@ Provide skip links (`<a href="#main-content">Skip to main content</a>`) for keyb
 
 Swipe-to-delete and similar gestures are invisible. Hint at their existence:
 
-- **Partially reveal** — show the delete button peeking from the edge.
-- **Coach marks** — first-use overlay teaching the gesture.
-- **Always provide a visible fallback** — a menu with "Delete" so the gesture is an accelerator, not the only path.
+- Partially reveal: show the delete button peeking from the edge.
+- Coach marks: first-use overlay teaching the gesture.
+- Always provide a visible fallback: a menu with "Delete" so the gesture is an accelerator, not the only path.
 
 Never rely on gestures as the only way to perform an action.
 

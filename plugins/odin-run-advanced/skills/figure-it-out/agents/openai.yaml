@@ -1,3 +1,0 @@
-interface:
-  display_name: "Figure It Out"
-  short_description: "Use when asked to design a bespoke execution workflow when no playbook fits; verify a falsifiable predicate on the real product with a reviewable trail."

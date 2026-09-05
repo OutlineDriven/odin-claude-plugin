@@ -1,6 +1,6 @@
 ---
 name: ios-build-cleanup
-description: 'Use when the user wants a clean Xcode rebuild by deleting DerivedData and build artifacts. Do not use for diagnosing a specific build error; that is ios-build-fix.'
+description: 'Use when the user wants a clean Xcode rebuild by deleting DerivedData and build artifacts. Do not use for diagnosing a specific build error: use ios-build-fix.'
 disable-model-invocation: true
 ---
 
@@ -11,8 +11,8 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs /ios-build-cleanup. |
-| Authority | Human-only. Require explicit human invocation; preview the target and consequence before any irreversible deletion. The model must not invoke this skill autonomously. |
-| Side effect | Local deletion of DerivedData and build artifacts only. These artifacts are untracked and fully regenerable by a rebuild. No source, VCS, credential, or remote mutation. |
+| Authority | Human-gated: requires explicit human invocation and previews the target and consequence before any irreversible deletion. The model never invokes it autonomously. |
+| Side effect | Local deletion of DerivedData and build artifacts only. These artifacts are untracked and regenerable by a rebuild. No source, VCS, credential, or remote mutation. |
 | Done | A clean build state is restored: DerivedData and project build artifacts are removed and the next build starts from a clean cache. |
 
 ## Inputs

@@ -1,0 +1,21 @@
+{
+  "name": "odin-review",
+  "version": "2.1.0",
+  "description": "ODIN workflows for reviewing diffs, branches, and implementations against their specs.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "review"
+  ],
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "OutlineDriven"
+  },
+  "skills": "./skills",
+  "interface": {
+    "displayName": "ODIN Review",
+    "shortDescription": "ODIN workflows for reviewing diffs, branches, and implementations against their specs."
+  }
+}

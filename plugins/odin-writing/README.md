@@ -1,8 +1,8 @@
 # ODIN Writing
 
-ODIN workflows for clear, useful technical writing.
+ODIN workflows for documentation, editorial prose, and copy.
 
-12 skills, category Writing.
+33 skills, category Writing.
 
 ## Install
 
@@ -20,13 +20,34 @@ codex plugin add odin-writing@odin-marketplace
 
 - articulate
 - brand-authority
+- clean-and-true
 - copywriting
-- copywriting-cta
-- copywriting-hooks
+- copywriting-tone-of-voice-creator
+- debloat-respect-richness
+- doc-coauthoring
+- doc-review
+- docs-update
+- docs-writing
+- fresh-reader-review
+- good-readme
 - humaniseur-fr
 - humanizer-en-asd-ste100
 - linkedin-ghostwriting
+- markdown-to-pdf
 - press-release-writer
+- purge-slop-docs
+- reorder
+- reorder-respect-deliberate
+- rewrite-clean-v0
+- rewrite-denoise-v0
+- rhythmic-taste
+- save-md
 - substack-ghostwriting
+- sync-docs
 - technical-article-writer
+- technical-writing
+- training-report
 - unslop
+- writing-beats
+- writing-fragments
+- writing-shape

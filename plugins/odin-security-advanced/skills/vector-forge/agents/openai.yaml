@@ -1,3 +1,0 @@
-interface:
-  display_name: "Vector Forge"
-  short_description: "Use when existing cryptographic implementations and a vector-consuming harness need mutation-driven, cross-implementation test vector expansion."

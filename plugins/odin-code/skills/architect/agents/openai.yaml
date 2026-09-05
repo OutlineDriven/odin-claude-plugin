@@ -1,0 +1,3 @@
+interface:
+  display_name: "Architect"
+  short_description: "Use when non-trivial code needs a design, architecture needs improving, or one module needs targeted interface narrowing, seams, or testability."

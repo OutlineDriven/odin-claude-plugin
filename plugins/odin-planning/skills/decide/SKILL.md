@@ -1,6 +1,6 @@
 ---
 name: decide
-description: 'Use when the user has a fork and wants it resolved and applied, not explored: "decide this", "choose the path", or "decide and fix it". Grounds the fork, frames one single-select with a recommended default, takes the pick, and applies it in the same turn.'
+description: 'Use when the user has a fork and wants it resolved and applied, not explored: "decide this", "choose the path", or "decide and fix it".'
 ---
 
 # Decide
@@ -10,7 +10,7 @@ description: 'Use when the user has a fork and wants it resolved and applied, no
 | Field | Bound contract |
 |---|---|
 | Trigger | The user has a fork and wants it resolved and applied, not explored: "help me decide", "just decide this", "what should I do here", or "decide and fix it". |
-| Authority | Apply the selected reversible local change or dispatch the selected verify/keep/revert loop; ask before unrecoverable or observable-surface removal. |
+| Authority | Human-gated: asks before unrecoverable or observable-surface removal; otherwise reversible local, applying the selected change or dispatching the verify/keep/revert loop. No remote mutation. |
 | Side effect | Local artifacts only; rollback is git revert or edit revert of the applied change. |
 | Done | The fork, user pick, and resulting change are named; the pick is implemented and verified in the same turn. |
 

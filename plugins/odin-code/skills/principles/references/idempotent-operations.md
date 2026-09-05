@@ -1,4 +1,4 @@
-# Idempotent operations — procedure
+# Idempotent operations: procedure
 
 The side-effect classification and convergence proof behind the anchor.
 

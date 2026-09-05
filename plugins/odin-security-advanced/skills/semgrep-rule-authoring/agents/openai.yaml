@@ -1,3 +1,0 @@
-interface:
-  display_name: "Semgrep Rule Authoring"
-  short_description: "Use when a vulnerability or code pattern and a target language need a new custom static-analysis detection rule."

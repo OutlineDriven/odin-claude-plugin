@@ -1,6 +1,6 @@
 ---
 name: press-release-writer
-description: 'Use when a user asks to write or announce a press release for any occasion or region. Delivers a regionally-compliant inverted-pyramid release, angle justification note, journalist pitch email, and social teasers. Adapts to release type, target region, and media format.'
+description: 'Use when a user asks to write or announce a press release for any occasion or region, adapting to release type and media format. Read-only. All output in chat.'
 ---
 
 # Press release writer
@@ -109,7 +109,7 @@ Media format adaptations:
 
 - Print: AP/AFP/PA style. High-res images with typed captions. Plan lead times: monthly magazines 4-6 months, weeklies 2-8 weeks, dailies 1-3 days.
 - Digital/wire: headlines under 100 chars (65 ideal for Google SERP). 300-500 words. Include ticker symbol for public companies. Max 3 hyperlinks with descriptive anchor text. Add NewsArticle schema markup if publishing on own newsroom.
-- Broadcast: write for the ear. Sentences 8-12 words max. Always use contractions. Attribution first ("The CEO said..." not "..., the CEO said"). Spell out abbreviations. Write out numerals. Present tense preferred. Round numbers. 150-160 words/minute; 30 seconds is about 75 words.
+- Broadcast: write for the ear. Sentences 8-12 words max. Use contractions throughout. Attribution first ("The CEO said..." not "..., the CEO said"). Spell out abbreviations. Write out numerals. Present tense preferred. Round numbers. 150-160 words/minute; 30 seconds is about 75 words.
 - Social/SMPR: modular structure. Bulleted core facts under 400 words. Each quote as standalone, tweetable passage. Pre-write 3-5 tweet variations under 280 chars. Include pre-composed social posts with suggested hashtags.
 - Trade press: technical jargon expected and signals credibility. Depth over breadth. 500-700 words acceptable. Include technical specs, benchmarks, methodology. Reference industry standards and certifications.
 

@@ -1,3 +1,0 @@
-interface:
-  display_name: "Embed Diagram"
-  short_description: "Use when the user runs /embed-diagram to render a Mermaid diagram offline and embed the SVG or PNG into a target document."

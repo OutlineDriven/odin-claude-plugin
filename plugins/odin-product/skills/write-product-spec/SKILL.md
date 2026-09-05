@@ -1,6 +1,7 @@
 ---
 name: write-product-spec
-description: 'Use when a user asks for a product spec with numbered behavioral invariants. Writes PRODUCT.md with unambiguous, implementable behavior. Not for evidence-backed PRDs and PR creation — use write-prd; not for implementation plans — use write-tech-spec.'
+description: 'Use when a user asks for a product spec with invariants, a tech spec, or a PRD. Modes: product (default), technical, requirements. Not for task breakdown: use plan.'
+disable-model-invocation: true
 ---
 
 # Write product spec
@@ -9,45 +10,72 @@ description: 'Use when a user asks for a product spec with numbered behavioral i
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User asks for a product spec with numbered behavioral invariants (a PRODUCT.md); route evidence-backed PRD requests to write-prd and implementation plans to write-tech-spec. |
-| Authority | Reversible local: write only to the named PRODUCT.md artifact; delete the file to roll back. |
-| Side effect | Writes one PRODUCT.md file under specs/<id>/. |
-| Done | PRODUCT.md exists and its Behavior section makes desired behavior unambiguous enough that an implementer can build from it without guessing product intent. |
+| Trigger | User asks for a product spec with numbered behavioral invariants, a technical implementation plan, or an evidence-backed PRD. |
+| Authority | Human-gated: in requirements mode, previews and confirms credentials, paid actions, and remote publishing before execution; otherwise writes only the named artifact. Rollback is delete the file. No remote mutation without explicit human approval in requirements mode. |
+| Side effect | Writes one PRODUCT.md, TECH.md, or PRD artifact; in requirements mode also stages, commits, and opens a PR after explicit confirmation. |
+| Done | The named artifact exists, meets its mode-specific contract, and the output is confirmed. |
 
 ## Inputs
 
-- Feature identifier (required): a short kebab-case name for the feature (e.g. `vertical-tabs-hover-sidecar`). If the user has a ticket or issue number, use that as the identifier. Ask the user for a name if none is provided.
-- Feature summary (required): 1–3 sentences describing what the feature does and the desired outcome. Gather via dialogue if not supplied upfront.
-- Target consumers (optional): who consumes the surface being designed. Defaults to the end user. For a data model, the consumer is the code that reads and writes it. For an API or library, the consumer is the callers. For a CLI, the consumer is the developer invoking it.
-- Key behaviors and edge cases (optional): gather via dialogue. Do not guess; ask.
+- Mode (required): `product` (default), `technical`, or `requirements`.
+- Feature identifier or intent (required): for `product` and `requirements`, a short kebab-case feature name or ticket or issue number; for `technical`, a description of the feature, change, or system to specify.
+- Feature summary (required for `product` and `requirements`): one to three sentences describing what the feature does and the desired outcome.
+- Target consumers (optional for `product`): who consumes the surface. Defaults to the end user.
+- Key behaviors and edge cases (optional for `product`): gather via dialogue; do not guess.
+- Codebase context (optional for `technical`): existing files, modules, or architecture the spec must integrate with.
+- Target users (optional for `requirements`): who the feature serves.
+- Constraints (optional for `requirements`): limits on the feature.
+- Related URLs or docs (optional for `requirements`): sources to cite.
+- Priority level (optional for `requirements`): P0, P1, or P2.
 
 ## Procedure
 
-1. Determine the feature identifier. If the user provides a ticket or issue number, use it. If not, ask for a short kebab-case feature name. Do not proceed without an identifier. Done when: the feature identifier is confirmed.
-2. Gather context via dialogue: feature summary, target consumers, key behaviors, edge cases, and how the feature will be validated. Ask one question at a time. Do not guess missing context; ask the user. Done when: the feature summary is confirmed and target consumers, behaviors, and edge cases are gathered or explicitly deferred.
-3. Structure the spec with these sections: Summary (required), Behavior (required, the core), Problem (optional, only when motivation is not obvious from Summary), Goals / Non-goals (optional, when scope is ambiguous or contested), Open questions (optional, prefer inline `**Open question:** …` next to the relevant behavior; collect here only if multiple unresolved questions exist). Omit any optional section entirely if it would be empty. Do not write "None" as a placeholder. Do not include Validation, Success criteria, or Testing sections. Done when: the section list is decided with required and optional sections identified.
-4. Write the Behavior section as numbered, testable invariants, not prose. Describe from the consumer's perspective:
-   - Default behavior and happy-path flow.
-   - Every consumer-visible state and the transitions between them.
-   - All inputs the consumer can provide and how the surface responds.
-   - Empty states, error states, loading/pending states, and cancellation.
-   - Edge cases: permission denied, offline, timeouts, races between state changes, stale or missing data, focus loss mid-interaction, interactions with adjacent features.
-   - Keyboard, accessibility, and focus expectations where relevant.
-   - Invariants that must hold at all times and behaviors that must not regress.
-   - Err toward enumerating one more edge case rather than one fewer.
-   Done when: the Behavior section contains numbered testable invariants covering default flow, states, inputs, edge cases, and invariants.
-5. Apply the length heuristic to everything around Behavior (Summary, optional sections): keep framing thin. Behavior should be as long as the feature requires:
-   - Trivial fix or narrow tweak: no spec.
-   - Small feature: framing plus Behavior ~30–60 lines total.
-   - Medium feature: ~80–150 lines total.
-   - Large or behaviorally rich feature: longer is fine; most length lives in Behavior.
-   - If the same idea appears in Summary, Problem, Goals, and Behavior, collapse the framing, not the Behavior content.
-   Done when: framing is thin relative to Behavior and no idea is duplicated across sections.
-6. Write the spec to `specs/<id>/PRODUCT.md` where `<id>` is the feature identifier from step 1. Create the directory if it does not exist. Done when: the file is written to the correct path.
-7. Confirm the file was written and present the Summary and a count of Behavior invariants to the user. Done when: the Summary and Behavior invariant count are presented.
+1. Select the mode. Ask or infer from the request: `product` for behavioral invariants, `technical` for implementation plan, `requirements` for evidence-backed PRD. Default to `product` if the request does not name a mode. Done when: the mode is confirmed.
+2. Confirm scope. Ask only what is strictly necessary; do not guess.
+   - Mode `product`: confirm the feature identifier, feature summary, target consumers, key behaviors, edge cases, and validation approach.
+   - Mode `technical`: confirm the intent, codebase context, and constraints.
+   - Mode `requirements`: confirm the feature name or description, target users, constraints, related URLs or docs, and priority level.
+   Done when: the required scope for the selected mode is confirmed.
+3. Mode `requirements`: gather supporting evidence. Read local sources when present and non-stale (≤7 days): `reports/customer_feedback_summaries/`, `reports/competitor_changelog_reports/` or `reports/feature_research/`, `reports/git_history_analysis/`, `reports/weekly_product_briefings/`. Note absent or stale sources. Cite every claim in the Problem Statement and Technical Considerations sections; tag unattributed claims `[UNCITED]`. Done when: available sources are read and stale or missing sources are noted.
+4. Draft the artifact structure.
+   - Mode `product`: Summary (required), Behavior (required, numbered invariants), optional Problem, optional Goals/Non-goals, optional Open questions. Do not include Validation, Success criteria, or Testing sections.
+   - Mode `technical`: Objective, Background, Design, Implementation plan, Risks and mitigations, Open questions. No placeholders or TODOs.
+   - Mode `requirements`: TL;DR, Problem Statement, Goals & Success Metrics, Target Users, Scope, Proposed Solution, Technical Considerations, Competitive Context, Open Questions, References. Include a header block with title, author, date, status (Draft), priority.
+   Done when: the section list is decided with required and optional sections.
+5. Produce the content.
+   - Mode `product`: write Behavior as numbered, testable invariants from the consumer's perspective. Cover default flow, states, inputs, empty/error/loading/cancellation states, edge cases, keyboard/accessibility, and invariants. Keep framing thin relative to Behavior.
+   - Mode `technical`: write each section. Validate every implementation step against the codebase: confirm referenced paths, types, and interfaces exist or are created by a prior step.
+   - Mode `requirements`: write each section with citations. Derive the feature slug from the feature name (lowercase, hyphenated).
+   Done when: all sections are drafted with concrete content and the mode-specific contract is satisfied.
+6. Write the artifact.
+   - Mode `product`: `specs/<id>/PRODUCT.md` where `<id>` is the feature identifier.
+   - Mode `technical`: `TECH.md` in the working directory.
+   - Mode `requirements`: `reports/prds/prd_<feature_slug>_YYYY-MM-DD.md`.
+   Create the directory if it does not exist. Done when: the file is written to the correct path.
+7. Mode `requirements`: publish the PRD. Present the saved path and a content summary. Obtain explicit confirmation. Stage and commit the PRD file; open a pull request against the default branch. If VCS commands fail, report the error. Inform the user that optional exports to Google Docs, Notion, or Slack are separate steps. Done when: the PR is open or the user stops before the PR.
+8. Confirm the output. Present the file path, a one-line summary, and a count (behavior invariants for `product`, implementation steps for `technical`, or sections for `requirements`). Done when: the summary and count are presented.
 
 ## Failure and recovery
-If the user cannot provide a feature name or summary after clarification, stop; do not fabricate a spec from assumptions. If a behavior remains unclear after clarification, write it as an explicit `**Open question:** …` inline in the Behavior section rather than guessing. If the file cannot be written (permissions, disk), report the error and the intended path; do not silently discard the spec content. If the procedure stops partway, no file is written; do not save a partial spec. To reverse the side effect, delete the written `specs/<id>/PRODUCT.md` file (and its directory if empty).
+
+| Failure class | Mode | Partial-result rule | Recovery |
+|---|---|---|---|
+| Missing scope | all | No file written | Stop; ask for the missing input. |
+| Conflicting requirements | technical | No file written | Stop; name the conflict and present the trade-off. |
+| Scope creep | technical | Bound to the original ask | Note out-of-scope items in Open questions. |
+| Technical uncertainty | technical | Record the assumption | Flag the assumption in Open questions with the test or investigation needed. |
+| Unclear behavior | product | No file written | Write `**Open question:** ...` inline in Behavior; do not guess. |
+| File write fails | all | No artifact on disk | Report the error with the path and root cause. |
+| Source read fails | requirements | Continue without that source | Note the absence; do not halt. |
+| Stale data (>7 days) | requirements | Note staleness | Proceed; do not block. |
+| Uncited claim | requirements | Tag `[UNCITED]` | Resolve or move to Open Questions. |
+| Missing required section | all | Incomplete artifact | Do not claim Done; report which section is absent. |
+| PR creation fails | requirements | PRD file exists | Report the error; do not delete the PRD file. |
+| Partial stop | all | No file written | Do not save a partial artifact. |
+
+To reverse the side effect, delete the written artifact. In requirements mode, a partial result that produced a file but not a PR leaves the file in place.
 
 ## Output
-`specs/<id>/PRODUCT.md` — sections in order: Summary, Behavior (numbered invariants), optional Problem, optional Goals/Non-goals, optional Open questions; no Validation, Success criteria, or Testing sections.
+
+- Mode `product`: `specs/<id>/PRODUCT.md` with sections in order: Summary, Behavior (numbered invariants), optional Problem, optional Goals/Non-goals, optional Open questions; no Validation, Success criteria, or Testing sections.
+- Mode `technical`: `TECH.md` with sections in order: Objective, Background, Design, Implementation plan, Risks and mitigations, Open questions; no placeholders or TODOs.
+- Mode `requirements`: `reports/prds/prd_<feature_slug>_YYYY-MM-DD.md` with sections in order: TL;DR, Problem Statement, Goals & Success Metrics, Target Users, Scope, Proposed Solution, Technical Considerations, Competitive Context, Open Questions, References; plus an open PR against the default branch.

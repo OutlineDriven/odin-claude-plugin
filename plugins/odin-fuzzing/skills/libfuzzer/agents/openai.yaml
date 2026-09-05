@@ -1,0 +1,3 @@
+interface:
+  display_name: "Libfuzzer"
+  short_description: "Use when asked to build, run, or triage a coverage-guided C/C++ fuzz campaign on the libFuzzer or AFL++ engine."

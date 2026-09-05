@@ -9,8 +9,8 @@
     {
       "name": "odin-core",
       "source": "./plugins/odin-core",
-      "description": "Core ODIN workflows for planning, executing, and checking changes.",
-      "version": "2.0.4",
+      "description": "Core ODIN gates every session runs: intent, scope, verification, and hand-off checks.",
+      "version": "2.1.0",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -30,408 +30,10 @@
       }
     },
     {
-      "name": "odin-code",
-      "source": "./plugins/odin-code",
-      "description": "ODIN workflows for writing, reviewing, and maintaining code.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "code"
-      ],
-      "category": "Coding",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-code-advanced",
-      "source": "./plugins/odin-code-advanced",
-      "description": "Advanced ODIN workflows for complex code changes and technical audits.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "code",
-        "advanced"
-      ],
-      "category": "Coding",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-create",
-      "source": "./plugins/odin-create",
-      "description": "ODIN workflows for turning ideas into working artifacts.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "create"
-      ],
-      "category": "Productivity",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-create-advanced",
-      "source": "./plugins/odin-create-advanced",
-      "description": "Advanced ODIN workflows for ambitious, multi-part creative work.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "create",
-        "advanced"
-      ],
-      "category": "Productivity",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-research",
-      "source": "./plugins/odin-research",
-      "description": "ODIN workflows for focused research and source-backed findings.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "research"
-      ],
-      "category": "Research",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-research-advanced",
-      "source": "./plugins/odin-research-advanced",
-      "description": "Advanced ODIN workflows for deep research and evidence synthesis.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "research",
-        "advanced"
-      ],
-      "category": "Research",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-run",
-      "source": "./plugins/odin-run",
-      "description": "ODIN workflows for executing plans and shipping finished changes.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "run"
-      ],
-      "category": "Coding",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-run-advanced",
-      "source": "./plugins/odin-run-advanced",
-      "description": "Advanced ODIN workflows for complex execution and delivery.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "run",
-        "advanced"
-      ],
-      "category": "Coding",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-agent",
-      "source": "./plugins/odin-agent",
-      "description": "ODIN workflows for designing and improving AI agents.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "agent"
-      ],
-      "category": "Productivity",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-security",
-      "source": "./plugins/odin-security",
-      "description": "ODIN workflows for security reviews and defensive implementation.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "security"
-      ],
-      "category": "Security",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-security-advanced",
-      "source": "./plugins/odin-security-advanced",
-      "description": "Advanced ODIN workflows for threat analysis and security hardening.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "security",
-        "advanced"
-      ],
-      "category": "Security",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-design",
-      "source": "./plugins/odin-design",
-      "description": "ODIN workflows for practical interface and visual design.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "design"
-      ],
-      "category": "Design",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-design-advanced",
-      "source": "./plugins/odin-design-advanced",
-      "description": "Advanced ODIN workflows for polished interfaces and design systems.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "design",
-        "advanced"
-      ],
-      "category": "Design",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-writing",
-      "source": "./plugins/odin-writing",
-      "description": "ODIN workflows for clear, useful technical writing.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "writing"
-      ],
-      "category": "Writing",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-writing-advanced",
-      "source": "./plugins/odin-writing-advanced",
-      "description": "Advanced ODIN workflows for substantial writing and editorial work.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "writing",
-        "advanced"
-      ],
-      "category": "Writing",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-product",
-      "source": "./plugins/odin-product",
-      "description": "ODIN workflows for product strategy and developer adoption.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "product"
-      ],
-      "category": "Productivity",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-loop",
-      "source": "./plugins/odin-loop",
-      "description": "ODIN workflows for bounded iteration with explicit completion checks.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "loop"
-      ],
-      "category": "Coding",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
       "name": "odin-planning",
       "source": "./plugins/odin-planning",
-      "description": "ODIN workflows for shaping requirements and implementation plans.",
-      "version": "2.0.4",
+      "description": "ODIN workflows for shaping intent into approved plans, specs, and task lists.",
+      "version": "2.1.0",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -451,10 +53,10 @@
       }
     },
     {
-      "name": "odin-python",
-      "source": "./plugins/odin-python",
-      "description": "ODIN workflows for modern Python development.",
-      "version": "2.0.4",
+      "name": "odin-critique",
+      "source": "./plugins/odin-critique",
+      "description": "ODIN workflows for pressure-testing a decision from independent seats and lenses.",
+      "version": "2.1.0",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -465,7 +67,53 @@
         "odin",
         "outlinedriven",
         "agent-skills",
-        "python"
+        "critique"
+      ],
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-product",
+      "source": "./plugins/odin-product",
+      "description": "ODIN workflows for product strategy, market signals, and developer adoption.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "product"
+      ],
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-code",
+      "source": "./plugins/odin-code",
+      "description": "ODIN workflows for writing, changing, and simplifying code.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "code"
       ],
       "category": "Coding",
       "policy": {
@@ -474,10 +122,10 @@
       }
     },
     {
-      "name": "odin-typescript",
-      "source": "./plugins/odin-typescript",
-      "description": "ODIN workflows for modern TypeScript development.",
-      "version": "2.0.4",
+      "name": "odin-review",
+      "source": "./plugins/odin-review",
+      "description": "ODIN workflows for reviewing diffs, branches, and implementations against their specs.",
+      "version": "2.1.0",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -488,9 +136,377 @@
         "odin",
         "outlinedriven",
         "agent-skills",
-        "typescript"
+        "review"
       ],
       "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-testing",
+      "source": "./plugins/odin-testing",
+      "description": "ODIN workflows for tests, properties, mutation, and behavioral verification.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "testing"
+      ],
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-git",
+      "source": "./plugins/odin-git",
+      "description": "ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "git"
+      ],
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-release",
+      "source": "./plugins/odin-release",
+      "description": "ODIN workflows for cutting, gating, publishing, and announcing releases.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "release"
+      ],
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-run",
+      "source": "./plugins/odin-run",
+      "description": "ODIN workflows for executing plans, orchestrating subagents, and bounded autonomous loops.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "run"
+      ],
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-infra",
+      "source": "./plugins/odin-infra",
+      "description": "ODIN workflows for CI, deployment, observability, cost, and infrastructure tooling.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "infra"
+      ],
+      "category": "Infrastructure",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-security",
+      "source": "./plugins/odin-security",
+      "description": "ODIN workflows for security review, vulnerability triage, and defensive implementation.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "security"
+      ],
+      "category": "Security",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-fuzzing",
+      "source": "./plugins/odin-fuzzing",
+      "description": "ODIN workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "fuzzing"
+      ],
+      "category": "Security",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-research",
+      "source": "./plugins/odin-research",
+      "description": "ODIN workflows for source-backed investigation, verification, and design rationale.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "research"
+      ],
+      "category": "Research",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-knowledge",
+      "source": "./plugins/odin-knowledge",
+      "description": "ODIN workflows for memory, session continuity, decision records, and retrospectives.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "knowledge"
+      ],
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-learn",
+      "source": "./plugins/odin-learn",
+      "description": "ODIN workflows for teaching, explaining, drilling, and onboarding.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "learn"
+      ],
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-people",
+      "source": "./plugins/odin-people",
+      "description": "ODIN workflows for team dynamics, culture profiles, and negotiation.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "people"
+      ],
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-agent",
+      "source": "./plugins/odin-agent",
+      "description": "ODIN workflows for configuring agent harnesses, MCP servers, and repository agent surfaces.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "agent"
+      ],
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-skills",
+      "source": "./plugins/odin-skills",
+      "description": "ODIN workflows for authoring, auditing, benchmarking, and publishing agent skills.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "skills"
+      ],
+      "category": "Productivity",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-writing",
+      "source": "./plugins/odin-writing",
+      "description": "ODIN workflows for documentation, editorial prose, and copy.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "writing"
+      ],
+      "category": "Writing",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-visual",
+      "source": "./plugins/odin-visual",
+      "description": "ODIN workflows for diagrams, decks, canvases, and visual explainers.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "visual"
+      ],
+      "category": "Design",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-design",
+      "source": "./plugins/odin-design",
+      "description": "ODIN workflows for interface design, prototypes, and visual fidelity.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "design"
+      ],
+      "category": "Design",
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_USE"
@@ -499,8 +515,8 @@
     {
       "name": "odin-web",
       "source": "./plugins/odin-web",
-      "description": "ODIN workflows for building and refining web applications.",
-      "version": "2.0.4",
+      "description": "ODIN workflows for browser testing, web performance, SEO, and extensions.",
+      "version": "2.1.0",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -520,10 +536,56 @@
       }
     },
     {
+      "name": "odin-typescript",
+      "source": "./plugins/odin-typescript",
+      "description": "ODIN workflows for modern TypeScript development.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "typescript"
+      ],
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
+      "name": "odin-python",
+      "source": "./plugins/odin-python",
+      "description": "ODIN workflows for modern Python development.",
+      "version": "2.1.0",
+      "author": {
+        "name": "OutlineDriven",
+        "url": "https://github.com/OutlineDriven"
+      },
+      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+      "license": "SEE LICENSE IN LICENSE",
+      "keywords": [
+        "odin",
+        "outlinedriven",
+        "agent-skills",
+        "python"
+      ],
+      "category": "Coding",
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_USE"
+      }
+    },
+    {
       "name": "odin-native",
       "source": "./plugins/odin-native",
       "description": "ODIN workflows for native systems, toolchains, and performance.",
-      "version": "2.0.4",
+      "version": "2.1.0",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -546,7 +608,7 @@
       "name": "odin-apple",
       "source": "./plugins/odin-apple",
       "description": "ODIN workflows for software on Apple platforms.",
-      "version": "2.0.4",
+      "version": "2.1.0",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -569,7 +631,7 @@
       "name": "odin-lean",
       "source": "./plugins/odin-lean",
       "description": "ODIN workflows for Lean proofs and formal verification.",
-      "version": "2.0.4",
+      "version": "2.1.0",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -583,75 +645,6 @@
         "lean"
       ],
       "category": "Coding",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-terraform",
-      "source": "./plugins/odin-terraform",
-      "description": "ODIN workflows for safe Terraform infrastructure changes.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "terraform"
-      ],
-      "category": "Infrastructure",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-bigquery",
-      "source": "./plugins/odin-bigquery",
-      "description": "ODIN workflows for BigQuery data work and cost-aware queries.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "bigquery"
-      ],
-      "category": "Data",
-      "policy": {
-        "installation": "AVAILABLE",
-        "authentication": "ON_USE"
-      }
-    },
-    {
-      "name": "odin-prometheus",
-      "source": "./plugins/odin-prometheus",
-      "description": "ODIN workflows for Prometheus metrics and monitoring.",
-      "version": "2.0.4",
-      "author": {
-        "name": "OutlineDriven",
-        "url": "https://github.com/OutlineDriven"
-      },
-      "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
-      "license": "SEE LICENSE IN LICENSE",
-      "keywords": [
-        "odin",
-        "outlinedriven",
-        "agent-skills",
-        "prometheus"
-      ],
-      "category": "Infrastructure",
       "policy": {
         "installation": "AVAILABLE",
         "authentication": "ON_USE"

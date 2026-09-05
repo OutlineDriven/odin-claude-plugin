@@ -1,6 +1,6 @@
 ---
 name: unslop
-description: 'Use when prose is drafted or edited, reviewed for AI tells, or the user asks to remove AI patterns, humanize, or add voice. Runs 20 pattern-replacement checks across prose files; dedash mode purges em-dashes by grammatical role; detool mode neutralizes incidental tool names in portable artifacts. For code debris use deslop.'
+description: 'Use when prose is drafted or edited, reviewed for AI tells, or the user asks to remove AI patterns, humanize, or add voice. Offers dedash and detool modes. Not for code debris: use deslop.'
 ---
 
 # Unslop
@@ -10,7 +10,7 @@ description: 'Use when prose is drafted or edited, reviewed for AI tells, or the
 | Field | Bound contract |
 |---|---|
 | Trigger | Prose is drafted or edited, text is under review for AI tells, or the user asks to remove AI patterns, humanize, add voice, purge em-dashes by grammatical role, or neutralize incidental tool names in portable artifacts. |
-| Authority | Reversible local write. Edit only the named prose file or scope; the original is recoverable from version control or the user's undo. |
+| Authority | Reversible local: writes only the named prose file or scope; rollback is version control or the user's undo. No remote mutation. |
 | Side effect | Rewrites user-facing or internal prose files; may replace punctuation by grammatical role and remove incidental framework and tool nouns. |
 | Done | The rewrite passes all 20 checks (full mode) or the focused mode's pass condition; meaning is preserved. |
 

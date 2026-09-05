@@ -1,6 +1,6 @@
 ---
 name: spec-driven-implementation
-description: 'Use when a significant feature begins or specs are checked in: author or update behavioral specs and keep them current with what ships. Not for producing the initial approved spec and plan — use spec-driven. Don''t use for remote or irreversible changes.'
+description: 'Use when a feature begins or specs are checked in: author or update behavioral specs and keep them current with what ships. Not for producing the initial approved spec and plan: use spec-driven.'
 ---
 
 # Spec driven implementation
@@ -10,7 +10,7 @@ description: 'Use when a significant feature begins or specs are checked in: aut
 | Field | Bound contract |
 |---|---|
 | Trigger | Starting a significant feature or when specs are checked in. |
-| Authority | Reversible local writes only; rollback via VCS if commit is not yet pushed. |
+| Authority | Reversible local: writes only checked-in spec files and implementation; rollback is version control (if commit is not yet pushed). No remote mutation. |
 | Side effect | Creates or updates checked-in spec files within the project. |
 | Done | Specs exist, are behavioral, and stay current with what ships. |
 

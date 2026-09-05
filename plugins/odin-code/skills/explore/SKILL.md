@@ -1,6 +1,6 @@
 ---
 name: explore
-description: 'Use when asked to explore the codebase to map structure, symbols, and dependencies. Produces a structured orientation report with architecture, pattern, tooling, dependency, and critical-file sections.'
+description: 'Use when asked to explore the codebase to map structure, symbols, and dependencies. Not for a single file under 50 LOC: read it directly.'
 ---
 
 # Explore

@@ -1,6 +1,6 @@
 ---
 name: insecure-default-discovery
-description: 'Use when the user asks to audit a file, subtree, or repository for fallback secrets, default credentials, fail-open controls, weak primitives, permissive access, or exposed debug behavior. Returns a coverage-aware findings report. Not for exhaustive secret scanning.'
+description: 'Use when the user asks to audit a file, subtree, or repository for fallback secrets, default credentials, fail-open controls, weak primitives, or permissive access. Not for exhaustive secret scanning.'
 ---
 
 # Insecure default discovery
@@ -10,7 +10,7 @@ description: 'Use when the user asks to audit a file, subtree, or repository for
 | Field | Bound contract |
 |---|---|
 | Trigger | The user asks to audit a file, subtree, or repository for fallback secrets, usable default credentials, fail-open controls, weak security primitives, permissive access, or exposed debug behavior. |
-| Authority | Read-only: no file, VCS, credential, paid, published, deployed, or remote mutation. Application code and configuration are never altered. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Application code and configuration are never altered. |
 | Side effect | Chat output only: scoped read-only discovery plus refuting verification of every candidate, reported without touching the target. |
 | Done | Every category records corpus access and coverage; each reported finding traces an active insecure value to a production security decision; refuted candidates and incomplete coverage remain visible. |
 
@@ -27,7 +27,7 @@ description: 'Use when the user asks to audit a file, subtree, or repository for
 3. **Discover: run one sweep per category, collecting without judging.** Each sweep searches the scope with its category's seed patterns below and with patterns derived from the detected stack (framework keys, language idioms such as `ENV.fetch(k, d)`, `System.getProperty(k, d)`, `${VAR:-default}`, and the manifest formats found in recon), filing every hit as a candidate. Classification happens only in verification.
    - Seeds are a floor, not the search: a codebase reading config through its own wrapper barely matches generic seeds, so derived patterns are mandatory for every sweep.
    - Record per sweep: whether it read the scope, seed-pattern hits, and derived-pattern hits. A sweep whose derived pattern list is empty searched generic idioms only and is a coverage gap to name in the report.
-   - Seeds are POSIX ERE: `[[:space:]]` and `[0-9]`, never `\s`, `\d`, or `\b` — some grep builds silently fail on those, and a pattern that matches nothing is indistinguishable from a clean result.
+   - Seeds are POSIX ERE: `[[:space:]]` and `[0-9]`, never `\s`, `\d`, or `\b`; some grep builds silently fail on those, and a pattern that matches nothing is indistinguishable from a clean result.
 
    ```text
    fallback-secrets:
@@ -74,15 +74,15 @@ description: 'Use when the user asks to audit a file, subtree, or repository for
    | Fallback secrets | A default value supplied when an env var is absent feeds signing, encryption, session, or token machinery | Defaults generated per-boot at random; values used only as cache keys or correlation ids | Does the app run with the fallback? `env.get(X, Y)` runs; `env[X]` crashes and is fail-secure |
    | Default credentials | A credential literal a running deployment can authenticate with, including seeded first-boot accounts | Accounts created disabled or with a forced-reset flag; credentials in docs, READMEs, and fixture files | Can a deployment authenticate with it? A credential in prose is unusable; one in a bootstrap routine is a login |
    | Fail-open security switches | The value taken when configuration is absent disables a security control | Switches whose unconfigured value is the secure one; flags read but never consulted at the enforcement point | Read the default, not the flag name: `REQUIRE_AUTH` defaulting to `false` requires nothing |
-   | Weak cryptographic defaults | A broken or non-cryptographic primitive stands in for a security-relevant one: password hashing, token generation, encryption, signature verification | Checksums, ETags, cache keys, deduplication hashes, test vectors, non-security shuffling or sampling | The algorithm alone is never the finding: trace to the use site — `md5` over a cache key is fine, over a password is not |
+   | Weak cryptographic defaults | A broken or non-cryptographic primitive stands in for a security-relevant one: password hashing, token generation, encryption, signature verification | Checksums, ETags, cache keys, deduplication hashes, test vectors, non-security shuffling or sampling | The algorithm alone is never the finding: trace to the use site; `md5` over a cache key is fine, over a password is not |
    | Permissive access defaults | Access granted to a party who should not have it, whether hardcoded (`ACL='public-read'`, mode `0o666`, CORS `*`) or the unconfigured fallback | Deliberate public endpoints with a stated reason; local-only dev servers; permissiveness already gated by an outer authorization layer at the same trust boundary | Who gains access, not how wide the value looks: `0o644` on a CDN asset is correct, `0o666` on a key file is not |
-   | Debug and introspection defaults | Internal detail reaches a response, a listening port, or a log a lower-privileged party can read — flag-defaulted-on or unconditional | Log-verbosity-only flags with no user-facing output; debug servers bound to loopback and off by default | Both halves required: enabled-by-default and an exposure path |
+   | Debug and introspection defaults | Internal detail reaches a response, a listening port, or a log a lower-privileged party can read: flag-defaulted-on or unconditional | Log-verbosity-only flags with no user-facing output; debug servers bound to loopback and off by default | Both halves required: enabled-by-default and an exposure path |
 
-   Deduplicate on `category:file:line` before verification: two patterns of one category hitting the same line collapse to one candidate, but the same line hit by two categories stays as two candidates — `hashlib.md5(k)` can be a real weak-crypto finding and a false permissive-access match at once, and one merged verdict would have to cover both readings.
+   Deduplicate on `category:file:line` before verification: two patterns of one category hitting the same line collapse to one candidate, but the same line hit by two categories stays as two candidates; `hashlib.md5(k)` can be a real weak-crypto finding and a false permissive-access match at once, and one merged verdict would have to cover both readings.
 
 5. **Verify by refutation.** For each candidate, start at `refuted: true` and stop at the first step that kills it:
    1. Is the file reachable in production?
-   2. Is the insecure value the one that runs? A **configurable** candidate (a lookup with a fallback) is only a bug if the app runs with the insecure value; a lookup that crashes when the variable is missing is fail-secure. An **unconditional** candidate (no configuration anywhere, insecure as written) cannot be refuted at this step — a missing env var is not grounds to refute it.
+   2. Is the insecure value the one that runs? A **configurable** candidate (a lookup with a fallback) is only a bug if the app runs with the insecure value; a lookup that crashes when the variable is missing is fail-secure. An **unconditional** candidate (no configuration anywhere, insecure as written) cannot be refuted at this step; a missing env var is not grounds to refute it.
    3. Is the value actually insecure under the category's skip rules?
    4. Does it reach a security decision? Cite the sink: the call or enforcement point that consumes the value.
    5. Configurable candidates only: does deployment always supply the variable? A missing answer does not refute the candidate. Every manifest that sets it lowers severity; if no manifest sets it, the candidate is CRITICAL; a partial or undetermined answer counts as reachable.

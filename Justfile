@@ -8,10 +8,16 @@
 default:
     @just --list
 
-# Regenerate every generated file: skill manifests, plugin manifests, registries.
+# Regenerate every generated file: skill manifests, plugin manifests, registries, skill index, and the doctrine cascade.
+#
+# sync-baseline.py exits 1 when it rewrote a drifted cascade: that is its
+# pre-commit re-stage convention, not a render failure. Exit 2 (missing
+# canonical baseline or broken style layout) still fails the recipe.
 render:
     node scripts/render-skill-manifests.mjs
     node scripts/render-plugin-surfaces.mjs
+    node scripts/render-skill-index.mjs
+    python3 scripts/sync-baseline.py || [ $? -eq 1 ]
 
 # Mirror every skill into the outline repository as a flat Devin skill tree.
 #
@@ -23,7 +29,7 @@ sync-outline:
 # Run every gate over the whole tree.
 #
 # This delegates rather than re-enumerating. The gate set lives in
-# .pre-commit-config.yaml, and a second copy here drifted: it was missing both
+# `.pre-commit-config.yaml`, and a second copy here drifted: it was missing both
 # frontmatter gates while claiming to be what the hooks run, so `just check`
 # passed on the defect those gates exist to catch. One list, no drift.
 #
@@ -38,3 +44,11 @@ validate-skills:
 
 # Everything a change must pass before it is committed.
 verify: check validate-skills
+
+# Manual carrier sync, never a hook: a hook that rewrites home-directory files
+# on every commit would fire on machines with no carriers to repair.
+sync-carriers:
+    python3 scripts/sync-carriers.py
+
+sync-carriers-check:
+    python3 scripts/sync-carriers.py --check

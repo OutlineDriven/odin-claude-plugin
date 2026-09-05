@@ -1,3 +1,0 @@
-interface:
-  display_name: "Architecture Diagram"
-  short_description: "Use when the user asks to visualize an architecture as a self-contained HTML artifact with a hash-bound receipt."

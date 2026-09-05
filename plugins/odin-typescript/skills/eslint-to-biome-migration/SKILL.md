@@ -1,6 +1,6 @@
 ---
 name: eslint-to-biome-migration
-description: 'Use when asked to migrate a JavaScript or TypeScript project from ESLint, Prettier, Standard, or mixed legacy lint configuration to Biome 2.5. Biome owns linting and formatting, legacy configuration and dependencies are removed, and the project CI check passes without auto-fix.'
+description: 'Use when migrating a JavaScript or TypeScript project from ESLint, Prettier, Standard, or mixed legacy lint configuration to Biome 2.5.'
 ---
 
 # ESLint to Biome migration
@@ -10,7 +10,7 @@ description: 'Use when asked to migrate a JavaScript or TypeScript project from 
 | Field | Bound contract |
 |---|---|
 | Trigger | Migrate an existing JavaScript or TypeScript project from ESLint, Prettier, Standard, or mixed lint configuration to Biome 2.5. |
-| Authority | Reversible local writes only. Edit lint configuration, package scripts, dependencies, hooks, and CI checks. Roll back with version control. |
+| Authority | Reversible local: writes only lint configuration, package scripts, dependencies, hooks, and CI checks; rollback is version control. No remote mutation. |
 | Side effect | Writes `biome.json` or `biome.jsonc`; removes superseded lint and format configuration and dependencies; updates local scripts, hooks, and CI. No remote mutation. |
 | Done | Biome 2.5 lint and format checks pass; the prior lint and format checks have an explicit coverage disposition; no ESLint, Prettier, Standard, or legacy config remains; CI runs Biome without auto-fix and passes. |
 

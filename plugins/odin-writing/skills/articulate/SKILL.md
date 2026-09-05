@@ -1,6 +1,6 @@
 ---
 name: articulate
-description: 'Use when the user knows what they mean but cannot express it completely or clearly. Turns a vague intended thought into a faithful, audience-ready statement, preserving scope and identity, surfacing unsupported choices, and inventing no goals or facts. Not for discovery, ideation, or style-only editing — use unslop for style.'
+description: 'Use when the user knows what they mean but cannot express it completely or clearly. Not for discovery, ideation, or style-only editing: use unslop for style.'
 ---
 
 # Articulate
@@ -10,7 +10,7 @@ description: 'Use when the user knows what they mean but cannot express it compl
 | Field | Bound contract |
 |---|---|
 | Trigger | The user has an intended thought but cannot yet express it completely or clearly. |
-| Authority | Read-only. Use only supplied material and confirmed conversation context. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Uses only supplied material and confirmed conversation context. |
 | Side effect | Chat output by default. Replace a supplied draft only when the user explicitly asks for an edit. |
 | Done | The statement is audience-ready, every sentence is supported, the user's scope and identity are unchanged, and unresolved forks remain visible. |
 
@@ -42,7 +42,7 @@ Return the completed statement, followed only when needed by `Unresolved:` and t
 ## Routing boundaries
 
 - Requirements or intent must be discovered: use the planning owner.
-- Several possible ideas are wanted: use `ideate`.
+- Several possible ideas are wanted: use `brainstorm` (mode ideate).
 - A reusable rule must be inferred from examples or material: use `generalize`.
 - An external concept must be taught: use `paced-explanation`.
 - Meaning is already complete and only voice or polish changes: use `unslop`.

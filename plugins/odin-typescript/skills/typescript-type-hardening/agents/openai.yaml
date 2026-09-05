@@ -1,3 +1,3 @@
 interface:
   display_name: "Typescript Type Hardening"
-  short_description: "Use when existing TypeScript code has concrete type errors, any, failing inference, or needs advanced type mechanism design (generics, conditional or infer, mapped or template-literal, branded, utility derivation, overloads, builders) repaired against the current project state."
+  short_description: "Use when TypeScript has type errors, failing inference, or needs type mechanism repair (generics, infer, mapped, branded)."

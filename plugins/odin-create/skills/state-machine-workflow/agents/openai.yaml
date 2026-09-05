@@ -1,3 +1,0 @@
-interface:
-  display_name: "State Machine Workflow"
-  short_description: "Use when work has distinct modes and the user wants states, events, guards, outcomes, and illegal transitions instead of a prose todo list."

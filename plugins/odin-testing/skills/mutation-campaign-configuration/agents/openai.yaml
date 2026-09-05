@@ -1,0 +1,3 @@
+interface:
+  display_name: "Mutation Campaign Configuration"
+  short_description: "Use when asked to initialize, scope, estimate, configure, validate, or optimize a mewt, muton, or mutation testing campaign before execution."

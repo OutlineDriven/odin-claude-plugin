@@ -1,3 +1,0 @@
-interface:
-  display_name: "Classify CI Failure"
-  short_description: "Use when a CI check is failed, absent, pending too long, unstable, or reported unexpectedly."

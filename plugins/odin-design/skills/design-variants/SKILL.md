@@ -1,6 +1,6 @@
 ---
 name: design-variants
-description: 'Use when /design-variants generates distinct design directions and a gallery for selection. Not for one polished artifact — use polished-web-prototype; not for token-system direction picking — use design. No remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when /design-variants generates distinct design directions and a gallery for selection. Not for one polished artifact: use polished-web-prototype. Not for token-system picking: use design.'
 ---
 
 # Design variants
@@ -10,9 +10,9 @@ description: 'Use when /design-variants generates distinct design directions and
 | Field | Bound contract |
 |---|---|
 | Trigger | the user runs /design-variants |
-| Authority | reversible-local: write only design variant pages and files under a per-project design directory; recover by deleting that directory |
+| Authority | Reversible local: writes only design variant pages and files under a per-project design directory; rollback is deleting that directory. No remote mutation. |
 | Side effect | local-write to a design directory; no project source, VCS, credential, or remote mutation |
-| Done | a variant gallery is ready for user selection |
+| Done | A variant gallery is ready, an approved record is saved to the design directory, and the taste record is updated |
 
 ## Inputs
 
@@ -51,4 +51,4 @@ When optional context is absent, gather it across five dimensions: who the desig
 - Never swallow a generation failure or present a gallery as ready when variants are missing.
 
 ## Output
-A variant gallery inline and side-by-side for selection, then an approved record in the design directory naming the chosen variant, per-variant ratings, comments, overall direction, date, screen, and branch, plus an updated taste record — ordered bound → gather → read-taste → generate → confirm → render → gallery → select → summarize → save.
+A variant gallery inline and side-by-side for selection, then an approved record in the design directory naming the chosen variant, per-variant ratings, comments, overall direction, date, screen, and branch, plus an updated taste record, ordered bound → gather → read-taste → generate → confirm → render → gallery → select → summarize → save.

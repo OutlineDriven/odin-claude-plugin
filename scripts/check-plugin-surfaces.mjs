@@ -50,6 +50,8 @@ const missing = ids.filter((id) => !onDisk.includes(id));
 const extra = onDisk.filter((id) => !ids.includes(id));
 if (missing.length) errors.push(`catalog entries without a directory: ${missing.join(", ")}`);
 if (extra.length) errors.push(`plugin directories without a catalog entry: ${extra.join(", ")}`);
+const tiered = ids.filter((id) => id.endsWith("-advanced"));
+if (tiered.length) errors.push(`plugin id names a tier, not a job: ${tiered.join(", ")}`);
 
 // A plugin with no skills installs nothing. Each harness dotdir manifest must
 // exist, parse, and carry the catalog name: Codex resolves the plugin namespace

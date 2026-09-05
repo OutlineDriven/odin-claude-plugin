@@ -1,0 +1,20 @@
+{
+  "name": "odin-git",
+  "version": "2.1.0",
+  "description": "ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "git"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Git",
+    "shortDescription": "ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.",
+    "category": "Coding"
+  }
+}

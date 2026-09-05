@@ -1,0 +1,3 @@
+interface:
+  display_name: "Semgrep Rule Authoring"
+  short_description: "Use when a vulnerability or pattern and target language need a new Semgrep rule, or an existing rule needs porting to another language."

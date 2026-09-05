@@ -1,6 +1,6 @@
 ---
 name: minimalism-driven
-description: 'Use when writing or restructuring code, before adding a helper, wrapper, config key, or dependency, or when the user asks for minimal or DRY code. Produce the smallest complete implementation whose intent is obvious. Not for performance tuning — use the optimize skill.'
+description: 'Use when writing or restructuring code, before adding a helper, wrapper, config key, or dependency, or when the user asks for minimal or DRY code. Not for performance tuning: use optimize.'
 ---
 
 # Minimalism driven
@@ -10,7 +10,7 @@ description: 'Use when writing or restructuring code, before adding a helper, wr
 | Field | Bound contract |
 |---|---|
 | Trigger | Writing or restructuring code; considering a helper, wrapper, config key, or dependency; or an explicit request for minimal code, DRY code, or no gold-plating. |
-| Authority | Inspect relevant local code and make only reversible local edits needed by the ask. Do not mutate remote state, credentials, published artifacts, deployments, or unrelated files. |
+| Authority | Reversible local: writes only reversible local edits needed by the ask; rollback is version control or undo. No remote mutation. |
 | Side effect | Edit code within the requested scope; do not implement adjacent improvements. |
 | Done | Every addition has a concrete reason, intent and failure behavior are obvious, and the resulting scope exactly matches the ask. |
 

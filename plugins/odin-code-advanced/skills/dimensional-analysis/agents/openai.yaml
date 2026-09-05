@@ -1,3 +1,0 @@
-interface:
-  display_name: "Dimensional Analysis"
-  short_description: "Use when code mixes units, fixed-point precisions, scaling factors, rates, prices, shares, or conversions and needs dimensional consistency validated."

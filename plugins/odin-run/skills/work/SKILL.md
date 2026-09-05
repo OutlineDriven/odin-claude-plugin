@@ -1,6 +1,6 @@
 ---
 name: work
-description: 'Use when implementing from a plan or spec path, a clear build request, or a single settled ticket. Single-unit executor with two caller modes: orchestrated (stops after implementation and local verification, returns a structured result) and standalone (delegates finalization to review-and-ship). Never commits, pushes, or opens a PR. Don''t use for open-ended debugging (use debug), exploration, or read-only research.'
+description: 'Use when implementing from a plan, spec, clear build request, or settled ticket, orchestrated or standalone. Don''t use for open-ended debugging (figure-it-out), exploration, or read-only research.'
 disable-model-invocation: true
 ---
 
@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | Implementation starts from a plan or spec path or a clear build request (not an open-ended bug). |
-| Authority | Write named local artifacts only. Never commit, push, or open a PR. Rollback path is VCS. Finalization belongs to a separate finalizer reachable only in standalone mode. |
+| Authority | Reversible local: writes only named local artifacts; never commits, pushes, or opens a PR; rollback is version control. No remote mutation. Finalization belongs to a separate finalizer reachable only in standalone mode. |
 | Caller mode | Orchestrated or standalone, set by the caller. Orchestrated: a supervisor passes an explicit orchestrated signal. Standalone: invoked directly by a human. The mode governs where execution stops. |
 | Side effect (orchestrated) | Implements plan units, runs local verification, returns a structured result. No review, commit, push, or PR. |
 | Side effect (standalone) | Implements plan units, runs local verification, then delegates finalization to review-and-ship with explicit delegated authority. |

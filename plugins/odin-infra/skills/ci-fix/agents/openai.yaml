@@ -1,0 +1,3 @@
+interface:
+  display_name: "CI Fix"
+  short_description: "Use when \"CI is red\", \"fix the checks\", or \"make CI green\", one check needs classifying, or a bounded sweep runs."

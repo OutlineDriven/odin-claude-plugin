@@ -1,3 +1,3 @@
 interface:
   display_name: "Ios Build Fix"
-  short_description: "Use when asked to run /ios-build-fix to fix a failing iOS build or UI behavior through the debug bridge."
+  short_description: "Use when asked to run /ios-build-fix to fix a failing iOS build, regenerate an Xcode project from project.yml, or correct UI behavior."

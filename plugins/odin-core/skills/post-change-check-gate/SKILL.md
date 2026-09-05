@@ -1,6 +1,6 @@
 ---
 name: post-change-check-gate
-description: 'Use when an artifact or skill has just changed and is about to be called done, committed, or handed off. Runs the relevant hygiene checks and applies their findings. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when an artifact or skill has just changed and is about to be called done, committed, or handed off. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Post change check gate
@@ -10,7 +10,7 @@ description: 'Use when an artifact or skill has just changed and is about to be 
 | Field | Bound contract |
 |---|---|
 | Trigger | Right after creating or changing an artifact/skill, before calling it done, committing, or handing off |
-| Authority | Make reversible local changes only to the named artifact; rollback path: revert the artifact to its pre-check state |
+| Authority | Reversible local: writes only the named artifact; rollback is revert to pre-check state. No remote mutation. |
 | Side effect | Applies findings to the artifact, or defers each with a stated reason; never touches git |
 | Done | Relevant checks actually ran (not eyeballed); artifact changed or every skipped check has a stated reason |
 
@@ -34,4 +34,4 @@ description: 'Use when an artifact or skill has just changed and is about to be 
 - Partial-result rule: if any check fails and cannot be resolved, the done predicate is not met regardless of other passing checks.
 
 ## Output
-The artifact with all check findings applied, or the check log recording every skip with its reason — plus a concrete check-run report naming artifact path, checks invoked, results per check, and any deferred items with stated reasons.
+The artifact with all check findings applied, or the check log recording every skip with its reason, plus a concrete check-run report naming artifact path, checks invoked, results per check, and any deferred items with stated reasons.

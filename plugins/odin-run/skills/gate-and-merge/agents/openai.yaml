@@ -1,3 +1,0 @@
-interface:
-  display_name: "Gate And Merge"
-  short_description: "Land a queue of open PRs: gate each PR, sweep its review feedback to root cause, then merge, repair, hold, or close it."

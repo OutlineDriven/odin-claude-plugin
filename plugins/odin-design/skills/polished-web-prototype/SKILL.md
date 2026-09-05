@@ -1,6 +1,6 @@
 ---
 name: polished-web-prototype
-description: 'Use when the user runs /polished-web-prototype or asks to turn an approved mockup, design plan, or freeform description into a polished responsive Pretext-native HTML artifact refined through a live preview loop. Writes the artifact and finalized.json under the project design directory. Not for variant galleries; use design-variants. Not for live-URL audits; use web-design-review.'
+description: 'Use when /polished-web-prototype runs or a user builds an artifact from a mockup, design plan, or brief. Not for variant galleries: use design-variants. Not for live audits: use web-design-review.'
 ---
 
 # Polished web prototype
@@ -10,7 +10,7 @@ description: 'Use when the user runs /polished-web-prototype or asks to turn an 
 | Field | Bound contract |
 |---|---|
 | Trigger | The user runs `/polished-web-prototype` or asks to convert an approved mockup, design plan, or freeform description into a polished responsive HTML artifact. |
-| Authority | Reversible local: write only the named HTML artifact file and its finalized.json metadata under the project design directory. When framework-native output is chosen, also modify the package manifest and lockfile to add the Pretext dependency using the detected package manager; that is the only permitted mutation beyond the artifact and metadata. Rollback is deleting the artifact and metadata and reverting the manifest and lockfile edit. |
+| Authority | Reversible local: writes only the named HTML artifact file and its finalized.json metadata under the project design directory, and (for framework-native output) the package manifest and lockfile at the project root; rollback is undo. No remote mutation. When framework-native output is chosen, the only permitted mutation beyond the artifact and metadata is adding the Pretext dependency using the detected package manager. |
 | Side effect | The HTML artifact, finalized.json, and, for framework output, the manifest and lockfile dependency addition. A local HTTP preview server runs during refinement and is stopped at finalization. |
 | Done | The user accepted the artifact or chose to finalize at the 10-iteration gate; finalized.json is written with every listed field; the preview server is stopped. |
 

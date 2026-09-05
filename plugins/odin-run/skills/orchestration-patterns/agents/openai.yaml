@@ -1,0 +1,3 @@
+interface:
+  display_name: "Orchestration Patterns"
+  short_description: "Use when work decomposes across subagents or role panels and needs coupling-based orchestration."

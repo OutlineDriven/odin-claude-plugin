@@ -1,0 +1,3 @@
+interface:
+  display_name: "Validation First Driven"
+  short_description: "Use when protocols, workflows, concurrency, or lifecycle state need states, transitions, and temporal properties."

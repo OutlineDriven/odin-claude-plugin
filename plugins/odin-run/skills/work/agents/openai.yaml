@@ -1,3 +1,3 @@
 interface:
   display_name: "Work"
-  short_description: "Use when implementing from a plan or spec path, a clear build request, or a single settled ticket."
+  short_description: "Use when implementing from a plan, spec, clear build request, or settled ticket, orchestrated or standalone."

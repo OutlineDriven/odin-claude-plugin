@@ -1,3 +1,0 @@
-interface:
-  display_name: "Render Excalidraw Diagram"
-  short_description: "Use when a user supplies an existing .excalidraw file and asks for PNG rendering."

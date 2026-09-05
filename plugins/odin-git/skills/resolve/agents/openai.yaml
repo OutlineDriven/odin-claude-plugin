@@ -1,0 +1,3 @@
+interface:
+  display_name: "Resolve"
+  short_description: "Use when addressing review feedback: analyze mode classifies comment validity, reception mode applies accepted items with tests and drafts pushback."

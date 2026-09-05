@@ -1,3 +1,3 @@
 interface:
   display_name: "Plan"
-  short_description: "Use when a user commits to a direction and asks to plan, brief, research, or operationalize it."
+  short_description: "Use when a user commits to a direction and asks to plan, brief, or research it; modes score, breakdown, shape, visual."

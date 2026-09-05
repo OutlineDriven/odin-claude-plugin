@@ -1,3 +1,0 @@
-interface:
-  display_name: "Batch Ask Me"
-  short_description: "Use when the user faces multi-fork decisions or unresolved prerequisites."

@@ -1,6 +1,6 @@
 ---
 name: semgrep-security-scan
-description: 'Use when a user asks for a Semgrep security scan or fast pattern-based scan of a codebase. Runs Semgrep with --sarif, merges results, and reports every finding with severity, file, and line. Not for authoring or porting rules. Use port-static-analysis-rule.'
+description: 'Use when a user asks for a Semgrep security scan or fast pattern-based scan of a codebase. Not for authoring or porting rules: use semgrep-rule-authoring.'
 ---
 
 # Semgrep security scan
@@ -10,13 +10,13 @@ description: 'Use when a user asks for a Semgrep security scan or fast pattern-b
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks for a Semgrep security audit or fast pattern-based scan of a codebase, including broad or important-only coverage. |
-| Authority | Reversible local: writes only named local artifacts (scan outputs, temporary rule clones, merged SARIF, structured report). Rollback is deletion of those artifacts. |
+| Authority | Reversible local: writes only named local artifacts (scan outputs, temporary rule clones, merged SARIF, structured report); rollback is deleting those artifacts. No remote mutation. |
 | Side effect | Creates local scan outputs, may clone approved rule sources, runs Semgrep, merges SARIF, and reports every temporary clone path. Preserves clones for human disposition; deletion is a human action. |
 | Done | The approved plan and actual scan accounting agree; merged SARIF parses; findings are reported from the merged result; failed, skipped, unscoped, and zero-file scan units and every temporary clone path are disclosed; temporary clones are preserved. |
 
 ## Not for
 
-- Authoring or porting Semgrep rules. Use port-static-analysis-rule.
+- Authoring or porting Semgrep rules. Use semgrep-rule-authoring.
 
 ## Inputs
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Keep Why Maintenance"
+  short_description: "Use when contradictions, revisit conditions, or duplicates appear in knowledge entries."

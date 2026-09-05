@@ -1,3 +1,0 @@
-interface:
-  display_name: "Ssotize Audit Fold"
-  short_description: "Use when asked to find duplication, check consistency, establish or repair SSOT, consolidate scattered facts, or when the user says \"consolidate this\" or \"ssotize this\"."

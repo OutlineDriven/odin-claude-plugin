@@ -1,6 +1,6 @@
 ---
 name: frontend-design-deslop
-description: 'Use when a user builds or styles a web frontend or asks to make it not look AI-generated. Commits a token system and crafted interface passing a slop-audit and WCAG 2.2 AA gate. Not for component-level UI work without the token system; use frontend-ui-engineering. Local writes only.'
+description: 'Use when a user builds or styles a web frontend or asks to make it not look AI-generated. Not for component-level UI work without the token system: use frontend-ui-engineering.'
 ---
 
 # Frontend design deslop
@@ -10,7 +10,7 @@ description: 'Use when a user builds or styles a web frontend or asks to make it
 | Field | Bound contract |
 |---|---|
 | Trigger | User builds or styles a web frontend or asks to make it not look AI-generated. |
-| Authority | Reversible local writes only to DESIGN.md, design token files, and component CSS in the working project. Roll back by reverting those files via version control; no other files are touched. |
+| Authority | Reversible local: writes only DESIGN.md, design token files, and component CSS in the working project; rollback is version control. No remote mutation. No other files are touched. |
 | Side effect | Writes DESIGN.md, design tokens, and component CSS. |
 | Done | A committed token system and a crafted interface with a recorded slop-audit pass and a WCAG 2.2 AA pass/fail gate that passes. |
 
@@ -31,16 +31,16 @@ Optional: brand palette, typeface preferences, existing token files, and a targe
 1. Read the target surface and any existing styles, tokens, and brand inputs. Record what was found versus supplied so the design system is grounded, not invented. Done when: found-versus-supplied is recorded.
 2. Author a design strategy in DESIGN.md: layout grid, type scale, color system in OKLCH, spacing scale, motion intent, and component list. State the strategy before writing tokens so the tokens follow a decision, not a guess. Done when: DESIGN.md strategy section is written.
 3. Emit a token system as CSS custom properties (or the project's token format) covering color, typography, spacing, radius, shadow, and motion. Tokens are the single source of truth; component CSS references tokens, never hard-coded values. Done when: token system covers all six categories and no component CSS uses hard-coded values.
-4. Craft the interface using the tokens. Apply the NEVER-slop list and reject every violation before claiming the surface done:
+4. Craft the interface using the tokens. Apply the never-slop list and reject every violation before claiming the surface done:
    - Generic AI gradient backgrounds and rainbow color stops.
    - Default framework spacing, borders, and radius with no design intent.
    - Centered hero stacks, three-card feature grids, and other templated AI layouts used without purpose.
    - Hard-coded color, font, spacing, or radius values that bypass the token system.
    - Placeholder copy, lorem ipsum, or unfilled image alt text.
    - Low-contrast text, focus rings removed, or interactive elements without a visible focus state.
-   Done when: every NEVER-slop item is checked and cleared or fixed.
+   Done when: every never-slop item is checked and cleared or fixed.
 5. Run a WCAG 2.2 AA pass/fail gate over the crafted surface: contrast ratios for text and UI components, focus visibility, target sizes, and semantic structure. Record pass or fail per criterion. Done when: every criterion is recorded as pass.
-6. Run a slop audit against the NEVER-slop list and record each item as cleared or violated. Fix violations in the interface and tokens before recording a pass. Done when: every item is recorded as cleared.
+6. Run a slop audit against the never-slop list and record each item as cleared or violated. Fix violations in the interface and tokens before recording a pass. Done when: every item is recorded as cleared.
 7. Commit DESIGN.md, the token files, and the component CSS. Record the slop-audit result and the WCAG 2.2 AA gate result alongside the commit so the pass is auditable. Done when: artifacts are committed with both gate results recorded.
 
 ## Failure and recovery

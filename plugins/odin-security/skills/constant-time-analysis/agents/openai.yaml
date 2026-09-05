@@ -1,0 +1,3 @@
+interface:
+  display_name: "Constant Time Analysis"
+  short_description: "Use when reviewing cryptographic code for timing side-channels, statically in compiled output or at runtime with statistical timing tests."

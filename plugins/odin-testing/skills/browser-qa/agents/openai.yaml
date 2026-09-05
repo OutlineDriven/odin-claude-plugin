@@ -1,0 +1,3 @@
+interface:
+  display_name: "Browser QA"
+  short_description: "Use when the user runs /browser-qa for report-only QA results without entering a fix loop."

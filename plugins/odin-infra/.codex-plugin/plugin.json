@@ -1,0 +1,20 @@
+{
+  "name": "odin-infra",
+  "version": "2.1.0",
+  "description": "ODIN workflows for CI, deployment, observability, cost, and infrastructure tooling.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "infra"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Infra",
+    "shortDescription": "ODIN workflows for CI, deployment, observability, cost, and infrastructure tooling.",
+    "category": "Infrastructure"
+  }
+}

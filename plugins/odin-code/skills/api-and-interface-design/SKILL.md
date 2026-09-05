@@ -1,6 +1,6 @@
 ---
 name: api-and-interface-design
-description: 'Use when asked to design or change a public API, route, CLI flag, or module boundary. It documents the contract with semantics and errors, then migrates every consumer so no legacy path remains. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to design or change a public API, route, CLI flag, or module boundary. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # API and interface design
@@ -10,7 +10,7 @@ description: 'Use when asked to design or change a public API, route, CLI flag, 
 | Field | Bound contract |
 |---|---|
 | Trigger | Designing or changing a public API, route, CLI flag, or module boundary. |
-| Authority | Write only named local interface definitions and contract docs before implementation; rollback by discarding the uncommitted draft. |
+| Authority | Reversible local: writes only named local interface definitions and contract docs, edits consumer files onto the new contract, and deletes legacy paths (old signatures, aliases, re-exports, deprecated entry points) during cutover; rollback is undo (discard the uncommitted draft) or version control. No remote mutation. No credential, paid, published, or deployed change, and no VCS history rewrite. |
 | Side effect | Interface definitions and contract docs written before implementation; consumer files edited onto the new contract and legacy paths (old signatures, aliases, re-exports, deprecated entry points) deleted during cutover; no build, publish, or remote mutation. |
 | Done | Contract is documented with semantics and errors, every consumer is migrated, and no legacy path remains. |
 
@@ -31,7 +31,7 @@ The interface being designed or changed: its name and kind (API endpoint, route,
 - Unmigrated consumer: if a consumer cannot be inspected or updated, stop. Record it as a blocking risk; the change is not complete and the done predicate does not hold.
 - Ambiguous semantics: if a field's semantics cannot be stated concretely, stop and request the missing specification rather than guessing or leaving it implicit.
 - Partial-result rule: a partially migrated change is not shippable. Keep the draft uncommitted and report the remaining consumers and unresolved semantics.
-- Rollback: discard the uncommitted draft. No implementation was mutated, so no source rollback is required.
+- Rollback: discard the uncommitted draft. Consumer edits and legacy-path restores are part of the same draft, so reverting via VCS restores them. No source rollback is required beyond VCS.
 - Blocked result: return the unmigrated-consumer list and the unresolved-semantics list. Do not pretend the done predicate holds.
 
 ## Output

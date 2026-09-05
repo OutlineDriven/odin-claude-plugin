@@ -1,6 +1,6 @@
 ---
 name: watch-for-structured
-description: 'Use when the user wants to classify a surface state and page an on-call API when triggered. Reads one snapshot, classifies severity, looks up routing, sends a page if required, and returns a structured report with severity, routing, and on-call disposition. Not for read-only anomaly watching without paging: use watch-for.'
+description: 'Use when the user wants to classify a surface state and page an on-call API when triggered. Not for read-only anomaly watching without paging: use watch-for.'
 ---
 
 # Single-snapshot alert
@@ -10,7 +10,7 @@ description: 'Use when the user wants to classify a surface state and page an on
 | Field | Bound contract |
 |---|---|
 | Trigger | User wants to classify a surface state and page an on-call API when triggered. |
-| Authority | Read-only surface observation and human-authorized remote alerting API calls. Preview the target and consequence before any paging, credential use, or remote alerting API call. |
+| Authority | Remote: sends pages through the alerting API when a snapshot classifies as triggering; requires explicit human invocation, and previews the target and consequence before any paging or credential use. Surface observation itself is read-only. |
 | Side effect | On-call or alerting API and routing destinations when the classification decides to page. |
 | Done | A structured report with severity, routing, and on-call disposition is produced and paging is confirmed when triggered. |
 

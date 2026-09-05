@@ -1,0 +1,20 @@
+{
+  "name": "odin-learn",
+  "version": "2.1.0",
+  "description": "ODIN workflows for teaching, explaining, drilling, and onboarding.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "learn"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN Learn",
+    "shortDescription": "ODIN workflows for teaching, explaining, drilling, and onboarding.",
+    "category": "Productivity"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "name": "odin-people",
+  "version": "2.1.0",
+  "description": "ODIN workflows for team dynamics, culture profiles, and negotiation.",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "people"
+  ],
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "interface": {
+    "displayName": "ODIN People",
+    "shortDescription": "ODIN workflows for team dynamics, culture profiles, and negotiation.",
+    "category": "Productivity"
+  }
+}

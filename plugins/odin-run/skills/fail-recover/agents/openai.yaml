@@ -1,3 +1,0 @@
-interface:
-  display_name: "Fail Recover"
-  short_description: "Use when the user needs to restore service from a specific known failure by applying a single prescribed recovery operation."

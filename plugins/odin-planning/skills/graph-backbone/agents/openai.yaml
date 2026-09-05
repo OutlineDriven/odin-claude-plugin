@@ -1,0 +1,3 @@
+interface:
+  display_name: "Graph Backbone"
+  short_description: "Use when defining, revising, or gate-replanning the project structural backbone in project-root graph.yaml."

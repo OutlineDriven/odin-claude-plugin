@@ -1,0 +1,3 @@
+interface:
+  display_name: "Git Guardrails"
+  short_description: "Use when a repository needs a guard against force-push, forced reset, clean, branch deletion, working-tree discard, stash drop, reflog expire, or gc prune."

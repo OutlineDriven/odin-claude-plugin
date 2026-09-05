@@ -1,6 +1,6 @@
 ---
 name: agents-md
-description: 'Use when setting up a repo for agents, adding AGENTS.md, auditing CLAUDE.md, scoring instructions, or pruning long/stale files via a three-check gate. Also handles lean pointer-only AGENTS.md under 100 lines. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when a repo needs agent setup, AGENTS.md added or made lean, CLAUDE.md audited, or agent instructions scored or pruned. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Agents MD
@@ -10,9 +10,9 @@ description: 'Use when setting up a repo for agents, adding AGENTS.md, auditing 
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to set up a repo for agents, add AGENTS.md, audit CLAUDE.md, make a repo agent-friendly, score agent instructions, prune long/generic/stale instructions, or produce a lean pointer-only AGENTS.md |
-| Authority | Reversible local write: audit and refactor AGENTS.md, CLAUDE.md, CLAUDE.local.md, and supporting instruction files; apply diffs only after user confirms. Roll back by restoring the pre-edit snapshot taken before any write |
+| Authority | Reversible local: writes only AGENTS.md, CLAUDE.md (or a symlink to AGENTS.md when a target tool reads solely CLAUDE.md), CLAUDE.local.md, `.claude/settings.json`, `.cursor/rules/*.mdc`, Cursor `hooks.json`, and supporting instruction files after user confirmation; rollback is restoring the pre-edit snapshot. No remote mutation. |
 | Side effect | Local write to agent instruction files in the repo; no remote, credential, paid, published, deployed, or VCS mutation |
-| Done | Repo has working, scored, non-contradictory AGENTS.md and CLAUDE.md for Claude, Codex, and Cursor; every surviving line passes the three-check admission gate (non-discoverable, operationally significant, actionable); lean variants stay under 100 lines with pointer-only sections |
+| Done | Repo has working, scored, non-contradictory AGENTS.md for every target tool, plus a CLAUDE.md only when a target tool reads solely CLAUDE.md; every surviving line passes the three-check admission gate (non-discoverable, operationally significant, actionable); lean variants stay under 100 lines with pointer-only sections |
 
 ## Inputs
 
@@ -27,7 +27,7 @@ AGENTS.md files are execution contracts, not knowledge bases. Every line must he
    ```bash
    find . \( -name "AGENTS.md" -o -name "CLAUDE.md" -o -name "CLAUDE.local.md" \) 2>/dev/null | sort
    ```
-   Also check `~/.claude/CLAUDE.md` (applies to every session). For monorepos, include workspace-level files. Audit each level independently: root holds universal rules, child files hold directory-specific rules. Then survey source files to learn what is already discoverable: README, PROJECT.md, cursor rules (`.cursor/rules/` or `.cursorrules`), Copilot instructions (`.github/copilot-instructions.md`), GEMINI.md, CI/workflow files, package manager config, CONTRIBUTING.md, and `docs/`. Record what an agent can infer from these alone — anything discoverable need not be restated.
+   Also check `~/.claude/CLAUDE.md` (applies to every session). For monorepos, include workspace-level files. Audit each level independently: root holds universal rules, child files hold directory-specific rules. Then survey source files to learn what is already discoverable: README, PROJECT.md, cursor rules (`.cursor/rules/` or `.cursorrules`), Copilot instructions (`.github/copilot-instructions.md`), GEMINI.md, CI/workflow files, package manager config, CONTRIBUTING.md, and `docs/`. Record what an agent can infer from these alone; anything discoverable need not be restated.
    - Done when: every instruction file is listed and the discoverability survey records what an agent can learn without AGENTS.md.
 
 2. **Choose a mode.**
@@ -37,17 +37,17 @@ AGENTS.md files are execution contracts, not knowledge bases. Every line must he
    - Repo has convention docs and user wants a lean pointer file → **Lean** (Step 6, lean variant).
    - Done when: exactly one mode is selected and the entry step is identified.
 
-3. **Setup — decide which files exist and which tool reads each.**
+3. **Setup: decide which files exist and which tool reads each.**
    - `AGENTS.md` at the repo root is the source of truth. Claude Code, Codex, Cursor, Copilot, Gemini CLI, Aider, Windsurf, and Zed all read it natively. Every other agent file is a pointer or tool-specific supplement, never a second copy. Two copies of a rule drift silently because nothing in the codebase contradicts either one.
    - Claude Code: nothing beyond AGENTS.md. Add `CLAUDE.md -> AGENTS.md` as a symlink only when a tool in use reads solely `CLAUDE.md`; a symlink keeps one source of truth where a copy would drift. Use `.claude/settings.json` for hooks and `CLAUDE.local.md` (gitignored) for personal overrides.
    - Codex: nothing beyond AGENTS.md.
    - Cursor: AGENTS.md covers prose. Add `.cursor/rules/*.mdc` only for rules needing Cursor glob scoping. Frontmatter is required; `alwaysApply: true` with empty `globs` duplicates AGENTS.md.
-   - Check `.gitignore`: if agent config is ignored, decide per file whether it is personal (leave ignored) or repo knowledge (commit it). Do not put shared knowledge under `.claude/` — that path reads as Claude-only and is commonly gitignored.
+   - Check `.gitignore`: if agent config is ignored, decide per file whether it is personal (leave ignored) or repo knowledge (commit it). Do not put shared knowledge under `.claude/`; that path reads as Claude-only and is commonly gitignored.
    - The import trap: `@import` is Claude Code only. Codex and Cursor ignore `@import` lines without warning, so a rule behind an import is absent from most sessions while the file looks correct. Anything every tool must obey goes inline in AGENTS.md. Reserve `@import` for depth only Claude Code needs, never for safety, data-loss, or format-contract rules. `@import` chains stop resolving at 5 hops; deeper content silently disappears. `@import` lines do not evaluate inside code spans or fenced blocks.
    - Enforcement that survives tool choice: prefer, in order, a linter or formatter rule, a git hook (lefthook, husky) that fires whichever agent made the edit, a CI check, then tool-native hooks (`.claude/settings.json`, Cursor `hooks.json`). Tool-native hooks are the last rung because they cover one tool only. Move a prose rule down to an exit code whenever the check is mechanical, and delete the prose once the gate exists.
    - Done when: the file-to-tool mapping is decided and every tool's read path is confirmed.
 
-4. **Audit — score each root file independently.** Exclude N/A checks from the denominator.
+4. **Audit: score each root file independently.** Exclude N/A checks from the denominator.
    - **Quick** (default): 12 checks, target ≥ 10/12. Borderline (8–9) or fail (≤7) escalates to full.
      1. Core run/test/build/lint commands exist when applicable
      2. Commands appear runnable and match project scripts/tooling
@@ -69,16 +69,16 @@ AGENTS.md files are execution contracts, not knowledge bases. Every line must he
      - E. Currency and validation (7): referenced file paths exist; referenced tools/dependencies still in use; commands have been run or limitations documented; removed references to deleted folders/APIs; version-sensitive guidance is date/version scoped; clear maintenance loop (how to keep the file current); CLAUDE.local.md used for personal/gitignored overrides not mixed into shared AGENTS.md.
    - Grade mapping (earned / applicable): A ≥ 91%, B 76–<91%, C 59–<76%, D 39–<59%, F <39%.
    - Automatic fail (grade F regardless of score): commands are mostly broken/stale; instructions are primarily generic advice or restatements of default agent behavior; file is dominated by copied docs/templates rather than executable guidance.
-   - **Two tests that catch how a line fails** — apply during audit and refactor:
+   - **Two tests that catch how a line fails**: apply during audit and refactor:
      - Dead weight: "Would removing this cause the agent to make a mistake?" If no, cut it; bloat makes agents ignore the rules that matter.
      - Harmful precision: "Is this wrong on any plausible task in this repo?" A prohibition wrong one task in ten is still obeyed on that task, and the agent cannot tell it is the exception. State the desired outcome and let the surrounding code pick the path. `NEVER write comments` becomes `match the comment density of the file you are editing`. Absolutes still earn their place for safety, data loss, format contracts, and rules agents have actually been observed to break.
    - Done when: every root file has a score, grade, and issue list with proposed diffs.
 
-5. **Refactor — for bloated, stale, or low-signal files.** Bound scope before mutation: identify the target AGENTS.md path(s) — the root file and any module-local variants the user named. Do not create or edit a file outside this set.
+5. **Refactor: for bloated, stale, or low-signal files.** Bound scope before mutation: identify the target AGENTS.md path(s), the root file and any module-local variants the user named. Do not create or edit a file outside this set.
    - Snapshot current line count before any edit.
    - Extract only what every task needs: run/test/build/lint commands, critical environment/setup requirements, high-frequency gotchas, conventions that change implementation choices. Everything else: link to a reference or delete.
-   - Apply the **three-check admission gate** to each surviving line and each candidate line: (a) non-discoverable from repository files alone, (b) operationally significant — it changes commands, outcomes, or safety, (c) actionable — specific enough to execute. Omit anything that fails one check.
-   - Delete first, add back only what earns its place. For every removed line, record one reason: `generic`, `duplicate`, `stale`, `moved` (to a reference), `reworded`, or `omitted` (unverifiable — cannot be grounded in a file actually read; never speculate or fabricate). This log makes the final report traceable, and `reworded` keeps the safety re-check from treating a rewritten rule as lost content.
+   - Apply the **three-check admission gate** to each surviving line and each candidate line: (a) non-discoverable from repository files alone, (b) operationally significant: it changes commands, outcomes, or safety, (c) actionable: specific enough to execute. Omit anything that fails one check.
+   - Delete first, add back only what earns its place. For every removed line, record one reason: `generic`, `duplicate`, `stale`, `moved` (to a reference), `reworded`, or `omitted` (unverifiable: cannot be grounded in a file actually read; never speculate or fabricate). This log makes the final report traceable, and `reworded` keeps the safety re-check from treating a rewritten rule as lost content.
    - Remove: full documentation and tutorial-style prose, long architecture explanations in root, exhaustive file maps, generic advice ("write clean code", "use best practices"), outdated commands and dead links, restatements of default agent behavior ("read before editing", "run the tests after changes", "use the todo tool", "don't commit unless asked"), facts auto-memory owns (user preferences, personal feedback, evolving project status), tech stack summaries, directory structure overviews, architecture descriptions agents can infer from code, generic best-practice advice not specific to this repo, rules already enforced by tooling (linters, typecheck, tests, CI), and mandatory boilerplate headers unless the repo explicitly requires one.
    - Write each retained entry as an imperative or prohibition paired with why the rule needs to be. Each fact appears once. Ground every statement in a file actually read; if uncertain, omit the claim rather than speculate. Admissible form: "Use pnpm; npm lockfiles break CI." Inadmissible form: "The repo uses pnpm."
    - Reword rather than remove: a blanket prohibition that some plausible task would want broken becomes the outcome it was protecting. Tag it `reworded`.
@@ -110,8 +110,8 @@ AGENTS.md files are execution contracts, not knowledge bases. Every line must he
    - @docs/architecture.md
    - @.claude/testing.md
    ```
-   For monorepos, add a workspace map pointing to each workspace's own AGENTS.md. For multi-language monorepos, add per-language setup commands and cross-language boundary rules. Never ship a skeleton verbatim; a shipped placeholder is worse than no file. Prefer bullets over paragraphs. Keep root within 60–150 lines for typical active repos. 3–8 gotchas from real failures beat 20 hypothetical ones. When a convention has an exemplar in the repo, name the file path instead of describing the pattern in prose — code cannot be vague and cannot drift from itself.
-   - Lean variant: when the repo already has convention docs (CONTRIBUTING.md, `docs/`, `.github/`), write pointer-only sections: `**Topic**: see <path-or-url>` — one pointer per line, never restate policy. Keep the total file at or under 100 lines; prefer bullet tables over prose. Add a commit attribution line at the bottom: `<!-- commit: <owner or "agent"> -->`. If no conventions are found, scaffold a minimal file with a placeholder attribution line and no convention sections; do not fabricate conventions.
+   For monorepos, add a workspace map pointing to each workspace's own AGENTS.md. For multi-language monorepos, add per-language setup commands and cross-language boundary rules. Never ship a skeleton verbatim; a shipped placeholder is worse than no file. Prefer bullets over paragraphs. Keep root within 60–150 lines for typical active repos. 3–8 gotchas from real failures beat 20 hypothetical ones. When a convention has an exemplar in the repo, name the file path instead of describing the pattern in prose: code cannot be vague and cannot drift from itself.
+   - Lean variant: when the repo already has convention docs (CONTRIBUTING.md, `docs/`, `.github/`), write pointer-only sections: `**Topic**: see <path-or-url>`, one pointer per line, never restate policy. Keep the total file at or under 100 lines; prefer bullet tables over prose. Add a commit attribution line at the bottom: `<!-- commit: <owner or "agent"> -->`. If no conventions are found, scaffold a minimal file with a placeholder attribution line and no convention sections; do not fabricate conventions.
    - Done when: the file is filled with verified commands and gotchas (or pointer-only sections in lean mode), no skeleton is shipped verbatim, and the line count is within bounds.
 
 7. **Propose minimal diffs.** In priority order:
@@ -131,7 +131,7 @@ AGENTS.md files are execution contracts, not knowledge bases. Every line must he
    5. Issues found: revise, then validate again. Never proceed on "looks right".
    - Done when: commands are smoke-run or verified, all paths resolve, no contradictions remain, and each tool quotes a unique rule back.
 
-9. **Apply and report.** Apply approved edits, re-score with the same checklist, report before/after scores and line counts. Per future PR, add at most one new gotcha, only if it prevented or fixed a real mistake. Prune stale instructions aggressively — the file shrinks over time as root causes get fixed in code or tooling.
+9. **Apply and report.** Apply approved edits, re-score with the same checklist, report before/after scores and line counts. Per future PR, add at most one new gotcha, only if it prevented or fixed a real mistake. Prune stale instructions aggressively: the file shrinks over time as root causes get fixed in code or tooling.
    - Done when: edits are applied, before/after scores and line counts are reported, and the deletion log with reason tags is delivered.
 
 ### Operational traps

@@ -1,4 +1,4 @@
-# Separate before serializing — procedure
+# Separate before serializing: procedure
 
 The classification, primitive choice, and merge-point design behind the anchor.
 

@@ -1,0 +1,3 @@
+interface:
+  display_name: "History Source Registry"
+  short_description: "Use when a coding-agent session store is added or its format drifts, to document its layout, roles, quirks."

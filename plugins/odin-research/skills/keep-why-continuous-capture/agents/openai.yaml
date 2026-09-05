@@ -1,3 +1,0 @@
-interface:
-  display_name: "Keep Why Continuous Capture"
-  short_description: "Use when a non-trivial change lands or is abandoned and the decision, its rejected alternatives, and the reason must be captured in a local topic file."

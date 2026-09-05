@@ -1,6 +1,6 @@
 ---
 name: implement-spec
-description: 'Use when a ticket DAG from a complete specification needs parallel execution into a green draft PR. A single approved feature is the degenerate one-ticket DAG. Not for a single settled ticket with no spec — use work; not for ticket decomposition — use to-tickets.'
+description: 'Use when a ticket DAG from a complete specification needs parallel execution into a green draft PR. Not for a settled ticket with no spec: use work. Not for ticket decomposition: use to-tickets.'
 disable-model-invocation: true
 ---
 
@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | A ticket DAG from a complete specification needs parallel execution. |
-| Authority | Run only on explicit human invocation. Before using credentials, publishing commits or a pull request, mutating remote state, or deleting cleanup targets, preview the exact target and consequence and obtain explicit human approval for that action. |
+| Authority | Human-gated: runs only on explicit human invocation and previews the exact target and consequence, then obtains explicit human approval, before using credentials, publishing commits or a pull request, mutating remote state, or deleting cleanup targets; every other write is reversible local, with version control as the rollback. |
 | Side effect | Create implementation commits in isolated worktrees, integrate them on the named branch, publish the approved branch and draft pull request, and remove only the previewed temporary worktrees and branches. |
 | Done | Every ticket is complete, the dependency frontier is empty, required checks pass, review has no unresolved actionable finding, and the green draft pull request exists. |
 
@@ -45,7 +45,7 @@ disable-model-invocation: true
 For any partial result, report completed tickets, the remaining frontier, commits, checks, findings, remote state, and retained worktrees. Never discard unintegrated work, swallow an error, or claim the done predicate.
 
 ## Output
-On success, return the ticket-to-commit ledger, empty frontier, integrated commit identifier, passing check evidence, review-clear evidence, draft pull-request URL and head commit, and cleanup result. Otherwise return exactly one terminal classification—`invalid-input`, `blocked`, `ticket-failed`, `integration-conflict`, `check-failed`, `review-blocked`, `non-converged`, `publication-failed`, or `cleanup-blocked`—with the partial-result ledger and the next human-resolvable blocker.
+On success, return the ticket-to-commit ledger, empty frontier, integrated commit identifier, passing check evidence, review-clear evidence, draft pull-request URL and head commit, and cleanup result. Otherwise return exactly one terminal classification, `invalid-input`, `blocked`, `ticket-failed`, `integration-conflict`, `check-failed`, `review-blocked`, `non-converged`, `publication-failed`, or `cleanup-blocked`, with the partial-result ledger and the next human-resolvable blocker.
 
 ## Single-feature case (degenerate DAG)
 

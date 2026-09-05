@@ -1,3 +1,3 @@
 interface:
   display_name: "Design Gate Brainstorming"
-  short_description: "Use when creative work is requested and no approved design exists, or when a raw idea or repository must be developed into an approved design document."
+  short_description: "Use when creative work is requested with no approved design, or a raw idea or repository must be developed into an approved design document."

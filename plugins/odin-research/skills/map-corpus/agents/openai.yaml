@@ -1,3 +1,0 @@
-interface:
-  display_name: "Map Corpus"
-  short_description: "Use when the user points to a folder of their study material and wants it made teachable."

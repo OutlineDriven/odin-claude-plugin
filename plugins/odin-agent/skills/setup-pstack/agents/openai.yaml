@@ -1,3 +1,0 @@
-interface:
-  display_name: "Setup Pstack"
-  short_description: "Use when asked to configure pstack role-to-model choices so every role maps to an available model."

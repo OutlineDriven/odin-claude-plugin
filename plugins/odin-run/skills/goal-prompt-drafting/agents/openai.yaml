@@ -1,0 +1,3 @@
+interface:
+  display_name: "Goal Prompt Drafting"
+  short_description: "Use when asked to draft copy-ready /goal objectives for long-running agents."

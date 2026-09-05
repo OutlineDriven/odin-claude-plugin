@@ -1,6 +1,6 @@
 ---
 name: django-perf-review
-description: 'Use when reviewing Django performance, N+1 queries, or queryset behavior. Returns validated ORM findings with severity-matched impact and concrete rewrites. Not for authorization or IDOR review — use django-access-review. No source or remote-system changes.'
+description: 'Use when reviewing Django performance, N+1 queries, or queryset behavior. Not for authorization or IDOR review: use django-access-review. No source or remote-system changes.'
 ---
 
 # Django performance review

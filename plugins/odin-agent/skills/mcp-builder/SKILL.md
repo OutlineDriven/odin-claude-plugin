@@ -1,6 +1,6 @@
 ---
 name: mcp-builder
-description: 'Use when asked to create an MCP server to integrate an API or service in Python or TypeScript. Produces a server with typed tools, tests, and a read-only evaluation suite. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when asked to create an MCP server to integrate an API or service in Python or TypeScript. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # MCP builder
@@ -10,7 +10,7 @@ description: 'Use when asked to create an MCP server to integrate an API or serv
 | Field | Bound contract |
 |---|---|
 | Trigger | Creating an MCP server to integrate an API or service in Python or TypeScript. |
-| Authority | Reversible local: write only named project files; delete the project directory to roll back. |
+| Authority | Reversible local: writes only named project files; rollback is deleting the project directory. No remote mutation. |
 | Side effect | A new MCP server project with typed tools, tests, and a read-only evaluation suite. |
 | Done | Server builds, registers tools with correct Zod/Pydantic schemas and annotations, passes MCP inspector, and has 16 stable read-only evaluations with verified answers. |
 
@@ -42,10 +42,10 @@ description: 'Use when asked to create an MCP server to integrate an API or serv
 
 Partial results rule: if the server builds but evaluations fail, keep the project directory and report which evaluations failed. Do not delete partial work.
 
-Rollback: delete the project directory to fully reverse all side effects.
+Rollback: delete the project directory to reverse all side effects.
 
 Blocked result: if the API specification is unparseable or the language is unsupported, stop and report the specific validation failure. Do not proceed with scaffolding.
 
 ## Output
 
-A complete MCP server project: server entry point with all tools registered, tool definitions with typed schemas and annotations, test suite with 16 read-only evaluations, and build/inspector/evaluation results — ordered by the procedure steps that produced them.
+A complete MCP server project: server entry point with all tools registered, tool definitions with typed schemas and annotations, test suite with 16 read-only evaluations, and build/inspector/evaluation results, ordered by the procedure steps that produced them.

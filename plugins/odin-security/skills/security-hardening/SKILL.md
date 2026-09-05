@@ -1,6 +1,6 @@
 ---
 name: security-hardening
-description: 'Use when handling untrusted input, auth/authz, data storage, or external integrations to add security controls during construction. Not for auditing a change set — use security-review. Not for verifying a named finding — use security-finding-verification.'
+description: 'Use when adding security controls for untrusted input, auth/authz, data storage, or external integrations. Not for audit: use security-review. Not for finding: use security-finding-verification.'
 ---
 
 # Harden code security
@@ -10,14 +10,14 @@ description: 'Use when handling untrusted input, auth/authz, data storage, or ex
 | Field | Bound contract |
 |---|---|
 | Trigger | Handling untrusted input, auth/authz, data storage, external integrations, files/uploads/payment. |
-| Authority | Reversible-local: adds security controls to code during construction; rollback restores prior state. |
-| Side effect | Local-write: changes to code files only; no credential, deployment, or remote mutation. |
+| Authority | Reversible local: writes only security controls added to code during construction, plus a verification report beside those controls; rollback is version control. No remote mutation. |
+| Side effect | Local-write: changes to code files plus a verification report; no credential, deployment, or remote mutation. |
 | Done | Security-relevant code passes the always-do checks and verification checklist. |
 
 ## Not for
 
-- Auditing a diff or change set for vulnerabilities — use security-review.
-- Verifying a named security allegation as true or false positive — use security-finding-verification.
+- Auditing a diff or change set for vulnerabilities: use security-review.
+- Verifying a named security allegation as true or false positive: use security-finding-verification.
 
 ## Inputs
 

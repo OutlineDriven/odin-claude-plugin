@@ -1,6 +1,6 @@
 ---
 name: fastify-production-hardening
-description: 'Use when asked to prepare a Fastify service for production load and exposure: timeouts and payload limits, overload shedding, rate limiting, CORS and security headers, proxy safety, SIGTERM drain, and a measured performance baseline. Not for building the app; use fastify-schema-first-service.'
+description: 'Use when asked to prepare a Fastify service for production load and exposure. Not for building the app: use fastify-schema-first-service.'
 ---
 
 # Fastify production hardening

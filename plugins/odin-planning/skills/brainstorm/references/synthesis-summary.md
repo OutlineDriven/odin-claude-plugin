@@ -76,7 +76,7 @@ The cap is heuristic. Typical bounds by tier, counting bullets across Trade-offs
 
 ### Detail level: conversational, not documentary
 
-Each bullet is **1 line ideally, 2 lines maximum**. The reference shape is what two collaborators would say to each other in conversation, not what an ODIN spec outline would say. If a bullet reads like a doc paragraph, it is wrong-shaped.
+Each bullet is **one line, two at most**. The reference shape is what two collaborators would say to each other in conversation, not what an ODIN spec outline would say. If a bullet reads like a doc paragraph, it is wrong-shaped.
 
 The "What we're building" prose obeys the same discipline: 1-3 sentences describing shape, not an enumeration of requirements.
 

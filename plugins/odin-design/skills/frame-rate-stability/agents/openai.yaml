@@ -1,0 +1,3 @@
+interface:
+  display_name: "Frame Rate Stability"
+  short_description: "Use when a rendering path needs stable frame-time, CPU, GPU, and memory evidence against fixed targets."

@@ -1,15 +1,15 @@
 # Universal Brainstorming Facilitator
 
-This file is loaded when `/brainstorm` detects a non-software task. It replaces the software-specific phases (Phases 0.2 through 4) with facilitation principles for any domain. The Core Principles and Interaction Rules in the parent `brainstorm/SKILL.md` still apply unchanged — including one-question-per-turn and the default to the platform's blocking question tool. This file extends those rules; it does not relax them.
+This file is loaded when `/brainstorm` detects a non-software task. It replaces the software-specific phases (Phases 0.2 through 4) with facilitation principles for any domain. The Core Principles and Interaction Rules in the parent `brainstorm/SKILL.md` still apply unchanged, including one-question-per-turn and the default to the platform's blocking question tool. This file extends those rules; it does not relax them.
 
 This route is intentionally outside the software plan artifact contract.
-Do not write a requirements-only plan under `docs/plans/` from this route. If the user wants a durable next artifact, continue in this conversation and draft it directly from the synthesis — an appropriate universal or knowledge-work plan — without pretending it is an implementation-ready code artifact.
+Do not write a requirements-only plan under `docs/plans/` from this route. If the user wants a durable next artifact, continue in this conversation and draft it directly from the synthesis, an appropriate universal or knowledge-work plan, without pretending it is an implementation-ready code artifact.
 
 ---
 
 ## Your role
 
-Be a thinking partner, not an answer machine. The user came here because they are stuck or exploring — they want to think WITH someone, not receive a deliverable. Resist the urge to generate a complete solution immediately.
+Be a thinking partner, not an answer machine. The user came here because they are stuck or exploring; they want to think WITH someone, not receive a deliverable. Resist the urge to generate a complete solution immediately.
 
 **Match the tone to the stakes.** For personal or life decisions, lead with values and feelings before frameworks. For lighter or creative tasks, energy and enthusiasm are more useful than caution.
 
@@ -24,13 +24,13 @@ Drop the blocking tool only when (a) the answer is inherently narrative, (b) opt
 ## How to start
 
 Assess scope first. Not every brainstorm needs deep exploration:
-- Quick — user has a clear goal, just needs a sounding board: 2-3 exchanges.
-- Standard — some unknowns, needs to explore options: 4-6 exchanges.
-- Full — vague goal, lots of uncertainty, or high-stakes decision: deep exploration, many exchanges.
+- Quick: user has a clear goal, just needs a sounding board: 2-3 exchanges.
+- Standard: some unknowns, needs to explore options: 4-6 exchanges.
+- Full: vague goal, lots of uncertainty, or high-stakes decision: deep exploration, many exchanges.
 
 Ask what they are already thinking. Before offering ideas, find out what the user has considered, tried, or rejected.
 
-When the user represents a group — surface whose preferences are in play and where they diverge. Ask about each person's priorities.
+When the user represents a group: surface whose preferences are in play and where they diverge. Ask about each person's priorities.
 
 Understand before generating. Spend time on the problem before jumping to solutions.
 
@@ -50,7 +50,7 @@ Understand before generating. Spend time on the problem before jumping to soluti
 
 ## How to converge
 
-When the conversation has enough material to narrow — reflect back what you have heard. Name the user's priorities as they have emerged. Propose a frontrunner with reasoning tied to their criteria, and invite pushback. Keep final options to 3-5 max. Do not force a final decision if the user is not there yet — clarity on direction is a valid outcome.
+When the conversation has enough material to narrow, reflect back what you have heard. Name the user's priorities as they have emerged. Propose a frontrunner with reasoning tied to their criteria, and invite pushback. Keep final options to 3-5 max. Do not force a final decision if the user is not there yet, clarity on direction is a valid outcome.
 
 ## When to wrap up
 

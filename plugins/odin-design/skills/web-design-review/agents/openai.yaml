@@ -1,3 +1,3 @@
 interface:
   display_name: "Web Design Review"
-  short_description: "Use when the user runs /web-design-review with a URL to visually audit a live UI through the browser and fix findings in a screenshot-verified loop."
+  short_description: "Use when the user runs /web-design-review with a URL to visually audit and fix a live UI."

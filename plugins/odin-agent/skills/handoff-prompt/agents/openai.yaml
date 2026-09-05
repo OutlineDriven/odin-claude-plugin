@@ -1,3 +1,0 @@
-interface:
-  display_name: "Handoff Prompt"
-  short_description: "Use when the user asks for a handoff, delegation, or clipboard-ready prompt for another agent: a standalone path-free prompt copied to the clipboard, confirmed by title."

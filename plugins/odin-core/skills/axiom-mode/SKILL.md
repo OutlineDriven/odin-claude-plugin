@@ -1,6 +1,6 @@
 ---
 name: axiom-mode
-description: 'Use when the user requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form. Switches responses to compact formal-logic English with predicate claims and ASCII keywords, then restores the register after clarity exceptions. Not for changing code or remote state.'
+description: 'Use when the user requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form. Not for changing code or remote state.'
 ---
 
 # Axiom mode
@@ -10,7 +10,7 @@ description: 'Use when the user requests axiom, axiom-mode, axiom-compact, forma
 | Field | Bound contract |
 |---|---|
 | Trigger | User requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form. |
-| Authority | Read-only; changes response register only. No file, VCS, credential, or remote mutation. |
+| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. Changes response register only. |
 | Side effect | None; response style only. |
 | Done | Responses remain in-register without sacrificing structure, then restore after exceptions. |
 
@@ -22,11 +22,11 @@ No external input required. The user's invocation phrase activates the register;
 
 1. Activate the Compacted Formal-logic English register. This ASCII-only register uses shortened-English keywords for logical connectives and follows predicate-calculus and Hoare-triple conventions for structural framing. Persist the register for every subsequent response until the user signals "stop axiom-mode" or "normal mode". Done when: the register is active and persists across responses.
 
-2. Emit only allowed characters: A-Z, a-z, 0-9, hyphens, spaces, and standard sentence punctuation (period, comma, colon, semicolon, parentheses, brackets, quotes). Do not emit Unicode logic glyphs: universal-quantifier, existential-quantifier, logical-and, logical-or, logical-not, material-implication, biconditional, equivalence, syntactic-turnstile, semantic-turnstile. Done when: the response contains only allowed characters.
+2. Emit only allowed characters: A-Z, a-z, 0-9, hyphens, spaces, slash, underscore, and standard sentence punctuation (period, comma, colon, semicolon, parentheses, brackets, quotes). Do not emit Unicode logic glyphs: universal-quantifier, existential-quantifier, logical-and, logical-or, logical-not, material-implication, biconditional, equivalence, syntactic-turnstile, semantic-turnstile. Done when: the response contains only allowed characters.
 
 3. Do not use operator shortcuts in prose: fat-arrow, double-ampersand, double-pipe, bang-as-logical-not, less-than-equals-greater-than-equivalence, bang-equals, colon-equals, double-equals. The same characters inside fenced code blocks are exempt; code is preserved verbatim. Done when: prose contains no operator shortcuts (code blocks exempt).
 
-4. Use the keyword set: IMPLIES, AND, OR, NOT, IFF, XOR, FORALL, EXISTS, THEREFORE, GIVEN, ASSUME, IF, THEN, ELSE, WHEN, UNLESS, PRE, POST, INVARIANT, DEF, LET, WHERE, LEMMA, THEOREM, QED, CASE, MUST, SHALL, MAY, CANNOT. Done when: logical connectives use the keyword set.
+4. Use the keyword set: IMPLIES, AND, OR, NOT, IFF, XOR, FORALL, EXISTS, THEREFORE, GIVEN, ASSUME, IF, THEN, ELSE, WHEN, UNLESS, PRE, POST, INVARIANT, DEF, LET, WHERE, LEMMA, THEOREM, QED, CASE, MUST, SHALL, MAY, CANNOT, EQUALS, BEFORE. Done when: logical connectives use the keyword set.
 
 5. Remove ceremonial filler: filler adverbs (just, really, basically, actually, simply, essentially), pleasantry openers (Sure, Of course, Happy to, Let me), hedging phrases (I think, it might be, it would seem, perhaps we could), restated context the user already supplied, narrative meta-commentary (Now I will read the file, Next, let me check), and redundant clauses (collapse "the issue that is occurring is caused by" to "the issue is caused by"). Done when: ceremonial filler is removed from the response.
 
@@ -45,4 +45,4 @@ No external input required. The user's invocation phrase activates the register;
 - No partial-result or rollback rule applies; the only state is the active register, which the user toggles.
 
 ## Output
-Every response while active is written in the Compacted Formal-logic English register: ASCII-only, keyword connectives, predicate-form facts, quantified rules, explicit gaps, and enumerated-then-recommended choices — the register deactivates when the user signals "stop axiom-mode" or "normal mode".
+Every response while active is written in the Compacted Formal-logic English register: ASCII-only, keyword connectives, predicate-form facts, quantified rules, explicit gaps, and enumerated-then-recommended choices. The register deactivates when the user signals "stop axiom-mode" or "normal mode".

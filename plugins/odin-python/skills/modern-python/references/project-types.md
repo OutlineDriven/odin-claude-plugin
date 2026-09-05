@@ -5,15 +5,15 @@ SKILL.md detects the project type and validates the done predicate with per-type
 this file holds the per-type setup steps.
 ## Single-file scripts (PEP 723)
 
-- Add PEP 723 inline metadata header to the script file: `# /// - projdeps`, then `# ///`, then a `[[project]]` or `[project]` table with name, version, requires-python, and dependencies.
-- Confirm the file is runnable with `uv run python <script>`.
-- Add ruff to the inline metadata dev dependencies and run `uv run ruff check <script>` to verify lint passes.
+- Add PEP 723 inline metadata header to the script file: start with `# /// script`, list top-level `requires-python = "..."` and `dependencies = [...]`, then close with `# ///`.
+- Confirm the file is runnable with `uv run <script>`.
+- Run `uvx ruff check <script>` to verify lint passes.
 
 ## New multi-file projects
 
 - Run `uv init <name>` in the project root.
 - Add dependencies with `uv add <pkg>` and dev tools with `uv add --group dev pytest ruff ty`.
-- Verify with `uv run pytest` and `uv run ruff check .`.
+- Verify with `uv run pytest`, `uv run ruff check .`, and `uv run ty check src/`.
 
 ## New reusable packages
 
@@ -82,12 +82,12 @@ Run `uv init --bare`. Use `uv add` for each dependency from `install_requires`. 
 
 ### From flake8 + black + isort
 
-Remove those tools via `uv remove`. Delete `.flake8`, `[tool.black]`, and `[tool.isort]` config sections. Add ruff: `uv add --group dev ruff`. Run `uv run ruff check --fix .` and `uv run ruff format .`.
+Remove those tools via `uv remove flake8 black isort`. Delete `.flake8`, `[tool.black]`, and `[tool.isort]` config sections. Add ruff: `uv add --group dev ruff`. Run `uv run ruff check --fix .` and `uv run ruff format .`.
 
 ### From mypy / pyright
 
-Remove those tools via `uv remove`. Delete `mypy.ini`, `pyrightconfig.json`, and legacy `[tool.mypy]`/`[tool.pyright]` sections. Add ty: `uv add --group dev ty`. Run `uv run ty check src/`.
+Remove those tools via `uv remove mypy pyright`. Delete `mypy.ini`, `pyrightconfig.json`, and legacy `[tool.mypy]`/`[tool.pyright]` sections. Add ty: `uv add --group dev ty`. Run `uv run ty check src/`.
 
 ### General
 
-After migration, verify with `make test` and `make lint`.
+After migration, verify using the target project type's checks (only package projects use `make`).
