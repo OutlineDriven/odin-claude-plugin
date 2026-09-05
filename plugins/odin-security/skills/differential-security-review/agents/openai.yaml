@@ -1,3 +1,0 @@
-interface:
-  display_name: "Differential Security Review"
-  short_description: "Use when given PR, commit, diff, or baseline for security regressions, blast radius, gaps, or adversarial review."

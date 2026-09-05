@@ -133,7 +133,6 @@
 | diagramming-code | odin-visual | Design |
 | diamond-task | odin-run | Coding |
 | diff-scoped-browser-qa | odin-web | Coding |
-| differential-security-review | odin-security | Security |
 | dimensional-analysis | odin-code | Coding |
 | diverge | odin-planning | Productivity |
 | django-access-review | odin-security | Security |

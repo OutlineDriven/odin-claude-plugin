@@ -2,7 +2,7 @@
 
 ODIN workflows for security review, vulnerability triage, and defensive implementation.
 
-39 skills, category Security.
+38 skills, category Security.
 
 ## Install
 
@@ -26,7 +26,6 @@ codex plugin add odin-security@odin-marketplace
 - confirmed-security-review
 - constant-time-analysis
 - crypto-protocol-diagram
-- differential-security-review
 - django-access-review
 - entry-point-analyzer
 - firebase-apk-scanner
