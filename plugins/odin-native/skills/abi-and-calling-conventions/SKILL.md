@@ -27,9 +27,9 @@ description: 'Use when explaining System V AMD64, ARM AAPCS, RISC-V psABI, stack
 
 | ABI | Integer arguments | Float or vector arguments | Return | Stack alignment at call | Callee-saved |
 |---|---|---|---|---|---|
-| System V AMD64 | `rdi, rsi, rdx, rcx, r8, r9` | `xmm0` to `xmm7` | `rax`, plus `rdx` for 128-bit values | 16 bytes before `call` | `rbx, rbp, r12` to `r15` |
+| System V AMD64 | `rdi, rsi, rdx, rcx, r8, r9` | `xmm0` to `xmm7` | `rax` (`xmm0` for float or vector), plus `rdx` for 128-bit values | 16 bytes before `call` | `rbx, rbp, r12` to `r15` |
 | AAPCS64 | `x0` to `x7` | `v0` to `v7` | `x0` and `x1`, or `v0` | 16 bytes | `x19` to `x28`, `x29` (frame pointer), `x30` (link register) |
-| RISC-V psABI RV64 | `a0` to `a7` | `fa0` to `fa7` | `a0` and `a1` | 16 bytes | `s0` to `s11`, `sp` |
+| RISC-V psABI RV64 | `a0` to `a7` | `fa0` to `fa7` | `a0` and `a1` (`fa0` for float) | 16 bytes | `s0` to `s11`, `sp` |
 
 System V AMD64 on Linux also grants a 128-byte red zone below `rsp` that leaf functions use without adjusting the stack pointer. Arguments past the register set go on the stack, so a seven-integer C function on System V passes the seventh in memory.
 

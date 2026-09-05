@@ -30,10 +30,9 @@ hash_dir = false                # exclude CWD from the hash (shared caches)
 base_dir = /project             # strip this prefix from hashed paths
 
 # sloppiness relaxes what the hash covers
-sloppiness = include_file_mtime,include_file_ctime,time_macros
+sloppiness = include_file_mtime,include_file_ctime,time_macros,pch_defines
 # time_macros: ignore __DATE__ and __TIME__ changes
 # pch_defines: needed for GCC precompiled headers
-sloppiness = pch_defines,time_macros
 ```
 
 ## CI and shared cache

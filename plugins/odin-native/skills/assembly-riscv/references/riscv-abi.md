@@ -71,4 +71,4 @@ Extensions concatenate in the mandated order:
 | `G` | Shorthand for `IMAFD` with Zicsr and Zifencei |
 | `C` | Compressed 16-bit instructions |
 
-Extra extensions, for example `B` for bit manipulation once ratified, append after the single-letter block. Write the full `-march` string and let the toolchain reject what the target lacks.
+Extra extensions, for example `B` for bit manipulation with its `Zba`/`Zbb`/`Zbs` sub-extensions (ratified 2021), append after the single-letter block. Write the full `-march` string and let the toolchain reject what the target lacks.

@@ -33,6 +33,7 @@ Clang has no `-D_GLIBCXX_ASSERTIONS` dependency difference; keep it for C++ code
 CFLAGS="-O2 \
   -fstack-protector-strong \
   -fstack-clash-protection \
+  -fcf-protection \
   -D_FORTIFY_SOURCE=3 \
   -fPIE"
 

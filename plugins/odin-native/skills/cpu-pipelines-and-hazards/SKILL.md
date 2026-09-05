@@ -36,15 +36,18 @@ description: 'Use when explaining pipeline stages, data or control hazards, forw
 
 ```c
 /* Serial: each iteration waits on acc. */
+acc = 0;
 for (int i = 0; i < n; i++)
     acc = acc + data[i];
 
 /* Two chains: the core overlaps them. */
 acc0 = acc1 = 0;
-for (int i = 0; i < n; i += 2) {
+for (int i = 0; i + 1 < n; i += 2) {
     acc0 += data[i];
     acc1 += data[i + 1];
 }
+if (n & 1) /* odd tail: one element left */
+    acc0 += data[n - 1];
 acc = acc0 + acc1;
 ```
 

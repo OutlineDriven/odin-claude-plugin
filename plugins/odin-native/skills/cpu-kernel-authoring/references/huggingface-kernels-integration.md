@@ -61,13 +61,13 @@ from kernels import get_kernel, has_kernel
 repo_id = "kernels-community/rmsnorm"
 
 if has_kernel(repo_id):
-    layer_norm = get_kernel(repo_id)
+    rmsnorm_kernel = get_kernel(repo_id)
 
     x = torch.randn(2, 1024, 2048, dtype=torch.bfloat16)  # CPU tensor
     weight = torch.ones(2048, dtype=torch.bfloat16)
 
     # CPU dispatch happens automatically via torch_binding.cpp
-    out = layer_norm.rms_norm_fn(x, weight, eps=1e-6)
+    out = rmsnorm_kernel.apply_rms_norm_forward(x, weight, eps=1e-6)
 ```
 
 ### Integration with Transformers
@@ -90,7 +90,7 @@ if has_kernel(repo_id):
 
                 def make_forward(mod, epsilon):
                     def forward(hidden_states):
-                        return rmsnorm_kernel.rms_norm(hidden_states, mod.weight, eps=epsilon)
+                        return rmsnorm_kernel.apply_rms_norm_forward(hidden_states, mod.weight, eps=epsilon)
                     return forward
 
                 module.forward = make_forward(module, eps)

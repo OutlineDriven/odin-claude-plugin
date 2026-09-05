@@ -34,7 +34,7 @@ description: 'Use when navigating kernel source, understanding boot flow, initca
    | Block | `block/` | `request_queue`, `gendisk` |
    | Net | `net/` | `sk_buff`, `net_device` |
    | Drivers | `drivers/` | `device`, `device_driver` |
-   | Syscalls | `kernel/`, `fs/`, `mm/` | `SYSCALL_DEFINE*` |
+   | Syscalls | `kernel/`, `fs/`, `mm/` | `pt_regs` |
 
    Done when: the question's subsystem names its path and the structs a reader will meet first.
 4. For initcall ordering, read the levels in run order from `include/linux/init.h`: `early_initcall`, `core_initcall`, `postcore_initcall`, `arch_initcall`, `subsys_initcall`, `fs_initcall`, `device_initcall`, `late_initcall`. Platform drivers typically register at `subsys_initcall` or through `module_init` (which lands at `device_initcall` for built-in code). Done when: the requested code sits at a named level relative to its dependencies.

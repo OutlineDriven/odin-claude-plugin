@@ -95,8 +95,8 @@ msr  nzcv, x0              // write the flags register
 | `dmb ish` | Full barrier, inner shareable domain |
 | `dmb ishld` | Load barrier |
 | `dmb ishst` | Store barrier |
-| `dsb` | Instruction synchronization barrier, all device and memory |
-| `isb` | Instruction fetch barrier |
+| `dsb` | Data synchronization barrier, all device and memory |
+| `isb` | Instruction synchronization barrier |
 
 ## NEON quick categories
 

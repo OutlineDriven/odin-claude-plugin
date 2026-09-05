@@ -28,7 +28,7 @@ prefetch:
     - "_MM_HINT_T0: prefetch to L1 (closest, smallest)"
     - "_MM_HINT_T1: prefetch to L2"
     - "_MM_HINT_T2: prefetch to L3"
-    - "_MM_HINT_NTA: non-temporal (bypass cache, for write-only streams)"
+    - "_MM_HINT_NTA: non-temporal (minimal cache pollution, for data read once)"
   guideline: |
     Prefetch distance = memory_latency × bandwidth / element_size
     Typical: 4-16 cache lines ahead for L1, 64+ for L2

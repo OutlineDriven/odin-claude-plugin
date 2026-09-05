@@ -4,7 +4,7 @@ Source: the GDB manual's Python section at sourceware.org/gdb/current/onlinedocs
 
 ## GDB Python API basics
 
-GDB embeds a Python interpreter. Load a script with `source script.py` or keep scripts in `~/.gdb_scripts/`.
+GDB embeds a Python interpreter. Load a script with `source script.py` or add the source command to your `~/.gdbinit`.
 
 ```python
 import gdb
