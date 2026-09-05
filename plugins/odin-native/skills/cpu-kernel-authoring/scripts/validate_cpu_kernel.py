@@ -14,6 +14,8 @@ import re
 import sys
 from pathlib import Path
 
+CPU_BACKEND_RE = re.compile(r'backend\s*=\s*["\']cpu["\']')
+
 
 class ValidationError:
     def __init__(self, level: str, message: str, file: str | None = None, line_num: int | None = None):
@@ -45,7 +47,7 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
     with open(build_toml) as f:
         content = f.read()
 
-    if 'backend = "cpu"' not in content:
+    if not CPU_BACKEND_RE.search(content):
         errors.append(ValidationError("ERROR", "No CPU backend sections found in build.toml", "build.toml"))
 
     # kernel-builder does not add the kernel directory to the include path; without `include` headers fail to resolve.
@@ -55,7 +57,7 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
         next_section = content.find("[kernel.", start + 1)
         section_content = content[start:next_section] if next_section != -1 else content[start:]
 
-        if 'backend = "cpu"' in section_content and "include" not in section_content:
+        if CPU_BACKEND_RE.search(section_content) and "include" not in section_content:
             errors.append(ValidationError(
                 "WARNING",
                 f"Section {section} missing 'include' directive for header resolution",

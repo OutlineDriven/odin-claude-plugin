@@ -194,7 +194,18 @@ def print_analysis(analysis: dict[str, object]):
 
     print("CPU Optimization Strategy:")
 
-    if analysis["has_gemm"]:
+    if analysis["kernel_type"] == "attention":
+        print("  Kernel Category: Attention (Flash-Attention style)")
+        print("  Architecture: Tiled attention with brgemm for Q@K and S@V")
+        print("  Blocking: BLOCK_M=256, BLOCK_N=768 (attention-specific)")
+        print("  Threading: parallel over batch * heads * M-tiles")
+        print("  Requirements: AVX512 + AMX (via brgemm)")
+        print()
+        print("  Reference files:")
+        print("    - references/brgemm_patterns.yaml")
+        print("    - references/memory_patterns.yaml")
+
+    elif analysis["has_gemm"]:
         print("  Kernel Category: GEMM")
         print("  Architecture:")
         print("    - tinygemm path (M <= 4): fused dequant + _mm512_dpbf16_ps")
@@ -209,31 +220,6 @@ def print_analysis(analysis: dict[str, object]):
         print("    - references/brgemm_patterns.yaml")
         print("    - references/quantized_gemm_patterns.yaml")
         print("    - references/threading_patterns.yaml")
-
-    elif analysis["kernel_type"] in ("reduction", "elementwise"):
-        print("  Kernel Category: Element-wise / Reduction")
-        print("  Architecture: Direct AVX512 intrinsics (no brgemm)")
-        print("  Threading: #pragma omp parallel for over rows")
-        print("  Vectorization: FP32Vec16, BF16Vec32 abstractions")
-        print("  Compiler flags: -mavx512f -mavx512bf16 -mavx512vl -mavx512dq -mavx512bw")
-        print("                  -mavx512vbmi -mfma -mf16c -fopenmp")
-        print("  Prefetch: _MM_HINT_T1 (L2)")
-        print()
-        print("  Reference files:")
-        print("    - references/simd_optimization_patterns.yaml")
-        print("    - references/memory_patterns.yaml")
-        print("    - references/threading_patterns.yaml")
-
-    elif analysis["kernel_type"] == "attention":
-        print("  Kernel Category: Attention (Flash-Attention style)")
-        print("  Architecture: Tiled attention with brgemm for Q@K and S@V")
-        print("  Blocking: BLOCK_M=256, BLOCK_N=768 (attention-specific)")
-        print("  Threading: parallel over batch * heads * M-tiles")
-        print("  Requirements: AVX512 + AMX (via brgemm)")
-        print()
-        print("  Reference files:")
-        print("    - references/brgemm_patterns.yaml")
-        print("    - references/memory_patterns.yaml")
 
     print()
     print("File Structure:")
