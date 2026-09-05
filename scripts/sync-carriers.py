@@ -139,7 +139,7 @@ def _plan(baseline_text, carrier_text):
 
     # Stitch edits and insertions into the original text, sorted by position.
     # Insertions at the same offset stay in baseline order (stable sort).
-    all_edits = list(edits) + [(p, p, t) for p, t in insertions]
+    all_edits = edits + [(p, p, t) for p, t in insertions]
     all_edits.sort(key=lambda e: e[0])
 
     parts = []
@@ -180,7 +180,8 @@ def self_test():
     """Prove the planner preserves an overlay and that --check reuses the audit."""
 
     baseline_text = read_exact(BASELINE)
-    canonical = dict(sections(baseline_text))
+    ordered = sections(baseline_text)
+    canonical = dict(ordered)
     overlay_body = "\na carrier persona overlay\n"
     overlay = f"<role>{overlay_body}</role>"
     overlay_only = baseline_text.replace(
@@ -207,7 +208,6 @@ def self_test():
         error is None and not changes and bool(failures),
     ))
 
-    ordered = sections(baseline_text)
     tool_body = next(body for tag, body in ordered if tag == "code_tools")
     missing_tool = baseline_text.replace(
         f"<code_tools>{tool_body}</code_tools>", "", 1
