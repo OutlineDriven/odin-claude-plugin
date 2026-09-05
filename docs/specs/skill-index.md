@@ -465,7 +465,6 @@
 | skills-visibility | odin-skills | Productivity |
 | slicing-code-context | odin-code | Coding |
 | smart-contract-audit-prep | odin-security | Security |
-| smart-contract-code-maturity-assessor | odin-security | Security |
 | smart-contract-guidelines-advisor | odin-security | Security |
 | smart-contract-secure-workflow | odin-security | Security |
 | snippet-image-rendering | odin-visual | Design |
