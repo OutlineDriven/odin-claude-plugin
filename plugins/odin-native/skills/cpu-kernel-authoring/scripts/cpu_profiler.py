@@ -44,7 +44,8 @@ def _find_perf_binary():
     perf_candidates = sorted(glob.glob("/usr/lib/linux-tools/*/perf"), reverse=True)
     for candidate in perf_candidates:
         try:
-            result = subprocess.run(
+            try:
+              result = subprocess.run(
                 [candidate, "stat", "echo", "test"],
                 capture_output=True, timeout=10, check=False,
             )
@@ -132,13 +133,17 @@ def run_perf_stat(kernel_package: str, op_path: str, warmup: int, iters: int, ba
         ]
 
         print(f"  Running: {' '.join(cmd[:6])} ...")
-        result = subprocess.run(
-            cmd,
-            capture_output=True,
-            text=True,
-            timeout=300,
-            check=False,
-        )
+        try:
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=300,
+                check=False,
+            )
+        except subprocess.TimeoutExpired:
+            print("  perf stat timed out after 300 seconds")
+            return {}
 
         if result.returncode != 0:
             print(f"  perf stat failed (exit code {result.returncode})")
