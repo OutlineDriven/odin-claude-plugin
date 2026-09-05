@@ -259,7 +259,7 @@
 | full-product-evaluation | odin-testing | Coding |
 | function-audit-context-analyzer | odin-security | Security |
 | fuzz-harness-writing | odin-fuzzing | Security |
-| fuzzing | odin-native | Coding |
+| fuzzing | odin-fuzzing | Security |
 | fuzzing-coverage-analysis | odin-fuzzing | Security |
 | fuzzing-dictionary | odin-fuzzing | Security |
 | fuzzing-obstacles | odin-fuzzing | Security |

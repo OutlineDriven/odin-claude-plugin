@@ -2,7 +2,7 @@
 
 ODIN workflows for native systems, toolchains, and performance.
 
-148 skills, category Coding.
+147 skills, category Coding.
 
 ## Install
 
@@ -72,7 +72,6 @@ codex plugin add odin-native@odin-marketplace
 - embedded-rust
 - flamegraphs
 - freertos
-- fuzzing
 - gcc
 - gdb
 - gpio-baremetal

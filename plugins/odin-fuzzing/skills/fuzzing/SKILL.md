@@ -1,6 +1,6 @@
 ---
 name: fuzzing
-description: 'Use when setting up libFuzzer or AFL++ fuzz targets, writing fuzz harnesses, managing corpora, or wiring fuzzing into CI. Not for sanitizer flag reference: use sanitizers.'
+description: 'Use when planning an end-to-end fuzzing program for a project: engine and target selection, corpus management, and CI or nightly wiring. Not for harness design: use fuzz-harness-writing. Not for engine operation or triage: use libfuzzer. Not for sanitizer flag reference: use sanitizers.'
 ---
 
 # Fuzzing

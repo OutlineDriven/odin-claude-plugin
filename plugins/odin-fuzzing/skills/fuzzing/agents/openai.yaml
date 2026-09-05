@@ -1,0 +1,3 @@
+interface:
+  display_name: "Fuzzing"
+  short_description: "Use when planning an end-to-end fuzzing program for a project: engine and target selection, corpus management, and CI or nightly wiring."
