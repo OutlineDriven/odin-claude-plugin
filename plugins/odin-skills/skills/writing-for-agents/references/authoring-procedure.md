@@ -42,7 +42,7 @@ distinct trigger and procedure, not through a topic label.
    receipts, ceremonial phase tables, and repeated "done when" text that add no decision or check.
 7. Keep `SKILL.md` below 500 lines. Move bulky catalogs, schemas, and branch-specific rules into
    one-level `references/` files, and name the exact condition that loads each file. Add an
-   `assets/` template only when output shape is contractual.
+   `assets/` template only when output plan is contractual.
 8. Add a `scripts/` program only for deterministic work that prose handles badly, such as parsing,
    validation, or repetitive generation. Give it a narrow CLI, useful errors, no hidden network
    calls, and a direct behavioral check. Do not create empty directories.

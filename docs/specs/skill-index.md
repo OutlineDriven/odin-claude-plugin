@@ -446,7 +446,6 @@
 | skill-benchmark | odin-skills | Productivity |
 | skill-doctor | odin-agent | Productivity |
 | skill-gap-finder | odin-core | Coding |
-| skill-progressive-disclosure-design | odin-skills | Productivity |
 | skill-scanner | odin-skills | Productivity |
 | skills-visibility | odin-skills | Productivity |
 | slicing-code-context | odin-code | Coding |
@@ -560,7 +559,6 @@
 | writing-fragments | odin-writing | Writing |
 | writing-lean-proofs | odin-lean | Coding |
 | writing-shape | odin-writing | Writing |
-| writing-skills | odin-skills | Productivity |
 | wycheproof | odin-security | Security |
 | xcode-simulator-testing | odin-apple | Coding |
 | yara-rule-authoring | odin-security | Security |
