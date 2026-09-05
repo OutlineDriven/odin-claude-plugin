@@ -2,7 +2,7 @@
 
 ODIN workflows for memory, session continuity, decision records, and retrospectives.
 
-44 skills, category Productivity.
+43 skills, category Productivity.
 
 ## Install
 
@@ -58,7 +58,6 @@ codex plugin add odin-knowledge@odin-marketplace
 - visual-project-recap
 - weekly-review
 - weekly-synthesis
-- what-did-i-get-done
 - work-records-summary
 - workflow-evidence-mining
 - workflow-from-chats

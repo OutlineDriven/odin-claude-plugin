@@ -540,7 +540,6 @@
 | webapp-testing | odin-web | Coding |
 | weekly-review | odin-knowledge | Productivity |
 | weekly-synthesis | odin-knowledge | Productivity |
-| what-did-i-get-done | odin-knowledge | Productivity |
 | why | odin-research | Research |
 | wizard | odin-run | Coding |
 | wontfix | odin-git | Coding |

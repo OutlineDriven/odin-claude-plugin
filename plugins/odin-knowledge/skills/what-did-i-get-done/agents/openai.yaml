@@ -1,3 +1,0 @@
-interface:
-  display_name: "What Did I Get Done"
-  short_description: "Use when a user asks what was completed in a named date or commit range."
