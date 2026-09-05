@@ -1,11 +1,11 @@
 # Install proof
 
 Each supported surface, exercised against this tree rather than read from a document. Run
-2026-09-04 on branch `feat/prompt-stack-2.1` at `releaseVersion` 2.1.0, the tree of 28 job-named
-plugins and 614 skills.
+2026-09-05 on branch `feat/prompt-stack-2.1` at `releaseVersion` 2.1.0, the tree of 28 job-named
+plugins and 605 skills.
 
-The counts below are the run's own: the tree held 614 skills that day and holds 608
-now; the live gate prints the current count.
+The counts below are the run's own, and they match the tree as it stands: `check-plugin-surfaces`
+prints the same 605.
 
 `docs/specs/distribution-surfaces.md` carries the specifications and their citations. This file
 carries only what was executed and what it returned.
@@ -18,7 +18,7 @@ The GitHub CLI validates every skill against the Agent Skills specification. (Th
 $ gh skill publish --dry-run
 warning	[plugins] odin-agent/agent-environment-retrospective	recommended field missing: license
 warning	[plugins] odin-agent/agents-md	recommended field missing: license
-... 612 more lines of the same shape, one per skill ...
+... 603 more lines of the same shape, one per skill ...
 warning		secret scanning is not enabled. Recommended to prevent accidental credential exposure (gh repo edit --enable-secret-scanning)
 warning		secret scanning push protection is not enabled. Blocks pushes containing secrets (gh repo edit --enable-secret-scanning-push-protection)
 warning		no active tag protection rulesets found. Consider protecting tags to ensure immutable releases (Settings > Rules > Rulesets)
@@ -28,9 +28,9 @@ $ echo $?
 0
 ```
 
-All 614 skill directories were discovered under the `[plugins]` label, which is the
+All 605 skill directories were discovered under the `[plugins]` label, which is the
 `plugins/{scope}/skills/*/SKILL.md` convention that `gh skill publish --help` enumerates. The only
-per-skill finding was `recommended field missing: license`, 614 times.
+per-skill finding was `recommended field missing: license`, 605 times.
 
 That warning is accepted, not fixed. `license` is optional in the Agent Skills specification, this
 tree has mixed provenance, and third-party attribution lives in `licenses/NOTICE`. A uniform
@@ -41,7 +41,7 @@ GitHub settings, not tree content; they belong to the repository owner.
 
 ## Per-skill install
 
-`gh skill install` accepts an exact repository path, which skips a full tree traversal. At 614
+`gh skill install` accepts an exact repository path, which skips a full tree traversal. At 605
 skills that matters.
 
 ```shell
