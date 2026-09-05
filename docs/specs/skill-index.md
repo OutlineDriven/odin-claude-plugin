@@ -503,7 +503,6 @@
 | unslop | odin-writing | Writing |
 | validate-changes-match-specs | odin-review | Coding |
 | validation-first-driven | odin-testing | Coding |
-| validation-self-audit | odin-testing | Coding |
 | variant-hunt | odin-security | Security |
 | vector-forge | odin-security | Security |
 | verification-before-completion | odin-core | Coding |

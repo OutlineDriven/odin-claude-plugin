@@ -2,7 +2,7 @@
 
 ODIN workflows for tests, properties, mutation, and behavioral verification.
 
-26 skills, category Coding.
+25 skills, category Coding.
 
 ## Install
 
@@ -41,6 +41,5 @@ codex plugin add odin-testing@odin-marketplace
 - tests-adversarial
 - tests-purge-unneeded
 - validation-first-driven
-- validation-self-audit
 - verification-skill
 - verify-this
