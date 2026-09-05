@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.0] - 2026-09-04
 ### Changed
+- Restored `commit-push`, `commit-push-pr`, `commit-push-current`, and
+  `commit-push-main`. The current-branch and default-branch variants require
+  explicit human invocation; every push requires approval of its mutation set.
+  After the approved folds and these additions, the tree holds 547 skills in
+  28 plugins.
 - Shortened every skill description to at most 200 characters (median 174, down from 269).
   Each keeps its trigger phrases and `Not for` pointer and drops mechanism narration;
   a fresh read-only review of every rewrite restored 95 lost triggers or pointers.

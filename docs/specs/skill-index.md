@@ -70,6 +70,10 @@
 | code-simplification | odin-code | Coding |
 | codeql-security-analysis | odin-security | Security |
 | commit | odin-git | Coding |
+| commit-push | odin-git | Coding |
+| commit-push-current | odin-git | Coding |
+| commit-push-main | odin-git | Coding |
+| commit-push-pr | odin-git | Coding |
 | competitor-feature-research | odin-product | Productivity |
 | compile-3d-workflow | odin-visual | Design |
 | complexity-grill | odin-review | Coding |

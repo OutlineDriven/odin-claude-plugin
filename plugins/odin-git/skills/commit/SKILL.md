@@ -1,6 +1,6 @@
 ---
 name: commit
-description: 'Use when asked to commit changes, create a typed branch, format history for changelogs, or rewrite commit messages of HEAD or an unpushed range. Not for pushed or shared history without confirmation.'
+description: 'Use when asked to commit changes, create a typed branch, format history for a changelog, or rewrite messages of HEAD or an unpushed range. Not for pushing or a PR: use commit-push or commit-push-pr.'
 ---
 
 # Git commit

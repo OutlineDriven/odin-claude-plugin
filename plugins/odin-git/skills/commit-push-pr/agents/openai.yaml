@@ -1,0 +1,3 @@
+interface:
+  display_name: "Commit Push PR"
+  short_description: "Use when asked to commit, push a feature branch, and open or update a pull request with gh in one pass."
