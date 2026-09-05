@@ -1,3 +1,3 @@
 interface:
   display_name: "Burpsuite Project Parser"
-  short_description: "Use when asked to search or analyze a Burp Suite .burp project to extract audit items, inspect request or response metadata, or search captured traffic."
+  short_description: "Use when asked to analyze a Burp Suite .burp project for audit items, request/response metadata, or captured traffic."

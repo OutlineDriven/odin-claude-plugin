@@ -45,7 +45,6 @@
 | browser-qa | odin-testing | Coding |
 | browser-testing | odin-web | Coding |
 | build-program-graph | odin-security | Security |
-| burp-search-command | odin-security | Security |
 | burpsuite-project-parser | odin-security | Security |
 | buyer-objection-research | odin-product | Productivity |
 | buzzword-analysis | odin-product | Productivity |

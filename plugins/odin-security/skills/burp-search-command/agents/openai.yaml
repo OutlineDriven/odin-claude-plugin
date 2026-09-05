@@ -1,3 +1,0 @@
-interface:
-  display_name: "Burp Search Command"
-  short_description: "Use when a human invokes the Burp search command with a required .burp project file and optional parser operation."

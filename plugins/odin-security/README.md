@@ -2,7 +2,7 @@
 
 ODIN workflows for security review, vulnerability triage, and defensive implementation.
 
-45 skills, category Security.
+44 skills, category Security.
 
 ## Install
 
@@ -19,7 +19,6 @@ codex plugin add odin-security@odin-marketplace
 ## Skills
 
 - build-program-graph
-- burp-search-command
 - burpsuite-project-parser
 - c-security-review
 - chain-vulnerability-scanner
