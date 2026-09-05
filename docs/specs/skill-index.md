@@ -154,7 +154,6 @@
 | eligibility-batch-organizer | odin-knowledge | Productivity |
 | embed-diagram | odin-visual | Design |
 | enforce-workflow-constraints | odin-core | Coding |
-| engineering-blog-writing | odin-writing | Writing |
 | engineering-retrospective | odin-knowledge | Productivity |
 | entropy-assisted-planning | odin-planning | Productivity |
 | entry-point-analyzer | odin-security | Security |
