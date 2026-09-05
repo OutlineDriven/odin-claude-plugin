@@ -277,8 +277,6 @@
 | ios-build-cleanup | odin-apple | Coding |
 | ios-build-fix | odin-apple | Coding |
 | ios-visual-review | odin-design | Design |
-| isolate-work-in-worktree | odin-git | Coding |
-| isolate-workspace-gate | odin-git | Coding |
 | issue-intake | odin-git | Coding |
 | issue-now | odin-git | Coding |
 | issue-triage | odin-git | Coding |
