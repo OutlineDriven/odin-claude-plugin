@@ -146,3 +146,17 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+
+      - id: check-skill-scripts
+        name: compile, syntax-check, and self-check skill scripts
+        entry: python3 scripts/check-skill-scripts.py
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: check-skill-scripts-self-test
+        name: check the skill-script gate flags planted defects
+        entry: python3 scripts/check-skill-scripts.py --self-test
+        language: system
+        pass_filenames: false
+        always_run: true

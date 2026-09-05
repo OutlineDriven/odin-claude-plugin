@@ -146,19 +146,21 @@ def compare_structured(ref, out, tolerances, path="output"):
     return []
 
 
-def _reference_output(baseline_mod, inputs):
+def _baseline_pair(baseline_mod, inputs):
+    """Reference output and a timed callable, building any Model exactly once."""
     if hasattr(baseline_mod, "get_reference_output"):
-        return baseline_mod.get_reference_output(*inputs)
+        return baseline_mod.get_reference_output(*inputs), baseline_mod.get_reference_output
     if hasattr(baseline_mod, "Model"):
         init_inputs = baseline_mod.get_init_inputs() if hasattr(baseline_mod, "get_init_inputs") else []
         model = baseline_mod.Model(*init_inputs)
         model.eval()
         with torch.no_grad():
-            return model(*inputs)
+            ref_output = model(*inputs)
+        return ref_output, (lambda *args: model(*args))
     raise AttributeError("baseline must define get_reference_output() or a Model class")
 
 
-def run_correctness(baseline_mod, kernel_func, tolerances):
+def run_correctness(inputs, ref_output, kernel_func, tolerances):
     """Compare the kernel output to the baseline output; return True when they match."""
     print("\n  Correctness Check (per-dtype tolerances)")
     for dtype, (atol, rtol) in tolerances.items():
@@ -166,12 +168,6 @@ def run_correctness(baseline_mod, kernel_func, tolerances):
     print("    integer and bool dtypes: exact")
 
     try:
-        if not hasattr(baseline_mod, "get_inputs"):
-            print("  Error: baseline must define get_inputs()")
-            return False
-        inputs = baseline_mod.get_inputs()
-        ref_output = _reference_output(baseline_mod, inputs)
-
         with torch.no_grad():
             kernel_output = kernel_func(*inputs)
 
@@ -189,16 +185,12 @@ def run_correctness(baseline_mod, kernel_func, tolerances):
         return False
 
 
-def run_performance(baseline_mod, kernel_func, baseline_us=None, warmup=10, iters=100):
+def run_performance(inputs, kernel_func, ref_func, baseline_us=None, warmup=10, iters=100):
     """Time baseline and kernel with torch.utils.benchmark; return (baseline_us, kernel_us, speedup)."""
     from torch.utils.benchmark import Timer
 
     print(f"\n  Performance Benchmark (warmup={warmup}, iters={iters})")
 
-    if not hasattr(baseline_mod, "get_inputs"):
-        print("  Error: baseline must define get_inputs()")
-        return None, None, None
-    inputs = baseline_mod.get_inputs()
 
     if baseline_us is not None:
         # The baseline does not change between trials, so re-timing it only adds
@@ -206,37 +198,29 @@ def run_performance(baseline_mod, kernel_func, baseline_us=None, warmup=10, iter
         print(f"  Using cached baseline: {baseline_us:.2f} us")
         bl_us = baseline_us
     else:
-        if hasattr(baseline_mod, "get_reference_output"):
-            ref_func = baseline_mod.get_reference_output
-        elif hasattr(baseline_mod, "Model"):
-            init_inputs = baseline_mod.get_init_inputs() if hasattr(baseline_mod, "get_init_inputs") else []
-            model = baseline_mod.Model(*init_inputs)
-            model.eval()
-            ref_func = lambda *args: model(*args)
-        else:
-            print("  Error: baseline must define get_reference_output() or Model class")
-            return None, None, None
-
-        bl_timer = Timer(
-            stmt="ref_func(*inputs)",
-            globals={"ref_func": ref_func, "inputs": inputs},
-            label="Baseline",
-            description="PyTorch",
-            num_threads=torch.get_num_threads(),
-        )
-        bl_result = bl_timer.blocked_autorange(min_run_time=2.0)
+        # Autograd state is measurement overhead: no timed iteration builds a graph.
+        with torch.no_grad():
+            bl_timer = Timer(
+                stmt="ref_func(*inputs)",
+                globals={"ref_func": ref_func, "inputs": inputs},
+                label="Baseline",
+                description="PyTorch",
+                num_threads=torch.get_num_threads(),
+            )
+            bl_result = bl_timer.blocked_autorange(min_run_time=2.0)
         bl_us = bl_result.median * 1e6
         print(f"  Baseline: {bl_us:.2f} us (median)")
 
-    kr_timer = Timer(
-        stmt="kernel_func(*inputs)",
-        globals={"kernel_func": kernel_func, "inputs": inputs},
-        label="Kernel",
-        description="CPU Kernel",
-        num_threads=torch.get_num_threads(),
-    )
-    kr_result = kr_timer.blocked_autorange(min_run_time=2.0)
-    kr_us = kr_result.median * 1e6
+    with torch.no_grad():
+        kr_timer = Timer(
+            stmt="kernel_func(*inputs)",
+            globals={"kernel_func": kernel_func, "inputs": inputs},
+            label="Kernel",
+            description="CPU Kernel",
+            num_threads=torch.get_num_threads(),
+        )
+        kr_result = kr_timer.blocked_autorange(min_run_time=2.0)
+        kr_us = kr_result.median * 1e6
     print(f"  Kernel:   {kr_us:.2f} us (median)")
 
     speedup = bl_us / kr_us if kr_us > 0 else 0
@@ -378,13 +362,18 @@ def main():
     print(f"\n{'=' * 70}")
     print("Correctness")
     print(f"{'=' * 70}")
-    correct = run_correctness(baseline_mod, kernel_func, tolerances)
+    if not hasattr(baseline_mod, "get_inputs"):
+        print("Error: baseline must define get_inputs()")
+        sys.exit(1)
+    inputs = baseline_mod.get_inputs()
+    ref_output, ref_func = _baseline_pair(baseline_mod, inputs)
+    correct = run_correctness(inputs, ref_output, kernel_func, tolerances)
     print(f"\n  Result: {'PASSED' if correct else 'FAILED'}")
 
     print(f"\n{'=' * 70}")
     print("Performance")
     print(f"{'=' * 70}")
-    bl_us, kr_us, speedup = run_performance(baseline_mod, kernel_func, baseline_us=args.baseline_us)
+    bl_us, kr_us, speedup = run_performance(inputs, kernel_func, ref_func, baseline_us=args.baseline_us)
 
     print(f"\n{'=' * 70}")
     print("Summary")
@@ -395,7 +384,6 @@ def main():
         print(f"Kernel:      {kr_us:.2f} us")
         print(f"Speedup:     {speedup:.2f}x")
     print()
-
     if correct and speedup is not None and speedup >= 1.0:
         print("All checks passed!")
         sys.exit(0)
