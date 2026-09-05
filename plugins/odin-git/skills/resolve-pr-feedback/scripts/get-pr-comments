@@ -143,10 +143,11 @@ query Reviews($owner: String!, $repo: String!, $pr: Int!, $endCursor: String) {
 # graphql --paginate --slurp` always wraps the pages in an array, and
 # `--slurpfile` adds one more nesting level, so normalize both shapes
 # before filtering.
-threads_file=$(mktemp "${TMPDIR:-/tmp}/odin-get-pr-comments.XXXXXX")
-comments_file=$(mktemp "${TMPDIR:-/tmp}/odin-get-pr-comments.XXXXXX")
-reviews_file=$(mktemp "${TMPDIR:-/tmp}/odin-get-pr-comments.XXXXXX")
-trap 'rm -f "$threads_file" "$comments_file" "$reviews_file"' EXIT
+tmp_dir=$(mktemp -d "${TMPDIR:-/tmp}/odin-get-pr-comments.XXXXXX")
+trap 'rm -rf "$tmp_dir"' EXIT
+threads_file="$tmp_dir/threads.json"
+comments_file="$tmp_dir/comments.json"
+reviews_file="$tmp_dir/reviews.json"
 printf '%s' "$threads_pages" > "$threads_file"
 printf '%s' "$comments_pages" > "$comments_file"
 printf '%s' "$reviews_pages" > "$reviews_file"
