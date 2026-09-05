@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-knowledge",
   "displayName": "ODIN Knowledge",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "ODIN workflows for memory, session continuity, decision records, and retrospectives.",
   "author": {
     "name": "OutlineDriven",

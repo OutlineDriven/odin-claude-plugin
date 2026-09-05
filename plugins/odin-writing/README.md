@@ -2,7 +2,7 @@
 
 ODIN workflows for documentation, editorial prose, and copy.
 
-33 skills, category Writing.
+35 skills, category Writing.
 
 ## Install
 
@@ -34,6 +34,7 @@ codex plugin add odin-writing@odin-marketplace
 - humanizer-en-asd-ste100
 - linkedin-ghostwriting
 - markdown-to-pdf
+- plain-korean
 - press-release-writer
 - purge-slop-docs
 - reorder
@@ -42,6 +43,7 @@ codex plugin add odin-writing@odin-marketplace
 - rewrite-denoise-v0
 - rhythmic-taste
 - save-md
+- ste-korean
 - substack-ghostwriting
 - sync-docs
 - technical-article-writer

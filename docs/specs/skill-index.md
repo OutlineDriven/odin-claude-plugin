@@ -440,6 +440,7 @@
 | peripherals-from-datasheet | odin-native | Coding |
 | perspective-complete-review | odin-review | Coding |
 | pgo | odin-native | Coding |
+| plain-korean | odin-writing | Writing |
 | plan | odin-planning | Productivity |
 | plan-review | odin-planning | Productivity |
 | platform-device-model | odin-native | Coding |
@@ -585,6 +586,7 @@
 | ssotize-audit-fold | odin-knowledge | Productivity |
 | state-machine-workflow | odin-planning | Productivity |
 | static-analysis | odin-native | Coding |
+| ste-korean | odin-writing | Writing |
 | stm32-baremetal | odin-native | Coding |
 | strace-ltrace | odin-native | Coding |
 | strategy | odin-product | Productivity |
