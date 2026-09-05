@@ -2,7 +2,7 @@
 
 ODIN workflows for pressure-testing a decision from independent seats and lenses.
 
-22 skills, category Productivity.
+21 skills, category Productivity.
 
 ## Install
 
@@ -24,7 +24,6 @@ codex plugin add odin-critique@odin-marketplace
 - cross-lens-converge
 - decision-rationale-gaps
 - doubt-driven
-- framing-divergence-fanout
 - from-breaking-perspective
 - from-business-perspective
 - from-career-perspective

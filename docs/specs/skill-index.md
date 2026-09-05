@@ -184,7 +184,6 @@
 | fix-p0-issues | odin-git | Coding |
 | fixed-view-visual-benchmark | odin-design | Design |
 | frame-rate-stability | odin-design | Design |
-| framing-divergence-fanout | odin-critique | Productivity |
 | fresh-reader-review | odin-writing | Writing |
 | from-breaking-perspective | odin-critique | Productivity |
 | from-business-perspective | odin-critique | Productivity |
