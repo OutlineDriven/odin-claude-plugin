@@ -10,7 +10,7 @@
       "name": "odin-core",
       "source": "./plugins/odin-core",
       "description": "Core ODIN gates every session runs: intent, scope, verification, and hand-off checks.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -33,7 +33,7 @@
       "name": "odin-planning",
       "source": "./plugins/odin-planning",
       "description": "ODIN workflows for shaping intent into approved plans, specs, and task lists.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -56,7 +56,7 @@
       "name": "odin-critique",
       "source": "./plugins/odin-critique",
       "description": "ODIN workflows for pressure-testing a decision from independent seats and lenses.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -79,7 +79,7 @@
       "name": "odin-product",
       "source": "./plugins/odin-product",
       "description": "ODIN workflows for product strategy, market signals, and developer adoption.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -102,7 +102,7 @@
       "name": "odin-code",
       "source": "./plugins/odin-code",
       "description": "ODIN workflows for writing, changing, and simplifying code.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -125,7 +125,7 @@
       "name": "odin-review",
       "source": "./plugins/odin-review",
       "description": "ODIN workflows for reviewing diffs, branches, and implementations against their specs.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -148,7 +148,7 @@
       "name": "odin-testing",
       "source": "./plugins/odin-testing",
       "description": "ODIN workflows for tests, properties, mutation, and behavioral verification.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -171,7 +171,7 @@
       "name": "odin-git",
       "source": "./plugins/odin-git",
       "description": "ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -194,7 +194,7 @@
       "name": "odin-release",
       "source": "./plugins/odin-release",
       "description": "ODIN workflows for cutting, gating, publishing, and announcing releases.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -217,7 +217,7 @@
       "name": "odin-run",
       "source": "./plugins/odin-run",
       "description": "ODIN workflows for executing plans, orchestrating subagents, and bounded autonomous loops.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -240,7 +240,7 @@
       "name": "odin-infra",
       "source": "./plugins/odin-infra",
       "description": "ODIN workflows for CI, deployment, observability, cost, and infrastructure tooling.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -263,7 +263,7 @@
       "name": "odin-security",
       "source": "./plugins/odin-security",
       "description": "ODIN workflows for security review, vulnerability triage, and defensive implementation.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -286,7 +286,7 @@
       "name": "odin-fuzzing",
       "source": "./plugins/odin-fuzzing",
       "description": "ODIN workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -309,7 +309,7 @@
       "name": "odin-research",
       "source": "./plugins/odin-research",
       "description": "ODIN workflows for source-backed investigation, verification, and design rationale.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -332,7 +332,7 @@
       "name": "odin-knowledge",
       "source": "./plugins/odin-knowledge",
       "description": "ODIN workflows for memory, session continuity, decision records, and retrospectives.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -355,7 +355,7 @@
       "name": "odin-learn",
       "source": "./plugins/odin-learn",
       "description": "ODIN workflows for teaching, explaining, drilling, and onboarding.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -378,7 +378,7 @@
       "name": "odin-people",
       "source": "./plugins/odin-people",
       "description": "ODIN workflows for team dynamics, culture profiles, and negotiation.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -401,7 +401,7 @@
       "name": "odin-agent",
       "source": "./plugins/odin-agent",
       "description": "ODIN workflows for configuring agent harnesses, MCP servers, and repository agent surfaces.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -424,7 +424,7 @@
       "name": "odin-skills",
       "source": "./plugins/odin-skills",
       "description": "ODIN workflows for authoring, auditing, benchmarking, and publishing agent skills.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -447,7 +447,7 @@
       "name": "odin-writing",
       "source": "./plugins/odin-writing",
       "description": "ODIN workflows for documentation, editorial prose, and copy.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -470,7 +470,7 @@
       "name": "odin-visual",
       "source": "./plugins/odin-visual",
       "description": "ODIN workflows for diagrams, decks, canvases, and visual explainers.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -493,7 +493,7 @@
       "name": "odin-design",
       "source": "./plugins/odin-design",
       "description": "ODIN workflows for interface design, prototypes, and visual fidelity.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -516,7 +516,7 @@
       "name": "odin-web",
       "source": "./plugins/odin-web",
       "description": "ODIN workflows for browser testing, web performance, SEO, and extensions.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -539,7 +539,7 @@
       "name": "odin-typescript",
       "source": "./plugins/odin-typescript",
       "description": "ODIN workflows for modern TypeScript development.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -562,7 +562,7 @@
       "name": "odin-python",
       "source": "./plugins/odin-python",
       "description": "ODIN workflows for modern Python development.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -585,7 +585,7 @@
       "name": "odin-native",
       "source": "./plugins/odin-native",
       "description": "ODIN workflows for native systems, toolchains, and performance.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -608,7 +608,7 @@
       "name": "odin-apple",
       "source": "./plugins/odin-apple",
       "description": "ODIN workflows for software on Apple platforms.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -628,10 +628,10 @@
       }
     },
     {
-      "name": "odin-lean",
-      "source": "./plugins/odin-lean",
-      "description": "ODIN workflows for Lean proofs and formal verification.",
-      "version": "2.1.0",
+      "name": "odin-formal",
+      "source": "./plugins/odin-formal",
+      "description": "ODIN workflows for formal methods: model checking, SMT solving, deductive verification, and proof assistants.",
+      "version": "2.1.1",
       "author": {
         "name": "OutlineDriven",
         "url": "https://github.com/OutlineDriven"
@@ -642,7 +642,7 @@
         "odin",
         "outlinedriven",
         "agent-skills",
-        "lean"
+        "formal-methods"
       ],
       "category": "Coding",
       "policy": {

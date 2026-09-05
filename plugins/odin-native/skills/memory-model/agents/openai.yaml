@@ -1,0 +1,3 @@
+interface:
+  display_name: "Memory Model"
+  short_description: "Use when choosing memory orderings for C++ or Rust atomics, reasoning about happens-before, writing lock-free patterns, or diagnosing data races."

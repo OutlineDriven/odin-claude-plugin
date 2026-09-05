@@ -1,0 +1,3 @@
+interface:
+  display_name: "Make"
+  short_description: "Use when writing or debugging Makefiles, understanding pattern rules and automatic dependency generation, managing CFLAGS/LDFLAGS, or diagnosing incremental build, phony targets, or recursive make."

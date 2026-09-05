@@ -1,0 +1,3 @@
+interface:
+  display_name: "Linux Kernel Modules"
+  short_description: "Use when writing loadable kernel modules: Kbuild, module parameters, proc and sysfs entries, char devices, or ftrace debugging."

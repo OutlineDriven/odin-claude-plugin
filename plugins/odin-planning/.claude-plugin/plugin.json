@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-planning",
   "displayName": "ODIN Planning",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "ODIN workflows for shaping intent into approved plans, specs, and task lists.",
   "author": {
     "name": "OutlineDriven",

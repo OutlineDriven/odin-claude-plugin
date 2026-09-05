@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cpp Modules"
+  short_description: "Use when a C++ project adopts C++20 modules: named modules, partitions, header units, the global module fragment, CMake CXX_MODULES, or a BMI lookup error."

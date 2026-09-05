@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cuda Profiling"
+  short_description: "Use when profiling CUDA with Nsight Systems or Nsight Compute, reading roofline and occupancy metrics, or annotating phases with NVTX."

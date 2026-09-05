@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rust Security"
+  short_description: "Use when auditing Rust dependencies for vulnerabilities, enforcing license and source policies with cargo-deny, reviewing RUSTSEC advisories, or fuzzing and testing unsafe code for security."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Numa Programming"
+  short_description: "Use when detecting NUMA topology, binding processes with numactl, using the libnuma API, building NUMA-aware data structures, or measuring remote memory access penalties."

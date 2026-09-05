@@ -1,0 +1,3 @@
+interface:
+  display_name: "Zig Build System"
+  short_description: "Use when writing or fixing a build.zig: executables, libraries, modules, C sources, build options, test steps, custom steps, or build.zig.zon dependencies."

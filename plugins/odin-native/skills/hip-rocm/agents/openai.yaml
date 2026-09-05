@@ -1,0 +1,3 @@
+interface:
+  display_name: "Hip Rocm"
+  short_description: "Use when writing HIP kernels with hipcc, porting CUDA code through HIPIFY, profiling with rocprofv3, debugging with rocgdb, or optimizing for MI300X."

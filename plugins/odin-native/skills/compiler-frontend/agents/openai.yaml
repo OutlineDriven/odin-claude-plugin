@@ -1,0 +1,3 @@
+interface:
+  display_name: "Compiler Frontend"
+  short_description: "Use when building a lexer, Pratt or recursive-descent parser, AST, symbol table, type checker, or LLVM IR emitter for a language or DSL."

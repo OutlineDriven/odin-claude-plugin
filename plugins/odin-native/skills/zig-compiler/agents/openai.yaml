@@ -1,0 +1,3 @@
+interface:
+  display_name: "Zig Compiler"
+  short_description: "Use when invoking zig directly: build-exe, build-lib, optimize modes, zig cc as a C compiler, emit flags, ast-check, fmt, or a Zig compile error."

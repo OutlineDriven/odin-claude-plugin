@@ -1,0 +1,3 @@
+interface:
+  display_name: "Kernel Concurrency"
+  short_description: "Use when choosing kernel spinlocks versus mutexes, using RCU, seqlocks, completions, or memory barriers, or debugging scheduling-while-atomic."

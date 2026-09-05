@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rust Unsafe"
+  short_description: "Use when writing, reviewing, or auditing unsafe Rust, or understanding raw pointers, transmute, UnsafeCell, and safe abstractions over unsafe code."

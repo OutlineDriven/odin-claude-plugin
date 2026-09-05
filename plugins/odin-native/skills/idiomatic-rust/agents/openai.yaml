@@ -1,0 +1,3 @@
+interface:
+  display_name: "Idiomatic Rust"
+  short_description: "Use when writing, reviewing, or refactoring Rust code."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Interpreters"
+  short_description: "Use when designing bytecode dispatch loops, choosing stack or register VM shapes, adding inline caches, or building a first JIT with mmap."

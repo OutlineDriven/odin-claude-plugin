@@ -1,0 +1,3 @@
+interface:
+  display_name: "Containers Internals"
+  short_description: "Use when explaining or building on Linux container primitives: namespaces, cgroups v2, overlayfs, runc and the OCI spec, seccomp-bpf, capabilities, or escapes."

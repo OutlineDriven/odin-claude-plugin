@@ -1,0 +1,3 @@
+interface:
+  display_name: "Kernel Security"
+  short_description: "Use when writing an SELinux or AppArmor policy, a seccomp-bpf filter, enabling CET, PAC, or BTI, or triaging a kernel CVE."

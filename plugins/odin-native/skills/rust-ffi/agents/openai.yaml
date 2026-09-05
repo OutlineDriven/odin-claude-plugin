@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rust Ffi"
+  short_description: "Use when calling C libraries from Rust, generating bindings with bindgen, exporting Rust functions to C with cbindgen, writing safe wrappers over unsafe FFI, or linking system libraries."

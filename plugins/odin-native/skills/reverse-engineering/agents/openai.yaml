@@ -1,0 +1,3 @@
+interface:
+  display_name: "Reverse Engineering"
+  short_description: "Use when triaging an unknown binary, decompiling with Ghidra, scripting radare2, or diffing two builds for patched functions."

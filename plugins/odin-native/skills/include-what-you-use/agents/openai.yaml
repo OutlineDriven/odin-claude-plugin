@@ -1,0 +1,3 @@
+interface:
+  display_name: "Include What You Use"
+  short_description: "Use when reducing header bloat and compilation cascades with Include What You Use, interpreting IWYU reports, mapping files, forward declarations, or CMake integration."

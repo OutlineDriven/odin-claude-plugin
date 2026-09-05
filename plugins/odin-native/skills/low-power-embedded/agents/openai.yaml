@@ -1,0 +1,3 @@
+interface:
+  display_name: "Low Power Embedded"
+  short_description: "Use when configuring MCU sleep/stop/standby, WFI, STM32 PWR, nRF sleep, clock gating, wake-up EXTI sources, or measuring current draw."

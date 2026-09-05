@@ -1,0 +1,3 @@
+interface:
+  display_name: "Llvm Ir And Passes"
+  short_description: "Use when reading LLVM IR, explaining SSA and PHI nodes, finding what -O2 changed, or running opt on a .ll or .bc file."

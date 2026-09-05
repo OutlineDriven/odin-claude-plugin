@@ -1,0 +1,3 @@
+interface:
+  display_name: "Build Acceleration"
+  short_description: "Use when reducing C/C++ compilation times with ccache, sccache, distcc, unity builds, precompiled headers, split DWARF, IWYU, or link time reduction."

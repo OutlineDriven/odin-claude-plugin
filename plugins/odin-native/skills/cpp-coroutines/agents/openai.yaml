@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cpp Coroutines"
+  short_description: "Use when working with C++20 co_await, co_yield, and co_return, implementing promise_type, sizing coroutine frames, or debugging suspended coroutines in GDB."

@@ -1,0 +1,37 @@
+---
+name: smt-solving-with-z3-cvc5
+description: 'Use when a query needs direct SMT solving, an unsat core needs debugging, or another tool reports a solver timeout or unknown. Not for deciding what to prove: use proof-driven.'
+---
+
+# SMT solving with Z3 and cvc5
+
+## Contract
+
+| Field | Bound contract |
+|---|---|
+| Trigger | A constraint problem needs an SMT-LIB query written and solved, an `unsat` result needs its core explained, or a verifier built on Z3 or cvc5 (Apalache, Kani, Verus, Frama-C WP, Dafny, Why3) reports `unknown` or a timeout that must be diagnosed. |
+| Authority | Reversible local: writes `.smt2` files and solver logs; rollback is deleting them. No remote mutation. |
+| Side effect | Query files and captured solver output on disk. Solver runs are bounded by an explicit timeout. |
+| Done | Every query has a recorded verdict of `sat` with a model, `unsat` with a core, or `unknown` with the solver's reason and the change that resolves it. |
+
+## Inputs
+
+The constraint problem, or the failing query dumped by the calling tool. Solver pins from the grounded set: Z3 z3-5.1.0 (`pip install z3-solver`, or `apt`, `brew`, prebuilt binaries, or source) and cvc5 cvc5-1.3.4 (`pip install cvc5`, prebuilt binaries, or source). The input language is SMT-LIB 2.7 (reference document revision 2026-03-27, https://smt-lib.org/). Optional: a target logic, a per-query timeout budget, and the calling tool's own solver options.
+
+## Procedure
+
+1. Choose the logic and declare the sorts. Open the file with `(set-logic L)` where `L` is the narrowest fragment that fits: `QF_LIA` for linear integers, `QF_BV` for fixed-width bit-vectors, `QF_UFLIA` when uninterpreted functions join linear arithmetic, `QF_ABV` for bit-vectors with arrays. Quantifier-free fragments decide; quantified ones may return `unknown`. Z3 and cvc5 both accept `ALL` as a solver keyword that enables every theory, but `ALL` is not a logic named by the standard, so use it only for exploration. Declare each variable with `(declare-const x Int)` and each function with `(declare-fun f (Int) Bool)`. Done when: the header names one logic and every symbol is declared before use.
+2. Write the assertions with names. Turn on the options first, because the standard requires `(set-option :produce-models true)` and `(set-option :produce-unsat-cores true)` before any declaration or assertion. Wrap every assertion whose origin matters as `(assert (! <term> :named a1))`. Names are what an unsat core reports, so one assertion per requirement and one name per source line. End with `(check-sat)` and, on the expected branch, `(get-model)` or `(get-unsat-core)`. Done when: every assertion carries a name that maps back to a requirement.
+3. Run with a timeout. Z3: `z3 -smt2 -T:30 query.smt2` sets a hard 30-second limit for the whole process; `-t:30000` sets a soft limit in milliseconds that ends only the current query; `-st` prints statistics. cvc5: `cvc5 --lang smt2 --tlimit=30000 query.smt2` limits the whole run in milliseconds and `--tlimit-per=30000` limits each `check-sat`; `--stats` prints statistics. Run both solvers on any query that matters: agreement on `unsat` is the cross-check, disagreement is a bug in the query or a solver. Done when: both solvers have printed a verdict or a timeout under the recorded budget.
+4. Read `sat`. Issue `(get-model)`; the reply is a list of `define-fun` forms, one per declared symbol. A model is a witness that the assertions are jointly satisfiable, so when the query encodes "the property can be violated", the model is the counterexample: substitute its values into the original requirement and confirm by hand that it breaks. Done when: the model has been replayed against the property and the violation is understood or the encoding is fixed.
+5. Read `unsat`. Issue `(get-unsat-core)`; the reply is a subset of the named assertions that is already unsatisfiable. When the query encodes "the property can be violated", `unsat` is the proof and the core names which assumptions the proof needs. When the query encodes a system that should have solutions, `unsat` means the requirements conflict and the core is the smallest set to argue about. Remove one core member at a time and rerun to confirm that each is necessary. For assumption sets that change between checks, use `(check-sat-assuming (a1 a2))` with `(set-option :produce-unsat-assumptions true)` and read `(get-unsat-assumptions)`, which keeps the base assertions fixed and avoids a `push`/`pop` cycle. Done when: every core member is confirmed necessary and mapped to its requirement.
+6. Read `unknown` and timeouts. After `unknown`, issue `(get-info :reason-unknown)`; the standard defines `memout` and `incomplete`, and each solver adds its own strings (Z3 prints `timeout` and `canceled`; cvc5 names `TIMEOUT`, `RESOURCEOUT`, `MEMOUT`, `INCOMPLETE`, and `REQUIRES_FULL_CHECK`). Z3 exits 102 on a hard `-T:` timeout after printing `timeout`; cvc5 exits 0 after a completed run whatever the verdict and 1 on an option or API error, so read the printed verdict and not the exit code. Resolve in this order: narrow the logic (quantified to quantifier-free, `Int` to `BitVec` when the domain is finite), remove quantifiers by instantiating the finite domain, split one large query into per-property queries, then raise the timeout once with a written reason. Done when: the query returns `sat` or `unsat`, or the reason it cannot is recorded with the reductions tried.
+7. Diagnose another tool's solver failure. Get the tool to dump its query (Frama-C WP writes its proof obligations to the directory named by `-wp-out`; Apalache selects its backend with `--smt-solver=z3` or `cvc5`; Kani accepts `#[kani::solver(z3)]` or `cvc5` on the harness). Run the dumped `.smt2` through steps 3 to 6 with both solvers. A query that one solver settles in seconds and the other cannot is a backend choice, so switch the calling tool's backend. A query neither solver settles is an encoding problem, so simplify the source property or add a lemma at the source. Done when: the calling tool's failure is traced to a backend choice or a source-level encoding change, and that change is applied.
+
+## Failure and recovery
+
+On a parse error, Z3 exits 103 and cvc5 prints `(error "...")`; fix the reported line, and check that every option was set before the first declaration. On a model that does not violate the property when replayed, the encoding is wrong: the query and the property disagree, so rewrite the assertion that mismatches and rerun before trusting any verdict. On an unsat core that is the whole assertion set, add finer names: one assertion per conjunct. On a `push`/`pop` session that returns different verdicts for the same assertions, reset the solver and rerun the failing query standalone; incremental state is a common source of confusion. On two solvers that disagree, the query is the suspect first: check the logic declaration and bit widths, then report the minimal query to the solver whose answer is wrong. Never raise a timeout without recording the reason and the reductions already tried.
+
+## Output
+
+The `.smt2` query files; per query, the verdict from each solver, with the model replayed against the property on `sat`, the confirmed minimal core mapped to requirements on `unsat`, or the reason and reductions on `unknown`; for a calling tool's failure, the backend switch or source-level change that resolved it.

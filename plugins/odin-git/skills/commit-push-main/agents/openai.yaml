@@ -1,0 +1,3 @@
+interface:
+  display_name: "Commit Push Main"
+  short_description: "Use when a human explicitly asks to commit and push directly to the default branch, with no feature branch and no pull request."

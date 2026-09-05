@@ -1,19 +1,17 @@
 ---
 name: plain-korean
-description: >-
-  Plain English와 Plain Language의 원칙으로 한국어 글을 작성·교정·검토한다.
-  "쉽게 써 줘", "명확하게 고쳐 줘", "관료적인 표현을 줄여 줘", "쉬운 한국어",
-  "plain Korean" 요청이나 독자 중심의 설명문, 이메일, 공지, README 편집에 사용한다.
-  의미·조건·전문 용어는 보존한다. 엄격한 용어 통제와 작업 절차가 목적이면
-  ste-korean을 우선하며, 원문 보존이나 맞춤법 검사만 요청한 경우에는 문체를 바꾸지 않는다.
+description: 'Use when Plain English·Plain Language 원칙으로 한국어 작성·교정·검토, 쉽게 써 줘·명확하게 고쳐 줘·관료적인 표현 줄이기·쉬운 한국어/plain Korean·독자 중심 설명문·이메일·공지·README용, 의미·조건·전문용어 보존, 엄격 통제·절차는 ste-korean 우선, 원문보존·맞춤법만 요청 시 문체 유지'
+---
+
+# Plain Korean
+
+```yaml
 metadata:
   version: "1.0.0"
   language: "ko"
   profile: "plain-english-inspired"
   source-checked: "2026-09-05"
----
-
-# Plain Korean
+```
 
 독자가 필요한 정보를 찾고, 처음 읽을 때 이해하고, 필요한 행동을 알 수 있게 쓴다.
 내용을 줄이는 것보다 이해에 드는 수고를 줄인다. 전문 지식의 정확성을 낮추지 않는다.

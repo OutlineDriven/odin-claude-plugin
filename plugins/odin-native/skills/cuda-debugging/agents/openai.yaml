@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cuda Debugging"
+  short_description: "Use when debugging CUDA with cuda-gdb or Compute Sanitizer, reading GPU core dumps, using device printf, or triaging error codes 700, 701, 702, and 719."

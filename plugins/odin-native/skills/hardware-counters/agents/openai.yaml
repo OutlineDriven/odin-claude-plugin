@@ -1,0 +1,3 @@
+interface:
+  display_name: "Hardware Counters"
+  short_description: "Use when measuring PMU events with perf stat -e or PAPI, computing IPC, miss rates, or MPKI, or attributing cache misses to source lines with perf annotate."

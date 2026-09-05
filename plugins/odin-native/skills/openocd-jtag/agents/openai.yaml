@@ -1,0 +1,3 @@
+interface:
+  display_name: "Openocd Jtag"
+  short_description: "Use when configuring OpenOCD for a JTAG or SWD target, flashing through it, attaching GDB to a bare-metal MCU, or setting hardware breakpoints and watchpoints."

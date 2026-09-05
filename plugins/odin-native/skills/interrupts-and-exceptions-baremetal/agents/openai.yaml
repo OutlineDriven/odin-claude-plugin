@@ -1,0 +1,3 @@
+interface:
+  display_name: "Interrupts And Exceptions Baremetal"
+  short_description: "Use when writing Cortex-M NVIC ISRs, configuring priorities, handling HardFault, tail-chaining, or measuring interrupt latency."

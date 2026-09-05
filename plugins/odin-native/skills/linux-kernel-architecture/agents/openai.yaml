@@ -1,0 +1,3 @@
+interface:
+  display_name: "Linux Kernel Architecture"
+  short_description: "Use when navigating kernel source, understanding boot flow, initcall levels, or major subsystems (VFS, scheduler, MM) in linux.git."

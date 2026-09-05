@@ -1,0 +1,3 @@
+interface:
+  display_name: "Uart Serial Baremetal"
+  short_description: "Use when configuring UART baud rate/BRR, polling or IRQ-driven TX/RX, serial printf retargeting, USART interrupts, or UART with DMA on bare-metal MCUs."

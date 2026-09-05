@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rust No Std"
+  short_description: "Use when writing #![no_std] Rust crates, using core and alloc without std, selecting panic handlers, or testing no_std code on the host."

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Sanitizers"
+  short_description: "Use when enabling or interpreting ASan, UBSan, TSan, MSan, LSan, or HWASan with GCC or Clang, or reading sanitizer reports."

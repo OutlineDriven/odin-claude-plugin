@@ -1,20 +1,20 @@
 ---
 name: ste-korean
-description: >-
-  ASD-STE100의 통제 언어 원칙을 한국어 기술문서에 적용하는 비공식 스킬이다.
-  "한국어 STE", "ASD-STE100 기반", "통제 한국어", "용어를 통일해 줘",
-  "한 단계에 한 행동", "절차를 명확하게 써 줘" 요청과 작업 지침, 운영 절차,
-  runbook, 기술 설명의 작성·교정·검토에 사용한다. 일반 글의 자연스러운 가독성 개선은
-  plain-korean을 우선한다. 공식 ASD-STE100 준수나 영어 STE 검증을 제공하지 않는다.
+description: 'Use when Korean tech docs need unofficial ASD-STE controlled wording, single-step procedures, unified terms; not for plain readability (use plain-korean), official or English STE.'
+---
+
+# STE 원칙 기반 한국어 기술문서
+
+## Source metadata
+
+```yaml
 metadata:
   version: "1.0.0"
   language: "ko"
   profile: "asd-ste100-inspired-nonofficial"
   source-baseline: "ASD-STE100 Issue 9 public overview and FAQ"
   source-checked: "2026-09-05"
----
-
-# STE 원칙 기반 한국어 기술문서
+```
 
 같은 개념은 같은 용어로 쓰고, 독자가 수행할 행동과 조건을 명확히 구분한다.
 유려한 표현보다 의미의 일관성과 작업 해석의 명확성을 우선한다.

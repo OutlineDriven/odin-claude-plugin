@@ -1,0 +1,3 @@
+interface:
+  display_name: "Commit Push Current"
+  short_description: "Use when a human explicitly asks to commit and push to the checked-out branch, with no branch creation and no pull request."

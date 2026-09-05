@@ -1,0 +1,3 @@
+interface:
+  display_name: "Kernel Memory Management"
+  short_description: "Use when using kmalloc, vmalloc, or the page allocator, sizing kmalloc allocations, working with SLUB or the buddy allocator, or debugging memory zones and kernel OOM."

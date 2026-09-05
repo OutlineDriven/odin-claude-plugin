@@ -2,7 +2,7 @@
 
 ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.
 
-42 skills, category Coding.
+46 skills, category Coding.
 
 ## Install
 
@@ -24,6 +24,10 @@ codex plugin add odin-git@odin-marketplace
 - capture-isolated-patch
 - close-done
 - commit
+- commit-push
+- commit-push-current
+- commit-push-main
+- commit-push-pr
 - create-branch
 - create-pull-request
 - finish-branch-menu

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Ninja"
+  short_description: "Use when diagnosing Ninja build failures, tuning parallelism, interpreting verbose output, or working with build.ninja files as a CMake-generated low-level build executor."

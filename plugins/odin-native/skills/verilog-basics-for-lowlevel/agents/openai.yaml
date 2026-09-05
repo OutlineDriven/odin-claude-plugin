@@ -1,0 +1,3 @@
+interface:
+  display_name: "Verilog Basics For Lowlevel"
+  short_description: "Use when reading RTL to understand hardware behavior, reset and clock domains, CDC synchronizers, APB/AHB/AXI bus protocols, or collaborating with hardware teams on SoC diagrams."

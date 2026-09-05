@@ -1,0 +1,3 @@
+interface:
+  display_name: "Peripherals From Datasheet"
+  short_description: "Use when writing a register-level peripheral driver from an MCU reference manual: register map, init sequence, timing, bit definitions."

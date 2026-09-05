@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "odin-formal",
+  "displayName": "ODIN Formal",
+  "version": "2.1.1",
+  "description": "ODIN workflows for formal methods: model checking, SMT solving, deductive verification, and proof assistants.",
+  "author": {
+    "name": "OutlineDriven",
+    "url": "https://github.com/OutlineDriven"
+  },
+  "homepage": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "repository": "https://github.com/OutlineDriven/odin-claude-plugin",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "odin",
+    "outlinedriven",
+    "agent-skills",
+    "formal-methods"
+  ]
+}

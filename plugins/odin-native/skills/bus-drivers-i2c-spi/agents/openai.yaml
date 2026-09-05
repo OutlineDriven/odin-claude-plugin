@@ -1,0 +1,3 @@
+interface:
+  display_name: "Bus Drivers I2c Spi"
+  short_description: "Use when writing a Linux i2c_driver or spi_driver, doing bus register access, DMA-safe SPI transfers, or debugging -EREMOTEIO."

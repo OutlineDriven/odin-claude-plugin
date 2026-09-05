@@ -1,0 +1,3 @@
+interface:
+  display_name: "Binutils"
+  short_description: "Use when building static archives with ar, stripping or converting binaries, mapping crash addresses with addr2line, or demangling C++ symbols."

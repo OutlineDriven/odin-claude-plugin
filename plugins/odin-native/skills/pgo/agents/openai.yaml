@@ -1,0 +1,3 @@
+interface:
+  display_name: "Pgo"
+  short_description: "Use when a C or C++ binary needs profile-guided optimization with GCC or Clang: instrumented or sampled profiles, merging, the two-stage build, or BOLT."

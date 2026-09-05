@@ -1,0 +1,3 @@
+interface:
+  display_name: "Qemu For Kernel Development"
+  short_description: "Use when booting custom kernels in QEMU, building Buildroot or Yocto rootfs, attaching virtio devices, or iterating kernel modules over NFS or 9p root."

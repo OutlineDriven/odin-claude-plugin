@@ -10,7 +10,7 @@ supported client discovers them from that same layout, so nothing is copied or r
 Methodology: [outline-driven-development](https://github.com/OutlineDriven/outline-driven-development)
 · Site: [outlinedriven.github.io](https://outlinedriven.github.io)
 
-- 543 skills in 28 plugins, each authored once at `plugins/<plugin>/skills/<slug>/SKILL.md`
+- 703 skills in 28 plugins, each authored once at `plugins/<plugin>/skills/<slug>/SKILL.md`
 - Five harness surfaces from one tree: Claude Code, Codex, Cursor, Grok, and Kimi
 - No package manager for the tooling; every script is dependency-free Node ESM or standard-library Python
 - Six output styles in odin-core, each embedding the canonical doctrine byte-identically
@@ -29,10 +29,10 @@ Methodology: [outline-driven-development](https://github.com/OutlineDriven/outli
 
 ## What is this
 
-543 skills in 28 plugins. A skill is authored once, at
+703 skills in 28 plugins. A skill is authored once, at
 `plugins/<plugin>/skills/<slug>/SKILL.md`, and that path is its only home. The directory states
 which plugin owns the skill, so no registry has to answer that question. Every plugin and
-marketplace ships at one `releaseVersion`, currently 2.1.0, held in `catalog/plugins.json`.
+marketplace ships at one `releaseVersion`, currently 2.1.1, held in `catalog/plugins.json`.
 
 Each harness resolves components from fixed conventions at the plugin root, so this layout is the
 one every supported client already discovers. Nothing is copied at publish time, and nothing is
@@ -153,7 +153,7 @@ row below is what you add on top for that kind of work, and the rest of the 28 s
 | Everyday code changes | `odin-run`, `odin-git` |
 | Tests and verification | `odin-testing` |
 | Large refactors, audits, bounded iteration | `odin-code`, `odin-review` |
-| A specific language | `odin-python`, `odin-typescript`, `odin-native`, `odin-apple`, or `odin-lean` |
+| A specific language | `odin-python`, `odin-typescript`, `odin-native`, `odin-apple`, or `odin-formal` |
 | Web and interface work | `odin-web`, `odin-design` |
 | Security review and hardening | `odin-security`, `odin-fuzzing` |
 | Research and technical writing | `odin-research`, `odin-knowledge`, `odin-writing` |
@@ -187,7 +187,7 @@ Install one skill instead of a whole plugin with `gh skill install`, shown under
 | odin-infra | Infrastructure | odin-python | Coding |
 | odin-security | Security | odin-native | Coding |
 | odin-fuzzing | Security | odin-apple | Coding |
-| odin-research | Research | odin-lean | Coding |
+| odin-research | Research | odin-formal | Coding |
 
 `catalog/plugins.json` is the identity ledger: it holds each plugin's name, description, category,
 and tags, and every manifest and registry is generated from it.

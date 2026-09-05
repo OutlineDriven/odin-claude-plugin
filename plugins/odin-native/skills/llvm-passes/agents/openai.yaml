@@ -1,0 +1,3 @@
+interface:
+  display_name: "Llvm Passes"
+  short_description: "Use when writing an LLVM pass plugin, registering it for opt -passes, using DominatorTree or LoopInfo, or testing with FileCheck and lit."

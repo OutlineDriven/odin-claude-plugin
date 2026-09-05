@@ -1,0 +1,3 @@
+interface:
+  display_name: "Platform Device Model"
+  short_description: "Use when implementing or debugging platform_driver probe/remove, sysfs attributes, device properties, or deferred probe on Linux."

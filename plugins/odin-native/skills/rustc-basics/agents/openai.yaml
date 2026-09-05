@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rustc Basics"
+  short_description: "Use when selecting RUSTFLAGS, configuring Cargo profiles, tuning release builds, reading assembly or MIR output, understanding monomorphization, or diagnosing compilation errors."

@@ -1,3 +1,3 @@
 interface:
   display_name: "C Security Review"
-  short_description: "Use when the user requests a userspace C or C++ security review with an explicit threat model, severity filter, and model."
+  short_description: "Use when the user requests a userspace C or C++ security review with a threat model and severity filter and wants validated findings."

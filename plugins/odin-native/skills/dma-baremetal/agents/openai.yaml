@@ -1,0 +1,3 @@
+interface:
+  display_name: "Dma Baremetal"
+  short_description: "Use when configuring DMA channels, circular buffer mode, double buffering, memory-to-peripheral transfers, or DMA IRQ completion on bare-metal MCUs."

@@ -43,7 +43,7 @@ Each harness reads the immediate children of `skills/`, so a skill nested deeper
 
 Five harness surfaces are supported, and no others: Claude Code, Codex, Cursor, Grok, and Kimi. Nothing is published to a package registry, and no npm artifact belongs in this tree. A flat Devin mirror of these same skills is exported to the outline repository, which publishes nothing and installs nothing.
 
-`catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.1.0`; never bump only some manifests.
+`catalog/plugins.json` owns plugin identity: name, description, category, tags, and directory. Every manifest and registry is generated from it. Keep every plugin and marketplace version at the single `releaseVersion` literal `2.1.1`; never bump only some manifests.
 
 Treat these as generator-owned and never hand-edit them:
 
@@ -93,7 +93,7 @@ Do not add a `license` field to a skill. This tree has mixed provenance and attr
 
 ## Verification
 
-Before a commit, run `just check`; it runs every hook in `.pre-commit-config.yaml` over the whole tree (`prek run --all-files`) and can repair the style cascade, so read `git status` afterwards. `just verify` adds `gh skill publish --dry-run`, which validates all 543 skills against the Agent Skills specification; its `recommended field missing: license` advisories are accepted, not fixed.
+Before a commit, run `just check`; it runs every hook in `.pre-commit-config.yaml` over the whole tree (`prek run --all-files`) and can repair the style cascade, so read `git status` afterwards. `just verify` adds `gh skill publish --dry-run`, which validates every skill in the tree against the Agent Skills specification; its `recommended field missing: license` advisories are accepted, not fixed.
 
 Do not invent language test commands or add CI without an explicit request; this repository has no build, no unit-test suite, and no GitHub Actions workflow.
 

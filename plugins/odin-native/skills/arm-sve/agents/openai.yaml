@@ -1,0 +1,3 @@
+interface:
+  display_name: "Arm Sve"
+  short_description: "Use when writing or porting AArch64 SIMD to SVE or SVE2: arm_sve.h intrinsics, predicates, vector-length-agnostic loops, auto-vectorization, or SVE registers in GDB."

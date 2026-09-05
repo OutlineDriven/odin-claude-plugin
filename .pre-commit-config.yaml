@@ -140,9 +140,26 @@ repos:
         pass_filenames: false
         always_run: true
 
+      # The mirror gate proves the mirror only from a checkout whose sibling
+      # outline repo exists; from a worktree the default target is absent and
+      # the script skips, so mirror evidence there needs an explicit --target.
       - id: sync-outline-skills
         name: check the flat Devin skill mirror matches the plugin tree
         entry: node scripts/sync-outline-skills.mjs --check
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: check-skill-scripts
+        name: compile, syntax-check, and self-check skill scripts
+        entry: python3 scripts/check-skill-scripts.py
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: check-skill-scripts-self-test
+        name: check the skill-script gate flags planted defects
+        entry: python3 scripts/check-skill-scripts.py --self-test
         language: system
         pass_filenames: false
         always_run: true

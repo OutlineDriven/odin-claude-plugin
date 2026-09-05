@@ -1,0 +1,3 @@
+interface:
+  display_name: "Spi I2c Baremetal"
+  short_description: "Use when implementing SPI/I2C master transfers, register read/write protocols, I2C START/STOP, clock phase/polarity, or bus stalls on bare-metal MCUs."

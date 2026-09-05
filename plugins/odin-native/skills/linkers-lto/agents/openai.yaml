@@ -1,0 +1,3 @@
+interface:
+  display_name: "Linkers Lto"
+  short_description: "Use when choosing a linker, fixing link order or undefined symbol errors, enabling LTO or ThinLTO, or cutting dead code with --gc-sections."

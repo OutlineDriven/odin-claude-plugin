@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "odin-people",
   "displayName": "ODIN People",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "ODIN workflows for team dynamics, culture profiles, and negotiation.",
   "author": {
     "name": "OutlineDriven",

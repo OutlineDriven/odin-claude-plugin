@@ -1,0 +1,3 @@
+interface:
+  display_name: "Strace Ltrace"
+  short_description: "Use when a binary misbehaves without crashing and the question is which file, socket, syscall, or library call fails: strace for syscalls, ltrace for library calls."

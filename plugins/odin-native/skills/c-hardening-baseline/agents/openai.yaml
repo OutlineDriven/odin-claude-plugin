@@ -1,0 +1,3 @@
+interface:
+  display_name: "C Hardening Baseline"
+  short_description: "Use when C code is written or audited and needs a pure-C baseline: standard, undefined behavior, integer and buffer safety, sanitizers, fuzzing, build flags."

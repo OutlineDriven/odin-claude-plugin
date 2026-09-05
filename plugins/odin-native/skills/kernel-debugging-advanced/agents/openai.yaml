@@ -1,0 +1,3 @@
+interface:
+  display_name: "Kernel Debugging Advanced"
+  short_description: "Use when tracing kernel functions with ftrace or trace-cmd, profiling with perf, kprobes, or dyndbg, or analyzing a vmcore with crash."

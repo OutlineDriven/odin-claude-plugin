@@ -1,0 +1,3 @@
+interface:
+  display_name: "Dpdk"
+  short_description: "Use when initializing EAL, configuring PMD drivers and huge pages, using mbuf pools and rte_ring, setting up RSS, or validating a port with testpmd."

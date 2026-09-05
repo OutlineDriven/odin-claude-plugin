@@ -1,0 +1,3 @@
+interface:
+  display_name: "Linux Perf"
+  short_description: "Use when collecting sampling profiles with perf record, reading perf report or perf annotate, or measuring counters with perf stat on Linux."

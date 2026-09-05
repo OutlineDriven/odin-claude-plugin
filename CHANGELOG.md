@@ -5,6 +5,34 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.1] - 2026-09-05
+### Added
+- Expanded `odin-native` from 2 to 148 skills: 142 adopted low-level-dev-skills
+  entries plus 4 new skills (Rust and Go handbooks, a C hardening baseline, and
+  CPU kernel authoring) alongside the 2 existing skills. The CPU correctness
+  comparator checks every structured output and uses dtype-specific tolerances
+  instead of checking only the first output.
+- Renamed `odin-lean` to `odin-formal`, retained `writing-lean-proofs`, and added
+  eight formal-methods skills. The plugin now contains nine skills.
+- Restored `commit-push`, `commit-push-pr`, `commit-push-current`, and
+  `commit-push-main`. The current-branch and default-branch variants require
+  explicit human invocation; every push requires approval of its mutation set.
+  The tree now holds 703 skills in 28 plugins, up from 545 on the current main branch.
+
+### Migration
+
+| Retired | Successor | Skills |
+|---|---|---|
+| `odin-lean` | `odin-formal` | 1 of 1; the plugin now covers formal methods beyond Lean |
+
+To find a moved skill's new plugin, look up its slug in `docs/specs/skill-index.md`.
+Reinstall a single skill from its new path:
+
+```shell
+gh skill install OutlineDriven/odin-claude-plugin plugins/<new-id>/skills/<slug> \
+  --agent claude-code --scope user
+```
+
 ## [2.1.0] - 2026-09-04
 ### Changed
 - Shortened every skill description to at most 200 characters (median 174, down from 269).

@@ -1,0 +1,3 @@
+interface:
+  display_name: "Jit Compilation"
+  short_description: "Use when adding code generation with LLVM ORC or LLJIT, Cranelift, or dynasm, lazy compilation or inline caches, or fixing W^X faults."

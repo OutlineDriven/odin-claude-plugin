@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cargo Workflows"
+  short_description: "Use when managing Cargo workspaces, feature flags, build scripts, CI caching, dependency auditing, or Cargo.lock with Rust."

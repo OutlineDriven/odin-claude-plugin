@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rust Build Times"
+  short_description: "Use when profiling slow Rust builds with cargo --timings, configuring sccache, selecting the Cranelift dev backend, splitting a workspace for parallelism, or tuning LTO and the linker."
