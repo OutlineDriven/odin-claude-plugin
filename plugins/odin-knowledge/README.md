@@ -2,7 +2,7 @@
 
 ODIN workflows for memory, session continuity, decision records, and retrospectives.
 
-42 skills, category Productivity.
+41 skills, category Productivity.
 
 ## Install
 
@@ -31,7 +31,6 @@ codex plugin add odin-knowledge@odin-marketplace
 - grill-with-docs
 - gut-sync
 - handoff
-- handoff-prompt
 - history-forget
 - history-health
 - history-notes

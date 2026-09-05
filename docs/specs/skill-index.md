@@ -234,7 +234,6 @@
 | guillotine | odin-code | Coding |
 | gut-sync | odin-knowledge | Productivity |
 | handoff | odin-knowledge | Productivity |
-| handoff-prompt | odin-knowledge | Productivity |
 | harness-port-guide | odin-agent | Productivity |
 | headed-browser-takeover | odin-web | Coding |
 | history-forget | odin-knowledge | Productivity |

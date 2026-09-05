@@ -1,3 +1,3 @@
 interface:
   display_name: "Handoff"
-  short_description: "Use when substantive work reaches a session boundary, resumes after interruption, completes, or must move to another session, agent, harness, directory, or repository."
+  short_description: "Use when work reaches a session boundary or the user asks to hand off, delegate, or get a clipboard-ready prompt."
