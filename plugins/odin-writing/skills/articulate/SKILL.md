@@ -42,7 +42,7 @@ Return the completed statement, followed only when needed by `Unresolved:` and t
 ## Routing boundaries
 
 - Requirements or intent must be discovered: use the planning owner.
-- Several possible ideas are wanted: use `ideate`.
+- Several possible ideas are wanted: use `brainstorm` (mode ideate).
 - A reusable rule must be inferred from examples or material: use `generalize`.
 - An external concept must be taught: use `paced-explanation`.
 - Meaning is already complete and only voice or polish changes: use `unslop`.

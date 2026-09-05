@@ -11,7 +11,7 @@ Load this when the input's fit for `pov` is in doubt, or to route a Hold (SKILL.
 | If the user wants... | Route to | The line |
 |---|---|---|
 | A neutral explainer ("tell me about X") | general research / answer it directly | `pov` only returns a project-grounded verdict; with no project angle, answer it as a normal research question, or a dedicated deep-research-style tool *if the environment has one*, rather than forcing a verdict |
-| Options invented from an open field | `ideate` | Invented vs. discovered: ideate invents; `pov` judges/selects from a discoverable field |
+| Options invented from an open field | `brainstorm` (mode ideate) | Invented vs. discovered: ideate invents; `pov` judges/selects from a discoverable field |
 | To scope an idea already chosen | `brainstorm` | `pov` decides *whether*; brainstorm scopes *what* once it's a yes |
 | To know how to build something decided | further implementation planning | Verdict accepted → continue into further implementation planning; `pov` does no task breakdown |
 | To fix observed broken behavior | `debug` | `pov` assesses *exposure and priority* of a CVE; debug investigates an *actual failure* |
@@ -23,7 +23,7 @@ A *selection* question ("what should we use for auth?") is a `pov` verdict only 
 
 When the field cannot be bounded without inventing options, or the criteria are unclear, **Hold and route out**:
 
-- Field too open to enumerate → Hold → `ideate` to enumerate the candidates → offer to re-run `pov` on the shortlist.
+- Field too open to enumerate → Hold → `brainstorm` (mode ideate) to enumerate the candidates → offer to re-run `pov` on the shortlist.
 - Criteria unclear / unstated requirements → Hold → `brainstorm` to surface them → offer to re-run.
 
 Running a verdict on an unbounded field turns `pov` into disguised requirements discovery; the escape hatch is what keeps it a judgment skill.
