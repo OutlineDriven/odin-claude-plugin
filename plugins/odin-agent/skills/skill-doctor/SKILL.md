@@ -1,6 +1,6 @@
 ---
 name: skill-doctor
-description: 'Use when a user wants agent setup graded from conversation history. Not for skill fixing: use skill-improver. Not for security scanning: use skill-scanner.'
+description: 'Use when a user wants agent setup graded from conversation history. Not for skill fixing: use agent-surface-forge. Not for security scanning: use skill-scanner.'
 ---
 
 # Skill doctor

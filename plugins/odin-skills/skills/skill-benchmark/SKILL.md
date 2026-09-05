@@ -1,6 +1,6 @@
 ---
 name: skill-benchmark
-description: 'Use when the user runs /skill-benchmark to score skills, compare models, or gate a skill release. Modes: score (default) and gate. Not for editing skills: use skill-improver.'
+description: 'Use when the user runs /skill-benchmark to score skills, compare models, or gate a skill release. Modes: score (default) and gate. Not for editing skills: use agent-surface-forge.'
 disable-model-invocation: true
 ---
 

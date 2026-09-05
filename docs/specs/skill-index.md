@@ -451,7 +451,6 @@
 | skill-benchmark | odin-skills | Productivity |
 | skill-doctor | odin-agent | Productivity |
 | skill-gap-finder | odin-core | Coding |
-| skill-improver | odin-skills | Productivity |
 | skill-progressive-disclosure-design | odin-skills | Productivity |
 | skill-scanner | odin-skills | Productivity |
 | skills-visibility | odin-skills | Productivity |
