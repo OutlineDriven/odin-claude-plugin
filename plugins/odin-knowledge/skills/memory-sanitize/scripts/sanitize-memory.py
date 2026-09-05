@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-sanitize-memory.sh [--scan-only] <memory_dir> [<dst_dir>]
+sanitize-memory.py [--scan-only] <memory_dir> [<dst_dir>]
 
 --scan-only: scan for Tier-1 credentials only; do not generate copies.
              Exit 2 if any Tier-1 credential is found, 0 otherwise.

@@ -221,6 +221,20 @@ def print_analysis(analysis: dict[str, object]):
         print("    - references/quantized_gemm_patterns.yaml")
         print("    - references/threading_patterns.yaml")
 
+    elif analysis["kernel_type"] in ("reduction", "elementwise"):
+        print("  Kernel Category: Element-wise / Reduction")
+        print("  Architecture: Direct AVX512 intrinsics (no brgemm)")
+        print("  Threading: #pragma omp parallel for over rows")
+        print("  Vectorization: FP32Vec16, BF16Vec32 abstractions")
+        print("  Compiler flags: -mavx512f -mavx512bf16 -mavx512vl -mavx512dq -mavx512bw")
+        print("                  -mavx512vbmi -mfma -mf16c -fopenmp")
+        print("  Prefetch: _MM_HINT_T1 (L2)")
+        print()
+        print("  Reference files:")
+        print("    - references/simd_optimization_patterns.yaml")
+        print("    - references/memory_patterns.yaml")
+        print("    - references/threading_patterns.yaml")
+
     print()
     print("File Structure:")
     print("  my_kernel_cpu/")

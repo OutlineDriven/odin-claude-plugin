@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
 """Whole-tree gate for executable skill content: compile, shell syntax, self-checks.
 
-Three checks that `prek` cannot otherwise run:
+Checks that `prek` cannot otherwise run:
 - every tracked Python file under plugins/ and scripts/ must compile;
-- every tracked shell script under plugins/ must pass `bash -n`;
+- every tracked shell script under plugins/ (a shell shebang or a .sh
+  suffix) must pass `bash -n`;
 - every skill script that ships a --self-check must pass it, with a
-  printed skip (not a failure) on hosts missing its heavyweight import.
+  printed skip (not a failure) on hosts missing its heavyweight import;
+- the E4M3 -> BF16 conversion taught in two reference files is held against
+  an independent float oracle so the two cannot silently diverge.
 
-The E4M3 -> BF16 conversion taught in two reference files is checked
-against an independent float oracle so the two cannot silently diverge
-from the hardware-verified form.
-
---self-test plants one broken file of each kind and proves both detectors
-fire, because a gate that has never seen a defect is a hope, not a gate.
+--self-test plants one broken file of each kind and proves every detector
+fires, because a gate that has never seen a defect is a hope, not a gate.
 """
 
+import re
 import struct
 import subprocess
 import sys
@@ -35,8 +35,14 @@ FP8_SNIPPETS = [
 ]
 FP8_CONSTANTS = ["set1_epi16(120)", "slli_epi16", ", 7)", ", 4)", "0x7F", "0x7FC0"]
 
+# Known pairs pinned from the hardware-verified run: zero, a flushed
+# subnormal, one, two, and both NaN signs.
+FP8_KNOWN_PAIRS = {0x00: 0x0000, 0x01: 0x0000, 0x38: 0x3F80, 0x40: 0x4000, 0x7F: 0x7FC0, 0xFF: 0xFFC0}
+
 BROKEN_PY = "def f(:\n    pass\n"
 BROKEN_SH = "if [ -f x ]; then\n    echo broken\n"
+
+_SHELL_SHEBANG = re.compile(r"^#!.*\b(?:ba|z|da|)sh\b")
 
 
 def _where(path: Path) -> str:
@@ -102,34 +108,56 @@ def _fp8_to_bf16(b: int) -> int:
     return sign | ((e + 120) << 7) | (m << 4)
 
 
-def fp8_reference_errors() -> list[str]:
-    errors: list[str] = []
+def _fp8_model_errors() -> list[str]:
+    if any(_fp8_to_bf16(b) != want for b, want in FP8_KNOWN_PAIRS.items()):
+        return ["FP8 model contradicts the pinned hardware-verified pairs"]
     for b in range(256):
         if (b & 0x7F) == 0x7F:
             continue
         e = (b >> 3) & 0xF
+        # e==0 is the pinned flush-to-zero contract: E4M3 subnormals are
+        # representable in bf16, and the taught kernels deliberately flush
+        # them, matching the hardware-verified reference. Every other
+        # encoding is checked against an independent float packing.
         value = 0.0 if e == 0 else (1.0 + (b & 0x7) / 8.0) * 2.0 ** (e - 7)
         if b & 0x80:
             value = -value
         oracle = struct.unpack(">I", struct.pack(">f", value))[0] >> 16
         if _fp8_to_bf16(b) != oracle:
-            errors.append(f"FP8 model diverges from float oracle at 0x{b:02x}")
-            break
-    for rel in FP8_SNIPPETS:
-        text = (ROOT / rel).read_text()
+            return [f"FP8 model diverges from float oracle at 0x{b:02x}"]
+    return []
+
+
+def _fp8_constant_errors(paths: list[Path]) -> list[str]:
+    errors: list[str] = []
+    for path in paths:
+        text = path.read_text()
         for constant in FP8_CONSTANTS:
             if constant not in text:
-                errors.append(f"{rel}: FP8 conversion lost the constant '{constant}'")
+                errors.append(f"{_where(path)}: FP8 conversion lost the constant '{constant}'")
     return errors
 
 
-def run_gate() -> int:
-    py_files = [p for p in _tracked("plugins/**/*.py") + _tracked("scripts/*.py") if p.exists()]
-    sh_files = [
+def fp8_reference_errors() -> list[str]:
+    return _fp8_model_errors() + _fp8_constant_errors([ROOT / rel for rel in FP8_SNIPPETS])
+
+
+def _python_files() -> list[Path]:
+    return [p for p in _tracked("plugins/**/*.py") + _tracked("scripts/*.py") if p.exists()]
+
+
+def _shell_files() -> list[Path]:
+    candidates = set(_tracked("plugins/**/scripts/*") + _tracked("plugins/**/*.sh"))
+    return sorted(
         p
-        for p in _tracked("plugins/**/scripts/*")
-        if p.exists() and p.is_file() and not p.suffix and p.read_text().startswith("#!")
-    ]
+        for p in candidates
+        if p.exists() and p.is_file() and (p.suffix == ".sh" or _SHELL_SHEBANG.match(p.read_text()))
+    )
+
+
+def run_gate() -> int:
+    py_files = _python_files()
+    sh_files = _shell_files()
 
     failures = (
         python_errors(py_files)
@@ -153,13 +181,18 @@ def run_self_test() -> int:
         bad_py.write_text(BROKEN_PY)
         bad_sh = Path(td) / "broken"
         bad_sh.write_text("#!/usr/bin/env bash\n" + BROKEN_SH)
-        if not python_errors([bad_py]):
-            print("FAIL: planted python syntax error was not flagged")
-            return 1
-        if not shell_errors([bad_sh]):
-            print("FAIL: planted shell syntax error was not flagged")
-            return 1
-        print("PASS: both planted defects were flagged")
+        bad_yaml = Path(td) / "broken.yaml"
+        bad_yaml.write_text("conversion: |\n  // no fp8 constants here\n")
+        checks = [
+            (python_errors([bad_py]), "planted python syntax error"),
+            (shell_errors([bad_sh]), "planted shell syntax error"),
+            (_fp8_constant_errors([bad_yaml]), "planted FP8 constant loss"),
+        ]
+        for errors, what in checks:
+            if not errors:
+                print(f"FAIL: {what} was not flagged")
+                return 1
+        print("PASS: every planted defect was flagged")
         return 0
 
 

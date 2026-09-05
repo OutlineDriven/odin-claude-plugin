@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-audit-memory.sh <memory_dir> [session_history_glob]
+audit-memory.py <memory_dir> [session_history_glob]
 Walks the memory directory and session history, emits a JSON audit report to stdout.
 Diagnostics go to stderr. Exit 1 on fatal error.
 

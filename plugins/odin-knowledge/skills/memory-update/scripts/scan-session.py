@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-scan-session.sh <session-history-glob>
+scan-session.py <session-history-glob>
 Scans Claude Code JSONL session files for save-worthy memory signals.
 Outputs a JSON array of candidate proposals to stdout.
 Diagnostics go to stderr.
