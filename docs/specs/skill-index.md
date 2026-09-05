@@ -70,7 +70,6 @@
 | close-done | odin-git | Coding |
 | cloud-task-orchestrator | odin-run | Coding |
 | code-simplification | odin-code | Coding |
-| codebase-design | odin-code | Coding |
 | codeql-security-analysis | odin-security | Security |
 | commit | odin-git | Coding |
 | competitor-feature-research | odin-product | Productivity |

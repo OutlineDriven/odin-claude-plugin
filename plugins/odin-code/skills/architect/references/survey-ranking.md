@@ -22,7 +22,7 @@ Order shallow modules by:
 
 Higher gain and lower effort ranks higher.
 
-## Report shape
+## Report plan
 
 - Ranked list of all shallow modules with their effort and gain scores.
 - Top candidate with a one-paragraph rationale for why it ranks first.

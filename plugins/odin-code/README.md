@@ -2,7 +2,7 @@
 
 ODIN workflows for writing, changing, and simplifying code.
 
-39 skills, category Coding.
+38 skills, category Coding.
 
 ## Install
 
@@ -24,7 +24,6 @@ codex plugin add odin-code@odin-marketplace
 - breaking-driven
 - clean-clean-cut
 - code-simplification
-- codebase-design
 - constraint-driven-development
 - contract-driven
 - deprecate-and-migrate
