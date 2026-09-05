@@ -187,7 +187,7 @@ The name-parity rule exists because Codex resolves a plugin's namespace from the
 alone. Five manifests with different names load one plugin's components under another's namespace,
 and nothing else reports it.
 
-Passing output: `plugin surfaces ok: 28 plugins, 605 skills`.
+Passing output: `plugin surfaces ok: 28 plugins, 543 skills`.
 
 ### check-skill-routes.mjs
 

@@ -236,15 +236,15 @@ Validation checks, from the help text (Tier 1, source: `gh skill publish --help`
 
 ### Dry-run result, 2026-09-05
 
-Run 2026-09-05 against this tree at `releaseVersion` 2.1.0, when the tree held 605 skills in 28
+Run 2026-09-05 against this tree at `releaseVersion` 2.1.0, when the tree held 543 skills in 28
 plugins. The verbatim output is in `docs/specs/install-proof.md`; the shape:
 
 Command: `gh skill publish --dry-run` from the repository root (Tier 1, source: local execution, verified).
 
 - Exit code: 0.
-- Skills discovered: 605, all under the `[plugins]` label, matching the 605 `plugins/<module>/skills/<slug>/` directories on disk.
-- Warnings: 608 total.
-  - 605 of type `recommended field missing: license`, one per skill.
+- Skills discovered: 543, all under the `[plugins]` label, matching the 543 `plugins/<module>/skills/<slug>/` directories on disk.
+- Warnings: 546 total.
+  - 543 of type `recommended field missing: license`, one per skill.
   - 3 repository-level advisories: secret scanning not enabled, secret scanning push protection not enabled, no active tag protection rulesets.
 - Final line: "Dry run complete. Use without --dry-run to publish."
 
@@ -256,7 +256,7 @@ The tree carries no blanket per-skill `license` frontmatter field, and this is d
 - A uniform value would misstate the provenance of adapted skills.
 - `license` is optional in the Agent Skills specification (Tier 1, source: https://agentskills.io/specification, verified).
 
-The 605 license warnings are advisory and do not fail the run.
+The 543 license warnings are advisory and do not fail the run.
 
 ## Repository layout
 
@@ -277,7 +277,7 @@ The current layout satisfies all five surfaces from one tree (Tier 1, source: re
 │       ├── .grok-plugin/plugin.json     # Grok manifest
 │       ├── .kimi-plugin/plugin.json     # Kimi manifest, skills declared
 │       ├── mcp.json                     # optional; only odin-core ships one
-│       └── skills/<slug>/SKILL.md       # 605 skills total
+│       └── skills/<slug>/SKILL.md       # 543 skills total
 ├── catalog/                             # registry and membership data
 ├── scripts/                             # dependency-free Node ESM and stdlib Python
 ├── Justfile                             # render, check, validate-skills, verify

@@ -148,6 +148,76 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `factory-mcp-bootstrap`: removed; the Warp Factory endpoint is vendor-internal,
   and `mcp-builder` covers MCP server authoring.
 
+- Folded 62 skills into 45 survivors (605 to 543 skills, 10.2 percent). Each survivor
+  absorbs its retired members' unique steps as inputs or named modes; a retired
+  slug that names a mode of its survivor keeps that name in the survivor's `mode`
+  input. Retired skills, slug to survivor:
+
+  | Retired | Survivor |
+  |---|---|
+  | `aflpp` | `libfuzzer` |
+  | `batch-ask-me` | `askme` |
+  | `burp-search-command` | `burpsuite-project-parser` |
+  | `ci-sweeper` | `ci-fix` |
+  | `clarify` | `askme` |
+  | `classify-ci-failure` | `ci-fix` |
+  | `codebase-design` | `architect` |
+  | `commit-economy` | `commit` |
+  | `competitor-changelog` | `competitor-feature-research` |
+  | `constant-time-testing` | `constant-time-analysis` |
+  | `copywriting-cta` | `copywriting` |
+  | `copywriting-hooks` | `copywriting` |
+  | `copywriting-prose-creator` | `copywriting-tone-of-voice-creator` |
+  | `design-consultation` | `design` |
+  | `differential-security-review` | `security-review` |
+  | `engineering-blog-writing` | `technical-article-writer` |
+  | `framing-divergence-fanout` | `prism` |
+  | `get-pr-comments` | `resolve-pr-feedback` |
+  | `handoff-prompt` | `handoff` |
+  | `ideate` | `brainstorm` |
+  | `intent-proposal` | `askme` |
+  | `interview-me` | `askme` |
+  | `isolate-work-in-worktree` | `worktree` |
+  | `isolate-workspace-gate` | `worktree` |
+  | `plan-review-tune` | `plan-review` |
+  | `planning` | `plan` |
+  | `planning-and-task-breakdown` | `plan` |
+  | `port-static-analysis-rule` | `semgrep-rule-authoring` |
+  | `pr-link-issue` | `create-pull-request` |
+  | `pr-review-canvas-html` | `pr-review-canvas` |
+  | `property-test-failure-triage` | `property-test-authoring` |
+  | `property-test-review` | `property-test-authoring` |
+  | `property-testing-fit-assessment` | `property-test-authoring` |
+  | `prototype-logic` | `prototype` |
+  | `publish-release-pr` | `release-gate` |
+  | `rationale-by-source` | `why` |
+  | `render-excalidraw-diagram` | `visual-argument-diagram` |
+  | `respond-to-pr-comments-in-blocklist` | `resolve-pr-feedback` |
+  | `review-reception-protocol` | `resolve` |
+  | `shape` | `plan` |
+  | `sharp-edges-analyzer` | `sharp-edges` |
+  | `skill-benchmark-gate` | `skill-benchmark` |
+  | `skill-improver` | `agent-surface-forge` |
+  | `skill-progressive-disclosure-design` | `writing-for-agents` |
+  | `smart-contract-code-maturity-assessor` | `smart-contract-guidelines-advisor` |
+  | `trailmark-summary` | `trailmark-structural` |
+  | `validation-self-audit` | `evaluation-leakage-audit` |
+  | `variant-neighborhood-seeding` | `variant-hunt` |
+  | `visual-brainstorm-companion` | `brainstorm` |
+  | `visual-fact-check` | `verify-both-ways` |
+  | `visual-plan` | `plan` |
+  | `visual-project-recap` | `catchup` |
+  | `visual-render-tool` | `visual-diagram` |
+  | `visual-slides` | `presentation-creator` |
+  | `visualise-chart` | `visualise-widget` |
+  | `visualise-explainer` | `visualise-widget` |
+  | `watch-until` | `watch-for` |
+  | `what-did-i-get-done` | `weekly-review` |
+  | `write-pr-description` | `create-pull-request` |
+  | `write-prd` | `write-product-spec` |
+  | `write-tech-spec` | `write-product-spec` |
+  | `writing-skills` | `writing-for-agents` |
+
 ### Migration
 
 Retired id to successor; the count is how many of the retired plugin's skills
