@@ -1,3 +1,3 @@
 interface:
   display_name: "Prototype"
-  short_description: "Use when asked to prototype one design question through a cheap logic or UI experiment."
+  short_description: "Use when asked to prototype one design question through a cheap logic or UI experiment, including button-driven state-model checks."

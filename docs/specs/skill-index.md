@@ -390,7 +390,6 @@
 | propose-external-change | odin-run | Coding |
 | propose-issue | odin-git | Coding |
 | prototype | odin-design | Design |
-| prototype-logic | odin-design | Design |
 | publish-branch | odin-git | Coding |
 | punishing-practices | odin-critique | Productivity |
 | purge-slop-docs | odin-writing | Writing |

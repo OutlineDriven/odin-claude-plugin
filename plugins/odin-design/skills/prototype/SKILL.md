@@ -1,6 +1,6 @@
 ---
 name: prototype
-description: 'Use when asked to prototype one design question through a cheap logic or UI experiment. Not for interactive state-model demos: use prototype-logic.'
+description: 'Use when asked to prototype one design question through a cheap logic or UI experiment, including button-driven state-model checks. Not for polished artifacts: use polished-web-prototype.'
 ---
 
 # Prototype
@@ -9,8 +9,8 @@ description: 'Use when asked to prototype one design question through a cheap lo
 
 | Field | Bound contract |
 |---|---|
-| Trigger | Explicit model invocation: one design question needs a cheap logic or UI experiment. |
-| Authority | Reversible local: writes throwaway prototype artifacts and their verdict off main; may fold the validated decision into the named real-code target as a working-tree edit the user commits through their normal flow. No VCS-history or tracked-branch mutation, no credentials, no remote mutation. |
+| Trigger | Explicit model invocation: one design question needs a cheap logic or UI experiment, including a state-model, logic, or data-shape question a human checks by pressing buttons and watching state change, even when the driver is a non-developer. |
+| Authority | Reversible local: writes throwaway prototype artifacts and their verdict on a throwaway branch off main; may fold the validated decision into the named real-code target as a working-tree edit the user commits through their normal flow; rollback is abandoning the throwaway branch or restoring its commits. Never push, delete existing work, or change production rendering. No remote mutation. |
 | Side effect | Write one throwaway prototype artifact and its verdict off the main branch; that branch is the evidence, not a delivery target. |
 | Done | The question is answered in one line and the decision is folded into the real work. |
 
@@ -18,6 +18,7 @@ description: 'Use when asked to prototype one design question through a cheap lo
 
 - Question (required): the design question being answered, drawn from the user's prompt or surrounding code. If the question is genuinely ambiguous and the user is reachable, ask before routing.
 - Context (required): the surrounding code or page that frames the question. Determines whether to route to LOGIC or UI.
+- LOGIC mode also takes: the relevant state, actions, domain terms, and legal-transition rules; a path for the throwaway HTML file; representative scenarios or enough domain rules to derive a happy path, a tricky edge case, and an illegal-action attempt; the main branch the throwaway branch is based on; and a real-code target, required only after the human validates the module.
 
 ## Procedure
 
@@ -34,21 +35,21 @@ Route before writing because LOGIC and UI variants require different artifact st
 
 *When the question is about business logic, state transitions, or data shape.*
 
-1. State the question. Write one paragraph at the top of the demo stating the exact question and the state model being tested. This checkpoint prevents the prototype from answering the wrong question. Done when: the artifact's top paragraph names the exact question and the state model, and a reader can tell what the prototype will answer without reading the code.
+1. Bound the change and state the question. Inspect the named paths and current version-control state; bound the change to the throwaway HTML path and, only after validation, the supplied real-code target. Stop if either target would overwrite unrelated work, the main-branch basis is unavailable, or a required domain rule cannot be established without guessing. Write one paragraph at the top of the demo stating the exact question and the state model being tested. This checkpoint prevents the prototype from answering the wrong question. Done when: the change is bounded, no target overwrites unrelated work or guesses a domain rule, and the artifact's top paragraph names the exact question and the state model.
 2. Isolate the logic. Put the answerable logic in a single `<script>` block as a small pure module. Pick the shape that fits the question:
    - Pure reducer: `(state, action) => state`, for discrete events and a single state value.
    - State machine: explicit states and transitions, when legality of actions depends on current state.
    - Pure functions over a plain data type, when there is no implicit current state.
    - Class or module with a clear method surface, when logic genuinely owns ongoing internal state.
-   Keep it pure: no DOM, no `document`, no button handlers reaching inside it. This module must be liftable into the real codebase after the question is answered. Done when: the logic sits in one pure module with no DOM or event-handler coupling, and the module's shape matches the question type from the list above.
-3. Build the shareable HTML file. One file, plain HTML/CSS/JS, everything inline, opens by double-click. No framework, no bundler, no server. Layout, top to bottom:
+   Keep it pure: no DOM, no `document`, no button handlers reaching inside it; the page may call the module, but the module must not call back into the page. This module must be liftable into the real codebase after the question is answered. Done when: the logic sits in one pure module with no DOM or event-handler coupling, and the module's shape matches the question type from the list above.
+3. Build the shareable HTML file. One file, plain HTML/CSS/JS, everything inline, opens by double-click. No framework, no bundler, no server. Mark the filename and the visible page as throwaway. Layout, top to bottom:
    - Title and one-line explanation of the question.
    - Current state panel: full relevant state rendered in domain language (not raw JSON), re-rendered after every click so the change is visible. Call out what just changed where it helps a non-developer follow.
    - Free-play buttons: one button per action, always available. Each click dispatches its action and re-renders the state.
-   - Guided walkthroughs: tabs, each containing a plain-language description of the scenario and the ordered buttons to press. Clicking a step button performs that action and advances. Each walkthrough resets to a known initial state before running. Choose scenarios that demonstrate the awkward cases: the happy path, a tricky edge case, and an attempt at something that should be illegal.
-   Write every label in domain language, not code. Keep it clean: one accent colour, generous spacing, no animations, no gimmicks. Done when: the HTML file opens by double-click with no server, shows the state panel, free-play buttons, and at least one guided walkthrough, and every label is domain language rather than code identifiers.
-4. Hand it over. Surface the file. Non-developers (designer, PM, domain expert) should be able to drive it without assistance. Done when: the file path is surfaced to the user and the file is openable from that path without installation or build steps.
-5. Capture. When the prototype answers the question: fold the validated reducer/machine/function set into the real module; commit the HTML file and the verdict to a throwaway branch off main. The main branch keeps only the folded decision. Done when: the validated logic is folded into the real codebase on main, and the HTML file plus the one-line verdict are committed to a throwaway branch that is not main.
+   - Guided walkthroughs: tabs, each containing a plain-language description of the scenario and the ordered buttons to press. Clicking a step button performs that action and advances. Each walkthrough resets to a known initial state before running so reruns are deterministic. Cover all three scenario classes: the happy path, a tricky edge case, and an attempt at something that should be illegal.
+   Write every label in domain language, not code. Keep it clean: one accent colour, generous spacing, no animations, no gimmicks. Done when: the HTML file opens by double-click with no server, shows the state panel, free-play buttons, and at least one guided walkthrough per scenario class, and every label is domain language rather than code identifiers.
+4. Exercise it, then hand it over. Before surfacing, open the standalone file, exercise free play and all three scenario classes, and confirm that every action visibly produces the modeled state transition, including rejection or handling of the illegal action. Repair only defects that prevent the demo from answering the stated question. Then surface the file. Non-developers (designer, PM, domain expert) should be able to drive it without assistance. Add actions or scenarios only when their feedback requests them; do not infer broader scope. Done when: free play and all three scenario classes produce the modeled transitions, and the file path is surfaced to the user.
+5. Capture. When the prototype answers the question: record the exact question and verdict in the commit that adds the demo on a throwaway branch based on the supplied main branch; do not push. Fold the validated reducer, machine, or function set, not the HTML shell, into the real module, and verify the same settled transitions there. The main branch keeps only the folded decision. Done when: the question and verdict are recorded in a throwaway-branch commit, the validated logic is folded into the real codebase with its transitions verified, and the HTML shell never ships as production code.
 
 ### UI procedure
 
@@ -82,7 +83,7 @@ Route before writing because LOGIC and UI variants require different artifact st
 
 1. Mark it throwaway from day one. Name it and locate it so a casual reader immediately knows it is not production code. Done when: the artifact's name or path contains `prototype` and a reader encountering it cold knows it is not production code.
 2. Trivial to run. Start a UI prototype with one project command (`pnpm <name>`, `python <path>`, `bun <path>`). Open a logic prototype by double-clicking its single HTML file. Done when: the prototype runs with a single command or double-click and no manual setup is required.
-3. No persistence by default. State lives in memory. If the question explicitly involves a database, use a scratch DB or local file with a clear "PROTOTYPE, wipe me" name. Done when: the prototype holds state in memory only, or the scratch store has a name that marks it for deletion.
+3. No persistence by default. State lives in memory. If the question explicitly involves a database, use a scratch DB or local file with a clear "PROTOTYPE, wipe me" name and include that target in the bounded scope before writing it. Done when: the prototype holds state in memory only, or the scratch store has a name that marks it for deletion.
 4. Skip the polish. No tests, no error handling beyond what makes the prototype runnable. Done when: the prototype contains no test files and no error handling beyond what keeps it runnable.
 5. Surface the state. After every action (logic) or on every variant switch (UI), display the full relevant state so the user can see what changed. Done when: the state panel re-renders after every action or variant switch, and the full relevant state is visible after each change.
 6. Capture the evidence off main. Commit the prototype to a throwaway branch. The main branch keeps only the validated decision. Done when: the prototype artifact and verdict are on a branch that is not main, and main contains only the folded decision.
@@ -92,7 +93,12 @@ Route before writing because LOGIC and UI variants require different artifact st
 | Failure | Response |
 |---|---|
 | Question is ambiguous or absent | Do not proceed. Ask the user to state the question before routing. |
+| Logic model is invalid or incomplete | Make no speculative transition; report `blocked` with the missing rule. |
+| Named write would overwrite existing work or exceed the bounded paths | Make no such write; report `blocked` with the conflicting path and intended change. |
 | Logic prototype needs a test to run | The logic is not isolated enough; extract the pure module before continuing. |
+| Demo fails to open, a button misses the module, state is not fully visible, a walkthrough is nondeterministic, or a transition is wrong | Do not claim a verdict; leave the last runnable artifact intact and report `non-converged` with the failed scenario and observed state. |
+| Human validation unavailable or negative | Preserve the throwaway demo as the partial result, fold nothing into real code, and report `blocked` with the unanswered question or rejected behavior. |
+| Validated logic cannot preserve the settled transitions in the real-code target | Restore the target from version control, retain the throwaway branch, and report `non-converged` with the failing transition. |
 | Variant fails to render | Remove the broken variant; document the failure in the verdict and continue with the remaining variants. |
 | User rejects all variants | Treat as unresolved; do not fold any variant into the main branch. |
 | Prototype code lands in main | Revert immediately. Prototype constraints (no tests, no error handling) are not safe for production. |
@@ -100,3 +106,4 @@ Route before writing because LOGIC and UI variants require different artifact st
 ## Output
 
 - Decision: one line answering the question. Evidence: the prototype HTML file (LOGIC) or variant components and switcher (UI), committed to a throwaway branch off main. Verdict record: the question, the answer, and the chosen path recorded in the issue or commit message on the throwaway branch.
+- LOGIC mode terminal classification: `validated`, `blocked`, or `non-converged`, with the standalone HTML path, the state-model question, the exercised happy-path, edge-case, and illegal-action scenarios, and their observed transitions. For `validated`, also return the human verdict, the throwaway-branch commit, and the real-code target containing the validated module. Never report or ship the HTML shell as production code.

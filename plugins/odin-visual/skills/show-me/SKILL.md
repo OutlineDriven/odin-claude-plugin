@@ -18,7 +18,7 @@ description: 'Use when the user says show this or diagram this about the current
 
 - An auditable decision trail for unattended work: use show-me-your-work.
 - A committed diagram in a document: use embed-diagram.
-- An interactive clickable sketch: use prototype-logic.
+- An interactive clickable sketch: use prototype.
 - Teaching a concept with explanation and examples: use explain-concept.
 - A visual walk of review findings one at a time: use show-review.
 - A guided multi-turn exploration: use walk-with-me.
