@@ -2,7 +2,7 @@
 
 ODIN workflows for CI, deployment, observability, cost, and infrastructure tooling.
 
-15 skills, category Infrastructure.
+13 skills, category Infrastructure.
 
 ## Install
 
@@ -21,8 +21,6 @@ codex plugin add odin-infra@odin-marketplace
 - analysis-artifacts
 - ci-cd
 - ci-fix
-- ci-sweeper
-- classify-ci-failure
 - consult-deployment
 - cost-reduction
 - dbt-model-index

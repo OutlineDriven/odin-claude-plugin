@@ -62,9 +62,7 @@
 | chrome-extension | odin-web | Coding |
 | ci-cd | odin-infra | Infrastructure |
 | ci-fix | odin-infra | Infrastructure |
-| ci-sweeper | odin-infra | Infrastructure |
 | clarify | odin-planning | Productivity |
-| classify-ci-failure | odin-infra | Infrastructure |
 | claude-settings-audit | odin-agent | Productivity |
 | clean-and-true | odin-writing | Writing |
 | clean-clean-cut | odin-code | Coding |
