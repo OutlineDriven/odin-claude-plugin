@@ -8,7 +8,7 @@ bf16_on_cpu:
   key_instructions:
     - name: "_mm512_dpbf16_ps"
       description: "Dot product of bf16 pairs, accumulate in fp32"
-      note: "Processes TWO bf16 pairs per call (k must be even)"
+      note: "Processes 16 bf16 pairs per call (k must be even)"
     - name: "_mm512_cvtne2ps_pbh"
       description: "Convert two fp32 vectors to one bf16 vector (round-to-nearest-even)"
     - name: "CVT_BF16_TO_FP32 macro"
@@ -65,7 +65,7 @@ fp8_on_cpu:
         __m512i m = _mm512_slli_epi16(_mm512_and_si512(x, _mm512_set1_epi16(0x7)), 4);  // 3-bit mantissa into BF16 bits 6-4
         __m512i r = _mm512_or_si512(_mm512_slli_epi16(_mm512_add_epi16(e, _mm512_set1_epi16(120)), 7), m);  // bias delta 127-7, exponent at bits 14-7
         r = _mm512_mask_mov_epi16(r, _mm512_cmpeq_epi16_mask(e, _mm512_setzero_si512()), _mm512_setzero_si512());  // e==0: flush subnormals to zero
-        // E4M3 NaN encodings (e=15, m=7) are not preserved: they map to finite values.
+        r = _mm512_mask_mov_epi16(r, _mm512_cmpeq_epi16_mask(x, _mm512_set1_epi16(0x7F)), _mm512_set1_epi16(0x7FC0));  // e=15, m=7: E4M3 NaN -> BF16 quiet NaN
         return (__m512bh)_mm512_or_si512(r, vsign);
     }
 

@@ -23,8 +23,8 @@ cache_dir = /var/cache/ccache   # non-default location
 
 compression = true              # zstd compression, on by default
 compression_level = 3           # zstd level; 0 is the default, positive
-                                # values go to at least 19; stay at 5 or
-                                # lower, higher levels slow compiles
+                                # values run 1-19; stay at 5 or lower,
+                                # higher levels slow compiles
 
 hash_dir = false                # exclude CWD from the hash (shared caches)
 base_dir = /project             # strip this prefix from hashed paths

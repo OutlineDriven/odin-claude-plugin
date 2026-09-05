@@ -27,7 +27,7 @@ gcc ${CFLAGS} ${LDFLAGS} -o prog main.c
 
 ## Clang (Linux)
 
-Clang has no `-D_GLIBCXX_ASSERTIONS` dependency difference; keep it for C++ code. SafeStack is an optional extra and changes the ABI:
+Clang takes the same hardening defines; `-D_GLIBCXX_ASSERTIONS` applies whenever libstdc++ headers are in use. SafeStack is an optional extra and changes the ABI:
 
 ```bash
 CFLAGS="-O2 \
@@ -35,6 +35,7 @@ CFLAGS="-O2 \
   -fstack-clash-protection \
   -fcf-protection \
   -D_FORTIFY_SOURCE=3 \
+  -D_GLIBCXX_ASSERTIONS \
   -fPIE"
 
 LDFLAGS="-pie -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack"

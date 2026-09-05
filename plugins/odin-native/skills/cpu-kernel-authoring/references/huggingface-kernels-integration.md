@@ -162,6 +162,6 @@ my-kernel/
 ## Notes
 
 - CPU kernels use the same `torch_binding.cpp` and `registration.h` pattern as CUDA/XPU kernels
-- The `ops.impl("forward", torch::kCPU, &func)` call ensures CPU dispatch
+- The `ops.impl("forward", torch::kCPU, &func)` call ensures CPU dispatch (element-wise kernels such as rmsnorm instead register with `c10::DispatchKey::CompositeExplicitAutograd`)
 - Multi-device kernels use `#if defined(CPU_KERNEL)` / `#elif defined(CUDA_KERNEL)` guards
 - CPU wheels are built for x86_64 Linux; ARM/macOS may require source builds

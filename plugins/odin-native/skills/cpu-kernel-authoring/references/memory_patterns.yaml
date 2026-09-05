@@ -5,7 +5,7 @@ cache_blocking:
   description: |
     Partition the computation into tiles that fit in L1/L2 cache.
     For GEMM: tile over M, N, K dimensions.
-    L1 is typically 48KB (data), L2 is 1.25-2MB, L3 is shared.
+    L1 is typically 32-48KB (data: 32KB on most AMD Zen, 48KB on recent Intel), L2 is 1.25-2MB, L3 is shared.
   pattern: |
     // Tile the K dimension to fit working set in L2
     for (int64_t kb = 0; kb < K; kb += BLOCK_K) {

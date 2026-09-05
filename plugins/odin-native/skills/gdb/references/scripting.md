@@ -74,7 +74,7 @@ libstdc++ ships its own GDB pretty-printers. They load automatically when the li
 break foo
 commands
   silent
-  print "hit foo, x =", x
+  printf "hit foo, x = %d\n", x
   continue
 end
 ```
