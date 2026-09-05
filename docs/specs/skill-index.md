@@ -360,7 +360,6 @@
 | pov | odin-planning | Productivity |
 | pr-impact-quiz | odin-review | Coding |
 | pr-review-canvas | odin-visual | Design |
-| pr-review-canvas-html | odin-visual | Design |
 | pr-walkthrough | odin-visual | Design |
 | prepare-repository-for-public-release | odin-release | Coding |
 | presentation-creator | odin-visual | Design |
