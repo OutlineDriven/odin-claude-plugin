@@ -1,3 +1,0 @@
-interface:
-  display_name: "Commit Economy"
-  short_description: "Use when the user asks to clean up a finished commit message or bring it to handoff-ready form."

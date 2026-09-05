@@ -73,7 +73,6 @@
 | codebase-design | odin-code | Coding |
 | codeql-security-analysis | odin-security | Security |
 | commit | odin-git | Coding |
-| commit-economy | odin-git | Coding |
 | competitor-feature-research | odin-product | Productivity |
 | compile-3d-workflow | odin-visual | Design |
 | complexity-grill | odin-review | Coding |
