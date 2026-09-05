@@ -1,25 +1,8 @@
----
-name: copywriting-hooks
-description: 'Use when a user asks for a hook, lede, or accroche for long-form content. Not for CTA design, use copywriting-cta. Not for general copywriting, use copywriting.'
----
+# Hook catalog
 
-# Copywriting hooks
+Reference for `Mode hook` in the copywriting skill: the five levers, the type-fit table, the 18-hook catalog, the anti-pattern cull, and language handling.
 
-## Contract
-
-| Field | Bound contract |
-|---|---|
-| Trigger | User asks for a hook, lede, or accroche for long-form content. |
-| Authority | Read-only. No file, VCS, credential, paid, published, deployed, or remote mutation. |
-| Side effect | No state outside the conversation. |
-| Done | User-selected hook plus what it commits the opening to. |
-
-## Inputs
-
-- Topic, audience, target language (EN, FR, or both), approximate length, and where it will be published. If any is unclear and material, ask before generating.
-- Optional: an existing draft opening. If supplied, treat it as Option 0 and propose 3 alternatives; never silently discard it.
-
-## Procedure
+## The five levers
 
 A hook's only job is to make the reader want sentence 2. It does that through one of five levers, and a strong hook usually pulls two at once:
 
@@ -29,21 +12,7 @@ A hook's only job is to make the reader want sentence 2. It does that through on
 4. **Promise a payoff**: name an outcome the reader wants (benefit, conditional, direct problem).
 5. **Borrow weight**: lean on a name, number, or quote that carries embedded authority (authority hook, statistic, quote with disagreement).
 
-1. Confirm the brief (see Inputs). Ask before generating if a material field is missing. Done when: the brief is confirmed or missing material fields are requested.
-2. Pick 3 to 4 hooks from the 18-hook catalog below that are genuinely different, different levers, not three flavors of the same technique. Done when: 3-4 genuinely different hooks are selected from the catalog, each pulling a different lever.
-3. Write 2 candidates per hook, specific to the user's article. The two candidates within one hook explore different angles (different anecdote, statistic, or scene), not rewordings of each other. Done when: 2 candidates per hook are written, each exploring a different angle.
-4. Apply the quality gates to every candidate:
-   - Specific beats abstract: replace "many companies" with "Stripe, Shopify, Vercel"; replace "recently" with a date; replace "studies show" with the actual finding or cut the claim.
-   - The first sentence must force the second: read each candidate cold; if sentence 2 would not be clicked after sentence 1, rewrite.
-   - Match technique to article type using the type-fit table.
-   Done when: every candidate passes the quality gates (specific detail, first-sentence-forces-second, type-fit).
-5. Run every candidate through the anti-pattern cull. If a candidate matches any entry, rewrite it before presenting. Done when: every candidate passes the anti-pattern cull or is rewritten.
-6. Present using the Output format, ask the user through the question tool, and wait. Do not pick for them. Done when: options are presented in the Output format and the user is asked to pick.
-7. After the pick, name what the choice commits the rest of the article to. A contrarian hook commits paragraphs 2-3 to defending the non-consensus claim. A scene opener commits the next section to resolving or productively delaying the scene. Done when: the chosen hook's opening commitments are named in one sentence.
-
-**Diversification rule.** Across the 3 to 4 options include at minimum one intellectual hook (contrarian, definition reversal, historical analogy, curiosity gap), one sensory hook (in medias res, concrete detail), and one reader-direct hook (conditional, direct problem, promise). Three flavors of contrarian is not a choice.
-
-**Type-fit table:**
+## Type-fit table
 
 | Article type | Strong hooks | Avoid |
 |---|---|---|
@@ -56,7 +25,9 @@ A hook's only job is to make the reader want sentence 2. It does that through on
 | Longform analysis | historical analogy, statistic, contrarian | direct problem |
 | Newsletter issue | personal confession + open loop, conditional, curiosity gap | dictionary opener |
 
-**The 18-hook catalog.** Each entry explains what the hook does, gives one example (EN or FR), and states when to use or avoid it.
+## The 18-hook catalog
+
+Each entry explains what the hook does, gives one example (EN or FR), and states when to use or avoid it.
 
 1. **Curiosity Gap**: open an information gap the reader wants closed. EN: "How does Shen Yun make any money? Short answer: they don't." Use when the gap can honestly be closed in 2-3 sentences and the reader cares about it. Avoid vague gaps ("You won't believe what happened next") the reader cannot even guess at.
 2. **Contrarian**: knock down a consensus belief the reader holds. EN: "Prevailing wisdom claims the best way to achieve what we want in life is to set specific, actionable goals." Use when a defensible non-consensus view exists and 200-400 words are available to defend it. Avoid strawmen and contrarianism for its own sake.
@@ -77,7 +48,9 @@ A hook's only job is to make the reader want sentence 2. It does that through on
 17. **Conditional ("If you... then this")**: self-segment the reader. EN: "If you write for a living, you've probably been taught to start with context. Don't." Use for tutorial, advice piece, segmented audience. Avoid conditions too broad ("If you've ever felt stuck...") that segment nobody.
 18. **Open Loop**: start something, withhold the resolution. EN: "He pressed Send and waited. Forty-seven seconds later, the company was worth 4 billion dollars less." Use for longform where the journey matters as much as the answer. Avoid unresolved loops; they create disproportionate betrayal when the article ends without paying off.
 
-**Anti-pattern cull (never propose any of these).** Run every candidate through this list before presenting; if a candidate matches, rewrite.
+## Anti-pattern cull
+
+Never propose any of these. Run every candidate through this list before presenting; if a candidate matches, rewrite.
 
 - "In today's fast-paced world..." / "À l'heure du tout-numérique" / "À l'ère de l'IA" / "Dans un monde où..."
 - "Have you ever wondered...?" / "Vous êtes-vous déjà demandé...?"
@@ -94,17 +67,6 @@ A hook's only job is to make the reader want sentence 2. It does that through on
 - "You're not alone."
 - Current AI tells: "It's not just X, it's Y", "Picture this:", "Imagine a world where...", "What if I told you...", "Whether you're a seasoned X or a curious newcomer...", "In the realm of...", "Navigating the landscape of...", "Unlock the power of...", "Dive into...", "Buckle up,", "Let's dive in", "Crucially,/Notably,/Importantly,/Essentially," as sentence openers. French AI tells: "Dans un monde en constante évolution", "Plongez dans...", "Découvrez comment...", "Par ailleurs,...", "Notamment,...", "Il est crucial de...".
 
-**Language handling.** If the audience is French, write in French and apply the _attaque journalistique_ register: concrete scene-setting, restrained tone, dated anchors, formal "vous" or restrained tutoiement. Do not translate American hype tropes literally ("You'll never believe..." becomes "Vous n'allez pas en croire vos yeux", which reads as scam in French); French marketing-skepticism is higher and high promises trigger _réactance_ faster. If English, default to direct-response register for marketing or tutorial content and longform register for essays and reported pieces. If bilingual, produce hooks in both languages and label clearly.
+## Language handling
 
-## Failure and recovery
-- Missing brief. If topic, audience, language, length, or publication venue is unclear and material, stop and ask before generating. Do not invent a brief.
-- Anti-pattern match. If a candidate matches the cull list, rewrite it before presenting. Never present a matched candidate.
-- No genuine choice. If the 3-4 options collapse to flavors of one technique, regenerate across different levers per the diversification rule before presenting.
-- User says "more" or "none". Produce 3 different hooks (different techniques), not new candidates for the same hooks.
-- User says "blend 1A and 2B". Write one combined hook and check in again before proceeding.
-- Unverifiable statistic or quote. If a candidate leans on a number or quote that cannot be cited accurately, replace it with a verifiable detail or cut the claim. Do not present an unsupported authority hook.
-- Partial-result rule: never present fewer than 3 distinct options. If 3 distinct, non-anti-pattern hooks cannot be produced from the catalog, stop and report the blocker rather than presenting a narrowed set.
-- Non-mutation rule: nothing is written to disk or any external system; recovery is always regenerate-in-conversation.
-
-## Output
-Return, in order: working title; 3-4 numbered hook types with two A/B candidates each; the user's selection prompt; after selection, the chosen hook and one sentence naming what it commits the opening to.
+If the audience is French, write in French and apply the _attaque journalistique_ register: concrete scene-setting, restrained tone, dated anchors, formal "vous" or restrained tutoiement. Do not translate American hype tropes literally ("You'll never believe..." becomes "Vous n'allez pas en croire vos yeux", which reads as scam in French); French marketing-skepticism is higher and high promises trigger _réactance_ faster. If English, default to direct-response register for marketing or tutorial content and longform register for essays and reported pieces. If bilingual, produce hooks in both languages and label clearly.

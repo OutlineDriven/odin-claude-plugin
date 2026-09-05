@@ -2,7 +2,7 @@
 
 ODIN workflows for documentation, editorial prose, and copy.
 
-35 skills, category Writing.
+33 skills, category Writing.
 
 ## Install
 
@@ -22,8 +22,6 @@ codex plugin add odin-writing@odin-marketplace
 - brand-authority
 - clean-and-true
 - copywriting
-- copywriting-cta
-- copywriting-hooks
 - copywriting-tone-of-voice-creator
 - debloat-respect-richness
 - doc-coauthoring

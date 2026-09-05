@@ -85,8 +85,6 @@
 | control-ui | odin-testing | Coding |
 | converge | odin-planning | Productivity |
 | copywriting | odin-writing | Writing |
-| copywriting-cta | odin-writing | Writing |
-| copywriting-hooks | odin-writing | Writing |
 | copywriting-tone-of-voice-creator | odin-writing | Writing |
 | corroborate-by-independent-reruns | odin-run | Coding |
 | cost-reduction | odin-infra | Infrastructure |
