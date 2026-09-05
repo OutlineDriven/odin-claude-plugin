@@ -25,11 +25,24 @@ TRIALS_DIR = os.path.join(os.getcwd(), "trials")
 OUTPUT_DIR = os.path.join(os.getcwd(), "output")
 
 
+def _validate_kernel_name(kernel_name):
+    if not kernel_name or os.path.isabs(kernel_name) or os.path.basename(kernel_name) != kernel_name:
+        raise ValueError("kernel_name must be a single directory name")
+    trial_root = os.path.realpath(TRIALS_DIR)
+    trial_dir = os.path.realpath(os.path.join(TRIALS_DIR, kernel_name))
+    if os.path.commonpath([trial_root, trial_dir]) != trial_root:
+        raise ValueError("kernel_name escapes the trials directory")
+    if os.path.lexists(os.path.join(TRIALS_DIR, kernel_name)) and os.path.islink(os.path.join(TRIALS_DIR, kernel_name)):
+        raise ValueError("kernel_name must not be a symlink")
+
+
 def _state_path(kernel_name):
+    _validate_kernel_name(kernel_name)
     return os.path.join(TRIALS_DIR, kernel_name, "state.json")
 
 
 def _trial_dir(kernel_name):
+    _validate_kernel_name(kernel_name)
     return os.path.join(TRIALS_DIR, kernel_name)
 
 
@@ -323,7 +336,16 @@ def cmd_finalize(args):
         output_path = os.path.join(OUTPUT_DIR, output_path)
 
     if os.path.isdir(src):
-        shutil.copytree(src, output_path, dirs_exist_ok=True)
+        temp_path = f"{output_path}.tmp-{os.getpid()}"
+        if os.path.exists(temp_path):
+            shutil.rmtree(temp_path)
+        shutil.copytree(src, temp_path)
+        if os.path.exists(output_path):
+            if os.path.isdir(output_path):
+                shutil.rmtree(output_path)
+            else:
+                os.unlink(output_path)
+        os.replace(temp_path, output_path)
     else:
         shutil.copy2(src, output_path)
 
