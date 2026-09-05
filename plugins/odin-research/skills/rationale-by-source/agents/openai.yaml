@@ -1,3 +1,0 @@
-interface:
-  display_name: "Rationale By Source"
-  short_description: "Use when asked to investigate design rationale, regression causes, or thresholds via source playbooks."

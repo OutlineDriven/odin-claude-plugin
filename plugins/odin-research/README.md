@@ -2,7 +2,7 @@
 
 ODIN workflows for source-backed investigation, verification, and design rationale.
 
-15 skills, category Research.
+14 skills, category Research.
 
 ## Install
 
@@ -24,7 +24,6 @@ codex plugin add odin-research@odin-marketplace
 - github-solution-research
 - ground-latest
 - how
-- rationale-by-source
 - readout
 - repo-qa-investigate
 - research

@@ -389,7 +389,6 @@
 | publish-branch | odin-git | Coding |
 | punishing-practices | odin-critique | Productivity |
 | purge-slop-docs | odin-writing | Writing |
-| rationale-by-source | odin-research | Research |
 | readiness-assessment | odin-planning | Productivity |
 | readout | odin-research | Research |
 | recall | odin-knowledge | Productivity |
