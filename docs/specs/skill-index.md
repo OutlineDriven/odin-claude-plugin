@@ -396,7 +396,6 @@
 | prototype | odin-design | Design |
 | prototype-logic | odin-design | Design |
 | publish-branch | odin-git | Coding |
-| publish-release-pr | odin-release | Coding |
 | punishing-practices | odin-critique | Productivity |
 | purge-slop-docs | odin-writing | Writing |
 | rationale-by-source | odin-research | Research |

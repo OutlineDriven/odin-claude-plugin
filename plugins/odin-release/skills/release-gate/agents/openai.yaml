@@ -1,3 +1,3 @@
 interface:
   display_name: "Release Gate"
-  short_description: "Use when the user decides to ship a release."
+  short_description: "Use when the user decides to ship a release as a signed tag or a redaction-gated PR."

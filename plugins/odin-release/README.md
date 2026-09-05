@@ -2,7 +2,7 @@
 
 ODIN workflows for cutting, gating, publishing, and announcing releases.
 
-14 skills, category Coding.
+13 skills, category Coding.
 
 ## Install
 
@@ -27,7 +27,6 @@ codex plugin add odin-release@odin-marketplace
 - open-source-readiness-audit
 - post-release-status
 - prepare-repository-for-public-release
-- publish-release-pr
 - release-gate
 - release-landing-report
 - secure-npm-package
