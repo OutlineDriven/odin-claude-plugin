@@ -3,7 +3,6 @@
 |---|---|---|
 | abstract-well | odin-planning | Productivity |
 | address-sanitizer | odin-fuzzing | Security |
-| aflpp | odin-fuzzing | Security |
 | agent-environment-retrospective | odin-agent | Productivity |
 | agent-surface-forge | odin-skills | Productivity |
 | agent-transcript | odin-git | Coding |

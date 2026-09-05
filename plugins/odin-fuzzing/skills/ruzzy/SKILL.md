@@ -1,6 +1,6 @@
 ---
 name: ruzzy
-description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby code or C extensions with Ruzzy, producing crash reports or clean campaign summaries. Not for C/C++ fuzzing: use libfuzzer or aflpp.'
+description: 'Use when asked to set up and run coverage-guided fuzzing of Ruby code or C extensions with Ruzzy, producing crash reports or clean campaign summaries. Not for C/C++ fuzzing: use libfuzzer or libfuzzer.'
 ---
 
 # Ruzzy fuzzing campaign

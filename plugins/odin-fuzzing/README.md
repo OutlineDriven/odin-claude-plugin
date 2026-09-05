@@ -2,7 +2,7 @@
 
 ODIN workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.
 
-12 skills, category Security.
+11 skills, category Security.
 
 ## Install
 
@@ -19,7 +19,6 @@ codex plugin add odin-fuzzing@odin-marketplace
 ## Skills
 
 - address-sanitizer
-- aflpp
 - atheris
 - cargo-fuzz
 - fuzz-harness-writing
