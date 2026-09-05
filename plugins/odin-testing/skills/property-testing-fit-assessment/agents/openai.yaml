@@ -1,3 +1,0 @@
-interface:
-  display_name: "Property Testing Fit Assessment"
-  short_description: "Use when deciding whether PBT fits a code path, which property and library to choose, or whether a design exposes a meaningful property."

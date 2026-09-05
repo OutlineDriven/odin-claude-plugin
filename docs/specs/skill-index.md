@@ -373,9 +373,6 @@
 | promql-cli | odin-infra | Infrastructure |
 | proof-driven | odin-testing | Coding |
 | property-test-authoring | odin-testing | Coding |
-| property-test-failure-triage | odin-testing | Coding |
-| property-test-review | odin-testing | Coding |
-| property-testing-fit-assessment | odin-testing | Coding |
 | propose-external-change | odin-run | Coding |
 | propose-issue | odin-git | Coding |
 | prototype | odin-design | Design |
