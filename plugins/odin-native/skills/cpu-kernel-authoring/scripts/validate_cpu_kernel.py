@@ -51,9 +51,13 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
         errors.append(ValidationError("ERROR", f"build.toml is not valid TOML: {e}", "build.toml"))
         return errors
 
+    kernel = data.get("kernel")
+    if not isinstance(kernel, dict):
+        errors.append(ValidationError("ERROR", "build.toml 'kernel' must be a table", "build.toml"))
+        return errors
     sections = {
         f"kernel.{name}": body
-        for name, body in data.get("kernel", {}).items()
+        for name, body in kernel.items()
         if isinstance(body, dict)
     }
     cpu_sections = {name: body for name, body in sections.items() if body.get("backend") == "cpu"}
@@ -75,7 +79,7 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
             ))
 
     flags_text = " ".join(
-        " ".join(body.get("flags", [])) if isinstance(body.get("flags"), list) else str(body.get("flags", ""))
+        " ".join(body.get("cxx-flags", [])) if isinstance(body.get("flags"), list) else str(body.get("flags", ""))
         for body in sections.values()
     )
 
