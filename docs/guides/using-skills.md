@@ -2,7 +2,7 @@
 
 ## Invoke one skill
 
-Type `/skill:<slug>` before a request. The skill's instructions run against that request. Names are exact: `/skill:todos-update` loads one skill, and a near miss loads nothing.
+Invocation depends on your client: Claude Code uses `/skill-name` (for example, `/todos-update`), while Codex uses the `$skill` form (for example, `$todos-update`) or the `/skills` picker. The skill's instructions run against the request. Names are exact, and a near miss loads nothing.
 
 ## Stack invocations
 

@@ -1,6 +1,6 @@
 # Workflows
 
-These chains come from 1432 skill invocations across 68 sessions and 19 projects, from 2026-08-24 to 2026-09-07. Of the skills in this tree, 101 were used at least once and 444 were never invoked, so the chains below favor what sessions actually reached for.
+These chains come from 1432 skill invocations across 68 sessions and 19 projects, from 2026-08-24 to 2026-09-07. The usage ledger is an older 545-skill snapshot: 101 were used at least once and 444 were never invoked. The current tree contains 703 skills, so the chains below favor what those sessions actually reached for. Invocation syntax varies by client: Claude Code uses `/skill-name`; Codex uses `$skill` or the `/skills` picker.
 
 Every campaign below shares one shape: open with a planning or gate skill, steer with short corrections rather than restated requirements, and close with a verification skill before you call anything done. The mined work spans a Rust Bitcoin node, two greenfield Rust ports, a harness port, and this marketplace itself; map your own work onto the closest shape.
 

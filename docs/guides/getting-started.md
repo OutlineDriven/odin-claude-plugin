@@ -12,11 +12,13 @@ List your installed plugins. On Claude Code the command is `claude plugin list`,
 
 ## Run one skill
 
-Type a skill invocation with a request after it:
+Type a client-specific skill invocation with a request after it. In Claude Code:
 
 ```text
-/skill:necessary-work Is this change really needed, or is the task already done?
+/necessary-work Is this change really needed, or is the task already done?
 ```
+
+In Codex, use `$necessary-work` or choose the skill from `/skills`.
 
 `necessary-work` asks whether the work stays inside the ask, so it fits a first run: you read the answer and judge it at once.
 

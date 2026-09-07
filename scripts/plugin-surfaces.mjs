@@ -309,11 +309,9 @@ export function firstSentence(desc) {
   return m ? m[1] : desc;
 }
 
-// The trigger a human or a model routes on: the description's first sentence.
-export function skillTrigger(entry, slug) {
-  const path = join(ROOT, entry.directory, "skills", slug, "SKILL.md");
-  const front = parseFrontmatter(readFileSync(path, "utf8"));
-  return firstSentence(front.description ?? "").trim();
+// Canonical skill definitions are linked from generated catalogs rather than copied into them.
+export function skillPath(entry, slug) {
+  return `../../${entry.directory}/skills/${slug}/SKILL.md`;
 }
 
 export function skillRows(entry) {
@@ -353,7 +351,7 @@ export function renderPluginReadme(catalog, entry, skills) {
     "",
     "| Skill | Trigger |",
     "|---|---|",
-    ...skills.map((slug) => `| ${slug} | ${skillTrigger(entry, slug)} |`),
+    ...skills.map((slug) => `| [${slug}](${skillPath(entry, slug)}) | canonical definition |`),
     "",
     "## Workflows",
     "",
@@ -442,6 +440,11 @@ export function surfacePlan(catalog) {
     files.set(
       `${entry.directory}/.kimi-plugin/plugin.json`,
       renderKimiPluginManifest(catalog, entry),
+    );
+  }
+  return files;
+}
+og, entry),
     );
   }
   return files;
