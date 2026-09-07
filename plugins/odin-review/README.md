@@ -20,8 +20,10 @@ codex plugin add odin-review@odin-marketplace
 
 ```shell
 gh skill install OutlineDriven/odin-claude-plugin plugins/odin-review/skills/<skill> \
-  --agent claude-code --scope user
+  --agent <agent> --scope user
 ```
+
+`<agent>` is `claude-code`, `codex`, `cursor`, `grok`, or `kimi-cli`.
 
 Cursor, Grok, and Kimi install from this same tree. The repository README gives each command.
 

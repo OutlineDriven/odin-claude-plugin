@@ -121,8 +121,10 @@ full tree traversal, which matters at this repository's size.
 
 ```shell
 gh skill install OutlineDriven/odin-claude-plugin plugins/odin-planning/skills/askme \
-  --agent claude-code --scope user
+  --agent <agent> --scope user
 ```
+
+`<agent>` is `claude-code`, `codex`, `cursor`, `grok`, or `kimi-cli`.
 
 ### Grok
 
