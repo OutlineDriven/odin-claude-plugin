@@ -15,7 +15,7 @@
 // --only <slug>[,<slug>...] limits scope (fixture verification while the tree mutates).
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { ROOT, loadCatalog, skillRows } from "./plugin-surfaces.mjs";
+import { ROOT, loadCatalog, skillRows, parseScalar, parseFrontmatter, firstSentence } from "./plugin-surfaces.mjs";
 
 // slug -> repository-relative skill directory, in catalog then alphabetical order.
 const skillDirs = new Map(
@@ -75,41 +75,6 @@ function titleCaseName(name) {
       return tok.charAt(0).toUpperCase() + tok.slice(1).toLowerCase();
     })
     .join(" ");
-}
-
-// Parse a single-line YAML scalar following "key:".
-function parseScalar(raw) {
-  const s = raw.trim();
-  if (s.startsWith("'")) {
-    const body = s.slice(1, s.lastIndexOf("'"));
-    return body.replace(/''/g, "'");
-  }
-  if (s.startsWith('"')) {
-    const body = s.slice(1, s.lastIndexOf('"'));
-    return body
-      .replace(/\\n/g, "\n")
-      .replace(/\\"/g, '"')
-      .replace(/\\\\/g, "\\");
-  }
-  return s;
-}
-
-function parseFrontmatter(text) {
-  if (!text.startsWith("---\n")) return null;
-  const end = text.indexOf("\n---", 4);
-  if (end === -1) return null;
-  const out = {};
-  for (const line of text.slice(4, end).split("\n")) {
-    const m = /^([a-zA-Z_]+):(.*)$/.exec(line);
-    if (m) out[m[1]] = parseScalar(m[2]);
-  }
-  return out;
-}
-
-// First sentence: text up to the first period followed by whitespace, else the whole value.
-function firstSentence(desc) {
-  const m = /(.+?\.)\s/.exec(desc);
-  return m ? m[1] : desc;
 }
 
 // The short_description is the description's first sentence, emitted whole. The

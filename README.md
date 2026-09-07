@@ -21,6 +21,7 @@ Methodology: [outline-driven-development](https://github.com/OutlineDriven/outli
 - [What is this](#what-is-this)
 - [Install](#install)
 - [Choose your plugins](#choose-your-plugins)
+- [Using the skills](#using-the-skills)
 - [Plugins](#plugins)
 - [Core philosophy](#core-philosophy)
 - [Output styles](#output-styles)
@@ -120,8 +121,10 @@ full tree traversal, which matters at this repository's size.
 
 ```shell
 gh skill install OutlineDriven/odin-claude-plugin plugins/odin-planning/skills/askme \
-  --agent claude-code --scope user
+  --agent <agent> --scope user
 ```
+
+`<agent>` is `claude-code`, `codex`, `cursor`, `grok`, or `kimi-cli`.
 
 ### Grok
 
@@ -167,8 +170,12 @@ Each name installs with the same command:
 /plugin install odin-security@odin-marketplace
 ```
 
-The largest plugins are `odin-planning` at 50, `odin-git` at 50, and `odin-run` at 45.
+The largest plugins are `odin-native` at 147, `odin-git` at 46, and `odin-run` at 44.
 Install one skill instead of a whole plugin with `gh skill install`, shown under Install above.
+
+## Using the skills
+
+You install plugins once and invoke skills every day. Start with the [getting-started guide](docs/guides/getting-started.md) to run your first skill. Read [using the skills](docs/guides/using-skills.md) for the invocation mechanics. Browse [example workflows](docs/guides/workflows.md) for chains mined from real sessions.
 
 ## Plugins
 

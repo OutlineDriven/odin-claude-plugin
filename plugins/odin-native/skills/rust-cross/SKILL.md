@@ -1,6 +1,6 @@
 ---
 name: rust-cross
-description: 'Use when building Rust binaries for a different target architecture or OS, using cross or cargo-zigbuild, configuring .cargo/config.toml, or targeting embedded bare-metal'
+description: 'Use when building Rust binaries for a different target architecture or OS, using cross or cargo-zigbuild, configuring .cargo/config.toml, or targeting embedded bare-metal.'
 ---
 
 # Rust cross-compilation

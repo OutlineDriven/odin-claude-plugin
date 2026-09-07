@@ -315,6 +315,7 @@ def _feedback_session_check(mf: Path, body: str, session_glob: str):
 # ---------------------------------------------------------------------------
 
 def main():
+    """Walk memory directory and session history, emit JSON audit report to stdout."""
     if len(sys.argv) < 2:
         print("Usage: audit-memory.py <memory_dir> [session_history_glob]", file=sys.stderr)
         sys.exit(1)

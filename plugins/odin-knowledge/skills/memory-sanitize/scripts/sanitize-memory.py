@@ -105,6 +105,7 @@ def sanitize_text(text: str):
 
 
 def main():
+    """Scan for credentials or generate redacted copies of memory files; emit JSON report to stdout."""
     args = sys.argv[1:]
     scan_only = False
     if args and args[0] == "--scan-only":

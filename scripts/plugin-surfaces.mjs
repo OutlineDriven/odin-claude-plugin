@@ -274,6 +274,53 @@ export function renderKimiMarketplace(catalog) {
   };
 }
 
+// Parse a single-line YAML scalar following "key:".
+export function parseScalar(raw) {
+  const s = raw.trim();
+  if (s.startsWith("'")) {
+    const body = s.slice(1, s.lastIndexOf("'"));
+    return body.replace(/''/g, "'");
+  }
+  if (s.startsWith('"')) {
+    const body = s.slice(1, s.lastIndexOf('"'));
+    return body
+      .replace(/\\n/g, "\n")
+      .replace(/\\"/g, '"')
+      .replace(/\\\\/g, "\\");
+  }
+  return s;
+}
+
+export function parseFrontmatter(text) {
+  if (!text.startsWith("---\n")) return null;
+  const end = text.indexOf("\n---", 4);
+  if (end === -1) return null;
+  const out = {};
+  for (const line of text.slice(4, end).split("\n")) {
+    const m = /^([a-zA-Z_]+):(.*)$/.exec(line);
+    if (m) out[m[1]] = parseScalar(m[2]);
+  }
+  return out;
+}
+
+// First sentence: text up to the first period followed by whitespace, else the whole value.
+export function firstSentence(desc) {
+  const m = /(.+?\.)\s/.exec(desc);
+  return m ? m[1] : desc;
+}
+
+// Escape a Markdown table cell: a bare | or a newline in a trigger splits the row.
+export function tableCell(text) {
+  return text.replace(/\|/g, "\\|").replace(/\s*\n\s*/g, " ").trim();
+}
+
+// The trigger a human or a model routes on: the description's first sentence.
+export function skillTrigger(entry, slug) {
+  const path = join(ROOT, entry.directory, "skills", slug, "SKILL.md");
+  const front = parseFrontmatter(readFileSync(path, "utf8"));
+  return firstSentence(front.description ?? "").trim();
+}
+
 export function skillRows(entry) {
   const dir = join(ROOT, entry.directory, "skills");
   if (!existsSync(dir)) return [];
@@ -283,13 +330,18 @@ export function skillRows(entry) {
     .sort();
 }
 
+// The owner/repo slug used by `gh skill install`, derived from the catalog's
+// repository URL rather than a second literal that can drift.
+const repoSlug = (catalog) =>
+  catalog.repository.replace(/^https:\/\/github\.com\//, "");
+
 export function renderPluginReadme(catalog, entry, skills) {
   const lines = [
     `# ${entry.display_name}`,
     "",
     entry.description,
     "",
-    `${skills.length} skill${skills.length === 1 ? "" : "s"}, category ${entry.category}.`,
+    `${skills.length} skill${skills.length === 1 ? "" : "s"}, category ${entry.category}. Install the whole plugin below, or take a single skill with \`gh skill install\`.`,
     "",
     "## Install",
     "",
@@ -303,9 +355,30 @@ export function renderPluginReadme(catalog, entry, skills) {
     `codex plugin add ${entry.id}@${catalog.marketplace_name}`,
     "```",
     "",
+    "### Individual (gh skill)",
+    "",
+    "```shell",
+    `gh skill install ${repoSlug(catalog)} ${entry.directory}/skills/<skill> \\`,
+    "  --agent <agent> --scope user",
+    "```",
+    "",
+    "`<agent>` is `claude-code`, `codex`, `cursor`, `grok`, or `kimi-cli`.",
+    "",
+    "Cursor, Grok, and Kimi install from this same tree. The repository README gives each command.",
+    "",
     "## Skills",
     "",
-    ...skills.map((slug) => `- ${slug}`),
+    `Each row states when to reach for the skill. Invoke one as \`/${entry.id}:<name>\` in Claude Code, \`$<name>\` in Codex, or type \`/\` and pick it in Cursor.`,
+    "",
+    "| Skill | Trigger |",
+    "|---|---|",
+    ...skills.map(
+      (slug) => `| ${slug} | ${tableCell(skillTrigger(entry, slug))} |`,
+    ),
+    "",
+    "## Workflows",
+    "",
+    "[docs/guides/workflows.md](../../docs/guides/workflows.md) shows how these skills chain with the rest of the tree.",
     "",
   ];
   return lines.join("\n");
@@ -337,7 +410,30 @@ export function renderRootReadme(catalog, current) {
   ].join("\n");
   if (!ROOT_README_TABLE.test(current))
     throw new Error("README.md: no plugin table found under a '## Plugins' heading");
-  return current.replace(ROOT_README_TABLE, `$1${table}`);
+  let out = current.replace(ROOT_README_TABLE, `$1${table}`);
+  const counts = entries.map((entry) => [entry.id, skillRows(entry).length]);
+  const total = counts.reduce((n, [, c]) => n + c, 0);
+  const plugins = counts.length;
+  if (!/^- \d+ skills in \d+ plugins,/m.test(out))
+    throw new Error("README.md: no skills-in-plugins bullet found");
+  out = out.replace(
+    /^- \d+ skills in \d+ plugins,/m,
+    `- ${total} skills in ${plugins} plugins,`,
+  );
+  if (!/^\d+ skills in \d+ plugins\./m.test(out))
+    throw new Error("README.md: no skills-in-plugins sentence found");
+  out = out.replace(
+    /^\d+ skills in \d+ plugins\./m,
+    `${total} skills in ${plugins} plugins.`,
+  );
+  const top = [...counts].sort((a, b) => b[1] - a[1]).slice(0, 3);
+  if (!/^The largest plugins are [^\n]*\n/m.test(out))
+    throw new Error("README.md: no largest-plugins sentence found");
+  out = out.replace(
+    /^The largest plugins are [^\n]*\n/m,
+    `The largest plugins are ${top.map(([id, c]) => `\`${id}\` at ${c}`).join(", ").replace(/, ([^,]*)$/, ", and $1")}.\n`,
+  );
+  return out;
 }
 
 export function surfacePlan(catalog) {

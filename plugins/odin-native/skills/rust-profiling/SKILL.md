@@ -1,6 +1,6 @@
 ---
 name: rust-profiling
-description: 'Use when profiling Rust binaries with flamegraphs, cargo-bloat, cargo-llvm-lines, Criterion, perf, heaptrack, or DHAT'
+description: 'Use when profiling Rust binaries with flamegraphs, cargo-bloat, cargo-llvm-lines, Criterion, perf, heaptrack, or DHAT.'
 ---
 
 # Rust profiling
