@@ -12,8 +12,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   fresh directory and refuses an existing trial directory, so a failed copy never
   deletes prior contents; `save` and `finalize` copy symlinks as symlinks. The
   build validator parses `build.toml` as TOML, reads `cxx-flags`, reports a
-  non-table `kernel` value instead of crashing, and falls back to `tomli` on
-  Python 3.10. The profiler rejects nonpositive `iters` and negative `warmup`.
+  non-table `kernel` value instead of crashing, checks AVX512 flags per
+  `[kernel.*]` section, and requires Python 3.11. The profiler rejects
+  nonpositive `iters` and negative `warmup`.
 - Memory script usage strings name the `.py` files, the Clang hardening example
   matches the GCC linker flags, and the Hub examples pass `version=1`.
 

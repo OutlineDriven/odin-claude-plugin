@@ -94,7 +94,6 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
 
     # dq/bw/vbmi are needed only by GEMM byte-shuffle paths; requiring them elsewhere is noise.
     gemm_indicators = ["gemm", "gptq", "quantiz", "bnb", "bitsandbytes", "megablocks", "moe"]
-    is_gemm_kernel = any(ind in " ".join(sections).lower() for ind in gemm_indicators)
 
     # Each [kernel.*] section is its own translation unit, so a flag in one
     # tier never reaches another; check every AVX512 section on its own.
@@ -102,6 +101,7 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
         flags = _flags(body)
         if "-mavx512f" not in flags:
             continue
+        is_gemm_kernel = any(ind in name.lower() for ind in gemm_indicators)
         for flag in ("-mavx512bf16", "-mavx512vl"):
             if flag not in flags:
                 errors.append(ValidationError(
