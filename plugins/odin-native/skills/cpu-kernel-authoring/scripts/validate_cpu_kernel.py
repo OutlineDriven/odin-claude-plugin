@@ -14,7 +14,13 @@ import re
 import sys
 from pathlib import Path
 
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python < 3.11
+    try:
+        import tomli as tomllib
+    except ModuleNotFoundError:
+        sys.exit("validate_cpu_kernel.py needs Python 3.11+ or the 'tomli' package")
 
 
 class ValidationError:
@@ -51,9 +57,18 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
         errors.append(ValidationError("ERROR", f"build.toml is not valid TOML: {e}", "build.toml"))
         return errors
 
+    kernel_table = data.get("kernel", {})
+    if not isinstance(kernel_table, dict):
+        errors.append(ValidationError(
+            "ERROR",
+            f"build.toml 'kernel' must be a table of [kernel.<name>] sections, got {type(kernel_table).__name__}",
+            "build.toml",
+        ))
+        return errors
+
     sections = {
         f"kernel.{name}": body
-        for name, body in data.get("kernel", {}).items()
+        for name, body in kernel_table.items()
         if isinstance(body, dict)
     }
     cpu_sections = {name: body for name, body in sections.items() if body.get("backend") == "cpu"}
@@ -74,10 +89,13 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
                 "build.toml",
             ))
 
-    flags_text = " ".join(
-        " ".join(body.get("flags", [])) if isinstance(body.get("flags"), list) else str(body.get("flags", ""))
-        for body in sections.values()
-    )
+    def _flags(body: dict) -> str:
+        flags = body.get("cxx-flags", body.get("flags", []))
+        if isinstance(flags, list):
+            return " ".join(str(f) for f in flags)
+        return str(flags)
+
+    flags_text = " ".join(_flags(body) for body in sections.values())
 
     if "-mavx512f" in flags_text:
         core_flags = ["-mavx512bf16", "-mavx512vl"]

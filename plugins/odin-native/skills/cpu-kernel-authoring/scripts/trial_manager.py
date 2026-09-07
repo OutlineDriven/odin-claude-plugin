@@ -98,8 +98,9 @@ def _validate_state(state, kernel_name):
             " 'baseline_us' is not a list of numbers.",
             file=sys.stderr,
         )
+        sys.exit(1)
     best = state.get("best_trial")
-    if best is not None and best not in state.get("trials", {}):
+    if best is not None and (not isinstance(best, str) or best not in state.get("trials", {})):
         print(
             f"Error: Corrupt trial state for '{kernel_name}':"
             f" best_trial '{best}' is not a known trial.",
@@ -195,18 +196,33 @@ def cmd_save(args):
     state["next_id"] += 1
 
     dest = os.path.join(_trial_dir(kernel_name), trial_id)
+    if os.path.lexists(dest):
+        print(
+            f"Error: Trial directory '{dest}' already exists but is not in state.json."
+            " Remove it or repair the trial store before saving.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    # Copy into a fresh staging directory and rename it into place, so a failed
+    # copy never leaves a partial trial and cleanup only removes what this save
+    # created. symlinks=True copies links as links, so a nested symlink back into
+    # the trial store can never make the copy recurse into itself.
+    staging = None
     try:
+        staging = tempfile.mkdtemp(prefix=f".{trial_id}-", dir=_trial_dir(kernel_name))
+        staged = os.path.join(staging, trial_id)
         if os.path.isdir(trial_source):
-            # symlinks=True copies links as links, so a nested symlink back into
-            # the trial store can never make the copy recurse into itself.
-            shutil.copytree(trial_source, dest, dirs_exist_ok=True, symlinks=True)
+            shutil.copytree(trial_source, staged, symlinks=True)
         else:
-            os.makedirs(dest, exist_ok=True)
-            shutil.copy2(trial_source, dest)
+            os.makedirs(staged)
+            shutil.copy2(trial_source, staged)
+        os.rename(staged, dest)
     except (OSError, RecursionError) as e:
-        shutil.rmtree(dest, ignore_errors=True)
+        if staging is not None:
+            shutil.rmtree(staging, ignore_errors=True)
         print(f"Error: Failed to copy trial source into '{dest}': {e}", file=sys.stderr)
         sys.exit(1)
+    shutil.rmtree(staging, ignore_errors=True)
 
     state["trials"][trial_id] = {
         "parent": parent,
@@ -422,7 +438,7 @@ def cmd_finalize(args):
         staged = staging / dest.name
         backup = Path(f"{staged}.old")
         if Path(src).is_dir():
-            shutil.copytree(src, staged)
+            shutil.copytree(src, staged, symlinks=True)
         else:
             shutil.copy2(src, staged)
         if dest.exists() or dest.is_symlink():

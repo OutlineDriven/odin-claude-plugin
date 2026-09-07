@@ -26,9 +26,6 @@ pip install kernels torch
 from kernels import get_kernel
 
 kernel = get_kernel("kernels-community/rmsnorm", version=1)
-
-# With specific version
-kernel = get_kernel("kernels-community/rmsnorm", version=1)
 ```
 
 ### has_kernel

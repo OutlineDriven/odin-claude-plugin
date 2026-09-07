@@ -153,7 +153,7 @@ repos:
       # Authorized by the 2026-09-06 user-invoked audit-project run over the PR
       # #22 change surface: executable skill scripts must compile, syntax-check,
       # and pass their own --self-check before commit. This gates shipped
-      # executables; it is not a test suite. Evidence trail: .outline/GATES.md.
+      # executables; it is not a test suite.
       - id: check-skill-scripts
         name: compile, syntax-check, and self-check skill scripts
         entry: python3 scripts/check-skill-scripts.py
