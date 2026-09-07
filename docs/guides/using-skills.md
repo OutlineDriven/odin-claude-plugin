@@ -10,7 +10,7 @@ Type the skill's name before a request, in the form your harness uses:
 | Codex | `$<slug>`, or `/skills` to pick from a list | `$todos-update` |
 | Cursor | Type `/` and pick the skill by name | `/todos-update` |
 
-Grok and Kimi load the same skill tree; `docs/specs/distribution-surfaces.md` records what each one has proved about explicit invocation. The guides in this directory write a step as `/skill:<slug>` when the harness does not matter.
+Grok and Kimi load the same skill tree; each harness's own documentation gives its explicit-invocation form. The guides in this directory write a step as `/skill:<slug>` when the harness does not matter.
 
 Names are exact: `todos-update` loads one skill, and a near miss loads nothing.
 

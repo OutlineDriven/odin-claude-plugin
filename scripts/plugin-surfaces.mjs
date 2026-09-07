@@ -309,9 +309,9 @@ export function firstSentence(desc) {
   return m ? m[1] : desc;
 }
 
-// Escape a Markdown table cell: a bare | in a trigger splits the row.
+// Escape a Markdown table cell: a bare | or a newline in a trigger splits the row.
 export function tableCell(text) {
-  return text.replace(/\|/g, "\\|");
+  return text.replace(/\|/g, "\\|").replace(/\s*\n\s*/g, " ").trim();
 }
 
 // The trigger a human or a model routes on: the description's first sentence.
