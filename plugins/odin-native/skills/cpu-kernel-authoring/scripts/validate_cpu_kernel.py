@@ -87,6 +87,7 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
             ))
 
     def _flags(body: dict) -> list[str]:
+        """Extract and normalize compiler flags from a kernel section body."""
         flags = body.get("cxx-flags", body.get("flags", []))
         if isinstance(flags, list):
             return [str(f) for f in flags]

@@ -73,6 +73,7 @@ def _escaping_symlinks(source):
     real_root = os.path.realpath(source)
 
     def _stays_inside(dirpath, text):
+        """True if the symlink text stays inside source by path arithmetic alone."""
         if os.path.isabs(text):
             return False
         # Resolution can leave through a nested symlink even when the text alone does not.
