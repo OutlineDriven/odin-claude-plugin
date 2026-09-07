@@ -14,13 +14,10 @@ import re
 import sys
 from pathlib import Path
 
-try:
-    import tomllib
-except ModuleNotFoundError:  # Python < 3.11
-    try:
-        import tomli as tomllib
-    except ModuleNotFoundError:
-        sys.exit("validate_cpu_kernel.py needs Python 3.11+ or the 'tomli' package")
+if sys.version_info < (3, 11):
+    sys.exit("validate_cpu_kernel.py needs Python 3.11+ (tomllib in the standard library)")
+
+import tomllib  # noqa: E402
 
 
 class ValidationError:
@@ -89,39 +86,41 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
                 "build.toml",
             ))
 
-    def _flags(body: dict) -> str:
+    def _flags(body: dict) -> list[str]:
         flags = body.get("cxx-flags", body.get("flags", []))
         if isinstance(flags, list):
-            return " ".join(str(f) for f in flags)
-        return str(flags)
+            return [str(f) for f in flags]
+        return str(flags).split()
 
-    flags_text = " ".join(_flags(body) for body in sections.values())
+    # dq/bw/vbmi are needed only by GEMM byte-shuffle paths; requiring them elsewhere is noise.
+    gemm_indicators = ["gemm", "gptq", "quantiz", "bnb", "bitsandbytes", "megablocks", "moe"]
+    is_gemm_kernel = any(ind in " ".join(sections).lower() for ind in gemm_indicators)
 
-    if "-mavx512f" in flags_text:
-        core_flags = ["-mavx512bf16", "-mavx512vl"]
-        for flag in core_flags:
-            if flag not in flags_text:
+    # Each [kernel.*] section is its own translation unit, so a flag in one
+    # tier never reaches another; check every AVX512 section on its own.
+    for name, body in sections.items():
+        flags = _flags(body)
+        if "-mavx512f" not in flags:
+            continue
+        for flag in ("-mavx512bf16", "-mavx512vl"):
+            if flag not in flags:
                 errors.append(ValidationError(
                     "WARNING",
-                    f"AVX512 section missing core flag: {flag}",
+                    f"AVX512 section [{name}] missing core flag: {flag}",
                     "build.toml",
                 ))
-        # dq/bw/vbmi are needed only by GEMM byte-shuffle paths; requiring them elsewhere is noise.
-        gemm_indicators = ["gemm", "gptq", "quantiz", "bnb", "bitsandbytes", "megablocks", "moe"]
-        is_gemm_kernel = any(ind in flags_text.lower() or ind in " ".join(sections).lower() for ind in gemm_indicators)
         if is_gemm_kernel:
-            gemm_flags = ["-mavx512dq", "-mavx512bw", "-mavx512vbmi"]
-            for flag in gemm_flags:
-                if flag not in flags_text:
+            for flag in ("-mavx512dq", "-mavx512bw", "-mavx512vbmi"):
+                if flag not in flags:
                     errors.append(ValidationError(
                         "INFO",
-                        f"GEMM kernel may benefit from flag: {flag}",
+                        f"GEMM kernel section [{name}] may benefit from flag: {flag}",
                         "build.toml",
                     ))
-        if "-fopenmp" not in flags_text:
+        if "-fopenmp" not in flags:
             errors.append(ValidationError(
                 "WARNING",
-                "AVX512 section missing -fopenmp flag",
+                f"AVX512 section [{name}] missing -fopenmp flag",
                 "build.toml",
             ))
 
