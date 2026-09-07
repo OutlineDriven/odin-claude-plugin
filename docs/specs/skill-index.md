@@ -475,7 +475,7 @@
 | propose-issue | odin-git | Coding | Use when the user asks to propose an issue, file or open a bug report, or turn a reported defect into a tracked issue. |
 | protocol-analysis | odin-native | Coding | Use when decoding I2C, SPI, or UART captures with sigrok or PulseView, checking bus traffic against a datasheet, or post-processing captures in Python. |
 | prototype | odin-design | Design | Use when asked to prototype one design question through a cheap logic or UI experiment, including button-driven state-model checks. |
-| publish-branch | odin-git | Coding | Use when asked to publish the checked-out branch: commit and push it whatever branch it is, the default branch included. |
+| publish-branch | odin-git | Coding | Use when asked to publish the checked-out branch: commit and push it on whatever branch it is, the default branch included. |
 | punishing-practices | odin-critique | Productivity | Use when a workflow, plan, diff, or completed work cycle must be checked for practices that punish the project later. |
 | purge-slop-docs | odin-writing | Writing | Use when a human asks to purge stale docs, clean Markdown, or reorder the documentation hierarchy. |
 | qemu-embedded-simulation | odin-native | Coding | Use when running ARM or RISC-V bare-metal firmware in QEMU: machine selection, -kernel ELF loading, semihosting, or GDB debugging without hardware. |
