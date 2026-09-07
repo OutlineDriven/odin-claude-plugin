@@ -2,7 +2,7 @@
 
 > Formerly the ODIN Claude Plugin. The repository URL is unchanged.
 
-Outline-Driven Development, nicknamed ODIN, is a code-agent skill library: diagram-first
+Outline-Driven Development, nicknamed ODIN, is a highly opinionated code-agent skill library: diagram-first
 engineering, surgical editing, and workflow automation, published as installable plugins. It gives
 you a drop-in skill set with five discipline layers. Skills are authored once in-tree, and every
 supported client discovers them from that same layout, so nothing is copied or republished.
