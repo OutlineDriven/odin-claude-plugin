@@ -5,6 +5,10 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.2] - 2026-09-08
+### Changed
+- Clarified client-specific skill invocation syntax and linked generated catalogs to canonical skill definitions.
+
 ## [2.1.1] - 2026-09-05
 ### Added
 - Expanded `odin-native` from 2 to 148 skills: 142 adopted low-level-dev-skills
