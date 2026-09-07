@@ -70,9 +70,14 @@ def _escaping_symlinks(source):
     link that walks out of source (even if it resolves back in) depends on it.
     """
     root = os.path.abspath(source)
+    real_root = os.path.realpath(source)
 
     def _stays_inside(dirpath, text):
         if os.path.isabs(text):
+            return False
+        # Resolution can leave through a nested symlink even when the text alone does not.
+        resolved = os.path.realpath(os.path.join(dirpath, text))
+        if os.path.commonpath([real_root, resolved]) != real_root:
             return False
         rel = os.path.relpath(os.path.abspath(dirpath), root)
         depth = 0 if rel == os.curdir else len(rel.split(os.sep))
