@@ -50,7 +50,7 @@ Treat these as generator-owned and never hand-edit them:
 - `plugins/*/.claude-plugin/plugin.json`, `plugins/*/.codex-plugin/plugin.json`, `plugins/*/.cursor-plugin/plugin.json`, `plugins/*/.grok-plugin/plugin.json`, `plugins/*/.kimi-plugin/plugin.json`, `plugins/*/README.md`, `plugins/*/LICENSE`, `plugins/*/NOTICE`
 - `.claude-plugin/marketplace.json`, `.codex-plugin/marketplace.json`, `.cursor-plugin/marketplace.json`, `.grok-plugin/marketplace.json`, `.kimi-plugin/marketplace.json`
 - `plugins/*/skills/*/agents/openai.yaml`
-- the plugin table under `## Plugins` in the root `README.md`, and nothing else in that file
+- in the root `README.md`: the plugin table under `## Plugins`, the `N skills in M plugins` bullet and sentence, and the `The largest plugins are ...` sentence, and nothing else in that file
 - `docs/specs/skill-index.md`
 
 To change one, change its generator or `catalog/plugins.json`, run `just render`, and commit input and output together.

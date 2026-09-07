@@ -1,3 +1,3 @@
 interface:
-  display_name: "Gdb"
+  display_name: "GDB"
   short_description: "Use when running GDB: breakpoints, watchpoints, segfault or hang debugging, reverse debugging, remote gdbserver, core dumps, pretty-printers, Python scripting, or multi-threaded debugging."

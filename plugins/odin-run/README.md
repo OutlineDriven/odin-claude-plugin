@@ -16,11 +16,18 @@ codex plugin marketplace add OutlineDriven/odin-claude-plugin
 codex plugin add odin-run@odin-marketplace
 ```
 
+### Individual (gh skill)
+
+```shell
+gh skill install OutlineDriven/odin-claude-plugin plugins/odin-run/skills/<skill> \
+  --agent claude-code --scope user
+```
+
 Cursor, Grok, and Kimi install from this same tree. The repository README gives each command.
 
 ## Skills
 
-Each row states when to reach for the skill. Invoke one with `/skill:<name>`.
+Each row states when to reach for the skill. Invoke one as `/odin-run:<name>` in Claude Code, `$<name>` in Codex, or type `/` and pick it in Cursor.
 
 | Skill | Trigger |
 |---|---|
@@ -36,7 +43,7 @@ Each row states when to reach for the skill. Invoke one with `/skill:<name>`.
 | diagnose-loop-health | Use when a configured loop misbehaves, produces unexpected results, or its setup soundness is questioned. |
 | diamond-task | Use when one issue or PR is too large for a worker and partitions into disjoint write sets. |
 | duet | Use when the user invokes /duet, says pair on this, or faces aesthetic, architectural, or irreversible decisions. |
-| feedback-sweep | Use when asked to /feedback-sweep [setup|reconfigure] [mode:non-interactive]. |
+| feedback-sweep | Use when asked to /feedback-sweep [setup\|reconfigure] [mode:non-interactive]. |
 | figure-it-out | Use when non-trivial work should run a matched playbook to verified real-surface completion, or a bespoke workflow when none fits. |
 | finish-it-now | Use when the user says ship it now, no phases, or finish it now, or would defer work to phases, rollouts, follow-up PRs, or TODOs. |
 | gate-file-completion | Use when a task needs gate-file proof before a done claim. |

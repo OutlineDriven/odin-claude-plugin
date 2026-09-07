@@ -16,17 +16,24 @@ codex plugin marketplace add OutlineDriven/odin-claude-plugin
 codex plugin add odin-writing@odin-marketplace
 ```
 
+### Individual (gh skill)
+
+```shell
+gh skill install OutlineDriven/odin-claude-plugin plugins/odin-writing/skills/<skill> \
+  --agent claude-code --scope user
+```
+
 Cursor, Grok, and Kimi install from this same tree. The repository README gives each command.
 
 ## Skills
 
-Each row states when to reach for the skill. Invoke one with `/skill:<name>`.
+Each row states when to reach for the skill. Invoke one as `/odin-writing:<name>` in Claude Code, `$<name>` in Codex, or type `/` and pick it in Cursor.
 
 | Skill | Trigger |
 |---|---|
 | articulate | Use when the user knows what they mean but cannot express it completely or clearly. |
 | brand-authority | Use when the user asks for branded or style-governed output. |
-| clean-and-true | Use when the user just edited a durable artifact, or says \"clean and true\", \"run the hygiene pass\", or \"taste the output\". |
+| clean-and-true | Use when the user just edited a durable artifact, or says "clean and true", "run the hygiene pass", or "taste the output". |
 | copywriting | Use when asked to write or fix product/marketing copy, landing pages, UI strings, brand voice, AI tells, an end-of-article CTA, or a hook/lede. |
 | copywriting-tone-of-voice-creator | Use when asked to create, refresh, or port a brand tone of voice guide (TONE.md) or measurable prose style rules (PROSE.md). |
 | debloat-respect-richness | Use when a user asks to tighten verbose-but-correct prose without a full rewrite. |

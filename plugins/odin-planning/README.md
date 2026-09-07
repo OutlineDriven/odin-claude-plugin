@@ -16,11 +16,18 @@ codex plugin marketplace add OutlineDriven/odin-claude-plugin
 codex plugin add odin-planning@odin-marketplace
 ```
 
+### Individual (gh skill)
+
+```shell
+gh skill install OutlineDriven/odin-claude-plugin plugins/odin-planning/skills/<skill> \
+  --agent claude-code --scope user
+```
+
 Cursor, Grok, and Kimi install from this same tree. The repository README gives each command.
 
 ## Skills
 
-Each row states when to reach for the skill. Invoke one with `/skill:<name>`.
+Each row states when to reach for the skill. Invoke one as `/odin-planning:<name>` in Claude Code, `$<name>` in Codex, or type `/` and pick it in Cursor.
 
 | Skill | Trigger |
 |---|---|

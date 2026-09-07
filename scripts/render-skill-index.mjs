@@ -3,7 +3,7 @@
 // --check diffs against the file on disk and exits 1 on drift.
 import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { dirname, join } from "node:path";
-import { ROOT, loadCatalog, skillRows, skillTrigger } from "./plugin-surfaces.mjs";
+import { ROOT, loadCatalog, skillRows, skillTrigger, tableCell } from "./plugin-surfaces.mjs";
 
 const check = process.argv.includes("--check");
 const catalog = loadCatalog();
@@ -19,7 +19,7 @@ const lines = [
   "| Skill | Plugin | Category | Trigger |",
   "|---|---|---|---|",
 ];
-for (const r of rows) lines.push(`| ${r.slug} | ${r.plugin} | ${r.category} | ${r.trigger} |`);
+for (const r of rows) lines.push(`| ${r.slug} | ${r.plugin} | ${r.category} | ${tableCell(r.trigger)} |`);
 const output = `${lines.join("\n")}\n`;
 
 const relative = "docs/specs/skill-index.md";

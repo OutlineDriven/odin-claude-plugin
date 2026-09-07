@@ -2,26 +2,38 @@
 
 ## Invoke one skill
 
-Type `/skill:<slug>` before a request. The skill's instructions run against that request. Names are exact: `/skill:todos-update` loads one skill, and a near miss loads nothing.
+Type the skill's name before a request, in the form your harness uses:
+
+| Harness | Explicit invocation | Example |
+|---|---|---|
+| Claude Code | `/<plugin>:<slug>`; plugin skills are namespaced by plugin id | `/odin-planning:todos-update` |
+| Codex | `$<slug>`, or `/skills` to pick from a list | `$todos-update` |
+| Cursor | Type `/` and pick the skill by name | `/todos-update` |
+
+Grok and Kimi load the same skill tree; `docs/specs/distribution-surfaces.md` records what each one has proved about explicit invocation. The guides in this directory write a step as `/skill:<slug>` when the harness does not matter.
+
+Names are exact: `todos-update` loads one skill, and a near miss loads nothing.
 
 ## Stack invocations
 
-Several `/skill:` invocations in one message stack in the order you wrote them. This is the dominant pattern in real use: transcripts show 96 distinct multi-skill stacks, up to 20 skills in one message. Order them the way you want them applied.
+Several invocations in one message stack in the order you wrote them. This is the dominant pattern in real use: transcripts show 96 distinct multi-skill stacks, up to 20 skills in one message. Order them the way you want them applied.
 
 ## Match by trigger
 
-A skill also loads when your request matches its description trigger. Every description opens with a routing phrase such as `Use when`, and `scripts/check-skill-routes.mjs` rejects a description that states no trigger. When you phrase a request as the situation a skill names, that skill loads without an explicit invocation.
+A skill can also load when your request matches its description trigger. Every description opens with a routing phrase such as `Use when`, and `scripts/check-skill-routes.mjs` rejects a description that states no trigger. When you phrase a request as the situation a skill names, that skill loads without an explicit invocation.
+
+The exception is the 81 skills whose frontmatter sets `disable-model-invocation: true`, such as `work`, `commit-push-current`, and `publish-branch`: these run only when you invoke them by name, so the model never starts a side-effecting workflow on a phrase match.
 
 ## Pass arguments
 
 Words after the invocation pass through to the skill, including file references. Two shapes from real transcripts:
 
 ```text
-/skill:unslop @skills/
+/odin-writing:unslop @skills/
 ```
 
 ```text
-/skill:unslop clean this draft local://skill-foundry-plan.md
+/odin-writing:unslop clean this draft local://skill-foundry-plan.md
 ```
 
 Point the skill at the material and state the job in the same line.

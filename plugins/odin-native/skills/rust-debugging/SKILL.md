@@ -1,6 +1,6 @@
 ---
 name: rust-debugging
-description: 'Use when debugging Rust binaries with GDB or LLDB, enabling pretty-printers, interpreting panics and backtraces, debugging async with tokio-console, or stepping through no_std code'
+description: 'Use when debugging Rust binaries with GDB or LLDB, enabling pretty-printers, interpreting panics and backtraces, debugging async with tokio-console, or stepping through no_std code.'
 ---
 
 # Rust debugging

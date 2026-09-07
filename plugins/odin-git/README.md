@@ -16,11 +16,18 @@ codex plugin marketplace add OutlineDriven/odin-claude-plugin
 codex plugin add odin-git@odin-marketplace
 ```
 
+### Individual (gh skill)
+
+```shell
+gh skill install OutlineDriven/odin-claude-plugin plugins/odin-git/skills/<skill> \
+  --agent claude-code --scope user
+```
+
 Cursor, Grok, and Kimi install from this same tree. The repository README gives each command.
 
 ## Skills
 
-Each row states when to reach for the skill. Invoke one with `/skill:<name>`.
+Each row states when to reach for the skill. Invoke one as `/odin-git:<name>` in Claude Code, `$<name>` in Codex, or type `/` and pick it in Cursor.
 
 | Skill | Trigger |
 |---|---|
@@ -58,7 +65,7 @@ Each row states when to reach for the skill. Invoke one with `/skill:<name>`.
 | post-daily-new-issues | Use when a human explicitly requests the daily on-call issue digest from a named issue tracker for a configured Slack channel. |
 | post-merge-cleanup | Use when a landed merge, release, or completed change needs its cleanup surface reconciled. |
 | propose-issue | Use when the user asks to propose an issue, file or open a bug report, or turn a reported defect into a tracked issue. |
-| publish-branch | Use when asked to commit and push to the currently checked-out branch, including the default branch. |
+| publish-branch | Use when asked to publish the checked-out branch: commit and push it whatever branch it is, the default branch included. |
 | repo-health-triage | Use when a scheduled or watcher tick requests a repository-health pass. |
 | resolve | Use when addressing review feedback: analyze mode classifies comment validity, reception mode applies accepted items with tests and drafts pushback. |
 | resolve-merge-conflicts | Use when a merge, rebase, cherry-pick, or stash pop stops on conflicts. |

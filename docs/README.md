@@ -1,6 +1,6 @@
 # Docs
 
-This directory holds every document in this repository: guides that teach you to use the skills, and specs that govern changes to the tree.
+This directory holds the repository guides and specifications: guides that teach you to use the skills, and specs that govern changes to the tree.
 
 | Document | Read it when |
 |---|---|

@@ -83,7 +83,7 @@
 | ci-fix | odin-infra | Infrastructure | Use when "CI is red", "fix the checks", or "make CI green", one check needs classifying, or a bounded sweep runs. |
 | clang | odin-native | Coding | Use when a C or C++ build uses clang and needs diagnostics, optimization remarks, clang-tidy, ThinLTO with lld, LLVM PGO, or a GCC-to-Clang migration. |
 | claude-settings-audit | odin-agent | Productivity | Use when setting up a project, auditing agent command permissions, or asking which read-only bash commands and domains to allow. |
-| clean-and-true | odin-writing | Writing | Use when the user just edited a durable artifact, or says \"clean and true\", \"run the hygiene pass\", or \"taste the output\". |
+| clean-and-true | odin-writing | Writing | Use when the user just edited a durable artifact, or says "clean and true", "run the hygiene pass", or "taste the output". |
 | clean-clean-cut | odin-code | Coding | Use when asked to run /clean-clean-cut to cut accumulated records and residue. |
 | cli-for-agents | odin-agent | Productivity | Use when asked to build or review a CLI intended for coding agents and return flag-driven, pipeline-safe, idempotent design advice. |
 | close-done | odin-git | Coding | Use when the user wants to batch-close resolved or outdated tracker items. |
@@ -227,7 +227,7 @@
 | fastopt | odin-code | Coding | Use when optimizing suspected hot paths without waiting for benchmarks. |
 | fastopt-extreme | odin-code | Coding | Use when optimizing estimated hot and complexity-neutral cold paths while refusing complexity theater. |
 | feedback-pattern-sweep | odin-review | Coding | Use when recent resolved feedback may reveal a broader recurring defect pattern across the project surface. |
-| feedback-sweep | odin-run | Coding | Use when asked to /feedback-sweep [setup|reconfigure] [mode:non-interactive]. |
+| feedback-sweep | odin-run | Coding | Use when asked to /feedback-sweep [setup\|reconfigure] [mode:non-interactive]. |
 | figure-it-out | odin-run | Coding | Use when non-trivial work should run a matched playbook to verified real-surface completion, or a bespoke workflow when none fits. |
 | final-grain | odin-design | Design | Use when asked to push an already-working artifact to finished composition, texture, and feel. |
 | finish-branch-menu | odin-git | Coding | Use when implementation is complete, the test suite is green, and an integration decision is needed for a development branch or worktree. |
@@ -475,7 +475,7 @@
 | propose-issue | odin-git | Coding | Use when the user asks to propose an issue, file or open a bug report, or turn a reported defect into a tracked issue. |
 | protocol-analysis | odin-native | Coding | Use when decoding I2C, SPI, or UART captures with sigrok or PulseView, checking bus traffic against a datasheet, or post-processing captures in Python. |
 | prototype | odin-design | Design | Use when asked to prototype one design question through a cheap logic or UI experiment, including button-driven state-model checks. |
-| publish-branch | odin-git | Coding | Use when asked to commit and push to the currently checked-out branch, including the default branch. |
+| publish-branch | odin-git | Coding | Use when asked to publish the checked-out branch: commit and push it whatever branch it is, the default branch included. |
 | punishing-practices | odin-critique | Productivity | Use when a workflow, plan, diff, or completed work cycle must be checked for practices that punish the project later. |
 | purge-slop-docs | odin-writing | Writing | Use when a human asks to purge stale docs, clean Markdown, or reorder the documentation hierarchy. |
 | qemu-embedded-simulation | odin-native | Coding | Use when running ARM or RISC-V bare-metal firmware in QEMU: machine selection, -kernel ELF loading, semihosting, or GDB debugging without hardware. |
@@ -518,12 +518,12 @@
 | run-smoke-tests | odin-testing | Coding | Use when asked to run smoke tests or verify a local build, applying only minimal unblocking fixes. |
 | rust-async-internals | odin-native | Coding | Use when understanding the Rust Future poll model, Pin and Unpin, tokio scheduling, async stack traces, waker leaks, or select!/join! behavior. |
 | rust-build-times | odin-native | Coding | Use when profiling slow Rust builds with cargo --timings, configuring sccache, selecting the Cranelift dev backend, splitting a workspace for parallelism, or tuning LTO and the linker. |
-| rust-cross | odin-native | Coding | Use when building Rust binaries for a different target architecture or OS, using cross or cargo-zigbuild, configuring .cargo/config.toml, or targeting embedded bare-metal |
-| rust-debugging | odin-native | Coding | Use when debugging Rust binaries with GDB or LLDB, enabling pretty-printers, interpreting panics and backtraces, debugging async with tokio-console, or stepping through no_std code |
+| rust-cross | odin-native | Coding | Use when building Rust binaries for a different target architecture or OS, using cross or cargo-zigbuild, configuring .cargo/config.toml, or targeting embedded bare-metal. |
+| rust-debugging | odin-native | Coding | Use when debugging Rust binaries with GDB or LLDB, enabling pretty-printers, interpreting panics and backtraces, debugging async with tokio-console, or stepping through no_std code. |
 | rust-ffi | odin-native | Coding | Use when calling C libraries from Rust, generating bindings with bindgen, exporting Rust functions to C with cbindgen, writing safe wrappers over unsafe FFI, or linking system libraries. |
 | rust-formal-verification | odin-formal | Coding | Use when Rust code, especially unsafe or panic-critical paths, needs a Kani, Verus, or Creusot harness written, run, and its failure read. |
 | rust-no-std | odin-native | Coding | Use when writing #![no_std] Rust crates, using core and alloc without std, selecting panic handlers, or testing no_std code on the host. |
-| rust-profiling | odin-native | Coding | Use when profiling Rust binaries with flamegraphs, cargo-bloat, cargo-llvm-lines, Criterion, perf, heaptrack, or DHAT |
+| rust-profiling | odin-native | Coding | Use when profiling Rust binaries with flamegraphs, cargo-bloat, cargo-llvm-lines, Criterion, perf, heaptrack, or DHAT. |
 | rust-sanitizers-miri | odin-native | Coding | Use when running AddressSanitizer, ThreadSanitizer, MemorySanitizer, UndefinedBehaviorSanitizer, or Miri on Rust code, interpreting sanitizer output, or validating unsafe code for undefined behaviour. |
 | rust-security | odin-native | Coding | Use when auditing Rust dependencies for vulnerabilities, enforcing license and source policies with cargo-deny, reviewing RUSTSEC advisories, or fuzzing and testing unsafe code for security. |
 | rust-security-review | odin-security | Security | Use when asked for a Rust security or correctness audit of a crate, service, or library with unsafe, FFI, concurrency, async, or untrusted-input code. |

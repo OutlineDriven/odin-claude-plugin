@@ -35,6 +35,7 @@ const ACRONYMS = {
   api: "API",
   ci: "CI",
   gh: "GH",
+  gdb: "GDB",
   pr: "PR",
   tui: "TUI",
   cli: "CLI",

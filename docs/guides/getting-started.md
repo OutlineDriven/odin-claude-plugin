@@ -15,8 +15,10 @@ List your installed plugins. On Claude Code the command is `claude plugin list`,
 Type a skill invocation with a request after it:
 
 ```text
-/skill:necessary-work Is this change really needed, or is the task already done?
+/odin-core:necessary-work Is this change really needed, or is the task already done?
 ```
+
+That is the Claude Code spelling; in Codex type `$necessary-work` and the same request.
 
 `necessary-work` asks whether the work stays inside the ask, so it fits a first run: you read the answer and judge it at once.
 

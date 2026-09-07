@@ -309,6 +309,11 @@ export function firstSentence(desc) {
   return m ? m[1] : desc;
 }
 
+// Escape a Markdown table cell: a bare | in a trigger splits the row.
+export function tableCell(text) {
+  return text.replace(/\|/g, "\\|");
+}
+
 // The trigger a human or a model routes on: the description's first sentence.
 export function skillTrigger(entry, slug) {
   const path = join(ROOT, entry.directory, "skills", slug, "SKILL.md");
@@ -320,10 +325,15 @@ export function skillRows(entry) {
   const dir = join(ROOT, entry.directory, "skills");
   if (!existsSync(dir)) return [];
   return readdirSync(dir, { withFileTypes: true })
-    .filter((d) => d.isDirectory() && existsSync(join(dir, d.name, "SKILL.md")))
+    .filter((d) => d.isDirectory())
     .map((d) => d.name)
     .sort();
 }
+
+// The owner/repo slug used by `gh skill install`, derived from the catalog's
+// repository URL rather than a second literal that can drift.
+const repoSlug = (catalog) =>
+  catalog.repository.replace(/^https:\/\/github\.com\//, "");
 
 export function renderPluginReadme(catalog, entry, skills) {
   const lines = [
@@ -345,15 +355,24 @@ export function renderPluginReadme(catalog, entry, skills) {
     `codex plugin add ${entry.id}@${catalog.marketplace_name}`,
     "```",
     "",
+    "### Individual (gh skill)",
+    "",
+    "```shell",
+    `gh skill install ${repoSlug(catalog)} ${entry.directory}/skills/<skill> \\`,
+    "  --agent claude-code --scope user",
+    "```",
+    "",
     "Cursor, Grok, and Kimi install from this same tree. The repository README gives each command.",
     "",
     "## Skills",
     "",
-    "Each row states when to reach for the skill. Invoke one with `/skill:<name>`.",
+    `Each row states when to reach for the skill. Invoke one as \`/${entry.id}:<name>\` in Claude Code, \`$<name>\` in Codex, or type \`/\` and pick it in Cursor.`,
     "",
     "| Skill | Trigger |",
     "|---|---|",
-    ...skills.map((slug) => `| ${slug} | ${skillTrigger(entry, slug)} |`),
+    ...skills.map(
+      (slug) => `| ${slug} | ${tableCell(skillTrigger(entry, slug))} |`,
+    ),
     "",
     "## Workflows",
     "",
@@ -410,7 +429,7 @@ export function renderRootReadme(catalog, current) {
     throw new Error("README.md: no largest-plugins sentence found");
   out = out.replace(
     /^The largest plugins are [^\n]*\n/m,
-    `The largest plugins are ${top.map(([id, c]) => `\`${id}\` at ${c}`).join(", ").replace(/, ([^,]*)$/, ", and $1")}\n`,
+    `The largest plugins are ${top.map(([id, c]) => `\`${id}\` at ${c}`).join(", ").replace(/, ([^,]*)$/, ", and $1")}.\n`,
   );
   return out;
 }
