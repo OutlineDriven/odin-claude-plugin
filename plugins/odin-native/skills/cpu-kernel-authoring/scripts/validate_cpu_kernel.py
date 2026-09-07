@@ -14,7 +14,10 @@ import re
 import sys
 from pathlib import Path
 
-CPU_BACKEND_RE = re.compile(r'backend\s*=\s*["\']cpu["\']')
+if sys.version_info < (3, 11):
+    sys.exit("validate_cpu_kernel.py needs Python 3.11+ (tomllib in the standard library)")
+
+import tomllib  # noqa: E402
 
 
 class ValidationError:
@@ -36,7 +39,7 @@ class ValidationError:
 
 
 def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
-    """Validate build.toml configuration."""
+    """Validate build.toml configuration against the parsed kernel sections."""
     errors = []
     build_toml = kernel_dir / "build.toml"
 
@@ -44,56 +47,82 @@ def validate_build_toml(kernel_dir: Path) -> list[ValidationError]:
         errors.append(ValidationError("ERROR", "build.toml not found"))
         return errors
 
-    with open(build_toml) as f:
-        content = f.read()
+    try:
+        with open(build_toml, "rb") as f:
+            data = tomllib.load(f)
+    except tomllib.TOMLDecodeError as e:
+        errors.append(ValidationError("ERROR", f"build.toml is not valid TOML: {e}", "build.toml"))
+        return errors
 
-    if not CPU_BACKEND_RE.search(content):
+    kernel_table = data.get("kernel", {})
+    if not isinstance(kernel_table, dict):
+        errors.append(ValidationError(
+            "ERROR",
+            f"build.toml 'kernel' must be a table of [kernel.<name>] sections, got {type(kernel_table).__name__}",
+            "build.toml",
+        ))
+        return errors
+
+    sections = {
+        f"kernel.{name}": body
+        for name, body in kernel_table.items()
+        if isinstance(body, dict)
+    }
+    cpu_sections = {name: body for name, body in sections.items() if body.get("backend") == "cpu"}
+
+    if not cpu_sections:
         errors.append(ValidationError("ERROR", "No CPU backend sections found in build.toml", "build.toml"))
 
-    # kernel-builder does not add the kernel directory to the include path; without `include` headers fail to resolve.
-    sections = re.findall(r'\[kernel\.\w+\]', content)
-    for section in sections:
-        start = content.index(section)
-        next_section = content.find("[kernel.", start + 1)
-        section_content = content[start:next_section] if next_section != -1 else content[start:]
-
-        if CPU_BACKEND_RE.search(section_content) and "include" not in section_content:
+    for name, body in cpu_sections.items():
+        # kernel-builder does not add the kernel directory to the include path;
+        # without `include` headers fail to resolve.
+        include = body.get("include", [])
+        if isinstance(include, str):
+            include = [include]
+        if not include:
             errors.append(ValidationError(
                 "WARNING",
-                f"Section {section} missing 'include' directive for header resolution",
+                f"Section [{name}] missing 'include' directive for header resolution",
                 "build.toml",
             ))
 
-    if "-mavx512f" in content:
-        core_flags = ["-mavx512bf16", "-mavx512vl"]
-        for flag in core_flags:
-            if flag not in content:
+    def _flags(body: dict) -> list[str]:
+        flags = body.get("cxx-flags", body.get("flags", []))
+        if isinstance(flags, list):
+            return [str(f) for f in flags]
+        return str(flags).split()
+
+    # dq/bw/vbmi are needed only by GEMM byte-shuffle paths; requiring them elsewhere is noise.
+    gemm_indicators = ["gemm", "gptq", "quantiz", "bnb", "bitsandbytes", "megablocks", "moe"]
+
+    # Each [kernel.*] section is its own translation unit, so a flag in one
+    # tier never reaches another; check every AVX512 section on its own.
+    for name, body in sections.items():
+        flags = _flags(body)
+        if "-mavx512f" not in flags:
+            continue
+        is_gemm_kernel = any(ind in name.lower() for ind in gemm_indicators)
+        for flag in ("-mavx512bf16", "-mavx512vl"):
+            if flag not in flags:
                 errors.append(ValidationError(
                     "WARNING",
-                    f"AVX512 section missing core flag: {flag}",
+                    f"AVX512 section [{name}] missing core flag: {flag}",
                     "build.toml",
                 ))
-        # dq/bw/vbmi are needed only by GEMM byte-shuffle paths; requiring them elsewhere is noise.
-        gemm_indicators = ["gemm", "gptq", "quantiz", "bnb", "bitsandbytes", "megablocks", "moe"]
-        is_gemm_kernel = any(ind in content.lower() for ind in gemm_indicators)
         if is_gemm_kernel:
-            gemm_flags = ["-mavx512dq", "-mavx512bw", "-mavx512vbmi"]
-            for flag in gemm_flags:
-                if flag not in content:
+            for flag in ("-mavx512dq", "-mavx512bw", "-mavx512vbmi"):
+                if flag not in flags:
                     errors.append(ValidationError(
                         "INFO",
-                        f"GEMM kernel may benefit from flag: {flag}",
+                        f"GEMM kernel section [{name}] may benefit from flag: {flag}",
                         "build.toml",
                     ))
-        else:
-            pass
-
-    if "-mavx512f" in content and "-fopenmp" not in content:
-        errors.append(ValidationError(
-            "WARNING",
-            "AVX512 section missing -fopenmp flag",
-            "build.toml",
-        ))
+        if "-fopenmp" not in flags:
+            errors.append(ValidationError(
+                "WARNING",
+                f"AVX512 section [{name}] missing -fopenmp flag",
+                "build.toml",
+            ))
 
     return errors
 

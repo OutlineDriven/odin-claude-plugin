@@ -38,7 +38,7 @@ CFLAGS="-O2 \
   -D_GLIBCXX_ASSERTIONS \
   -fPIE"
 
-LDFLAGS="-pie -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack"
+LDFLAGS="-pie -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack -Wl,-z,nodlopen -Wl,-z,nodump -Wl,--as-needed"
 
 clang ${CFLAGS} ${LDFLAGS} -o prog main.c
 ```

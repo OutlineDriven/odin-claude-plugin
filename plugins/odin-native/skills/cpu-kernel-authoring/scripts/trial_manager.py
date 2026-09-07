@@ -18,6 +18,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import shutil
 import sys
 import tempfile
@@ -61,9 +62,53 @@ def _overlaps_trial_store(source):
     return src == store or src in store.parents or store in src.parents
 
 
+def _escaping_symlinks(source):
+    """Symlinks under source whose text stops being valid once the tree is copied elsewhere.
+
+    Only a relative link that stays inside source by path arithmetic alone survives
+    relocation; an absolute link keeps pointing at the original tree, and a relative
+    link that walks out of source (even if it resolves back in) depends on it.
+    """
+    root = os.path.abspath(source)
+    real_root = os.path.realpath(source)
+
+    def _stays_inside(dirpath, text):
+        if os.path.isabs(text):
+            return False
+        # Resolution can leave through a nested symlink even when the text alone does not.
+        resolved = os.path.realpath(os.path.join(dirpath, text))
+        if os.path.commonpath([real_root, resolved]) != real_root:
+            return False
+        rel = os.path.relpath(os.path.abspath(dirpath), root)
+        depth = 0 if rel == os.curdir else len(rel.split(os.sep))
+        for part in text.split("/"):
+            if part == "..":
+                depth -= 1
+                if depth < 0:
+                    return False
+            elif part not in ("", "."):
+                depth += 1
+        return True
+
+    escaping = []
+    for dirpath, dirnames, filenames in os.walk(source):
+        for name in dirnames + filenames:
+            link = os.path.join(dirpath, name)
+            if os.path.islink(link) and not _stays_inside(dirpath, os.readlink(link)):
+                escaping.append(link)
+    return escaping
+
+
 def _validate_state(state, kernel_name):
-    """A trial's dir is always its own id; nothing else is a valid state."""
+    """Trial ids are t<number> and a trial's dir is its own id; nothing else is valid state."""
     for tid, trial in state.get("trials", {}).items():
+        if not re.fullmatch(r"t\d+", tid):
+            print(
+                f"Error: Corrupt trial state for '{kernel_name}':"
+                f" trial id '{tid}' is not a t<number> id.",
+                file=sys.stderr,
+            )
+            sys.exit(1)
         if trial.get("dir") != tid:
             print(
                 f"Error: Corrupt trial state for '{kernel_name}':"
@@ -88,6 +133,14 @@ def _validate_state(state, kernel_name):
         print(
             f"Error: Corrupt trial state for '{kernel_name}':"
             " 'baseline_us' is not a list of numbers.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    best = state.get("best_trial")
+    if best is not None and (not isinstance(best, str) or best not in state.get("trials", {})):
+        print(
+            f"Error: Corrupt trial state for '{kernel_name}':"
+            f" best_trial '{best}' is not a known trial.",
             file=sys.stderr,
         )
         sys.exit(1)
@@ -160,6 +213,16 @@ def cmd_save(args):
         )
         sys.exit(1)
 
+    if os.path.isdir(trial_source):
+        escaping = _escaping_symlinks(trial_source)
+        if escaping:
+            print(
+                f"Error: Trial source '{trial_source}' has symlinks that point outside it,"
+                " so they would dangle once copied: " + ", ".join(escaping),
+                file=sys.stderr,
+            )
+            sys.exit(1)
+
     state = _load_state(kernel_name)
 
     if parent is not None and parent not in state["trials"]:
@@ -180,15 +243,33 @@ def cmd_save(args):
     state["next_id"] += 1
 
     dest = os.path.join(_trial_dir(kernel_name), trial_id)
+    if os.path.lexists(dest):
+        print(
+            f"Error: Trial directory '{dest}' already exists but is not in state.json."
+            " Remove it or repair the trial store before saving.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+    # Copy into a fresh staging directory and rename it into place, so a failed
+    # copy never leaves a partial trial and cleanup only removes what this save
+    # created. symlinks=True copies links as links, so a nested symlink back into
+    # the trial store can never make the copy recurse into itself.
+    staging = None
     try:
+        staging = tempfile.mkdtemp(prefix=f".{trial_id}-", dir=_trial_dir(kernel_name))
+        staged = os.path.join(staging, trial_id)
         if os.path.isdir(trial_source):
-            shutil.copytree(trial_source, dest, dirs_exist_ok=True)
+            shutil.copytree(trial_source, staged, symlinks=True)
         else:
-            os.makedirs(dest, exist_ok=True)
-            shutil.copy2(trial_source, dest)
+            os.makedirs(staged)
+            shutil.copy2(trial_source, staged)
+        os.rename(staged, dest)
     except (OSError, RecursionError) as e:
+        if staging is not None:
+            shutil.rmtree(staging, ignore_errors=True)
         print(f"Error: Failed to copy trial source into '{dest}': {e}", file=sys.stderr)
         sys.exit(1)
+    shutil.rmtree(staging, ignore_errors=True)
 
     state["trials"][trial_id] = {
         "parent": parent,
@@ -384,6 +465,13 @@ def cmd_finalize(args):
     best_id = state["best_trial"]
     best = state["trials"][best_id]
     src = os.path.join(_trial_dir(kernel_name), best["dir"])
+    if os.path.islink(src):
+        print(
+            f"Error: Trial directory '{src}' is a symlink; a trial must be a real directory"
+            " inside the trial store.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     # A bare name is a label, not a path; keep every finalized kernel under one output root.
     if os.path.dirname(output_path) == "":
@@ -404,7 +492,7 @@ def cmd_finalize(args):
         staged = staging / dest.name
         backup = Path(f"{staged}.old")
         if Path(src).is_dir():
-            shutil.copytree(src, staged)
+            shutil.copytree(src, staged, symlinks=True)
         else:
             shutil.copy2(src, staged)
         if dest.exists() or dest.is_symlink():

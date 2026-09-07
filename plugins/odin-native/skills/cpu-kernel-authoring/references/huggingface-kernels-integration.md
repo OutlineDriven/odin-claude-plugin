@@ -25,9 +25,6 @@ pip install kernels torch
 ```python
 from kernels import get_kernel
 
-kernel = get_kernel("kernels-community/rmsnorm")
-
-# With specific version
 kernel = get_kernel("kernels-community/rmsnorm", version=1)
 ```
 
@@ -36,8 +33,8 @@ kernel = get_kernel("kernels-community/rmsnorm", version=1)
 ```python
 from kernels import has_kernel
 
-if has_kernel("kernels-community/rmsnorm"):
-    kernel = get_kernel("kernels-community/rmsnorm")
+if has_kernel("kernels-community/rmsnorm", version=1):
+    kernel = get_kernel("kernels-community/rmsnorm", version=1)
 ```
 
 ### get_local_kernel (Development)
@@ -60,8 +57,8 @@ from kernels import get_kernel, has_kernel
 
 repo_id = "kernels-community/rmsnorm"
 
-if has_kernel(repo_id):
-    rmsnorm_kernel = get_kernel(repo_id)
+if has_kernel(repo_id, version=1):
+    rmsnorm_kernel = get_kernel(repo_id, version=1)
 
     x = torch.randn(2, 1024, 2048, dtype=torch.bfloat16)  # CPU tensor
     weight = torch.ones(2048, dtype=torch.bfloat16)
@@ -78,8 +75,8 @@ from kernels import get_kernel, has_kernel
 
 repo_id = "kernels-community/rmsnorm"
 
-if has_kernel(repo_id):
-    rmsnorm_kernel = get_kernel(repo_id)
+if has_kernel(repo_id, version=1):
+    rmsnorm_kernel = get_kernel(repo_id, version=1)
 
     def patch_rmsnorm(model):
         """Patch model's RMSNorm to use CPU kernel."""
