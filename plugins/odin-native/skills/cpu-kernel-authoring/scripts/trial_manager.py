@@ -63,17 +63,23 @@ def _overlaps_trial_store(source):
 
 
 def _escaping_symlinks(source):
-    """Symlinks under source whose target resolves outside source; copied as links they would dangle."""
-    root = Path(source).resolve()
+    """Symlinks under source whose text stops being valid once the tree is copied elsewhere.
+
+    Only a relative link that stays inside source by path arithmetic alone survives
+    relocation; an absolute link keeps pointing at the original tree, and a relative
+    link that walks out of source (even if it resolves back in) depends on it.
+    """
+    root = os.path.abspath(source)
     escaping = []
     for dirpath, dirnames, filenames in os.walk(source):
         for name in dirnames + filenames:
-            link = Path(dirpath) / name
-            if not link.is_symlink():
+            link = os.path.join(dirpath, name)
+            if not os.path.islink(link):
                 continue
-            target = (link.parent / os.readlink(link)).resolve()
-            if target != root and root not in target.parents:
-                escaping.append(str(link))
+            text = os.readlink(link)
+            lexical = os.path.normpath(os.path.join(os.path.abspath(dirpath), text))
+            if os.path.isabs(text) or os.path.commonpath([root, lexical]) != root:
+                escaping.append(link)
     return escaping
 
 
