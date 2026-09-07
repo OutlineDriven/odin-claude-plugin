@@ -1,8 +1,6 @@
 # Workflows
 
-These chains come from 1432 skill invocations across 68 sessions and 19 projects, from 2026-08-24 to 2026-09-07. Of the 545 skills the tree held while those sessions ran (it holds 703 now), 101 were used at least once and 444 were never invoked, so the chains below favor what sessions actually reached for.
-
-Most campaigns below share one shape: open by clarifying or planning, steer with short corrections rather than restated requirements, and close with a pass over what was left behind before you call anything done. The mined work spans a Rust Bitcoin node, two greenfield Rust ports, a harness port, and this marketplace itself; map your own work onto the closest shape.
+Most campaigns below share one shape: open by clarifying or planning(*explicitly* in **plan mode** with `/askme` or`/architect` or *implictly* with `/wayfinder` or `/autoplan)`, steer with short corrections rather than restated requirements, and close with a pass over what was left behind before you call anything done. The mined work spans a Rust Bitcoin node, two greenfield Rust ports, a harness port, and this marketplace itself; map your own work onto the closest shape.
 
 Chains are written in the harness-neutral form `/skill:<slug>`. Type each step as your harness spells it: `/<plugin>:<slug>` in Claude Code, `$<slug>` in Codex, or `/` and the skill name in Cursor; [using-skills.md](using-skills.md) has the table.
 
