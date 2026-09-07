@@ -70,15 +70,26 @@ def _escaping_symlinks(source):
     link that walks out of source (even if it resolves back in) depends on it.
     """
     root = os.path.abspath(source)
+
+    def _stays_inside(dirpath, text):
+        if os.path.isabs(text):
+            return False
+        rel = os.path.relpath(os.path.abspath(dirpath), root)
+        depth = 0 if rel == os.curdir else len(rel.split(os.sep))
+        for part in text.split("/"):
+            if part == "..":
+                depth -= 1
+                if depth < 0:
+                    return False
+            elif part not in ("", "."):
+                depth += 1
+        return True
+
     escaping = []
     for dirpath, dirnames, filenames in os.walk(source):
         for name in dirnames + filenames:
             link = os.path.join(dirpath, name)
-            if not os.path.islink(link):
-                continue
-            text = os.readlink(link)
-            lexical = os.path.normpath(os.path.join(os.path.abspath(dirpath), text))
-            if os.path.isabs(text) or os.path.commonpath([root, lexical]) != root:
+            if os.path.islink(link) and not _stays_inside(dirpath, os.readlink(link)):
                 escaping.append(link)
     return escaping
 
