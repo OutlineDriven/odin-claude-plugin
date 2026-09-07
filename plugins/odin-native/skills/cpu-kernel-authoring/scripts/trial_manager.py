@@ -62,6 +62,21 @@ def _overlaps_trial_store(source):
     return src == store or src in store.parents or store in src.parents
 
 
+def _escaping_symlinks(source):
+    """Symlinks under source whose target resolves outside source; copied as links they would dangle."""
+    root = Path(source).resolve()
+    escaping = []
+    for dirpath, dirnames, filenames in os.walk(source):
+        for name in dirnames + filenames:
+            link = Path(dirpath) / name
+            if not link.is_symlink():
+                continue
+            target = (link.parent / os.readlink(link)).resolve()
+            if target != root and root not in target.parents:
+                escaping.append(str(link))
+    return escaping
+
+
 def _validate_state(state, kernel_name):
     """Trial ids are t<number> and a trial's dir is its own id; nothing else is valid state."""
     for tid, trial in state.get("trials", {}).items():
@@ -175,6 +190,16 @@ def cmd_save(args):
             file=sys.stderr,
         )
         sys.exit(1)
+
+    if os.path.isdir(trial_source):
+        escaping = _escaping_symlinks(trial_source)
+        if escaping:
+            print(
+                f"Error: Trial source '{trial_source}' has symlinks that point outside it,"
+                " so they would dangle once copied: " + ", ".join(escaping),
+                file=sys.stderr,
+            )
+            sys.exit(1)
 
     state = _load_state(kernel_name)
 
@@ -418,6 +443,13 @@ def cmd_finalize(args):
     best_id = state["best_trial"]
     best = state["trials"][best_id]
     src = os.path.join(_trial_dir(kernel_name), best["dir"])
+    if os.path.islink(src):
+        print(
+            f"Error: Trial directory '{src}' is a symlink; a trial must be a real directory"
+            " inside the trial store.",
+            file=sys.stderr,
+        )
+        sys.exit(1)
 
     # A bare name is a label, not a path; keep every finalized kernel under one output root.
     if os.path.dirname(output_path) == "":
