@@ -5,6 +5,19 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.3] - 2026-09-09
+### Changed
+- `compound` now writes its learning records to `docs/solutions/`, the store `autolearn`
+  already owns; `docs/knowledge/` is gone. Compound records sit at the top level and the
+  category subdirectories stay autolearn's, so each skill reads the other's docs for overlap
+  without rewriting them to its own schema. An absent directory is an empty store, created on
+  the first approved write, instead of blocking the run.
+- `autolearn`'s refresh step names compound's seven-field records as outside the Solution
+  schema: it reads them for overlap and never rewrites one or marks it stale for lacking
+  `problem_type` or `root_cause`.
+- `brainstorm` searches `docs/solutions/` and `plans/` for prior knowledge, collapsing the
+  duplicate `docs/knowledge/` read.
+
 ## [2.1.2] - 2026-09-07
 ### Fixed
 - `cpu-kernel-authoring`: trial state rejects ids outside `t<number>`, an unknown

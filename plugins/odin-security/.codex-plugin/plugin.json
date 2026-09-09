@@ -1,6 +1,6 @@
 {
   "name": "odin-security",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "ODIN workflows for security review, vulnerability triage, and defensive implementation.",
   "keywords": [
     "odin",

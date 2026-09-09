@@ -1,6 +1,6 @@
 {
   "name": "odin-agent",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "ODIN workflows for configuring agent harnesses, MCP servers, and repository agent surfaces.",
   "author": {
     "name": "OutlineDriven",

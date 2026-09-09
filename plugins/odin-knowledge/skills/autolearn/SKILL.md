@@ -99,7 +99,7 @@ CONCEPTS.md at the operating repo root is the shared-vocabulary glossary. It hol
 
 ### 6. Refresh: maintain existing docs
 
-Find every `.md` under `docs/solutions/`, excluding `README.md` and anything under `_archived/`. A `[scope]` hint narrows it: try in order, stop at first hit: (1) subdirectory name, (2) frontmatter `module`/`component`/`tags` match, (3) filename partial match, (4) content keyword. No match → report the miss and exit. No scope hint → process everything.
+Find every `.md` under `docs/solutions/`, excluding `README.md` and anything under `_archived/`. Top-level records written by `compound` carry that skill's own seven-field schema (`type`, `tags`, `confidence`, `date`, `source`, `Context`, `Implication`); the Solution schema below does not apply to them. Read them for overlap and contradiction, and never rewrite one to the Solution schema or mark it stale for lacking those fields. A `[scope]` hint narrows it: try in order, stop at first hit: (1) subdirectory name, (2) frontmatter `module`/`component`/`tags` match, (3) filename partial match, (4) content keyword. No match → report the miss and exit. No scope hint → process everything.
 
 Classify every candidate doc into exactly one outcome:
 
