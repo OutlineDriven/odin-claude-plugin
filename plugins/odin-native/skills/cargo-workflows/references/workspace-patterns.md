@@ -36,13 +36,13 @@ tokio.workspace = true         # Inherit, including features
 serde = { workspace = true, features = ["derive"] }  # Can add features
 ```
 
-## Feature resolution (resolver = "2")
+## Feature resolution (resolver = "3")
 
-With `resolver = "2"` (required in edition 2024 workspaces):
+With `resolver = "3"` (the default for edition 2024 workspaces):
 
 ```toml
 [workspace]
-resolver = "2"
+resolver = "3"
 ```
 
 - Build deps, dev-deps, and regular deps get independent feature resolution.
@@ -57,11 +57,11 @@ A workspace without its own `[package]` — just orchestrates members:
 # Root Cargo.toml (virtual manifest)
 [workspace]
 members = ["crates/*", "tools/*"]
-resolver = "2"
+resolver = "3"
 
 [workspace.package]
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [profile.release]
 lto = "thin"
