@@ -51,7 +51,7 @@ resolver = "3"
 
 ## Virtual manifest pattern
 
-A workspace without its own `[package]` — just orchestrates members:
+A workspace without its own `[package]`: it just orchestrates members:
 
 ```toml
 # Root Cargo.toml (virtual manifest)

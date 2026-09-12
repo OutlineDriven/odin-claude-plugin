@@ -11,7 +11,7 @@ disable-model-invocation: true
 | Field | Bound contract |
 |---|---|
 | Trigger | User asks to research a specific feature or functionality across competitor products (mode: feature), or to summarize competitor changelogs or analyze recent competitor releases (mode: changelog). |
-| Authority | Human-gated: writes one report file locally; the remote write — one branch, one commit, one pull request — happens only after explicit human approval of a preview naming the report path, branch, and PR target; rollback is deleting the local report and reverting the commit. No remote mutation except the human-approved PR. |
+| Authority | Human-gated: writes one report file locally; the remote write (one branch, one commit, one pull request) happens only after explicit human approval of a preview naming the report path, branch, and PR target; rollback is deleting the local report and reverting the commit. No remote mutation except the human-approved PR. |
 | Side effect | Writes a structured report under `reports/feature_research/` (mode feature) or `reports/competitor_changelog_reports/` (mode changelog) and, after approval, opens one pull request referencing it. No other files, credentials, or remote mutation. |
 | Done | Mode feature: the report exists with TL;DR, per-competitor feature lists, a comparison table, gaps, risks, and insights, each non-obvious claim cited with a product-docs URL, and a PR is open referencing it. Mode changelog: the report exists with TL;DR, dated competitor entries, common themes, a product comparison sourced only from the product changelog, and risks, deduplicated against previous reports, and a PR contains it. |
 
