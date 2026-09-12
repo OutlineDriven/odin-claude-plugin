@@ -20,8 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `gate-file-completion`, `writing-for-agents`, `architect`, and `deslop`
   regain the trigger words `unlazy`, `writing skills`, `codebase design`, and
   `cleanup codebase`.
-- 268 cold skills are set slash-only with `disable-model-invocation: true`,
-  cutting the autoload catalog from 622 to 346; each stays reachable by
+- 252 cold skills are set slash-only with `disable-model-invocation: true`,
+  cutting the autoload catalog from 622 to 362; each stays reachable by
   `/skill:<slug>`.
 - Stale version pins corrected to the `<languages>` table: Rust edition 2024
   (`rust-version = "1.85"`) in `cargo-workflows`, Python 3.14 in

@@ -11,7 +11,7 @@ description: 'Use when work units carrying declared dependencies must be ordered
 |---|---|
 | Trigger | Work units with declared dependencies must be ordered before dispatch, or a dependency set must be checked for cycles. |
 | Authority | Read-only on the work tree; writes only the named schedule artifact. Rollback is deleting that artifact. No remote mutation. Not a write-set partitioner and not a dispatcher. |
-| Side effect | One schedule artifact listing waves in topological order, plus the unscheduled set when a cycle exists. |
+| Side effect | On an acyclic graph, one schedule artifact listing waves in topological order. On a cycle or a rejected edge, a named failure report and no schedule artifact. |
 | Done | Every supplied unit appears in exactly one wave with all its dependencies in earlier waves, or a cycle is reported with the participating units named and no schedule emitted. |
 
 ## Inputs

@@ -28,6 +28,7 @@ Not for behavior changes, new abstractions, or refactors that introduce patterns
 | debloat, tighten this, too long | bloat | One padded prose artifact (document, skill, spec) |
 | tidy this up, simplify, clean up this diff, polish my changes, make this simpler | tidy | Code in the working tree |
 | dead field, redundant wrapper, stale config, duplicate state, speculative abstraction | tidy | Code already under edit |
+| cleanup codebase | tidy | Code already under edit |
 | deslop this branch diff, remove AI debris from my branch, clean up added lines only | diff | Added/modified lines in a branch diff |
 
 ## Shared spine

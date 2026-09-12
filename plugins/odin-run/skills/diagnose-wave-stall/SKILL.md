@@ -1,6 +1,6 @@
 ---
 name: diagnose-wave-stall
-description: 'Use when a dispatched agent wave has stopped progressing: a result that never arrives or one that exists but stays unconsumed, and the blocking node must be named. Not for a configured loop misbehaving: use diagnose-loop-health. Clearing actions are recorded, never executed; re-dispatch follows only an explicit caller instruction.'
+description: 'Use when a dispatched agent wave has stopped progressing: a result that never arrives or one that exists but stays unconsumed, and the blocking node must be named. Not for a configured loop misbehaving: use diagnose-loop-health. Clearing actions are recorded, never executed. Re-dispatch follows only an explicit caller instruction.'
 ---
 
 # Diagnose wave stall
@@ -11,8 +11,8 @@ description: 'Use when a dispatched agent wave has stopped progressing: a result
 |---|---|
 | Trigger | A dispatched wave has stopped progressing and the blocking node is unknown. |
 | Authority | Read-only diagnosis; writes only the named stall report. Cancelling or re-dispatching a node happens only on an explicit instruction recorded in the report. No remote mutation. |
-| Side effect | A stall report naming the blocking node, its classification, and the clearing action taken or withheld. |
-| Done | Every non-progressing node is classified and the blocking edge is named, or the wave is shown to be progressing and no stall exists. |
+| Side effect | A stall report naming the blocking node, its classification, and the clearing action named or withheld. |
+| Done | Every non-progressing node is classified and its blocking edge or root cause is named, or the wave is shown to be progressing and no stall exists. |
 
 ## Inputs
 
@@ -30,9 +30,9 @@ This skill owns a dispatched wave blocked on a dependency edge. A configured loo
 
 3. Classify each non-progressing node into exactly one cause: dead worker (exited without returning a result), unsatisfiable input (waiting on an artifact no node in the wave produces), external limit (quota, rate limit, or credential), or satisfied-but-unconsumed (its result exists but nothing consumes it). Attach the evidence for each classification. **Done when:** every non-progressing node carries exactly one classification with evidence.
 
-4. Name the blocking edge for each non-progressing node: which node, waiting on which artifact or result, produced by whom. **Done when:** every non-progressing node has its blocking edge named.
+4. Name the blocking edge for each non-progressing node that waits on another node's output: which node, waiting on which artifact or result, produced by whom. A dead worker or an external limit has no blocking edge; record the root cause instead. **Done when:** every non-progressing node has its blocking edge or its root cause named.
 
-5. Choose the clearing action per class (re-dispatch for a dead worker, cut the edge for an unsatisfiable input, wait with a stated bound for an external limit, consume the result for satisfied-but-unconsumed) and record it in the stall report. This step is record-only: no procedure step re-dispatches, cuts an edge, waits on a bound, or consumes a result; a chosen action is executed only on an explicit caller instruction recorded in the report, outside this skill. **Done when:** every non-progressing node has its clearing action named in the report, or withheld where its class is unresolved.
+5. Choose the clearing action per class (re-dispatch for a dead worker, cut the edge for an unsatisfiable input, wait with a stated bound for an external limit, consume the result for satisfied-but-unconsumed) and record it in the stall report. This step is record-only: no procedure step re-dispatches, cuts an edge, waits on a bound, or consumes a result. A chosen action is executed only on an explicit caller instruction recorded in the report, outside this skill. **Done when:** every non-progressing node has its clearing action named in the report, or withheld where its class is unresolved.
 
 6. Write the stall report to the named path: the partition, every classification with its evidence, every blocking edge, and every clearing action named or withheld. **Done when:** the report exists with all recorded classifications and named actions.
 
@@ -45,4 +45,4 @@ This skill owns a dispatched wave blocked on a dependency edge. A configured loo
 
 ## Output
 
-A stall report at the named path listing every non-progressing node with its classification, evidence, blocking edge, and clearing action named or withheld. The report names the chosen action and never executes one; execution follows only an explicit caller instruction recorded in the report. Or a progressing verdict with no artifact written when no stall exists.
+A stall report at the named path listing every non-progressing node with its classification, evidence, blocking edge, and clearing action named or withheld. The report names the chosen action and never executes one. Execution follows only an explicit caller instruction recorded in the report. Or a progressing verdict with no artifact written when no stall exists.
