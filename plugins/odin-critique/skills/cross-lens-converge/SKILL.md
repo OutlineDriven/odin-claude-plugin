@@ -1,6 +1,7 @@
 ---
 name: cross-lens-converge
 description: 'Use when one reviewer is not enough because failure modes are heterogeneous, or a claim needs cross-lens pressure before it ships. Not for collapsing a decision field: use converge.'
+disable-model-invocation: true
 ---
 
 # Cross lens converge

@@ -1,6 +1,6 @@
 ---
 name: from-first-principle
-description: 'Use when a user wants to rebuild a design, organization, or API from primitives. Not for a perspective take: use from-*-perspective seats.'
+description: 'Use when a user wants to rebuild a design, organization, or API from primitives. Not for a perspective take: use from-perspective.'
 ---
 
 # From first principle
@@ -16,7 +16,7 @@ description: 'Use when a user wants to rebuild a design, organization, or API fr
 
 ## Not for
 
-- A perspective take on a question: use the from-*-perspective seats.
+- A perspective take on a question: use from-perspective.
 - Pruning an existing structure down to its primitives: this rebuilds from primitives, it does not strip down.
 - Restarting from a blank greenfield: use fromzero.
 - Remote, credential, publish, deploy, or irreversible changes.
