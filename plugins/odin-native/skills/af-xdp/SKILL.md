@@ -131,7 +131,7 @@ description: 'Use when creating AF_XDP sockets, configuring UMEM and XSK rings, 
    | Fit | Filter in kernel, selective traffic to user space | Full dataplane takeover |
 
    Throughput depends on NIC, driver, and CPU. No fixed number transfers between boards; measure with the real workload. Done when: the recommendation names the workload and the measured or expected traffic mix.
-8. Apply production rules. Run one socket per RX queue, pinned with `taskset` to the CPU that handles that queue's interrupts. AF_XDP needs `CAP_NET_RAW`. Route deeper work: `ebpf` for XDP program development, `ebpf-rust` for XDP in Rust, `dpdk` for full bypass. Done when: queue pinning, capability, and routing are stated in the delivered guidance.
+8. Apply production rules. Run one socket per RX queue, pinned with `taskset` to the CPU that handles that queue's interrupts. AF_XDP needs `CAP_NET_RAW`. Route deeper work: `ebpf` for XDP program development (including C/libbpf and Rust/Aya), `dpdk` for full bypass. Done when: queue pinning, capability, and routing are stated in the delivered guidance.
 
 ## Failure and recovery
 
