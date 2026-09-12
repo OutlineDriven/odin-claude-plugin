@@ -1,6 +1,7 @@
 ---
 name: f-star-effectful-verification
 description: 'Use when effectful, security-sensitive code needs refinement-typed, SMT-backed verification in F*, in the HACL* or Project Everest style.'
+disable-model-invocation: true
 ---
 
 # Effectful verification in F*

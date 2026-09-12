@@ -1,6 +1,7 @@
 ---
 name: viral-opportunity-scout
 description: 'Use when asked to find distribution opportunities for a template, tool, or artifact. Not for content creation or campaign management.'
+disable-model-invocation: true
 ---
 
 # Viral opportunity scout

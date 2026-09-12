@@ -1,6 +1,7 @@
 ---
 name: native-messaging-host-conflicts
 description: 'Use when a browser extension native messaging host fails, times out, or the wrong host spawns. Not for network, browser-install, or unrelated extension failures.'
+disable-model-invocation: true
 ---
 
 # Native messaging host conflicts

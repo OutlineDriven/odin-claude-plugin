@@ -1,6 +1,7 @@
 ---
 name: cost-reduction
 description: 'Use when a measured cost surface needs one-change-at-a-time reduction under frozen guardrails. Not for speed-only optimization: use optimize.'
+disable-model-invocation: true
 ---
 
 # Cost reduction

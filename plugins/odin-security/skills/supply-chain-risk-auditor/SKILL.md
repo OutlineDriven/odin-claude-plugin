@@ -1,6 +1,7 @@
 ---
 name: supply-chain-risk-auditor
 description: 'Use when assessing npm, PyPI, or Go dependency supply-chain risk, with lockfile-absent paths marked unassessable. Not for remote or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Supply chain risk auditor

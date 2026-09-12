@@ -1,6 +1,7 @@
 ---
 name: keep-why-repo-structure
 description: 'Use when project documentation needs a layout or a knowledge item needs one home. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Keep why repo structure

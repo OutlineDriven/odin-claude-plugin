@@ -1,6 +1,7 @@
 ---
 name: triton-lang
 description: 'Use when writing Triton kernels with @triton.jit, tl.load and tl.store with masking, tl.atomic_add, autotuning, benchmarking, or integrating kernels into PyTorch. Not for raw CUDA: use cuda.'
+disable-model-invocation: true
 ---
 
 # Triton

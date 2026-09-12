@@ -1,6 +1,7 @@
 ---
 name: insecure-default-discovery
 description: 'Use when the user asks to audit a file, subtree, or repository for fallback secrets, default credentials, fail-open controls, weak primitives, or permissive access. Not for exhaustive secret scanning.'
+disable-model-invocation: true
 ---
 
 # Insecure default discovery

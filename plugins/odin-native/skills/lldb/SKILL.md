@@ -1,6 +1,7 @@
 ---
 name: lldb
 description: 'Use when debugging with LLDB on macOS, FreeBSD, or Linux-clang, mapping GDB commands to LLDB, Xcode or VS Code integration, LLDB Python scripting, or debugging Swift and Objective-C.'
+disable-model-invocation: true
 ---
 
 # LLDB

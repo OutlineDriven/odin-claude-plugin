@@ -1,6 +1,7 @@
 ---
 name: teach
 description: 'Use when the user wants a course, a learning workspace, or ongoing teaching across sessions, with cited lessons and retention-gated advancement. Not for one-off explanations: use explain-concept.'
+disable-model-invocation: true
 ---
 
 # Teach

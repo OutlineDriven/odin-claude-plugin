@@ -1,6 +1,7 @@
 ---
 name: verilog-basics-for-lowlevel
 description: 'Use when reading RTL to understand hardware behavior, reset and clock domains, CDC synchronizers, APB/AHB/AXI bus protocols, or collaborating with hardware teams on SoC diagrams.'
+disable-model-invocation: true
 ---
 
 # Verilog basics for low-level engineers

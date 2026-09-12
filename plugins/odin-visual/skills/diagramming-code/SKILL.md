@@ -1,6 +1,7 @@
 ---
 name: diagramming-code
 description: 'Use when asked for a call graph, class hierarchy, dependency map, containment or complexity view, or data-flow view. Not for embedding: use embed-diagram. Not for architecture: use visual-diagram.'
+disable-model-invocation: true
 ---
 
 # Diagramming code

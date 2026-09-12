@@ -1,6 +1,7 @@
 ---
 name: virtual-memory-paging-and-tlb
 description: 'Use when explaining page faults, multi-level page tables, TLB misses, huge pages, or mmap and brk behavior. Not for the kernel page allocator: use kernel-memory-management.'
+disable-model-invocation: true
 ---
 
 # Virtual memory, paging, and TLB

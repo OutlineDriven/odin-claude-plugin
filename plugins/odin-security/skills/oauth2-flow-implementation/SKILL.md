@@ -1,6 +1,7 @@
 ---
 name: oauth2-flow-implementation
 description: 'Use when asked to implement, debug, validate, or explain an OAuth 2.1 flow: auth code with PKCE, client credentials, device, or refresh. Also for a failing token exchange. Not for irreversible work.'
+disable-model-invocation: true
 ---
 
 # OAuth 2.0 flow implementation

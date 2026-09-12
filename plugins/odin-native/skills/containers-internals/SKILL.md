@@ -1,6 +1,7 @@
 ---
 name: containers-internals
 description: 'Use when explaining or building on Linux container primitives: namespaces, cgroups v2, overlayfs, runc and the OCI spec, seccomp-bpf, capabilities, or escapes. Not for VM isolation: use qemu-kvm.'
+disable-model-invocation: true
 ---
 
 # Containers internals

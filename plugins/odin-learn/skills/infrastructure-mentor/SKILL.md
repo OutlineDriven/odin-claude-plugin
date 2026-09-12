@@ -1,6 +1,7 @@
 ---
 name: infrastructure-mentor
 description: 'Use when a user, especially a new hire, asks for mentoring, guidance, or explanation of infrastructure or engineering practices. Not for code changes.'
+disable-model-invocation: true
 ---
 
 # Infrastructure mentor

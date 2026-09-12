@@ -1,6 +1,7 @@
 ---
 name: property-test-authoring
 description: 'Use when authoring property tests, assessing PBT fit for a code path, reviewing existing property tests, or triaging a failing counterexample. Not for test-first features: use tdd.'
+disable-model-invocation: true
 ---
 
 # Property test authoring

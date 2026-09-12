@@ -1,6 +1,7 @@
 ---
 name: memory-sanitize
 description: 'Use when the user asks to sanitize memory for sharing, redact PII, or scan memory for credentials. Not for auditing memory: use memory-clean.'
+disable-model-invocation: true
 ---
 
 # Memory sanitize

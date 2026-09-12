@@ -1,6 +1,7 @@
 ---
 name: gut-sync
 description: 'Use when a user resumes work and needs an orientation card without full human recall. Not for packaging context for another agent or session: use handoff. Never source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Gut sync

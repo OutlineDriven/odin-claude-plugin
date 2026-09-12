@@ -1,6 +1,7 @@
 ---
 name: linkedin-ghostwriting
 description: 'Use when a user gives a founder story or result and asks for a LinkedIn post with a chosen hook and humanized body. Not for tasks that require source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # LinkedIn ghostwriting

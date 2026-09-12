@@ -1,6 +1,7 @@
 ---
 name: diff-scoped-browser-qa
 description: 'Use when asked to run branch-diff browser QA against a PR or branch. Not for live-URL visual audit: use web-design-review. No remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Diff-scoped browser QA

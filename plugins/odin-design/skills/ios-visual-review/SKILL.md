@@ -1,6 +1,7 @@
 ---
 name: ios-visual-review
 description: 'Use when the user invokes /ios-visual-review to audit an iOS app''s visuals on a real device. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # iOS visual review

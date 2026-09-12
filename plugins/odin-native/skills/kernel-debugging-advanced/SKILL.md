@@ -1,6 +1,7 @@
 ---
 name: kernel-debugging-advanced
 description: 'Use when tracing kernel functions with ftrace or trace-cmd, profiling with perf, kprobes, or dyndbg, or analyzing a vmcore with crash. Not for QEMU GDB stubs: use qemu-for-kernel-development.'
+disable-model-invocation: true
 ---
 
 # Advanced kernel debugging

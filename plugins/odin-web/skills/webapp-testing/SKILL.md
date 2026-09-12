@@ -1,6 +1,7 @@
 ---
 name: webapp-testing
 description: 'Use when asked to verify frontend or UI behavior, or capture browser screenshots and console logs. Not for read-only inspection: use browser-testing. Not for remote or deploy changes.'
+disable-model-invocation: true
 ---
 
 # Webapp testing

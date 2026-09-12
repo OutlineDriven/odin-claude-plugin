@@ -1,6 +1,7 @@
 ---
 name: context-engineering
 description: 'Use when a long session has accumulated stale or conflicting context or the user asks to refresh it. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Context engineering

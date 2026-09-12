@@ -1,6 +1,7 @@
 ---
 name: watch-for-harness-mode
 description: 'Use when a proven watch pattern should become a reusable harness artifact with configurable inputs. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Watch for harness mode

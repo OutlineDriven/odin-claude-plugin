@@ -1,6 +1,7 @@
 ---
 name: keep-why-autostart-examples
 description: 'Use when skill or knowledge activation is unreliable, or setup reaches activation reliability. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Keep why autostart examples

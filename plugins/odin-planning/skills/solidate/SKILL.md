@@ -1,6 +1,7 @@
 ---
 name: solidate
 description: 'Use when the user wants to harden a chosen but tentative artifact into one durable result. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Solidate

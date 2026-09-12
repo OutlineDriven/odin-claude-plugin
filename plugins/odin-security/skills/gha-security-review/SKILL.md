@@ -1,6 +1,7 @@
 ---
 name: gha-security-review
 description: 'Use when asked to review GitHub Actions for exploitable vulnerabilities, including prompt injection through Claude Code Action, Gemini CLI, or OpenAI Codex. Read-only. Not for general security review.'
+disable-model-invocation: true
 ---
 
 # GitHub Actions security review

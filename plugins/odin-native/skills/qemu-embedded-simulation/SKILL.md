@@ -1,6 +1,7 @@
 ---
 name: qemu-embedded-simulation
 description: 'Use when running ARM or RISC-V bare-metal firmware in QEMU: machine selection, -kernel ELF loading, semihosting, or GDB debugging without hardware. Not for KVM guests: use qemu-kvm.'
+disable-model-invocation: true
 ---
 
 # QEMU embedded simulation

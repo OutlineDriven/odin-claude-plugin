@@ -1,6 +1,7 @@
 ---
 name: markdown-to-pdf
 description: 'Use when the user runs /markdown-to-pdf on Markdown to render a publication-quality PDF. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Make PDF from Markdown

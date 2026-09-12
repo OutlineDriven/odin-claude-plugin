@@ -1,6 +1,7 @@
 ---
 name: gpu-memory-model
 description: 'Use when analyzing warp divergence, memory coalescing, shared memory bank conflicts, cache behavior, atomics, or occupancy tradeoffs on NVIDIA and AMD GPUs. Not for tool commands: use cuda-profiling.'
+disable-model-invocation: true
 ---
 
 # GPU memory model

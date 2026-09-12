@@ -1,6 +1,7 @@
 ---
 name: arm-sve
 description: 'Use when writing or porting AArch64 SIMD to SVE or SVE2: arm_sve.h intrinsics, predicates, vector-length-agnostic loops, auto-vectorization, or SVE registers in GDB. Not for NEON: use simd-intrinsics.'
+disable-model-invocation: true
 ---
 
 # Arm SVE and SVE2

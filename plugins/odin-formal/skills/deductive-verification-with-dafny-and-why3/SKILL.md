@@ -1,6 +1,7 @@
 ---
 name: deductive-verification-with-dafny-and-why3
 description: 'Use when an imperative program needs pre-conditions, post-conditions, and loop invariants proved automatically by SMT in Dafny or Why3, short of a tactic prover.'
+disable-model-invocation: true
 ---
 
 # Deductive verification with Dafny and Why3

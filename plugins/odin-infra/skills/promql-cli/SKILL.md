@@ -1,6 +1,7 @@
 ---
 name: promql-cli
 description: 'Use when asked to execute or investigate a PromQL expression against a Prometheus server. Read-only HTTP queries only. No source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # PromQL CLI

@@ -1,6 +1,7 @@
 ---
 name: release-landing-report
 description: 'Use when the user runs /release-landing-report to summarize landed changes and return a landing summary report. Not for tasks that require source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Release landing report

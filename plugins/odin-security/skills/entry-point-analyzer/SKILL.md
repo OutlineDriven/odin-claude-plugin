@@ -1,6 +1,7 @@
 ---
 name: entry-point-analyzer
 description: 'Use when mapping state-changing external entry points in a smart-contract codebase by access level, auditing access control, or invoking an entry-points command. Read-only. Not for remote mutation.'
+disable-model-invocation: true
 ---
 
 # Entry point analyzer

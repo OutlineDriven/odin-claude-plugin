@@ -1,6 +1,7 @@
 ---
 name: claude-settings-audit
 description: 'Use when setting up a project, auditing agent command permissions, or asking which read-only bash commands and domains to allow. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Agent command policy audit

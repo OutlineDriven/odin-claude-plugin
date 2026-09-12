@@ -1,6 +1,7 @@
 ---
 name: knowledge-refresh
 description: 'Use when a knowledge artifact needs review before sharing or execution. Not for source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Knowledge review

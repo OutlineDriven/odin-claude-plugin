@@ -1,6 +1,7 @@
 ---
 name: riscv-privileged
 description: 'Use when writing RISC-V M-mode or S-mode code: CSRs, trap handlers, PLIC and CLINT interrupts, OpenSBI payloads, Sv39 or Sv48 page tables, or QEMU virt boot. Not for user-mode asm: use assembly-riscv.'
+disable-model-invocation: true
 ---
 
 # RISC-V privileged architecture

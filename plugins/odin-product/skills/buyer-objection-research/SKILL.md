@@ -1,6 +1,7 @@
 ---
 name: buyer-objection-research
 description: 'Use when product copy needs buyer-objection evidence collected through approved, consented outreach. Not for unsolicited outreach or survey design.'
+disable-model-invocation: true
 ---
 
 # Buyer objection research

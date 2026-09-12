@@ -1,6 +1,7 @@
 ---
 name: new-space
 description: 'Use when a user starts a new work session and asks to split human decisions from agent execution. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # New space

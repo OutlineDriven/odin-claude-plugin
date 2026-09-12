@@ -1,6 +1,7 @@
 ---
 name: goal-init
 description: 'Use when a durable effort needs an approved, checkable success predicate before work starts. Not for requirement-to-evidence ledgers. Never remote, credential, publish, deploy, or irreversible.'
+disable-model-invocation: true
 ---
 
 # Goal init

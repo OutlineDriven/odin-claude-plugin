@@ -1,6 +1,7 @@
 ---
 name: ax-audit
 description: 'Use when asked to audit an agent or AI feature for agentic-experience quality (AX review, agent-native critique, trust question). Not for source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # AX audit

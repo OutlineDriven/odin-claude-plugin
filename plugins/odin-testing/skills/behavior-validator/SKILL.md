@@ -1,6 +1,7 @@
 ---
 name: behavior-validator
 description: 'Use when asked to validate a web app, CLI, API, or generated artifact against a source-blind behavior contract. Not for source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Behavior validator

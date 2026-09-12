@@ -1,6 +1,7 @@
 ---
 name: prepare-repository-for-public-release
 description: 'Use when asked to prepare a repository for public launch or open source it. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Prepare repository for public release

@@ -1,6 +1,7 @@
 ---
 name: ninja
 description: 'Use when diagnosing Ninja build failures, tuning parallelism, interpreting verbose output, or working with build.ninja files as a CMake-generated low-level build executor.'
+disable-model-invocation: true
 ---
 
 # Ninja

@@ -1,6 +1,7 @@
 ---
 name: training-report
 description: 'Use when a trainer wants a training session or workshop documented as a compte rendu with a final .docx. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Training report

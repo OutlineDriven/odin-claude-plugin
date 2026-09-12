@@ -1,6 +1,7 @@
 ---
 name: multi-agent-tournament-scorecard
 description: 'Use when agent strategies need a reproducible finite tournament under a frozen evaluation protocol. Not for open-ended or infinite matchups: use a continuous benchmark.'
+disable-model-invocation: true
 ---
 
 # Multi-agent tournament scorecard

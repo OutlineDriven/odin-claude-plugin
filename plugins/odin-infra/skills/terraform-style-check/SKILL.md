@@ -1,6 +1,7 @@
 ---
 name: terraform-style-check
 description: 'Use when writing, reviewing, or generating Terraform HCL that must pass fmt and validate. Not for module authoring, state operations, `terraform apply`, or remote state.'
+disable-model-invocation: true
 ---
 
 # Terraform style check

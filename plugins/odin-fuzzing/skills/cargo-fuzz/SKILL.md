@@ -1,6 +1,7 @@
 ---
 name: cargo-fuzz
 description: 'Use when initializing, running, measuring coverage, or triaging a cargo-fuzz target in a Rust crate. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # cargo-fuzz

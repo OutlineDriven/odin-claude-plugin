@@ -1,6 +1,7 @@
 ---
 name: burpsuite-project-parser
 description: 'Use when asked to analyze a Burp Suite .burp project for audit items, request/response metadata, or captured traffic. Modes: parsed (default) and stream. Not for source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Burp Suite project parser

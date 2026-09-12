@@ -1,6 +1,7 @@
 ---
 name: validate-changes-match-specs
 description: 'Use when asked to compare implementation against repository specs, report mismatches, resolve by user decision, or check PR-review commitments. Not for general fact-checking: use verify-both-ways.'
+disable-model-invocation: true
 ---
 
 # Validate changes match specs

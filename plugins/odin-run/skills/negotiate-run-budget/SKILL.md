@@ -1,6 +1,7 @@
 ---
 name: negotiate-run-budget
 description: 'Use when a high-priority run reaches at least 90% of its budget and requests an extension. Never self-grants. Not for low-priority runs: let those exhaust silently.'
+disable-model-invocation: true
 ---
 
 # Negotiate run budget

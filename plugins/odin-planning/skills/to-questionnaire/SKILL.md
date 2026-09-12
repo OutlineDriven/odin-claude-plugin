@@ -1,6 +1,7 @@
 ---
 name: to-questionnaire
 description: 'Use when user wants an async questionnaire, a discovery questionnaire, or a knowledge gap needs answers outside the repo. Not for direct conversation: use askme. Not for agent research: use research.'
+disable-model-invocation: true
 ---
 
 # To questionnaire

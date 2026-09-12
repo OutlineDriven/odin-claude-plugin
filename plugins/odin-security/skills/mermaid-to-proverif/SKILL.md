@@ -1,6 +1,7 @@
 ---
 name: mermaid-to-proverif
 description: 'Use when a crypto Mermaid sequenceDiagram needs a ProVerif model for secrecy, authentication, replay, or forward-secrecy checks. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Mermaid to ProVerif

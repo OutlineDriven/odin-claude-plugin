@@ -1,6 +1,7 @@
 ---
 name: complexity-grill
 description: 'Use when a user wants to identify the true sources of complexity qualitatively before counting metrics. Not for source or remote mutation.'
+disable-model-invocation: true
 ---
 
 # Complexity grill

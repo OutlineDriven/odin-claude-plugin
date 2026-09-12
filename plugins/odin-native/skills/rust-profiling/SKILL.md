@@ -1,6 +1,7 @@
 ---
 name: rust-profiling
 description: 'Use when profiling Rust binaries with flamegraphs, cargo-bloat, cargo-llvm-lines, Criterion, perf, heaptrack, or DHAT.'
+disable-model-invocation: true
 ---
 
 # Rust profiling

@@ -1,6 +1,7 @@
 ---
 name: weekly-review
 description: 'Use when asked to summarize authored work over the last week or a named date range, commit range, or branch. Not for source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Weekly review

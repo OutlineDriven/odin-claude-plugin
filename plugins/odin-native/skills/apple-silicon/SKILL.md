@@ -1,6 +1,7 @@
 ---
 name: apple-silicon
 description: 'Use when tuning or profiling native code on Apple M-series Macs: unified memory, 16 KiB pages, Accelerate and Metal for matrix work, xctrace and leaks, Rosetta 2, or sysctl hardware queries.'
+disable-model-invocation: true
 ---
 
 # Apple Silicon

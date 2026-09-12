@@ -1,6 +1,7 @@
 ---
 name: presentation-creator
 description: 'Use when asked to create a presentation, pitch deck, or slides from a topic and audience, or to format supplied source items into a 16:9 HTML slide deck. Not for PowerPoint files.'
+disable-model-invocation: true
 ---
 
 # Presentation creator

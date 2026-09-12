@@ -1,6 +1,7 @@
 ---
 name: scrape
 description: 'Use when the user runs /scrape with a URL to extract page data and media through a browser and save assets with a manifest locally. Read-only. Not for any mutating page action.'
+disable-model-invocation: true
 ---
 
 # Scrape

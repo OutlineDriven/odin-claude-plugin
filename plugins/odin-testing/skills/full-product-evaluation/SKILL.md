@@ -1,6 +1,7 @@
 ---
 name: full-product-evaluation
 description: 'Use when a complete product needs production-like acceptance evidence against documented acceptance criteria. Not for single-component evaluation or evaluation without documented criteria.'
+disable-model-invocation: true
 ---
 
 # Full-product evaluation

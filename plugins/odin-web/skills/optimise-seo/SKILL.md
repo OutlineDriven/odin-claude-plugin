@@ -1,6 +1,7 @@
 ---
 name: optimise-seo
 description: 'Use when asked to make a Next.js App Router app crawlable, indexable, and search-optimized for sitemaps, robots, canonicals, and Core Web Vitals. Not for security headers or remote mutations.'
+disable-model-invocation: true
 ---
 
 # Optimise SEO

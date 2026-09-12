@@ -1,6 +1,7 @@
 ---
 name: eslint-to-biome-migration
 description: 'Use when migrating a JavaScript or TypeScript project from ESLint, Prettier, Standard, or mixed legacy lint configuration to Biome 2.5.'
+disable-model-invocation: true
 ---
 
 # ESLint to Biome migration

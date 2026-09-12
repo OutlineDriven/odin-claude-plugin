@@ -1,6 +1,7 @@
 ---
 name: culture-burnout-detection
 description: 'Use when Survey and Job Culture Index profiles need analysis for stress, burnout, disengagement, or flight-risk signals. Not for clinical diagnosis: use a qualified clinician.'
+disable-model-invocation: true
 ---
 
 # Culture burnout detection

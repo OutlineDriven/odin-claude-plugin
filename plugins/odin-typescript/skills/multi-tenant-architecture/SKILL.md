@@ -1,6 +1,7 @@
 ---
 name: multi-tenant-architecture
 description: 'Use when a request concerns multi-tenant scaffolding, tenant isolation, domain wiring, or SaaS architecture on Cloudflare or Vercel. Not for single-tenant apps: use scaffold-nextjs or scaffold-cli.'
+disable-model-invocation: true
 ---
 
 # Multi-tenant architecture

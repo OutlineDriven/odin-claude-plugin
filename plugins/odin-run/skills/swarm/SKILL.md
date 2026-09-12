@@ -1,6 +1,7 @@
 ---
 name: swarm
 description: 'Use when asked to run partitioned parallel coverage or races across isolated workers. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Swarm

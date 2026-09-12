@@ -1,6 +1,7 @@
 ---
 name: copywriting-tone-of-voice-creator
 description: 'Use when asked to create, refresh, or port a brand tone of voice guide (TONE.md) or measurable prose style rules (PROSE.md). Not for general copywriting: use copywriting.'
+disable-model-invocation: true
 ---
 
 # Copywriting tone of voice creator

@@ -1,6 +1,7 @@
 ---
 name: history-notes
 description: 'Use when the user says remember this or settles one durable fact. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # History note capture

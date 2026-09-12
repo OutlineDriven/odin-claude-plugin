@@ -1,6 +1,7 @@
 ---
 name: substack-ghostwriting
 description: 'Use when asked to ghostwrite Substack newsletters and web posts from structured intake. Not for tasks that require source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Substack ghostwriting

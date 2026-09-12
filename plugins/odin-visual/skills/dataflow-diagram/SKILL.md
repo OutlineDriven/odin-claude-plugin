@@ -1,6 +1,7 @@
 ---
 name: dataflow-diagram
 description: 'Use when asked to visualize data movement, ETL or ELT, lineage, transformations, custody, governance, stores, sources, or consumers.'
+disable-model-invocation: true
 ---
 
 # Dataflow diagram

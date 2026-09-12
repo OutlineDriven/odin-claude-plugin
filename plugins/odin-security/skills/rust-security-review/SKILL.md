@@ -1,6 +1,7 @@
 ---
 name: rust-security-review
 description: 'Use when asked for a Rust security or correctness audit of a crate, service, or library with unsafe, FFI, concurrency, async, or untrusted-input code. Not for general review: use security-review.'
+disable-model-invocation: true
 ---
 
 # Rust security review

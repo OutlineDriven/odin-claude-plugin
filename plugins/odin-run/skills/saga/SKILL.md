@@ -1,6 +1,7 @@
 ---
 name: saga
 description: 'Use when a user runs saga or asks to autonomously build a sizable feature. Not for executing a given plan: use subagent-driven.'
+disable-model-invocation: true
 ---
 
 # Saga

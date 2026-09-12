@@ -1,6 +1,7 @@
 ---
 name: static-analysis
 description: 'Use when hardening C/C++ code quality with clang-tidy, cppcheck, or scan-build, interpreting check categories, suppressing false positives, integrating into CI, or working with compile_commands.json.'
+disable-model-invocation: true
 ---
 
 # Static analysis

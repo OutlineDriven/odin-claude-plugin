@@ -1,6 +1,7 @@
 ---
 name: genealogical-proof
 description: 'Use when a genealogical identity or relationship needs correlation, conflict analysis, and negative-search proof. Not for non-genealogical identity proof.'
+disable-model-invocation: true
 ---
 
 # Genealogical proof

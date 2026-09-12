@@ -1,6 +1,7 @@
 ---
 name: test-suite-acceleration
 description: 'Use when a test suite is too slow and needs acceleration without weakening behavior or coverage, or CI parallelization must fix serial execution. Not for deleting tests: use tests-purge-unneeded.'
+disable-model-invocation: true
 ---
 
 # Test suite acceleration

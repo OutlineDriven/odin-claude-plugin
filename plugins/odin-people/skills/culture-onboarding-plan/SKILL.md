@@ -1,6 +1,7 @@
 ---
 name: culture-onboarding-plan
 description: 'Use when a signed new hire''s Culture Index profile and team profiles need a first-90-days plan. Not for manager coaching: use culture-manager-coaching.'
+disable-model-invocation: true
 ---
 
 # Culture onboarding plan

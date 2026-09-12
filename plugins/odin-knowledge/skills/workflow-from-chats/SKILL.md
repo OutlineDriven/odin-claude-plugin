@@ -1,6 +1,7 @@
 ---
 name: workflow-from-chats
 description: 'Use when a user asks to mine recent chats for workflow preferences. Don''t use for tasks that require source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Workflow from chats

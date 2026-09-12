@@ -1,6 +1,7 @@
 ---
 name: leave-only-first-principle
 description: 'Use when asked to prune a design or codebase until only primitives remain, producing a first-principles map. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Leave only first principle

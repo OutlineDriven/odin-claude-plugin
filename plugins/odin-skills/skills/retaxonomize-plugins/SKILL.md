@@ -1,6 +1,7 @@
 ---
 name: retaxonomize-plugins
 description: 'Use when skills must move between plugins, or plugins be created, merged, or retired. Not for reordering a listing, use reorder. Not for retiring a code path, use deprecate-and-migrate.'
+disable-model-invocation: true
 ---
 
 # Retaxonomize plugins

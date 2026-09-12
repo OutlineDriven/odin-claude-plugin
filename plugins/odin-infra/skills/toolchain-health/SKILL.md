@@ -1,6 +1,7 @@
 ---
 name: toolchain-health
 description: 'Use when the user runs /toolchain-health and wants a trustworthy green/yellow/red verdict on the installed toolchain with ranked repairs. Not for tasks that require source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Toolchain health

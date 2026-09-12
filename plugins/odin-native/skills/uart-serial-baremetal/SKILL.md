@@ -1,6 +1,7 @@
 ---
 name: uart-serial-baremetal
 description: 'Use when configuring UART baud rate/BRR, polling or IRQ-driven TX/RX, serial printf retargeting, USART interrupts, or UART with DMA on bare-metal MCUs. Not for the DMA stream: use dma-baremetal.'
+disable-model-invocation: true
 ---
 
 # UART serial on bare metal

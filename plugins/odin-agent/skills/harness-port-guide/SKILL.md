@@ -1,6 +1,7 @@
 ---
 name: harness-port-guide
 description: 'Use when the user asks to make the skills framework work in a new harness, IDE, or CLI. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Harness port guide

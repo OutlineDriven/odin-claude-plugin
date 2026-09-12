@@ -1,6 +1,7 @@
 ---
 name: pr-walkthrough
 description: 'Use when a user asks for a zoomable PR map or graph-canvas orientation. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # PR walkthrough

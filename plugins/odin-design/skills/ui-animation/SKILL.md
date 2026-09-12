@@ -1,6 +1,7 @@
 ---
 name: ui-animation
 description: 'Use when asked to build spring, easing, gesture, and choreographed animations with correct physics and reduced-motion support. Not for auditing existing motion or finding animation opportunities.'
+disable-model-invocation: true
 ---
 
 # UI animation

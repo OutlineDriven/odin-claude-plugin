@@ -1,6 +1,7 @@
 ---
 name: generalize
 description: 'Use when asked to derive the general rule a request carries as examples instead of a stated rule, then bound it. Not for ambiguity in a stated request: use askme. Read-only.'
+disable-model-invocation: true
 ---
 
 # Generalize from cases

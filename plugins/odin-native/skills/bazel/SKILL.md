@@ -1,6 +1,7 @@
 ---
 name: bazel
 description: 'Use when writing Bazel BUILD files with cc_library or cc_binary rules, Bzlmod dependencies, toolchain registration, remote execution, sandbox debugging, or bazel query and cquery graphs.'
+disable-model-invocation: true
 ---
 
 # Bazel

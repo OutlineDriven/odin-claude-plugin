@@ -1,6 +1,7 @@
 ---
 name: interrogate
 description: 'Use when asked to "interrogate" or run an adversarial multi-model review of a supplied code artifact. Not for tasks that require source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Interrogate

@@ -1,6 +1,7 @@
 ---
 name: seo-aeo-audit
 description: 'Use when asked to improve SEO, optimize for search, fix meta tags, add structured data, or improve AEO visibility. Not for tasks requiring source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # SEO / AEO audit

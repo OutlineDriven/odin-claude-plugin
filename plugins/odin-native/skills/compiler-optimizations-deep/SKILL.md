@@ -1,6 +1,7 @@
 ---
 name: compiler-optimizations-deep
 description: 'Use when -O3 leaves a hot loop scalar, spills appear in assembly, or a PGO or BOLT deployment is planned or stalls. Not for machine lowering: use code-generation-and-backends.'
+disable-model-invocation: true
 ---
 
 # Compiler optimizations, deep

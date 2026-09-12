@@ -1,6 +1,7 @@
 ---
 name: carbon-lang
 description: 'Use when evaluating Carbon for a C++ code base, running the carbon toolchain from a nightly or Bazel build, or comparing Carbon with staying on C++. Not for C++ modules: use cpp-modules.'
+disable-model-invocation: true
 ---
 
 # Carbon

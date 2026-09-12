@@ -1,6 +1,7 @@
 ---
 name: snippet-image-rendering
 description: 'Use when the user explicitly names snipgrapher and wants code rendered to a polished PNG, SVG, or WebP at an explicit local path. Not for other renderers, publishing, or remote actions.'
+disable-model-invocation: true
 ---
 
 # Snippet image rendering

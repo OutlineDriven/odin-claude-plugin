@@ -1,6 +1,7 @@
 ---
 name: os-dev-scratch
 description: 'Use when building a minimal x86-64 OS: boot protocols, long mode, page tables, IDT, PIC/APIC, serial and keyboard drivers, frame allocator, or context switching.'
+disable-model-invocation: true
 ---
 
 # OS development from scratch

@@ -1,6 +1,7 @@
 ---
 name: low-power-embedded
 description: 'Use when configuring MCU sleep/stop/standby, WFI, STM32 PWR, nRF sleep, clock gating, wake-up EXTI sources, or measuring current draw. Not for the wake ISR: use interrupts-and-exceptions-baremetal.'
+disable-model-invocation: true
 ---
 
 # Low-power embedded

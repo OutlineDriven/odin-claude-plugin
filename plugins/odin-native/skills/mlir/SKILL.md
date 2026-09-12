@@ -1,6 +1,7 @@
 ---
 name: mlir
 description: 'Use when defining an MLIR dialect with ODS, writing a lowering with ConversionPattern, running mlir-opt pipelines down to the LLVM dialect, or importing models via Torch-MLIR or IREE.'
+disable-model-invocation: true
 ---
 
 # MLIR

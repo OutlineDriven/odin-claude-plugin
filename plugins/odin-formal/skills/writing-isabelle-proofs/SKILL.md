@@ -1,6 +1,7 @@
 ---
 name: writing-isabelle-proofs
 description: 'Use when a proof needs Isabelle/HOL, its Sledgehammer automation, or an AFP session. Not for Lean 4: use writing-lean-proofs.'
+disable-model-invocation: true
 ---
 
 # Writing Isabelle proofs

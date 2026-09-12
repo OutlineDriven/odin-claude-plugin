@@ -1,6 +1,7 @@
 ---
 name: possible-worlds-qa
 description: 'Use when a product surface must be tested against extreme or hostile worlds. Not for design disputes: use possible-worlds. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Possible worlds QA

@@ -1,6 +1,7 @@
 ---
 name: zephyr
 description: 'Use when building a Zephyr app with west, picking a board target, editing prj.conf or a devicetree overlay, adding logging, running on native_sim, or using west debug. Not for FreeRTOS: use freertos.'
+disable-model-invocation: true
 ---
 
 # Zephyr RTOS

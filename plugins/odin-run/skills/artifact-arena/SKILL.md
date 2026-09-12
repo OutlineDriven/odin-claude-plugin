@@ -1,6 +1,7 @@
 ---
 name: artifact-arena
 description: 'Use when asked to run /artifact-arena to generate and judge competing artifact implementations. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Artifact arena

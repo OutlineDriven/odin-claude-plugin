@@ -1,6 +1,7 @@
 ---
 name: keep-why-maintenance
 description: 'Use when contradictions, revisit conditions, or duplicates appear in knowledge entries. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Keep why maintenance

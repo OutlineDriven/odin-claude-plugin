@@ -1,6 +1,7 @@
 ---
 name: corroborate-by-independent-reruns
 description: 'Use when a candidate patch or answer needs independent corroboration before it is trusted. Not for multi-stance investigation: use council.'
+disable-model-invocation: true
 ---
 
 # Corroborate by independent reruns

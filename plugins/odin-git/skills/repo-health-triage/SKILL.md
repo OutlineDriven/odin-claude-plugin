@@ -1,6 +1,7 @@
 ---
 name: repo-health-triage
 description: 'Use when a scheduled or watcher tick requests a repository-health pass. Not for source, label, merge, or close mutation.'
+disable-model-invocation: true
 ---
 
 # Repo health triage

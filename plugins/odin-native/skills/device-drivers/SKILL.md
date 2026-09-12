@@ -1,6 +1,7 @@
 ---
 name: device-drivers
 description: 'Use when writing or fixing a Linux device driver: platform/i2c/spi probe and remove, char device lifecycle, threaded IRQs, DMA mappings, regmap, runtime PM, or udev rules.'
+disable-model-invocation: true
 ---
 
 # Device drivers

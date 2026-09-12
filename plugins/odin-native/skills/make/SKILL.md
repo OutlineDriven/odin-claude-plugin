@@ -1,6 +1,7 @@
 ---
 name: make
 description: 'Use when writing or debugging Makefiles, understanding pattern rules and automatic dependency generation, managing CFLAGS/LDFLAGS, or diagnosing incremental build, phony targets, or recursive make.'
+disable-model-invocation: true
 ---
 
 # GNU Make

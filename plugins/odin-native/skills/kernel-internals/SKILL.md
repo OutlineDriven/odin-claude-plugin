@@ -1,6 +1,7 @@
 ---
 name: kernel-internals
 description: 'Use when diagnosing scheduler latency, kmalloc vs vmalloc, page cache, meminfo under pressure, or OOM victim choice, or when reading kernel/sched, mm, or fs source.'
+disable-model-invocation: true
 ---
 
 # Kernel internals

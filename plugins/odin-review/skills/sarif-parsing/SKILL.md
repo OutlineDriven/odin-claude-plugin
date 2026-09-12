@@ -1,6 +1,7 @@
 ---
 name: sarif-parsing
 description: 'Use when a user supplies existing SARIF to inspect, filter, aggregate, deduplicate, diff, convert, or gate findings. Not for running a scanner: use the relevant security-review skill.'
+disable-model-invocation: true
 ---
 
 # SARIF analysis

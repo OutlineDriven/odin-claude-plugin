@@ -1,6 +1,7 @@
 ---
 name: core-dumps
 description: 'Use when loading core files in GDB or LLDB, enabling core dump generation via ulimit or coredumpctl, mapping symbols with debuginfod, or extracting backtraces from production segfaults.'
+disable-model-invocation: true
 ---
 
 # Core dumps

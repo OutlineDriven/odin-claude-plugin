@@ -1,6 +1,7 @@
 ---
 name: writing-rocq-proofs
 description: 'Use when a proof needs Rocq (formerly Coq), including legacy Coq codebase maintenance and migration through the Coq to Rocq rename. Not for Lean 4: use writing-lean-proofs.'
+disable-model-invocation: true
 ---
 
 # Writing Rocq proofs

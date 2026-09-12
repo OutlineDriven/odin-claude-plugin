@@ -1,6 +1,7 @@
 ---
 name: post-merge-cleanup
 description: 'Use when a landed merge, release, or completed change needs its cleanup surface reconciled. Scans for stale TODOs, deprecations, unused flags, and doc gaps. Not for unrelated refactoring.'
+disable-model-invocation: true
 ---
 
 # Post-merge cleanup

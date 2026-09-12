@@ -1,6 +1,7 @@
 ---
 name: audit-loop-scaffold
 description: 'Use when loop scaffold files have drifted from their provenance-pinned templates. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Audit loop scaffold

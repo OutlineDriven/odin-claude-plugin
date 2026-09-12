@@ -1,6 +1,7 @@
 ---
 name: pricing-projection
 description: 'Use when projecting cost, estimating BYO cost or spend, or sizing a deal. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Pricing projection

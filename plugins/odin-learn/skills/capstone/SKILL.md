@@ -1,6 +1,7 @@
 ---
 name: capstone
 description: 'Use when the learner is ready to apply cleared concepts in a real project. Not for exercises or quizzes: use drill.'
+disable-model-invocation: true
 ---
 
 # Capstone

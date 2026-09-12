@@ -1,6 +1,7 @@
 ---
 name: ssotize-audit-fold
 description: 'Use when asked to find duplication, check consistency, establish or repair SSOT, consolidate facts, or when the user says "consolidate this" or "ssotize this". Not for remote or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # SSOTize audit fold

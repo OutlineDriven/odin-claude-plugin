@@ -1,6 +1,7 @@
 ---
 name: generate-my-taste
 description: 'Use when asked to generate a personal taste skill from local evidence. Not for applying an existing taste register: use the user-private spine skill.'
+disable-model-invocation: true
 ---
 
 # Generate my taste

@@ -1,6 +1,7 @@
 ---
 name: adc-dac-baremetal
 description: 'Use when configuring ADC sampling time, DMA-driven ADC, calibration, or DAC channel setup on bare-metal MCUs. Not for the DMA stream itself: use dma-baremetal.'
+disable-model-invocation: true
 ---
 
 # ADC and DAC on bare metal

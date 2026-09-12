@@ -1,6 +1,7 @@
 ---
 name: hip-rocm
 description: 'Use when writing HIP kernels with hipcc, porting CUDA code through HIPIFY, profiling with rocprofv3, debugging with rocgdb, or optimizing for MI300X. Not for NVIDIA-side kernels: use cuda.'
+disable-model-invocation: true
 ---
 
 # HIP and ROCm

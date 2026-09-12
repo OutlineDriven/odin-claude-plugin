@@ -1,6 +1,7 @@
 ---
 name: influence-and-negotiation
 description: 'Use when an agreement-seeking interaction arises, including mid-conversation moments the model detects.'
+disable-model-invocation: true
 ---
 
 # Influence and negotiation

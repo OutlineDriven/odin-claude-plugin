@@ -1,6 +1,7 @@
 ---
 name: include-what-you-use
 description: 'Use when reducing header bloat and compilation cascades with Include What You Use, interpreting IWYU reports, mapping files, forward declarations, or CMake integration.'
+disable-model-invocation: true
 ---
 
 # Include What You Use

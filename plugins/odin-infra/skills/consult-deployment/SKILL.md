@@ -1,6 +1,7 @@
 ---
 name: consult-deployment
 description: 'Use when the user asks to rank deployment platforms and stacks against their product with quantitative trade-offs. Not for source or remote mutation.'
+disable-model-invocation: true
 ---
 
 # Consult deployment

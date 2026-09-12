@@ -1,6 +1,7 @@
 ---
 name: prohibit-bad-habits
 description: 'Use when a user wants to define patterns the agent should not do. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Prohibit bad habits

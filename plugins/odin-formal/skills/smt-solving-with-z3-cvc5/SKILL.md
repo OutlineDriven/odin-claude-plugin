@@ -1,6 +1,7 @@
 ---
 name: smt-solving-with-z3-cvc5
 description: 'Use when a query needs direct SMT solving, an unsat core needs debugging, or another tool reports a solver timeout or unknown. Not for deciding what to prove: use proof-driven.'
+disable-model-invocation: true
 ---
 
 # SMT solving with Z3 and cvc5

@@ -1,6 +1,7 @@
 ---
 name: save-md
 description: 'Use when asked to save a URL, file, or pasted text as a .md file with frontmatter, without summarizing. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Save source as Markdown

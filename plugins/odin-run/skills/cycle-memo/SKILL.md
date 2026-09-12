@@ -1,6 +1,7 @@
 ---
 name: cycle-memo
 description: 'Use when a build, QA pass, demo, user complaint, or abandoned attempt leaves the next pass needing lessons rather than code. Not for changelog extraction. Not for session handoff: use handoff.'
+disable-model-invocation: true
 ---
 
 # Cycle memo

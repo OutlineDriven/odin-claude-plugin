@@ -1,6 +1,7 @@
 ---
 name: headed-browser-takeover
 description: 'Use when the user asks to open or take over a visible browser session by hand, for example to solve a CAPTCHA or authenticate. Not for headless scraping or unattended automation.'
+disable-model-invocation: true
 ---
 
 # Headed browser takeover

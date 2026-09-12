@@ -1,6 +1,7 @@
 ---
 name: keep-why-continuous-capture
 description: 'Use when a non-trivial change lands or is abandoned and its decision, rejected alternatives, and reason must be captured. Not for trivial or corrective changes: those belong in CHANGELOG.'
+disable-model-invocation: true
 ---
 
 # Keep why continuous capture
