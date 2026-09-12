@@ -1,3 +1,3 @@
 interface:
   display_name: "Security Review"
-  short_description: "Use when changes touch auth, parsing, dependencies, network, or pre-release, or a diff or baseline needs regression review."
+  short_description: "Use when changes touch auth, parsing, dependencies, network, or pre-release, or a diff or baseline needs regression review, or the user asks for a security review, vulnerability audit, or OWASP review of a supplied file, diff, or component, covering injection, XSS, auth, or crypto, with high-confidence findings only (mode: confirmed), or an API, configuration schema, cryptographic interface, authentication surface, or library design is audited for misuse resistance or footguns at a caller-named target (mode: edges, inline or delegated specialist)."
