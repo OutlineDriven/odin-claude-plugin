@@ -1,3 +1,0 @@
-interface:
-  display_name: "Fastopt"
-  short_description: "Use when optimizing suspected hot paths without waiting for benchmarks."
