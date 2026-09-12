@@ -1,6 +1,6 @@
 ---
 name: gate-file-completion
-description: 'Use when a task needs gate-file proof before a done claim. Also fires on "gate-file-completion", "depth tree", "gates", or "do not stop until it is done".'
+description: 'Use when a task needs gate-file proof before a done claim. Also fires on "gate-file-completion", "unlazy", "depth tree", "gates", or "do not stop until it is done".'
 ---
 
 # Gate file completion

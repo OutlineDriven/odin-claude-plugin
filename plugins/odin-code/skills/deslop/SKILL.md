@@ -1,6 +1,6 @@
 ---
 name: deslop
-description: 'Use when the user says deslop, debloat, tidy, simplify, clean a diff, or deslop branch diff, or remove dead code or config. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user says deslop, debloat, tidy, simplify, clean a diff, cleanup codebase, or deslop branch diff, or remove dead code or config. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Deslop
