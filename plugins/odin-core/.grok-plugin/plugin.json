@@ -1,6 +1,6 @@
 {
   "name": "odin-core",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "Core ODIN gates every session runs: intent, scope, verification, and hand-off checks.",
   "author": {
     "name": "OutlineDriven",

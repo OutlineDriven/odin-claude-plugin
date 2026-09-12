@@ -1,6 +1,7 @@
 ---
 name: analysis-artifacts
 description: 'Use when the user requests a deep dive, exploratory analysis, or data analysis on BigQuery. Not for credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Analysis artifacts

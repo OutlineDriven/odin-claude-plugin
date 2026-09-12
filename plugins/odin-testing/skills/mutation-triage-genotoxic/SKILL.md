@@ -1,6 +1,7 @@
 ---
 name: mutation-triage-genotoxic
 description: 'Use when a mutation campaign leaves surviving mutants needing triage. Classifies each as false-positive, missing-test, genotoxic, or removable. Not for setup: use mutation-campaign-configuration.'
+disable-model-invocation: true
 ---
 
 # Mutation triage genotoxic

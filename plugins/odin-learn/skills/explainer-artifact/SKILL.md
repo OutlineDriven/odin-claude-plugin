@@ -1,6 +1,7 @@
 ---
 name: explainer-artifact
 description: 'Use when asked to create an explainer document for a concept, diff, idea, or work recap. Drafts and verifies it in a scratch directory. Not for one-screen explanations: use explain-concept.'
+disable-model-invocation: true
 ---
 
 # Explainer artifact

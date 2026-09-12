@@ -1,6 +1,7 @@
 ---
 name: custom-allocators
 description: 'Use when implementing pool/slab/arena allocators, tuning jemalloc/mimalloc/tcmalloc, writing a Rust GlobalAlloc, or benchmarking allocator performance and fragmentation.'
+disable-model-invocation: true
 ---
 
 # Custom allocators

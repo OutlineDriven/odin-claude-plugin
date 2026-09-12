@@ -1,6 +1,7 @@
 ---
 name: weekly-synthesis
 description: 'Use when the user asks for a weekly synthesis, a weekly report, or a "what you need to know this week" digest from team reports. Not for the underlying reports or ad-hoc summaries.'
+disable-model-invocation: true
 ---
 
 # Weekly synthesis

@@ -1,6 +1,7 @@
 ---
 name: browser-qa
 description: 'Use when the user runs /browser-qa for report-only QA results without entering a fix loop. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Browser qa

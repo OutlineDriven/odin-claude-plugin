@@ -1,6 +1,7 @@
 ---
 name: thumbnail-accuracy-scorecard
 description: 'Use when thumbnail concepts need real-size, accuracy-first scoring without misleading claims. Not for generating thumbnails or declaring winners that fail the accuracy rubric.'
+disable-model-invocation: true
 ---
 
 # Thumbnail accuracy scorecard

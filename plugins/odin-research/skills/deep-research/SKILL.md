@@ -1,6 +1,7 @@
 ---
 name: deep-research
 description: 'Use when the user asks to research a topic and produce a thorough sourced report. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Deep research

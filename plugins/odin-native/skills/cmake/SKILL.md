@@ -1,6 +1,7 @@
 ---
 name: cmake
 description: 'Use when writing CMakeLists.txt, out-of-source builds, target_link_libraries, target properties, find_package/FetchContent, toolchain files, CPack, CMake presets, or cmake configure errors.'
+disable-model-invocation: true
 ---
 
 # CMake

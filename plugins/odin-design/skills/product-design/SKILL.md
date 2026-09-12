@@ -1,6 +1,7 @@
 ---
 name: product-design
 description: 'Use when deciding what an interface should do before UI is built or audited: consequences, action scope, reachable states, naming, and accessibility. Not for visual implementation: use prototype.'
+disable-model-invocation: true
 ---
 
 # Product design

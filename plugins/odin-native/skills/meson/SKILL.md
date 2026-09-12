@@ -1,6 +1,7 @@
 ---
 name: meson
 description: 'Use when setting up a Meson project, meson setup/compile/test, wrap dependencies, cross-file cross-compiling, meson.build, or migrating from CMake/Autotools to Meson.'
+disable-model-invocation: true
 ---
 
 # Meson

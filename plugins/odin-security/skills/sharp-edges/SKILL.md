@@ -1,6 +1,7 @@
 ---
 name: sharp-edges
 description: 'Use when asked to audit a code surface for misuse resistance or security edge cases, including delegated specialist analysis with exploitability validation (mode: specialist).'
+disable-model-invocation: true
 ---
 
 # Sharp edges

@@ -1,6 +1,7 @@
 ---
 name: typing-exclusion-worker
 description: 'Use when removing modules from pyproject mypy exclusions or running a typing-debt worker batch. Not for cross-team or out-of-scope typing work.'
+disable-model-invocation: true
 ---
 
 # Typing exclusion worker

@@ -1,6 +1,7 @@
 ---
 name: brand-authority
 description: 'Use when the user asks for branded or style-governed output. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Brand authority

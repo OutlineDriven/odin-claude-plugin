@@ -1,6 +1,7 @@
 ---
 name: open-source-readiness-audit
 description: 'Use when the user asks whether a repository is ready for public release or wants a gap assessment. Not for choosing or applying a license: use open-source-license-selection.'
+disable-model-invocation: true
 ---
 
 # Open source readiness audit

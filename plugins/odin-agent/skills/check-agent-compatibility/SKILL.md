@@ -1,6 +1,7 @@
 ---
 name: check-agent-compatibility
 description: 'Use when a human explicitly asks for a full repository agent-compatibility pass returning a scored report with prioritized fixes. Not for tasks that require source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Check agent compatibility

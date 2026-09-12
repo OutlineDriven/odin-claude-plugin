@@ -1,6 +1,7 @@
 ---
 name: entropy-assisted-planning
 description: 'Use when the user explicitly requests a Tarot draw or casually delegates an ambiguous choice among multiple valid approaches.'
+disable-model-invocation: true
 ---
 
 # Entropy assisted planning

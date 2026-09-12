@@ -1,6 +1,7 @@
 ---
 name: keep-why-retrospective
 description: 'Use when an existing repository needs its unexplained rationale recovered into topic files. Don''t use for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Keep why retrospective

@@ -1,6 +1,7 @@
 ---
 name: backlog
 description: 'Use when asked to park an undecided idea without representing it as decided or active work. Not for decided or active work: use the project task system.'
+disable-model-invocation: true
 ---
 
 # Backlog

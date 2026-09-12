@@ -1,6 +1,7 @@
 ---
 name: dwarf-expert
 description: 'Use when inspecting, searching, verifying, or parsing DWARF debug info: DIEs, DW_TAG_/DW_AT_ entries, .debug_* sections, line tables, or llvm-dwarfdump/readelf output.'
+disable-model-invocation: true
 ---
 
 # DWARF expert

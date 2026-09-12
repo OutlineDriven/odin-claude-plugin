@@ -1,6 +1,7 @@
 ---
 name: oss-fuzz
 description: 'Use when enrolling a project in OSS-Fuzz, running its helper workflow locally, or reproducing an OSS-Fuzz report. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # OSS-Fuzz

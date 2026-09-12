@@ -1,6 +1,7 @@
 ---
 name: sequence-diagram
 description: 'Use when a user asks to visualize a time-ordered interaction. Authors a typed sequence JSON spec and a self-contained interactive HTML artifact named by the user. Not for static architecture diagrams.'
+disable-model-invocation: true
 ---
 
 # Sequence diagram

@@ -1,6 +1,7 @@
 ---
 name: web-accessibility-audit
 description: 'Use when the user requests an accessibility audit, a11y check, or WCAG compliance review. Don''t use for tasks that require source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Web accessibility audit

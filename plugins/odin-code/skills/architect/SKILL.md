@@ -1,6 +1,6 @@
 ---
 name: architect
-description: 'Use when non-trivial code needs a design, architecture needs improving, or one module needs targeted interface narrowing, seams, or testability. Not for diagrams, deploy, or irreversible changes.'
+description: 'Use when non-trivial code needs a design, codebase design or architecture needs improving, or one module needs targeted interface narrowing, seams, or testability. Not for diagrams, deploy, or irreversible changes.'
 ---
 
 # Architect

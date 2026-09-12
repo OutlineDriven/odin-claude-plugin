@@ -1,6 +1,7 @@
 ---
 name: grill-with-docs
 description: 'Use when a repository decision needs an interview plus durable terminology and decision records. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Grill with docs

@@ -1,6 +1,7 @@
 ---
 name: nodejs-stream-pipeline
 description: 'Use when asked to build Node.js stream ETL pipelines for large-file or continuous ingestion without exceeding heap memory. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Node.js stream pipeline

@@ -1,6 +1,7 @@
 ---
 name: mcp-builder
 description: 'Use when asked to create an MCP server to integrate an API or service in Python or TypeScript. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # MCP builder

@@ -1,6 +1,6 @@
 ---
 name: writing-for-agents
-description: 'Use when authoring or restructuring an agent-consumed document, a SKILL.md or skill directory, or deciding a skill split-or-monolith disclosure question. Not for prose style: use unslop.'
+description: 'Use when authoring or restructuring an agent-consumed document, a SKILL.md or skill directory, writing skills, or deciding a skill split-or-monolith disclosure question. Not for prose style: use unslop.'
 ---
 
 # Writing for agents

@@ -1,6 +1,7 @@
 ---
 name: secure-npm-package
 description: 'Use when creating or hardening an npm release with Trusted or Staged Publishing, including E404 packages sequenced after first publish. Not for remote changes or publishing.'
+disable-model-invocation: true
 ---
 
 # Secure npm package

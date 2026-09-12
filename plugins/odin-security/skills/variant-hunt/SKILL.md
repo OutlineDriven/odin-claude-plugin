@@ -1,6 +1,7 @@
 ---
 name: variant-hunt
 description: 'Use when a confirmed root cause must be searched across a codebase, turned into a search rule, or seeded from graph neighbors. Not for building the program graph: use build-program-graph.'
+disable-model-invocation: true
 ---
 
 # Variant hunt

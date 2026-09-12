@@ -1,6 +1,7 @@
 ---
 name: workflow-diagram
 description: 'Use when a user asks to visualize a process, approval flow, runbook, CI/CD path, responsibility lanes, or tool calls. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Workflow diagram

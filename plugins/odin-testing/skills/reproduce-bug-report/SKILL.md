@@ -1,6 +1,7 @@
 ---
 name: reproduce-bug-report
 description: 'Use when a bug report or UI-visible defect exists. Reproduces it locally. Not for fixing the bug: use reproduce-and-fix-issues.'
+disable-model-invocation: true
 ---
 
 # Reproduce bug report

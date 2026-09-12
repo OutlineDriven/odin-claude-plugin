@@ -1,6 +1,7 @@
 ---
 name: visualise-widget
 description: 'Use when a user requests a comparison table, data record, metric card, stepper, or mockup widget, a numeric chart, or an interactive explainer. Not for source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Visualise widget

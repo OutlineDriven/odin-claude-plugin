@@ -1,6 +1,7 @@
 ---
 name: recorded-feedback-analysis
 description: 'Use when asked to analyze a screen recording, voice capture, or meeting notes artifact for product feedback. Not for credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Recorded feedback analysis

@@ -34,7 +34,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-code:<name>` i
 | Skill | Trigger |
 |---|---|
 | api-and-interface-design | Use when asked to design or change a public API, route, CLI flag, or module boundary. |
-| architect | Use when non-trivial code needs a design, architecture needs improving, or one module needs targeted interface narrowing, seams, or testability. |
+| architect | Use when non-trivial code needs a design, codebase design or architecture needs improving, or one module needs targeted interface narrowing, seams, or testability. |
 | ast-grep | Use when asked to run AST-based structural search, lint, or rewrite of code when regex is too fragile. |
 | breaking-driven | Use when bloated code needs clean re-derivation, or the user says "this module is bloated" or "break it and rebuild". |
 | clean-clean-cut | Use when asked to run /clean-clean-cut to cut accumulated records and residue. |
@@ -44,7 +44,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-code:<name>` i
 | deprecate-and-migrate | Use when asked to remove old code, migrate consumers, or decide whether to maintain or sunset a system. |
 | deps-upgrade | Use when dependency upgrades need batching for CVEs, a major release, forced compatibility, a scheduled or vulnerability-triggered sweep. |
 | design-it-twice | Use when asked to design a module interface, seam, or testable boundary. |
-| deslop | Use when the user says deslop, debloat, tidy, simplify, clean a diff, or deslop branch diff, or remove dead code or config. |
+| deslop | Use when the user says deslop, debloat, tidy, simplify, clean a diff, cleanup codebase, or deslop branch diff, or remove dead code or config. |
 | dimensional-analysis | Use when code mixes units, fixed-point precisions, scaling factors, rates, prices, shares, or conversions. |
 | document-api-endpoint | Use when reconciling an API endpoint's generated OpenAPI schema and declared response types with its actual runtime response. |
 | explore | Use when asked to explore the codebase to map structure, symbols, and dependencies. |

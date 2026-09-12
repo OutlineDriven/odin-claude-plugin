@@ -1,6 +1,7 @@
 ---
 name: model-retuning
 description: 'Use when asked to run /model-retuning to retune a skill corpus for a new model, measurement-first. Not for static audits: use deslop.'
+disable-model-invocation: true
 ---
 
 # Model retuning

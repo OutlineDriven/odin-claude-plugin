@@ -1,6 +1,7 @@
 ---
 name: history-health
 description: 'Use when a user asks to audit what recall fed agents. Not for source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # History usage audit

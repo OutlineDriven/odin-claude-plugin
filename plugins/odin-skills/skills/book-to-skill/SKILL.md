@@ -1,6 +1,7 @@
 ---
 name: book-to-skill
 description: 'Use when the user names one book, course, paper, or source document and asks to distill it into a reusable skill. Not for a folder of sources: use map-corpus.'
+disable-model-invocation: true
 ---
 
 # Book to skill

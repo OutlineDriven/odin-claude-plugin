@@ -1,6 +1,7 @@
 ---
 name: hare-lang
 description: 'Use when building or evaluating a Hare program: hare build, run, or test, tagged-union error handling, or calling C through bodyless fn declarations and -l. Not for Zig or C: use zig-cinterop or gcc.'
+disable-model-invocation: true
 ---
 
 # Hare

@@ -1,6 +1,7 @@
 ---
 name: humansense2system
 description: 'Use when the user wants to compile taste and "this feels wrong" signals into machine-consumable tokens, rules, forbidden combinations, and examples. Not for remote or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Humansense → system

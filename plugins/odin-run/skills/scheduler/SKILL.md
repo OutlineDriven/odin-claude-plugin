@@ -1,6 +1,7 @@
 ---
 name: scheduler
 description: 'Use when asked to set, list, pause, update, or delete a reminder or local task that fires at a confirmed time or interval. Not for destructive, remote, credential, publish, or deploy operations.'
+disable-model-invocation: true
 ---
 
 # Scheduler

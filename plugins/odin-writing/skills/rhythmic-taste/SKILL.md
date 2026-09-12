@@ -1,6 +1,7 @@
 ---
 name: rhythmic-taste
 description: 'Use when the user says "give this rhythm", "vary the structure", or "the sections all read the same". Not for judging an artifact''s overall taste: use taste.'
+disable-model-invocation: true
 ---
 
 # Rhythmic taste

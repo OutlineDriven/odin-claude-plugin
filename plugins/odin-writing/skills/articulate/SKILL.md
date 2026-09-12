@@ -1,6 +1,7 @@
 ---
 name: articulate
 description: 'Use when the user knows what they mean but cannot express it completely or clearly. Not for discovery, ideation, or style-only editing: use unslop for style.'
+disable-model-invocation: true
 ---
 
 # Articulate

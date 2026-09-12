@@ -1,6 +1,7 @@
 ---
 name: xcode-simulator-testing
 description: 'Use when asked to run /xcode-simulator-testing with a scheme name or current to build and launch an iOS app in a simulator. Not for project regeneration: use ios-build-fix.'
+disable-model-invocation: true
 ---
 
 # Xcode simulator test

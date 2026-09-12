@@ -1,6 +1,7 @@
 ---
 name: product-signal-pulse
 description: 'Use when invoking /product-signal-pulse with an optional lookback window to query configured product signals. Not for credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Product signal pulse

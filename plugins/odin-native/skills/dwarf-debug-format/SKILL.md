@@ -1,6 +1,7 @@
 ---
 name: dwarf-debug-format
 description: 'Use when inspecting .debug_info or .debug_line sections with dwarfdump or readelf, working with split-DWARF .dwo files, setting up debuginfod, or checking how LTO and stripping affect debug info.'
+disable-model-invocation: true
 ---
 
 # DWARF debug format

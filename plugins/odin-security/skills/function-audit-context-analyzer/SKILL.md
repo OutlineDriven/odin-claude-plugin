@@ -1,6 +1,7 @@
 ---
 name: function-audit-context-analyzer
 description: 'Use when asked for audit-context analysis of one function, or to build audit context across codebase before vulnerability hunting. Local write only. Not for vulnerability finding or severity rating.'
+disable-model-invocation: true
 ---
 
 # Function audit context analyzer

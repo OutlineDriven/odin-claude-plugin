@@ -1,6 +1,7 @@
 ---
 name: cross-run-playbook
 description: 'Use when a long agentic project needs each cycle to end in a learning memo and a keep/iterate/restart decision. Not for single-pass builds.'
+disable-model-invocation: true
 ---
 
 # Cross-run playbook

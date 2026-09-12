@@ -1,0 +1,3 @@
+interface:
+  display_name: "Schedule Dependency Waves"
+  short_description: "Use when work units carrying declared dependencies must be ordered into execution waves before any dispatch, including detecting a dependency cycle."

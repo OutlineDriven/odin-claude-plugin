@@ -1,6 +1,7 @@
 ---
 name: workflow-evidence-mining
 description: 'Use when authorized workflow history may contain a repeated process worth extracting and replay-testing. Produces a contradiction-tested workflow mined from authorized history.'
+disable-model-invocation: true
 ---
 
 # Workflow evidence mining

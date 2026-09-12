@@ -1,6 +1,7 @@
 ---
 name: propose-external-change
 description: 'Use when asked to change state in an external system: propose the write locally and halt at the human gate without executing. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Propose external change

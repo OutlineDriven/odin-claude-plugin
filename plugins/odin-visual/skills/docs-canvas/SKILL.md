@@ -1,6 +1,7 @@
 ---
 name: docs-canvas
 description: 'Use when asked to render documentation as an interactive, navigable HTML canvas. Not for writing or restructuring docs.'
+disable-model-invocation: true
 ---
 
 # Docs canvas

@@ -1,6 +1,7 @@
 ---
 name: review-speedread
 description: 'Use when a human asks for the change shape before reading a diff. Not for a full findings report: use review. For an interactive walk: use show-review.'
+disable-model-invocation: true
 ---
 
 # Review speedread

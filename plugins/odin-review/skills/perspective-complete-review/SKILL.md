@@ -1,6 +1,7 @@
 ---
 name: perspective-complete-review
 description: 'Use when one named review viewpoint must run fix cycles until a fresh reviewer finds nothing. Not for multi-viewpoint review or remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Perspective complete review

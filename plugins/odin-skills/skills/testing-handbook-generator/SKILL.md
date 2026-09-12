@@ -1,6 +1,7 @@
 ---
 name: testing-handbook-generator
 description: 'Use when the user asks to discover, generate, refresh, or validate skills from the Trail of Bits Testing Handbook or appsec.guide. Not for tasks that require source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Testing handbook skill generator

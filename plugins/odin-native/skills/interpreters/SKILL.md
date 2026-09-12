@@ -1,6 +1,7 @@
 ---
 name: interpreters
 description: 'Use when designing bytecode dispatch loops, choosing stack or register VM shapes, adding inline caches, or building a first JIT with mmap. Not for a language toolchain: use compiler-frontend.'
+disable-model-invocation: true
 ---
 
 # Interpreters and bytecode VMs

@@ -1,6 +1,7 @@
 ---
 name: press-release-writer
 description: 'Use when a user asks to write or announce a press release for any occasion or region, adapting to release type and media format. Read-only. All output in chat.'
+disable-model-invocation: true
 ---
 
 # Press release writer

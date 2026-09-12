@@ -1,6 +1,7 @@
 ---
 name: yara-rule-authoring
 description: 'Use when writing, reviewing, optimizing, validating, or migrating YARA or YARA-X malware-detection rules, including CRX or DEX rules. Not for network IDS or memory-forensics rules.'
+disable-model-invocation: true
 ---
 
 # YARA-X rule authoring

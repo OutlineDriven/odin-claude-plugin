@@ -16,7 +16,7 @@
 | api-and-interface-design | odin-code | Coding | Use when asked to design or change a public API, route, CLI flag, or module boundary. |
 | append-run-log | odin-run | Coding | Use when a completed agent run must be recorded as durable, queryable evidence. |
 | apple-silicon | odin-native | Coding | Use when tuning or profiling native code on Apple M-series Macs: unified memory, 16 KiB pages, Accelerate and Metal for matrix work, xctrace and leaks, Rosetta 2, or sysctl hardware queries. |
-| architect | odin-code | Coding | Use when non-trivial code needs a design, architecture needs improving, or one module needs targeted interface narrowing, seams, or testability. |
+| architect | odin-code | Coding | Use when non-trivial code needs a design, codebase design or architecture needs improving, or one module needs targeted interface narrowing, seams, or testability. |
 | architecture-diagram | odin-visual | Design | Use when the user asks to visualize an architecture as a self-contained HTML artifact, or compare two architecture snapshots. |
 | arm-sve | odin-native | Coding | Use when writing or porting AArch64 SIMD to SVE or SVE2: arm_sve.h intrinsics, predicates, vector-length-agnostic loops, auto-vectorization, or SVE registers in GDB. |
 | articulate | odin-writing | Writing | Use when the user knows what they mean but cannot express it completely or clearly. |
@@ -169,12 +169,13 @@
 | design-gate-brainstorming | odin-design | Design | Use when creative work is requested with no approved design, or a raw idea or repository must be developed into an approved design document. |
 | design-it-twice | odin-code | Coding | Use when asked to design a module interface, seam, or testable boundary. |
 | design-variants | odin-design | Design | Use when /design-variants generates distinct design directions and a gallery for selection. |
-| deslop | odin-code | Coding | Use when the user says deslop, debloat, tidy, simplify, clean a diff, or deslop branch diff, or remove dead code or config. |
+| deslop | odin-code | Coding | Use when the user says deslop, debloat, tidy, simplify, clean a diff, cleanup codebase, or deslop branch diff, or remove dead code or config. |
 | devcontainer-setup | odin-infra | Infrastructure | Use when adding a devcontainer or isolated dev environment to a repo that lacks one, for Python, Node/TypeScript, Rust, Go, or a combination. |
 | developer-experience-review | odin-product | Productivity | Use when dogfooding a developer-facing product or workflow to produce an evidence-backed DX scorecard. |
 | device-drivers | odin-native | Coding | Use when writing or fixing a Linux device driver: platform/i2c/spi probe and remove, char device lifecycle, threaded IRQs, DMA mappings, regmap, runtime PM, or udev rules. |
 | device-tree | odin-native | Coding | Use when writing DTS/DTSI, bindings, overlays, phandles, or debugging OF platform probe failures. |
 | diagnose-loop-health | odin-run | Coding | Use when a configured loop misbehaves, produces unexpected results, or its setup soundness is questioned. |
+| diagnose-wave-stall | odin-run | Coding | Use when a dispatched agent wave has stopped progressing: a result that never arrives or one that exists but stays unconsumed, and the blocking node must be named. |
 | diagramming-code | odin-visual | Design | Use when asked for a call graph, class hierarchy, dependency map, containment or complexity view, or data-flow view. |
 | diamond-task | odin-run | Coding | Use when one issue or PR is too large for a worker and partitions into disjoint write sets. |
 | diff-scoped-browser-qa | odin-web | Coding | Use when asked to run branch-diff browser QA against a PR or branch. |
@@ -183,6 +184,7 @@
 | django-access-review | odin-security | Security | Use when reviewing Django or DRF access control, IDOR, authorization, permissions, or tenant isolation. |
 | django-perf-review | odin-python | Coding | Use when reviewing Django performance, N+1 queries, or queryset behavior. |
 | dma-baremetal | odin-native | Coding | Use when configuring DMA channels, circular buffer mode, double buffering, memory-to-peripheral transfers, or DMA IRQ completion on bare-metal MCUs. |
+| do-it-now | odin-run | Coding | Use when the user says do it now, ship it now, no phases, or finish it now, or would defer work to phases, rollouts, follow-up PRs, or TODOs. |
 | doc-coauthoring | odin-writing | Writing | Use when drafting a doc, proposal, spec, RFC, design doc, decision doc, or PRD in chat. |
 | doc-review | odin-writing | Writing | Use when reviewing a prose plan, spec, PRD, requirements doc, design doc, or brainstorm, or invoking /doc-review. |
 | docs-and-adrs | odin-knowledge | Productivity | Use when making an architectural decision, changing a public API, shipping a feature, or recording a codebase term. |
@@ -231,7 +233,6 @@
 | figure-it-out | odin-run | Coding | Use when non-trivial work should run a matched playbook to verified real-surface completion, or a bespoke workflow when none fits. |
 | final-grain | odin-design | Design | Use when asked to push an already-working artifact to finished composition, texture, and feel. |
 | finish-branch-menu | odin-git | Coding | Use when implementation is complete, the test suite is green, and an integration decision is needed for a development branch or worktree. |
-| finish-it-now | odin-run | Coding | Use when the user says ship it now, no phases, or finish it now, or would defer work to phases, rollouts, follow-up PRs, or TODOs. |
 | firebase-apk-scanner | odin-security | Security | Use when an authorized user needs to assess mobile-backend exposure from compiled Android APKs, covering Firebase, custom HTTP backends, and cloud function endpoints. |
 | first-load-byte-reduction | odin-web | Coding | Use when a first screen needs lower transfer bytes without visual or behavioral change. |
 | fix-p0-issues | odin-git | Coding | Use when the user asks to fix P0s, address critical issues, or work on priorities from the weekly product briefing. |
@@ -240,18 +241,8 @@
 | frame-rate-stability | odin-design | Design | Use when a rendering path needs stable frame-time, CPU, GPU, and memory evidence against fixed targets. |
 | freertos | odin-native | Coding | Use when creating FreeRTOS tasks, queues, semaphores, or mutexes, catching stack overflow, writing FreeRTOSConfig.h, or debugging tasks over OpenOCD and GDB. |
 | fresh-reader-review | odin-writing | Writing | Use when asked to cold-read an artifact with fresh zero-context eyes and cut whatever a stranger cannot follow. |
-| from-breaking-perspective | odin-critique | Productivity | Use when a user wants an answer only from the breaking seat (stakeholders, dependencies, accounting, compatibility under destructive pressure). |
-| from-business-perspective | odin-critique | Productivity | Use when the user wants an answer only from the business seat: money, customers, timing. |
-| from-career-perspective | odin-critique | Productivity | Use when a user wants an answer only from the career seat: effects on human trajectories. |
-| from-codebase-perspective | odin-critique | Productivity | Use when asked to answer only from the codebase seat: what existing code tolerates or punishes. |
 | from-first-principle | odin-planning | Productivity | Use when a user wants to rebuild a design, organization, or API from primitives. |
-| from-human-perspective | odin-critique | Productivity | Use when a user wants an answer only from the human seat: what a person can love, trust, and tolerate. |
-| from-impact-perspective | odin-critique | Productivity | Use when asked to answer only from the impact seat: who and what actually moves. |
-| from-innovation-perspective | odin-critique | Productivity | Use when the user wants an answer only from the innovation seat. |
-| from-moat-perspective | odin-critique | Productivity | Use when the user wants an answer only from the moat seat: building, keeping, and thickening defensibility. |
-| from-rentseeking-perspective | odin-critique | Productivity | Use when the user wants an answer only from the rent-seeking seat: extraction without building. |
-| from-skeptic-perspective | odin-critique | Productivity | Use when the user wants an answer only from the skeptic seat: cold reasoning without project loyalty. |
-| from-stability-perspective | odin-critique | Productivity | Use when the user wants an answer only from the stability seat: preservation of the working machine. |
+| from-perspective | odin-critique | Productivity | Use when an answer is wanted from one named seat only: breaking, business, career, codebase, human, impact, innovation, moat, rent-seeking, skeptic, or stability. |
 | fromzero | odin-code | Coding | Use when replacing a greenfield attempt with a clean pad of verified requirements. |
 | frontend-design-deslop | odin-design | Design | Use when a user builds or styles a web frontend or asks to make it not look AI-generated. |
 | frontend-fidelity-rebuild | odin-design | Design | Use when an authorized reference surface needs a clean-room frontend reconstruction across static, motion, and responsive fidelity. |
@@ -537,6 +528,7 @@
 | scaffold-cli | odin-typescript | Coding | Use when asked to create a complete Node.js 24 TypeScript 7 command-line project. |
 | scaffold-exercises | odin-learn | Productivity | Use when a course needs numbered problem, solution, and explainer scaffolds. |
 | scaffold-nextjs | odin-typescript | Coding | Use when asked to scaffold a Next.js turborepo end to end and verify it. |
+| schedule-dependency-waves | odin-run | Coding | Use when work units carrying declared dependencies must be ordered into execution waves before any dispatch, including detecting a dependency cycle. |
 | scheduler | odin-run | Coding | Use when asked to set, list, pause, update, or delete a reminder or local task that fires at a confirmed time or interval. |
 | scrape | odin-research | Research | Use when the user runs /scrape with a URL to extract page data and media through a browser and save assets with a manifest locally. |
 | secure-npm-package | odin-release | Coding | Use when creating or hardening an npm release with Trusted or Staged Publishing, including E404 packages sequenced after first publish. |
@@ -685,7 +677,7 @@
 | write-product-spec | odin-product | Productivity | Use when a user asks for a product spec with invariants, a tech spec, or a PRD. |
 | writing-beats | odin-writing | Writing | Use when a grounded piece needs user-selected beat-by-beat assembly of verbatim beats. |
 | writing-char-drivers | odin-native | Coding | Use when writing a Linux char driver: file_operations, cdev, copy_to_user, ioctl commands, device memory mmap, or poll. |
-| writing-for-agents | odin-skills | Productivity | Use when authoring or restructuring an agent-consumed document, a SKILL.md or skill directory, or deciding a skill split-or-monolith disclosure question. |
+| writing-for-agents | odin-skills | Productivity | Use when authoring or restructuring an agent-consumed document, a SKILL.md or skill directory, writing skills, or deciding a skill split-or-monolith disclosure question. |
 | writing-fragments | odin-writing | Writing | Use when exploration needs heterogeneous noticings captured before structure. |
 | writing-isabelle-proofs | odin-formal | Coding | Use when a proof needs Isabelle/HOL, its Sledgehammer automation, or an AFP session. |
 | writing-lean-proofs | odin-formal | Coding | Use when asked to design, write, review, refactor, lint, or performance-diagnose Lean 4 proofs, libraries, or tactics. |

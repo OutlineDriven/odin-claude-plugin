@@ -1,6 +1,7 @@
 ---
 name: fail-recover
 description: 'Use when the user asks to restore service from a known failure with a prescribed recovery operation. Not for design-time failure definition or open-ended debugging.'
+disable-model-invocation: true
 ---
 
 # Fail recover

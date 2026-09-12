@@ -1,6 +1,7 @@
 ---
 name: readout
 description: 'Use when a user wants a readable, shareable HTML document of findings. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Readout

@@ -1,6 +1,7 @@
 ---
 name: rust-formal-verification
 description: 'Use when Rust code, especially unsafe or panic-critical paths, needs a Kani, Verus, or Creusot harness written, run, and its failure read. Not for choosing the proof policy: use proof-driven.'
+disable-model-invocation: true
 ---
 
 # Rust formal verification

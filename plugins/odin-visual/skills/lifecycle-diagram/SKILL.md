@@ -1,6 +1,7 @@
 ---
 name: lifecycle-diagram
 description: 'Use when states, waits, retries, decisions, transitions, and terminals need a lifecycle view. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Lifecycle diagram

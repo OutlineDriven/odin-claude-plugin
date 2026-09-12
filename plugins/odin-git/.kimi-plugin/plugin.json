@@ -1,6 +1,6 @@
 {
   "name": "odin-git",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "ODIN workflows for commits, branches, pull requests, review feedback, and issue tracking.",
   "keywords": [
     "odin",

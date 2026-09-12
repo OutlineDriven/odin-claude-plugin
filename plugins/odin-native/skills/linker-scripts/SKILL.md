@@ -1,6 +1,7 @@
 ---
 name: linker-scripts
 description: 'Use when writing a GNU ld script for a bare-metal target, placing code in a flash or RAM region, wiring .data and .bss startup, or fixing a region overflowed error. Not for LTO: use linkers-lto.'
+disable-model-invocation: true
 ---
 
 # Linker scripts

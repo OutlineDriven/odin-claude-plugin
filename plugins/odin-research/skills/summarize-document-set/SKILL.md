@@ -1,6 +1,7 @@
 ---
 name: summarize-document-set
 description: 'Use when the user asks to summarize a set of documents, identify themes and conflicts across multiple files, or synthesize internal docs. Not for single-document summaries or non-text sources.'
+disable-model-invocation: true
 ---
 
 # Summarize document set

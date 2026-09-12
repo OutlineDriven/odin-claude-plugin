@@ -1,6 +1,7 @@
 ---
 name: rdma-verbs
 description: 'Use when programming InfiniBand or RoCE with libibverbs: device setup, memory registration, queue pairs, send/recv or RDMA write, completion polling, or perftest benchmarks. Not for MPI: use mpi.'
+disable-model-invocation: true
 ---
 
 # RDMA verbs

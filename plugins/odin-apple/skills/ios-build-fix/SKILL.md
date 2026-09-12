@@ -5,7 +5,7 @@ description: 'Use when asked to run /ios-build-fix to fix a failing iOS build, r
 
 # iOS build fix
 
-## Mode A — Debug-bridge UI-fix
+## Mode A: Debug-bridge UI-fix
 
 ### Contract
 

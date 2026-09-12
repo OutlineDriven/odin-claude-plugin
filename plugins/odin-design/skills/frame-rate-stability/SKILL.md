@@ -1,6 +1,7 @@
 ---
 name: frame-rate-stability
 description: 'Use when a rendering path needs stable frame-time, CPU, GPU, and memory evidence against fixed targets. Not for one-shot profiling or visual quality review.'
+disable-model-invocation: true
 ---
 
 # Frame-rate stability

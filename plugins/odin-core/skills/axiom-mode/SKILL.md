@@ -1,6 +1,7 @@
 ---
 name: axiom-mode
 description: 'Use when the user requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form. Not for changing code or remote state.'
+disable-model-invocation: true
 ---
 
 # Axiom mode

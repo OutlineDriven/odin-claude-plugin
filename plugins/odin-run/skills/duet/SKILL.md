@@ -1,6 +1,7 @@
 ---
 name: duet
 description: 'Use when the user invokes /duet, says pair on this, or faces aesthetic, architectural, or irreversible decisions. Not for one-shot fork resolution: use decide.'
+disable-model-invocation: true
 ---
 
 # Duet

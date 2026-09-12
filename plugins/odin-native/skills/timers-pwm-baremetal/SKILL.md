@@ -1,6 +1,7 @@
 ---
 name: timers-pwm-baremetal
 description: 'Use when configuring general-purpose timers for PWM, input capture, periodic ticks, timer prescaler, PWM duty cycle, or SysTick without an RTOS. Not for the timer pin mux: use gpio-baremetal.'
+disable-model-invocation: true
 ---
 
 # Timers and PWM on bare metal

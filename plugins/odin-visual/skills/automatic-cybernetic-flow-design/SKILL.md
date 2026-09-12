@@ -1,6 +1,7 @@
 ---
 name: automatic-cybernetic-flow-design
 description: 'Use when the user wants a cybernetic flow design document for an interactive system. Not for implementing or deploying the system.'
+disable-model-invocation: true
 ---
 
 # Automatic cybernetic flow design

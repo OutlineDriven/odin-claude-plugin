@@ -1,6 +1,7 @@
 ---
 name: replace-unsafe-typescript-assertions
 description: 'Use when TypeScript tests use unsafe any or as assertions for partial or intentionally invalid fixtures. Not for production source or manifest edits. Test files only.'
+disable-model-invocation: true
 ---
 
 # Replace unsafe TypeScript assertions

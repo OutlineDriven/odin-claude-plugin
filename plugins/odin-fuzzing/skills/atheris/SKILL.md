@@ -1,6 +1,7 @@
 ---
 name: atheris
 description: 'Use when a user needs coverage-guided fuzzing for Python code or a Python native extension using Atheris. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Atheris

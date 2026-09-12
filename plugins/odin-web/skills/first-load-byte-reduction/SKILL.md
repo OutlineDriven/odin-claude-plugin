@@ -1,6 +1,7 @@
 ---
 name: first-load-byte-reduction
 description: 'Use when a first screen needs lower transfer bytes without visual or behavioral change. Not for visual redesign or behavioral changes.'
+disable-model-invocation: true
 ---
 
 # First-load byte reduction

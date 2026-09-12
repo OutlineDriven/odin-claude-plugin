@@ -1,6 +1,7 @@
 ---
 name: fixed-view-visual-benchmark
 description: 'Use when a visual needs repeatable fixed-view rendering and independent rubric scoring. Not for free-form visual review or subjective critique.'
+disable-model-invocation: true
 ---
 
 # Fixed-view visual benchmark

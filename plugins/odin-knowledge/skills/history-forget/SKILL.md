@@ -1,6 +1,7 @@
 ---
 name: history-forget
 description: 'Use when the user asks to remove a session or note from recall, or to unforget or list exclusions. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # History forget

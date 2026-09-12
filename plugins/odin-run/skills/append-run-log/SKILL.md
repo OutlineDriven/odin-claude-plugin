@@ -1,6 +1,7 @@
 ---
 name: append-run-log
 description: 'Use when a completed agent run must be recorded as durable, queryable evidence. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Append run log

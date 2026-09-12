@@ -1,6 +1,7 @@
 ---
 name: create-plugin-scaffold
 description: 'Use when asked to create a local agent-plugin directory tree or marketplace package. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Create plugin scaffold

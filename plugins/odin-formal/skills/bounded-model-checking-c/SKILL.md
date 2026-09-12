@@ -1,6 +1,7 @@
 ---
 name: bounded-model-checking-c
 description: 'Use when C or C++ code needs memory-safety or undefined-behavior guarantees proved with CBMC, or ACSL contracts checked with Frama-C Eva or WP. Not for choosing the proof policy: use proof-driven.'
+disable-model-invocation: true
 ---
 
 # Bounded model checking C

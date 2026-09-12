@@ -1,6 +1,7 @@
 ---
 name: binary-hardening
 description: 'Use when enabling RELRO, PIE, stack canaries, FORTIFY_SOURCE, CET, CFI, or seccomp filters, or checking a binary with checksec. Not for runtime sanitizer builds: use sanitizers.'
+disable-model-invocation: true
 ---
 
 # Binary hardening

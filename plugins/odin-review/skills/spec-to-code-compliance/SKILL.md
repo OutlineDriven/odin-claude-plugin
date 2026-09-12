@@ -1,6 +1,7 @@
 ---
 name: spec-to-code-compliance
 description: 'Use when implementation must be checked against an authoritative specification, or during PR review for spec drift against checked-in specs. Not for spec updates: use spec-driven-implementation.'
+disable-model-invocation: true
 ---
 
 # Spec to code compliance

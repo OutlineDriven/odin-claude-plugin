@@ -1,6 +1,7 @@
 ---
 name: blast-radius
 description: 'Use when asked to determine what a change could break before it ships. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Blast radius

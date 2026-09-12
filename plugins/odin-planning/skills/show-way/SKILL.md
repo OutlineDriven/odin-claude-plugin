@@ -1,6 +1,7 @@
 ---
 name: show-way
 description: 'Use when the user asks for a flattened view of roadmaps and next actions. Not for multi-session route planning: use wayfinder.'
+disable-model-invocation: true
 ---
 
 # Show way

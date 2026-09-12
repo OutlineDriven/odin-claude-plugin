@@ -1,6 +1,7 @@
 ---
 name: protocol-analysis
 description: 'Use when decoding I2C, SPI, or UART captures with sigrok or PulseView, checking bus traffic against a datasheet, or post-processing captures in Python. Not for bus drivers: use spi-i2c-baremetal.'
+disable-model-invocation: true
 ---
 
 # Protocol analysis (I2C / SPI / UART)

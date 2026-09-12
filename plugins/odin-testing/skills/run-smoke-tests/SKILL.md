@@ -1,6 +1,7 @@
 ---
 name: run-smoke-tests
 description: 'Use when asked to run smoke tests or verify a local build, applying only minimal unblocking fixes. Not for iterative bug fixing: use reproduce-and-fix-issues.'
+disable-model-invocation: true
 ---
 
 # Run smoke tests

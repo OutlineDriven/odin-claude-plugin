@@ -1,6 +1,7 @@
 ---
 name: node-internals-diagnosis
 description: 'Use when Node.js segfaults, addon crashes, leaks, event-loop anomalies, thread-pool saturation, V8 deoptimizations, or binding.gyp failures need diagnosis. Not for code edits or service restarts.'
+disable-model-invocation: true
 ---
 
 # Node internals diagnosis

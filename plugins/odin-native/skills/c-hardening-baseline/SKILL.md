@@ -1,6 +1,7 @@
 ---
 name: c-hardening-baseline
 description: 'Use when C code is written or audited and needs a pure-C baseline: standard, undefined behavior, integer and buffer safety, sanitizers, fuzzing, build flags. Not for C++: use modern-cpp-practices.'
+disable-model-invocation: true
 ---
 
 # C hardening baseline

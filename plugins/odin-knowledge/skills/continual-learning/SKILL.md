@@ -1,6 +1,7 @@
 ---
 name: continual-learning
 description: 'Use when asked to mine prior chats on a scheduled or watcher tick and maintain project memory. Not for remote, credential, publish, deploy, or irreversible mutation.'
+disable-model-invocation: true
 ---
 
 # Continual learning

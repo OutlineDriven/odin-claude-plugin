@@ -1,6 +1,7 @@
 ---
 name: nodejs-hanging-test-diagnosis
 description: 'Use when asked to diagnose Node.js tests that hang after the runner reports completion. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Node.js hanging test diagnosis

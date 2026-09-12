@@ -1,6 +1,7 @@
 ---
 name: debug-optimized-builds
 description: 'Use when debugging RelWithDebInfo or -O2 release builds, using -Og for debuggable optimization, split-DWARF, GDB scheduler-locking, reading inlined frames, or understanding "value optimized out".'
+disable-model-invocation: true
 ---
 
 # Debugging optimized builds

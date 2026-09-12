@@ -1,6 +1,7 @@
 ---
 name: review-plugin-submission
 description: 'Use when asked to review a plugin for marketplace readiness via a read-only audit of published quality gates. Not for reviewing a PR or code diff: use review.'
+disable-model-invocation: true
 ---
 
 # Review plugin submission

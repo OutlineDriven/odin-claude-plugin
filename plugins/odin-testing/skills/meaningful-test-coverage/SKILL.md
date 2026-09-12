@@ -1,6 +1,7 @@
 ---
 name: meaningful-test-coverage
 description: 'Use when a test surface needs behavior-guarding coverage raised to a configured target with mutation kill evidence. Not for line-coverage inflation without mutation proof.'
+disable-model-invocation: true
 ---
 
 # Meaningful test coverage

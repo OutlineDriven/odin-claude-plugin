@@ -1,6 +1,7 @@
 ---
 name: verification-skill
 description: 'Use when asked to create a project-local executable verification skill, or repair one whose commands, paths, or assertions drifted. Not for remote or deployed verification.'
+disable-model-invocation: true
 ---
 
 # Verification skill

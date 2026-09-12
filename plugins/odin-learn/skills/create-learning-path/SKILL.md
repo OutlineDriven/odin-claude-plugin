@@ -1,6 +1,7 @@
 ---
 name: create-learning-path
 description: 'Use when asked to create a multi-session learning plan. Returns a milestoned plan, practice, and review rubric. Don''t use for tasks that require source or remote-system changes.'
+disable-model-invocation: true
 ---
 
 # Create learning path

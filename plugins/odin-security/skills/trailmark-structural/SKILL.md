@@ -1,6 +1,7 @@
 ---
 name: trailmark-structural
 description: 'Use when a target needs a Trailmark summary of languages, entrypoints, dependencies, or a snapshot of hotspots, taint, blast radius, subgraphs. Not for graph queries: use build-program-graph.'
+disable-model-invocation: true
 ---
 
 # Trailmark structural analysis

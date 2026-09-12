@@ -1,6 +1,7 @@
 ---
 name: thin-repo-pulse
 description: 'Use when a scheduled or watcher tick fires and a lightweight pulse must capture current external state. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Thin repo pulse

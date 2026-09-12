@@ -1,6 +1,7 @@
 ---
 name: stm32-baremetal
 description: 'Use when scaffolding STM32 firmware without HAL, CMSIS-only clock/RCC config, STM32F4/H7 bring-up, or building with arm-none-eabi-gcc for Cortex-M. Not for the startup file: use baremetal-startup.'
+disable-model-invocation: true
 ---
 
 # STM32 bare metal with CMSIS only

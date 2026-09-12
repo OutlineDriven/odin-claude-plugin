@@ -1,6 +1,7 @@
 ---
 name: idea-sparkbox
 description: 'Use when the user asks to park ideas or inspiration for later. Not for code, backlog, or divergence-class cards, or remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # Idea sparkbox

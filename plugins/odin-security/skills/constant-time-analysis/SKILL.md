@@ -1,6 +1,7 @@
 ---
 name: constant-time-analysis
 description: 'Use when reviewing cryptographic code for timing side-channels, statically in compiled output or at runtime with statistical timing tests. Not for known-answer vectors: use wycheproof.'
+disable-model-invocation: true
 ---
 
 # Constant-time analysis

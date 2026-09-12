@@ -1,6 +1,7 @@
 ---
 name: evaluation-leakage-audit
 description: 'Use when reviewing an evaluation, benchmark, or scoring harness for leakage, or a validation result that looks self-confirming. Modes: leakage, self-audit. Not for one claim: use verify-both-ways.'
+disable-model-invocation: true
 ---
 
 # Evaluation leakage audit

@@ -1,6 +1,7 @@
 ---
 name: dbt-model-index
 description: 'Use when a human-curated dbt model index must guide BigQuery SQL for a warehouse question. Not for discovering undocumented models or executing warehouse changes.'
+disable-model-invocation: true
 ---
 
 # dbt model index

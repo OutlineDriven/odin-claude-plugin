@@ -1,6 +1,7 @@
 ---
 name: catchup
 description: 'Use when the human returns after a gap, cannot follow the project, asks what happened, or wants a visual HTML recap page. Not for onboarding: use onboard. Not for handoff: use handoff.'
+disable-model-invocation: true
 ---
 
 # Catchup

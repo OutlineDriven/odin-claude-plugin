@@ -1,6 +1,7 @@
 ---
 name: principles
 description: 'Use when a request names a working principle (subtract before you add, idempotent operations, never block on the human) or asks which principle applies. Not for running a repair: use strike-the-root.'
+disable-model-invocation: true
 ---
 
 # Principles

@@ -1,6 +1,7 @@
 ---
 name: production-go
 description: 'Use when writing, reviewing, debugging, or architecting Go code. Routes by project type and topic to conventions and reference chapters, then verifies with toolchain gates and unseen behavioral tests.'
+disable-model-invocation: true
 ---
 
 # Production Go

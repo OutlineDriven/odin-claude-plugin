@@ -1,6 +1,7 @@
 ---
 name: pr-review-canvas
 description: 'Use when asked to render a PR review as a Cursor Canvas artifact or a standalone HTML page served on localhost (mode: html), with risky hunks foregrounded.'
+disable-model-invocation: true
 ---
 
 # PR review canvas

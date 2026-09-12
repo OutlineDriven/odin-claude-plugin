@@ -1,6 +1,7 @@
 ---
 name: release-promotion
 description: 'Use when asked to draft launch or promotion copy for a shipped feature across channels via /release-promotion. Not for posting, publishing, scheduling, or committing, drafts only.'
+disable-model-invocation: true
 ---
 
 # Promotion copy

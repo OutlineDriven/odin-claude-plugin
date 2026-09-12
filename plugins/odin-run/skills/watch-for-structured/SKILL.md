@@ -1,6 +1,7 @@
 ---
 name: watch-for-structured
 description: 'Use when the user wants to classify a surface state and page an on-call API when triggered. Not for read-only anomaly watching without paging: use watch-for.'
+disable-model-invocation: true
 ---
 
 # Single-snapshot alert

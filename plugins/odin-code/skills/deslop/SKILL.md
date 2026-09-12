@@ -1,6 +1,6 @@
 ---
 name: deslop
-description: 'Use when the user says deslop, debloat, tidy, simplify, clean a diff, or deslop branch diff, or remove dead code or config. Not for remote, credential, publish, deploy, or irreversible changes.'
+description: 'Use when the user says deslop, debloat, tidy, simplify, clean a diff, cleanup codebase, or deslop branch diff, or remove dead code or config. Not for remote, credential, publish, deploy, or irreversible changes.'
 ---
 
 # Deslop
@@ -11,7 +11,7 @@ Four modes share one spine: bound scope, verify with the repo's own command, rol
 
 | Field | Bound contract |
 |---|---|
-| Trigger | The user says deslop, debloat, tidy, simplify, clean up this diff, deslop a branch diff, remove dead code, find placeholders or stubs, remove dead fields, redundant wrappers, or stale config, or the slop skill routes code findings here |
+| Trigger | The user says deslop, debloat, tidy, simplify, clean up this diff, cleanup codebase, deslop a branch diff, remove dead code, find placeholders or stubs, remove dead fields, redundant wrappers, or stale config, or the slop skill routes code findings here |
 | Authority | Reversible local: writes only production source files or prose artifacts (may run the repo verifier and `git restore` on regression); rollback is version control or undo. No remote mutation. |
 | Side effect | Local writes to production source files or prose artifacts; no edits to tests, fixtures, mocks, examples, generated, vendored, or lockfile/build artifacts |
 | Done | Mode-specific done predicate holds; verifier green or rollback confirmed |
@@ -28,6 +28,7 @@ Not for behavior changes, new abstractions, or refactors that introduce patterns
 | debloat, tighten this, too long | bloat | One padded prose artifact (document, skill, spec) |
 | tidy this up, simplify, clean up this diff, polish my changes, make this simpler | tidy | Code in the working tree |
 | dead field, redundant wrapper, stale config, duplicate state, speculative abstraction | tidy | Code already under edit |
+| cleanup codebase | tidy | Code already under edit |
 | deslop this branch diff, remove AI debris from my branch, clean up added lines only | diff | Added/modified lines in a branch diff |
 
 ## Shared spine

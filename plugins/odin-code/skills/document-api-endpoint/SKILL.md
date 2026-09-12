@@ -1,6 +1,7 @@
 ---
 name: document-api-endpoint
 description: 'Use when reconciling an API endpoint''s generated OpenAPI schema and declared response types with its actual runtime response. Not for general API documentation: use docs-and-adrs.'
+disable-model-invocation: true
 ---
 
 # Document and type an API endpoint

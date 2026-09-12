@@ -1,6 +1,7 @@
 ---
 name: libafl
 description: 'Use when a LibAFL fuzzer needs an executor, observer, feedback, mutator, scheduler, or objective composed around a target. Not for remote, credential, publish, deploy, or irreversible changes.'
+disable-model-invocation: true
 ---
 
 # LibAFL custom fuzzer composition
