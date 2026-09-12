@@ -16,8 +16,8 @@ description: 'Use when an answer is wanted from one named seat only: breaking, b
 
 ## Inputs
 
-- The subject to analyze — a question, claim, decision, design, change, system, or artifact (required). If it is absent, stop and ask; never invent a subject.
-- `seat` — required, one of the closed list: breaking, business, career, codebase, human, impact, innovation, moat, rent-seeking, skeptic, stability. If the request names a seat outside this list, stop and report which seat was requested; never substitute another.
+- The subject to analyze: a question, claim, decision, design, change, system, or artifact (required). If it is absent, stop and ask; never invent a subject.
+- `seat`: required, one of the closed list: breaking, business, career, codebase, human, impact, innovation, moat, rent-seeking, skeptic, stability. If the request names a seat outside this list, stop and report which seat was requested; never substitute another.
 - Seat-conditioned concerns, supplied with the seat and consumed by the shared procedure:
 
 | Seat | Analyze the subject as |
@@ -39,8 +39,8 @@ description: 'Use when an answer is wanted from one named seat only: breaking, b
 1. Take the subject and the named `seat`. Restate the subject in one line so the seat is unambiguous; for the skeptic seat, restate the claim as a paraphrase and confirm the target before answering. Done when: the subject and seat are stated and unambiguous.
 2. Adopt only the named seat and analyze the subject exclusively through that seat's concern set from the inputs table. Every claim in the answer must tie to a concern of that seat. Done when: the analysis is framed entirely through the named seat's concerns.
 3. Ground every claim in the evidence that seat admits: for the codebase seat, read the actual code and list tolerates and punishes findings with code evidence; for the impact seat, mark unverified impact as inference; for the skeptic seat, give the strongest available failure reason for each assumption, reach a conclusion or an insufficiency statement, and name the single strongest counterargument so the output is not one-sided; for every seat, state thin-evidence gaps rather than filling them, and omit a claim that cannot be grounded in this seat rather than borrowing another seat's reasoning. Done when: every claim is grounded or its gap is stated.
-4. Do not blend any other seat into the answer. If another seat is relevant, name it once as a separate lens to run independently — at most a one-line pointer at the end — never as content in the body. Comparison across seats happens only after each has produced its own independent output, outside this skill. Done when: no other seat's reasoning appears in the answer body.
-5. Emit the analysis as chat output, standing alone, with no recommendation and no cross-seat synthesis. If the named seat yields no independent answer for this subject — a question with no career dimension, nothing that actually moves, an innovation claim that cannot be grounded — state that explicitly rather than forcing an answer or borrowing another seat. Done when: the analysis is emitted, or the no-independent-answer statement is emitted.
+4. Do not blend any other seat into the answer. If another seat is relevant, name it once as a separate lens to run independently, at most a one-line pointer at the end, never as content in the body. Comparison across seats happens only after each has produced its own independent output, outside this skill. Done when: no other seat's reasoning appears in the answer body.
+5. Emit the analysis as chat output, standing alone, with no recommendation and no cross-seat synthesis. If the named seat yields no independent answer for this subject (a question with no career dimension, nothing that actually moves, an innovation claim that cannot be grounded), state that explicitly rather than forcing an answer or borrowing another seat. Done when: the analysis is emitted, or the no-independent-answer statement is emitted.
 
 ## Failure and recovery
 

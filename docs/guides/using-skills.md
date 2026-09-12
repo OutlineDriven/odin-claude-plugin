@@ -22,7 +22,7 @@ Several invocations in one message stack in the order you wrote them. This is th
 
 A skill can also load when your request matches its description trigger. Every description opens with a routing phrase such as `Use when`, and `scripts/check-skill-routes.mjs` rejects a description that states no trigger. When you phrase a request as the situation a skill names, that skill loads without an explicit invocation.
 
-The exception is the 334 skills whose frontmatter sets `disable-model-invocation: true`, such as `work`, `commit-push-current`, and `publish-branch`: these run only when you invoke them by name, so the model never starts a side-effecting workflow on a phrase match.
+The exception is the 333 skills whose frontmatter sets `disable-model-invocation: true`, such as `work`, `commit-push-current`, and `publish-branch`: these run only when you invoke them by name, so the model never starts a side-effecting workflow on a phrase match.
 
 ## Pass arguments
 

@@ -175,7 +175,7 @@
 | device-drivers | odin-native | Coding | Use when writing or fixing a Linux device driver: platform/i2c/spi probe and remove, char device lifecycle, threaded IRQs, DMA mappings, regmap, runtime PM, or udev rules. |
 | device-tree | odin-native | Coding | Use when writing DTS/DTSI, bindings, overlays, phandles, or debugging OF platform probe failures. |
 | diagnose-loop-health | odin-run | Coding | Use when a configured loop misbehaves, produces unexpected results, or its setup soundness is questioned. |
-| diagnose-wave-stall | odin-run | Coding | Use when a dispatched agent wave has stopped progressing — a result that never arrives or one that exists but stays unconsumed — and the blocking node must be named. |
+| diagnose-wave-stall | odin-run | Coding | Use when a dispatched agent wave has stopped progressing: a result that never arrives or one that exists but stays unconsumed, and the blocking node must be named. |
 | diagramming-code | odin-visual | Design | Use when asked for a call graph, class hierarchy, dependency map, containment or complexity view, or data-flow view. |
 | diamond-task | odin-run | Coding | Use when one issue or PR is too large for a worker and partitions into disjoint write sets. |
 | diff-scoped-browser-qa | odin-web | Coding | Use when asked to run branch-diff browser QA against a PR or branch. |
