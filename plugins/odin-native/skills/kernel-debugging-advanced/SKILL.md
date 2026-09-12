@@ -94,7 +94,7 @@ description: 'Use when tracing kernel functions with ftrace or trace-cmd, profil
    ```
 
    Where the distribution ships symbols as debug packages (`linux-image-*-dbg`) or via debuginfod, fetch the matching one. Done when: the backtrace names the faulting path and the state that led to it.
-8. Assemble the findings into one causal story: the traced function, the measured duration, the probe evidence, or the panic backtrace. Route deeper work: `ebpf` for BPF-based tracing alternatives, `writing-char-drivers` when the trace target is an ioctl path; keep kgdb guidance grounded in `Documentation/process/debugging/gdb-kernel-debugging-guide.rst` of the target kernel. Done when: the story answers the reported symptom with evidence from steps 1 to 7.
+8. Assemble the findings into one causal story: the traced function, the measured duration, the probe evidence, or the panic backtrace. Route deeper work: `ebpf` for BPF-based tracing alternatives, `device-drivers` when the trace target is an ioctl path; keep kgdb guidance grounded in `Documentation/process/debugging/gdb-kernel-debugging-guide.rst` of the target kernel. Done when: the story answers the reported symptom with evidence from steps 1 to 7.
 
 ## Failure and recovery
 

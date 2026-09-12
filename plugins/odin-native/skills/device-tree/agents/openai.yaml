@@ -1,3 +1,0 @@
-interface:
-  display_name: "Device Tree"
-  short_description: "Use when writing DTS/DTSI, bindings, overlays, phandles, or debugging OF platform probe failures."

@@ -1,6 +1,6 @@
 ---
 name: linux-kernel-modules
-description: 'Use when writing loadable kernel modules: Kbuild, module parameters, proc and sysfs entries, char devices, or ftrace debugging. Not for driver architecture: use writing-char-drivers.'
+description: 'Use when writing loadable kernel modules: Kbuild, module parameters, proc and sysfs entries, char devices, or ftrace debugging. Not for driver architecture: use device-drivers.'
 ---
 
 # Linux kernel modules
