@@ -1,7 +1,6 @@
 ---
 name: kernel-testing
 description: 'Use when writing KUnit tests, adding kselftest cases, fuzzing syscalls with syzkaller and kcov, running LTP, or wiring CI for a kernel patch.'
-disable-model-invocation: true
 ---
 
 # Kernel testing

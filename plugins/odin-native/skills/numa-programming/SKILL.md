@@ -1,7 +1,6 @@
 ---
 name: numa-programming
 description: 'Use when detecting NUMA topology, binding processes with numactl, using the libnuma API, building NUMA-aware data structures, or measuring remote memory access penalties.'
-disable-model-invocation: true
 ---
 
 # NUMA programming

@@ -1,7 +1,6 @@
 ---
 name: design-gate-brainstorming
 description: 'Use when creative work is requested with no approved design, or a raw idea or repository must be developed into an approved design document. Not for work with an approved design in context.'
-disable-model-invocation: true
 ---
 
 # Design gate brainstorming

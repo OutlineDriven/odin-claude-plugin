@@ -1,7 +1,6 @@
 ---
 name: hypervisor-internals
 description: 'Use when studying Intel VT-x or AMD-V internals: VMCS and VMCB, EPT and NPT, VM exit handling, APIC virtualization, or building a minimal type-1 hypervisor. Not for running VMs: use qemu-kvm.'
-disable-model-invocation: true
 ---
 
 # Hypervisor internals

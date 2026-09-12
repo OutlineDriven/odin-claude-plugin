@@ -1,7 +1,6 @@
 ---
 name: gate-proposed-change
 description: 'Use when asked to evaluate a proposed commit, merge, or auto-merge against a gate config. Not for landing PRs: use gate-and-merge. Read-only.'
-disable-model-invocation: true
 ---
 
 # Gate proposed change
