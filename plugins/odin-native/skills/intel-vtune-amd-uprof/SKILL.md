@@ -1,6 +1,6 @@
 ---
 name: intel-vtune-amd-uprof
-description: 'Use when profiling with Intel VTune or AMD uProf for hotspots, top-down pipeline stalls, memory-bound analysis, or roofline data. Not for raw perf stat counters: use hardware-counters.'
+description: 'Use when profiling with Intel VTune or AMD uProf for hotspots, top-down pipeline stalls, memory-bound analysis, or roofline data. Not for raw perf stat counters: use linux-perf.'
 disable-model-invocation: true
 ---
 

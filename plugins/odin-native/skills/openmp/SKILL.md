@@ -105,7 +105,7 @@ OpenMP adds shared-memory parallelism to C, C++, and Fortran through `#pragma om
 |---|---|---|
 | No speedup | Loop too small, or the parallel region is entered too often | Move the `parallel` outside the hot loop; add `if(n > threshold)` to the directive |
 | Wrong result | Race on a shared variable | `default(none)` to find it; then `reduction`, `atomic`, or `critical` |
-| Slower with more threads | False sharing or memory bandwidth ceiling | Pad per-thread data; check bandwidth with `hardware-counters` |
+| Slower with more threads | False sharing or memory bandwidth ceiling | Pad per-thread data; check bandwidth with `linux-perf` |
 | Threads migrate or share cores | No binding | `OMP_PROC_BIND=close OMP_PLACES=cores`; confirm with `OMP_DISPLAY_ENV=true` |
 | Offload silently runs on the host | Compiler lacks the offload target | `OMP_TARGET_OFFLOAD=MANDATORY` to make it fail loudly; install the offload compiler |
 | Nested regions oversubscribe | Inner regions spawn full teams | `OMP_MAX_ACTIVE_LEVELS=1`, or size inner teams with `num_threads` |
