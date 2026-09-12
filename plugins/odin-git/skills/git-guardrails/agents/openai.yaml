@@ -1,3 +1,3 @@
 interface:
   display_name: "Git Guardrails"
-  short_description: "Use when a repository needs a guard against force-push, forced reset, clean, branch deletion, working-tree discard, stash drop, reflog expire, or gc prune."
+  short_description: "Use when a repository needs Git safety controls: guard destructive commands, set up gitignore or fix gitignore when untracked files keep appearing, or install or repair a repository-local pre-commit hook from project gates, including package-manager-native commit-time checks."

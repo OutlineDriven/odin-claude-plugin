@@ -2,7 +2,7 @@
 
 ODIN workflows for native systems, toolchains, and performance.
 
-147 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
+138 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -43,12 +43,10 @@ Each row states when to reach for the skill. Invoke one as `/odin-native:<name>`
 | assembly-x86 | Use when reading GCC or Clang x86-64 assembly, writing inline asm, decoding AT&T syntax, or applying System V AMD64 register rules. |
 | baremetal-startup | Use when writing reset-to-main startup code, vector tables, VTOR, .data/.bss init, stack setup, startup.s, or crt0 for Cortex-M/RISC-V. |
 | bazel | Use when writing Bazel BUILD files with cc_library or cc_binary rules, Bzlmod dependencies, toolchain registration, remote execution, sandbox debugging, or bazel query and cquery graphs. |
-| binary-hardening | Use when enabling RELRO, PIE, stack canaries, FORTIFY_SOURCE, CET, CFI, or seccomp filters, or checking a binary with checksec. |
 | binutils | Use when building static archives with ar, stripping or converting binaries, mapping crash addresses with addr2line, or demangling C++ symbols. |
 | bootloaders-embedded | Use when writing a custom bootloader, jumping to application code, relocating VTOR, or implementing DFU/USB firmware update on Cortex-M. |
 | branch-prediction-and-speculation | Use when explaining branch predictors, mispredict penalties, speculative execution, Spectre or Meltdown mitigations, or branchless code. |
 | build-acceleration | Use when reducing C/C++ compilation times with ccache, sccache, distcc, unity builds, precompiled headers, split DWARF, IWYU, or link time reduction. |
-| bus-drivers-i2c-spi | Use when writing a Linux i2c_driver or spi_driver, doing bus register access, DMA-safe SPI transfers, or debugging -EREMOTEIO. |
 | c-hardening-baseline | Use when C code is written or audited and needs a pure-C baseline: standard, undefined behavior, integer and buffer safety, sanitizers, fuzzing, build flags. |
 | carbon-lang | Use when evaluating Carbon for a C++ code base, running the carbon toolchain from a nightly or Bazel build, or comparing Carbon with staying on C++. |
 | cargo-workflows | Use when managing Cargo workspaces, feature flags, build scripts, CI caching, dependency auditing, or Cargo.lock with Rust. |
@@ -72,18 +70,15 @@ Each row states when to reach for the skill. Invoke one as `/odin-native:<name>`
 | cuda-debugging | Use when debugging CUDA with cuda-gdb or Compute Sanitizer, reading GPU core dumps, using device printf, or triaging error codes 700, 701, 702, and 719. |
 | cuda-profiling | Use when profiling CUDA with Nsight Systems or Nsight Compute, reading roofline and occupancy metrics, or annotating phases with NVTX. |
 | custom-allocators | Use when implementing pool/slab/arena allocators, tuning jemalloc/mimalloc/tcmalloc, writing a Rust GlobalAlloc, or benchmarking allocator performance and fragmentation. |
-| datasheet-and-refmanual-reading | Use when extracting pinouts, electrical limits, register maps, clock trees, timing, or errata from MCU datasheets and reference manuals. |
 | debug-optimized-builds | Use when debugging RelWithDebInfo or -O2 release builds, using -Og for debuggable optimization, split-DWARF, GDB scheduler-locking, reading inlined frames, or understanding "value optimized out". |
-| device-drivers | Use when writing or fixing a Linux device driver: platform/i2c/spi probe and remove, char device lifecycle, threaded IRQs, DMA mappings, regmap, runtime PM, or udev rules. |
-| device-tree | Use when writing DTS/DTSI, bindings, overlays, phandles, or debugging OF platform probe failures. |
+| device-drivers | Use when writing or debugging Linux drivers: platform, I2C/SPI, device-tree, char-device, IRQ, DMA, regmap, PM, sysfs, udev, NACK, -EREMOTEIO, or probe failures. |
 | dma-baremetal | Use when configuring DMA channels, circular buffer mode, double buffering, memory-to-peripheral transfers, or DMA IRQ completion on bare-metal MCUs. |
 | dpdk | Use when initializing EAL, configuring PMD drivers and huge pages, using mbuf pools and rte_ring, setting up RSS, or validating a port with testpmd. |
 | dwarf-debug-format | Use when inspecting .debug_info or .debug_line sections with dwarfdump or readelf, working with split-DWARF .dwo files, setting up debuginfod, or checking how LTO and stripping affect debug info. |
 | dwarf-expert | Use when inspecting, searching, verifying, or parsing DWARF debug info: DIEs, DW_TAG_/DW_AT_ entries, .debug_* sections, line tables, or llvm-dwarfdump/readelf output. |
 | dynamic-linking | Use when debugging shared library load failures, setting RPATH or RUNPATH, applying soname versioning, writing dlopen plugins, or intercepting with LD_PRELOAD. |
-| ebpf | Use when writing eBPF programs with libbpf or bpftrace, attaching kprobes, tracepoints, or XDP hooks, triaging verifier errors, choosing maps, or porting with CO-RE. |
-| ebpf-rust | Use when writing eBPF programs in Rust with aya-ebpf and aya-log, declaring maps, sharing them with a tokio user-space loader, or debugging an Aya load failure. |
-| elf-inspection | Use when examining ELF binaries with readelf, objdump, nm, or ldd: dependencies, symbols, sections, relocations, build IDs, or hardening. |
+| ebpf | Use when writing eBPF programs with libbpf, bpftrace, or Rust with aya-ebpf and aya-log, attaching kprobes, tracepoints, or XDP hooks, declaring maps, sharing data with a Tokio loader, triaging verifier or Aya load errors, or porting with CO-RE. |
+| elf-inspection | Use when examining ELF binaries with readelf, objdump, nm, or ldd: dependencies, symbols, sections, relocations, build IDs, or hardening, or when enabling RELRO, PIE, stack canaries, FORTIFY_SOURCE, CET, CFI, or seccomp filters, or checking a binary with checksec. |
 | embedded-rust | Use when writing no_std Cortex-M or RISC-V firmware in Rust with cortex-m-rt, probe-rs, defmt, RTIC, or a panic handler. |
 | flamegraphs | Use when turning perf, DTrace, pprof, or async-profiler stacks into an SVG flamegraph with the FlameGraph scripts, reading one, or diffing two profiles. |
 | freertos | Use when creating FreeRTOS tasks, queues, semaphores, or mutexes, catching stack overflow, writing FreeRTOSConfig.h, or debugging tasks over OpenOCD and GDB. |
@@ -91,7 +86,6 @@ Each row states when to reach for the skill. Invoke one as `/odin-native:<name>`
 | gdb | Use when running GDB: breakpoints, watchpoints, segfault or hang debugging, reverse debugging, remote gdbserver, core dumps, pretty-printers, Python scripting, or multi-threaded debugging. |
 | gpio-baremetal | Use when configuring GPIO modes, alternate functions, pull resistors, or EXTI interrupts on STM32/nRF/ESP32-class MCUs. |
 | gpu-memory-model | Use when analyzing warp divergence, memory coalescing, shared memory bank conflicts, cache behavior, atomics, or occupancy tradeoffs on NVIDIA and AMD GPUs. |
-| hardware-counters | Use when measuring PMU events with perf stat -e or PAPI, computing IPC, miss rates, or MPKI, or attributing cache misses to source lines with perf annotate. |
 | hare-lang | Use when building or evaluating a Hare program: hare build, run, or test, tagged-union error handling, or calling C through bodyless fn declarations and -l. |
 | heaptrack | Use when tracking heap allocations on Linux with heaptrack: allocation hotspots, peak heap, temporary allocations, leaks, or a diff of two runs via heaptrack_print. |
 | hip-rocm | Use when writing HIP kernels with hipcc, porting CUDA code through HIPIFY, profiling with rocprofv3, debugging with rocgdb, or optimizing for MI300X. |
@@ -114,7 +108,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-native:<name>`
 | linkers-lto | Use when choosing a linker, fixing link order or undefined symbol errors, enabling LTO or ThinLTO, or cutting dead code with --gc-sections. |
 | linux-kernel-architecture | Use when navigating kernel source, understanding boot flow, initcall levels, or major subsystems (VFS, scheduler, MM) in linux.git. |
 | linux-kernel-modules | Use when writing loadable kernel modules: Kbuild, module parameters, proc and sysfs entries, char devices, or ftrace debugging. |
-| linux-perf | Use when collecting sampling profiles with perf record, reading perf report or perf annotate, or measuring counters with perf stat on Linux. |
+| linux-perf | Use when collecting sampling profiles with perf record, reading perf report or perf annotate, measuring PMU counters with perf stat -e, or using PAPI instrumentation to interpret IPC, miss rates, MPKI, or memory bandwidth on Linux. |
 | lldb | Use when debugging with LLDB on macOS, FreeBSD, or Linux-clang, mapping GDB commands to LLDB, Xcode or VS Code integration, LLDB Python scripting, or debugging Swift and Objective-C. |
 | llvm | Use when working with LLVM IR as a user: emitting IR from clang, running opt passes, lowering with llc, reading IR, or finding a missed optimization. |
 | llvm-ir-and-passes | Use when reading LLVM IR, explaining SSA and PHI nodes, finding what -O2 changed, or running opt on a .ll or .bc file. |
@@ -134,9 +128,8 @@ Each row states when to reach for the skill. Invoke one as `/odin-native:<name>`
 | openmp | Use when parallelizing loops or tasks with OpenMP: parallel for, schedules, reductions, data sharing, simd, target offload, OMP_* tuning, or false sharing. |
 | openocd-jtag | Use when configuring OpenOCD for a JTAG or SWD target, flashing through it, attaching GDB to a bare-metal MCU, or setting hardware breakpoints and watchpoints. |
 | os-dev-scratch | Use when building a minimal x86-64 OS: boot protocols, long mode, page tables, IDT, PIC/APIC, serial and keyboard drivers, frame allocator, or context switching. |
-| peripherals-from-datasheet | Use when writing a register-level peripheral driver from an MCU reference manual: register map, init sequence, timing, bit definitions. |
+| peripherals-from-datasheet | Use when reading MCU datasheets or reference manuals in documentation-reading mode for pinouts, electrical limits, register maps, clock trees, timing, or errata, or writing a register-level peripheral driver in driver-writing mode: source locations, init sequence, bit definitions, and bounded waits. |
 | pgo | Use when a C or C++ binary needs profile-guided optimization with GCC or Clang: instrumented or sampled profiles, merging, the two-stage build, or BOLT. |
-| platform-device-model | Use when implementing or debugging platform_driver probe/remove, sysfs attributes, device properties, or deferred probe on Linux. |
 | production-go | Use when writing, reviewing, debugging, or architecting Go code. |
 | protocol-analysis | Use when decoding I2C, SPI, or UART captures with sigrok or PulseView, checking bus traffic against a datasheet, or post-processing captures in Python. |
 | qemu-embedded-simulation | Use when running ARM or RISC-V bare-metal firmware in QEMU: machine selection, -kernel ELF loading, semihosting, or GDB debugging without hardware. |
@@ -153,11 +146,10 @@ Each row states when to reach for the skill. Invoke one as `/odin-native:<name>`
 | rust-ffi | Use when calling C libraries from Rust, generating bindings with bindgen, exporting Rust functions to C with cbindgen, writing safe wrappers over unsafe FFI, or linking system libraries. |
 | rust-no-std | Use when writing #![no_std] Rust crates, using core and alloc without std, selecting panic handlers, or testing no_std code on the host. |
 | rust-profiling | Use when profiling Rust binaries with flamegraphs, cargo-bloat, cargo-llvm-lines, Criterion, perf, heaptrack, or DHAT. |
-| rust-sanitizers-miri | Use when running AddressSanitizer, ThreadSanitizer, MemorySanitizer, UndefinedBehaviorSanitizer, or Miri on Rust code, interpreting sanitizer output, or validating unsafe code for undefined behaviour. |
 | rust-security | Use when auditing Rust dependencies for vulnerabilities, enforcing license and source policies with cargo-deny, reviewing RUSTSEC advisories, or fuzzing and testing unsafe code for security. |
 | rust-unsafe | Use when writing, reviewing, or auditing unsafe Rust, or understanding raw pointers, transmute, UnsafeCell, and safe abstractions over unsafe code. |
 | rustc-basics | Use when selecting RUSTFLAGS, configuring Cargo profiles, tuning release builds, reading assembly or MIR output, understanding monomorphization, or diagnosing compilation errors. |
-| sanitizers | Use when enabling or interpreting ASan, UBSan, TSan, MSan, LSan, or HWASan with GCC or Clang, or reading sanitizer reports. |
+| sanitizers | Use when building, running, or interpreting ASan, UBSan, TSan, MSan, LSan, HWASan, or Miri for native or Rust code, including memory-corruption debugging, unsafe-code validation, and sanitizer CI wiring. |
 | simd-intrinsics | Use when reading auto-vectorization reports, writing SSE2, AVX2, or NEON intrinsics, or fixing vectorization failures. |
 | spi-i2c-baremetal | Use when implementing SPI/I2C master transfers, register read/write protocols, I2C START/STOP, clock phase/polarity, or bus stalls on bare-metal MCUs. |
 | static-analysis | Use when hardening C/C++ code quality with clang-tidy, cppcheck, or scan-build, interpreting check categories, suppressing false positives, integrating into CI, or working with compile_commands.json. |
@@ -171,7 +163,6 @@ Each row states when to reach for the skill. Invoke one as `/odin-native:<name>`
 | virtual-memory-paging-and-tlb | Use when explaining page faults, multi-level page tables, TLB misses, huge pages, or mmap and brk behavior. |
 | wasm-emscripten | Use when compiling C or C++ to WebAssembly with emcc, exporting functions to JavaScript, sizing WASM memory, using Asyncify, or debugging .wasm. |
 | wasm-wasmtime | Use when running WASM with the wasmtime CLI, embedding wasmtime in Rust, limiting execution with fuel, or building WASI preview2 components. |
-| writing-char-drivers | Use when writing a Linux char driver: file_operations, cdev, copy_to_user, ioctl commands, device memory mmap, or poll. |
 | zephyr | Use when building a Zephyr app with west, picking a board target, editing prj.conf or a devicetree overlay, adding logging, running on native_sim, or using west debug. |
 | zig-build-system | Use when writing or fixing a build.zig: executables, libraries, modules, C sources, build options, test steps, custom steps, or build.zig.zon dependencies. |
 | zig-cinterop | Use when Zig code calls C or C code calls Zig: @cImport, translate-c, C type mapping, extern and packed structs, export fn, opaque handles, or a mixed C and Zig build. |

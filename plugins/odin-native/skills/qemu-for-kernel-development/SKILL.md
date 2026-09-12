@@ -86,7 +86,7 @@ description: 'Use when booting custom kernels in QEMU, building Buildroot or Yoc
 
    Done when: the breakpoint at `start_kernel` fires before the first printk.
 5. Handle the device tree deliberately. The `virt` machine generates its DTB at startup, and that generated tree is what makes its UART and virtio devices discoverable. Override it with `-dtb myboard.dtb` only for a board whose DTB matches the selected machine model; a mismatched DTB hides the devices the kernel needs. Build board DTBs from the kernel tree with `make dtbs`. Done when: the source of the guest's DTB (generated or supplied) is stated and its devices are expected to appear.
-6. Choose the network model per need: user-mode networking (`-netdev user`) for no-privilege testing, or a tap device for real packet flows. Route deeper work: `qemu-kvm` for KVM, VFIO, and libvirt management; `device-tree` for DT authoring behind the guest. Emulated MCU targets are outside this tree, so ground them in QEMU's own machine documentation. Done when: the delivered recipe names its networking and DT choices.
+6. Choose the network model per need: user-mode networking (`-netdev user`) for no-privilege testing, or a tap device for real packet flows. Route deeper work: `qemu-kvm` for KVM, VFIO, and libvirt management; `device-drivers` for DT authoring behind the guest. Emulated MCU targets are outside this tree, so ground them in QEMU's own machine documentation. Done when: the delivered recipe names its networking and DT choices.
 
 ## Failure and recovery
 

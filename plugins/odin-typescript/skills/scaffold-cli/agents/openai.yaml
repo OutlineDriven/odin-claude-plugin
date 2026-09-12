@@ -1,3 +1,0 @@
-interface:
-  display_name: "Scaffold CLI"
-  short_description: "Use when asked to create a complete Node.js 24 TypeScript 7 command-line project."

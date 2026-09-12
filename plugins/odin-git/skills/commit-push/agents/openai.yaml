@@ -1,3 +1,0 @@
-interface:
-  display_name: "Commit Push"
-  short_description: "Use when asked to commit and push to a feature branch off the default branch, with no pull request."

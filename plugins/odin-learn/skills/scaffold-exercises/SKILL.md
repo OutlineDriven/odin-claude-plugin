@@ -1,6 +1,6 @@
 ---
 name: scaffold-exercises
-description: 'Use when a course needs numbered problem, solution, and explainer scaffolds. Not for a CLI or Next.js project scaffold: use scaffold-cli or scaffold-nextjs.'
+description: 'Use when a course needs numbered problem, solution, and explainer scaffolds. Not for a CLI or Next.js project scaffold: use scaffold-nextjs.'
 ---
 
 # Scaffold exercises

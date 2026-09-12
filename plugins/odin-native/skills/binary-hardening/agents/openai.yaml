@@ -1,3 +1,0 @@
-interface:
-  display_name: "Binary Hardening"
-  short_description: "Use when enabling RELRO, PIE, stack canaries, FORTIFY_SOURCE, CET, CFI, or seccomp filters, or checking a binary with checksec."

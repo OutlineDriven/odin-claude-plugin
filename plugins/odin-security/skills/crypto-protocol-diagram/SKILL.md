@@ -1,6 +1,6 @@
 ---
 name: crypto-protocol-diagram
-description: 'Use when asked for a sequence diagram of cryptographic protocol semantics from code, prose, RFCs, papers, ProVerif, or Tamarin, or for code/spec divergence. Not for architecture: use embed-diagram.'
+description: 'Use when asked for a sequence diagram of cryptographic protocol semantics from code, prose, RFCs, papers, ProVerif, or Tamarin, or for code/spec divergence. Not for architecture: use diagramming-code.'
 disable-model-invocation: true
 ---
 

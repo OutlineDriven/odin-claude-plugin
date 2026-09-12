@@ -2,7 +2,7 @@
 
 ODIN workflows for writing, changing, and simplifying code.
 
-38 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
+35 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -48,16 +48,13 @@ Each row states when to reach for the skill. Invoke one as `/odin-code:<name>` i
 | dimensional-analysis | Use when code mixes units, fixed-point precisions, scaling factors, rates, prices, shares, or conversions. |
 | document-api-endpoint | Use when reconciling an API endpoint's generated OpenAPI schema and declared response types with its actual runtime response. |
 | explore | Use when asked to explore the codebase to map structure, symbols, and dependencies. |
-| extremely-optimize | Use when asked to run a performance campaign against a measured floor. |
-| fastopt | Use when optimizing suspected hot paths without waiting for benchmarks. |
-| fastopt-extreme | Use when optimizing estimated hot and complexity-neutral cold paths while refusing complexity theater. |
 | fromzero | Use when replacing a greenfield attempt with a clean pad of verified requirements. |
 | guillotine | Use when dead, duplicate, superseded, or generated residue must leave more than one artifact class of a repo or subsystem, preserving behavior. |
 | incremental-implementation | Use when implementing a multi-file change, building a feature from a breakdown, or writing a large amount of code. |
 | minimalism-driven | Use when writing or restructuring code, before adding a helper, wrapper, config key, or dependency, or when the user asks for minimal or DRY code. |
 | no-comments | Use when asked to audit comments in code files and propose structural replacements or deletions with per-candidate approval. |
 | offense | Use when a human says "overhaul", "rebuild this subsystem", or "rewrite it from scratch". |
-| optimize | Use when asked to optimize code, speed up a path, reduce allocations, repair a regression, or profile a target. |
+| optimize | Use when asked to optimize code, make a path faster, make this as fast as possible, reduce allocations, repair a regression, profile a target, grill every inefficiency, or run a subsystem or repo-wide performance campaign against a measured floor; when a performance requirement, slowness report, Core Web Vitals miss, or profiling evidence identifies a bottleneck; or for an "extremely optimize" performance campaign, optimizing suspected hot paths without waiting for benchmarks, or estimating hot and complexity-neutral cold paths while refusing complexity theater. |
 | principles | Use when a request names a working principle (subtract before you add, idempotent operations, never block on the human) or asks which principle applies. |
 | refactor-break-compat | Use when modernizing APIs, removing compat shims, killing feature flags, or rewriting a subsystem cleanly. |
 | reproduce-and-fix-issues | Use when a trusted bug or performance report needs reproduction and fix. |

@@ -2,7 +2,7 @@
 
 ODIN workflows for modern TypeScript development.
 
-16 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
+15 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -44,8 +44,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-typescript:<na
 | nodejs-service-foundations | Use when asked to set up or harden Node.js service foundations: env validation, logging, typed errors, type stripping, and shutdown wiring. |
 | nodejs-stream-pipeline | Use when asked to build Node.js stream ETL pipelines for large-file or continuous ingestion without exceeding heap memory. |
 | replace-unsafe-typescript-assertions | Use when TypeScript tests use unsafe any or as assertions for partial or intentionally invalid fixtures. |
-| scaffold-cli | Use when asked to create a complete Node.js 24 TypeScript 7 command-line project. |
-| scaffold-nextjs | Use when asked to scaffold a Next.js turborepo end to end and verify it. |
+| scaffold-nextjs | Use when asked to scaffold a Next.js turborepo, Vercel app, or Node.js 24 TypeScript 7 CLI project, including scaffold-cli mode. |
 | setup-ts-deep-modules | Use when asked to enforce boundaries, set up deep modules, stop deep imports, mutation-prove rules, or make entry-point packages. |
 | typescript-best-practices | Use when TypeScript needs shaping toward narrow types, unions, exhaustive variants, and strict flags. |
 | typescript-type-hardening | Use when TypeScript has type errors, failing inference, or needs type mechanism repair (generics, infer, mapped, branded). |

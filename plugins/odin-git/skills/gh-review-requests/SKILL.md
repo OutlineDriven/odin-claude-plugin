@@ -1,6 +1,6 @@
 ---
 name: gh-review-requests
-description: 'Use when the user asks to find PRs to review or check the team review queue. Not for summarizing PR feedback: use resolve-pr-feedback. Read-only.'
+description: 'Use when the user asks to find PRs to review or check the team review queue. Not for summarizing or resolving feedback on a specific PR: use resolve. Read-only.'
 ---
 
 # Gh review requests
@@ -16,8 +16,7 @@ description: 'Use when the user asks to find PRs to review or check the team rev
 
 ## Not for
 
-- Summarizing feedback on a specific PR: use resolve-pr-feedback.
-- Resolving review feedback, use resolve-pr-feedback.
+- Summarizing or resolving feedback on a specific PR: use `resolve`.
 - Source or remote mutation: this skill is read-only.
 
 ## Inputs

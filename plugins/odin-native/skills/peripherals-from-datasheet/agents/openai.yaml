@@ -1,3 +1,3 @@
 interface:
   display_name: "Peripherals From Datasheet"
-  short_description: "Use when writing a register-level peripheral driver from an MCU reference manual: register map, init sequence, timing, bit definitions."
+  short_description: "Use when reading MCU datasheets or reference manuals in documentation-reading mode for pinouts, electrical limits, register maps, clock trees, timing, or errata, or writing a register-level peripheral driver in driver-writing mode: source locations, init sequence, bit definitions, and bounded waits."

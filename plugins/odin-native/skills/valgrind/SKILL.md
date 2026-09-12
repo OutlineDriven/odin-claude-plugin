@@ -1,6 +1,6 @@
 ---
 name: valgrind
-description: 'Use when running Valgrind Memcheck for heap errors, leaks, or uninitialised reads on an unmodified binary, or Cachegrind, Callgrind, or Massif profiling. Not for ASan builds: use address-sanitizer.'
+description: 'Use when running Valgrind Memcheck for heap errors, leaks, or uninitialised reads on an unmodified binary, or Cachegrind, Callgrind, or Massif profiling. Not for ASan builds: use sanitizers.'
 ---
 
 # Valgrind
@@ -64,7 +64,7 @@ Valgrind (current stable 3.27.1) runs an unmodified binary on a synthetic CPU an
 |---|---|
 | Errors only in third-party frames | Suppress them (step 5); report the suppression file path and what it hides |
 | No line numbers in stacks | Rebuild with `-g`; Valgrind cannot recover source lines without debug info |
-| Run too slow to finish | Shorten the workload; drop `--track-origins`; reserve Memcheck for the failing path and use `address-sanitizer` for the broad suite |
+| Run too slow to finish | Shorten the workload; drop `--track-origins`; reserve Memcheck for the failing path and use `sanitizers` for the broad suite |
 | Cachegrind prints only `Ir` | Cache simulation was off; rerun with `--cache-sim=yes` |
 | Program uses a custom allocator | Memcheck sees one large block; wrap the allocator with `VALGRIND_MALLOCLIKE_BLOCK` client requests from `valgrind/valgrind.h`, or test with the system allocator |
 | Memcheck reports `Warning: client switching stacks?` | Large frame; raise `--max-stackframe` to the printed size |

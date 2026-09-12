@@ -1,3 +1,0 @@
-interface:
-  display_name: "Build Program Graph"
-  short_description: "Use when a multi-language program graph is needed for call paths, entrypoints, blast radius, or taint reachability."

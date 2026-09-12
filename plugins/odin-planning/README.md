@@ -2,7 +2,7 @@
 
 ODIN workflows for shaping intent into approved plans, specs, and task lists.
 
-39 skills, category Productivity. Install the whole plugin below, or take a single skill with `gh skill install`.
+36 skills, category Productivity. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -34,8 +34,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-planning:<name
 | Skill | Trigger |
 |---|---|
 | abstract-well | Use when the user wants to classify abstractions as useful, bad, or busy and keep one shallow level. |
-| all-scenarios-storm | Use when a user wants to enumerate plausible designs, configurations, scenarios, and paths and diagram the field before choosing. |
-| askme | Use when a task is ambiguous or intent needs eliciting: exhaustive/collaborative/adversarial askme, batch questions, interview, ambiguity scan, or intent proposal. |
+| askme | Use when eliciting intent/scope/referents or gating long/bundled/high-stakes/hard-to-undo work: exhaustive/collaborative/adversarial/gate/batch/interview/scan/proposal. |
 | autoplan | Use when the user runs /autoplan on a plan or idea. |
 | backlog | Use when asked to park an undecided idea without representing it as decided or active work. |
 | brainstorm | Use when the user begins knowledge work with notes, a transcript, or a brain dump, asks for divergent ideas (mode: ideate), or wants options shown in a local browser (mode: visual). |
@@ -54,8 +53,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-planning:<name
 | loop-me | Use when the user says "loop me" or asks to design a recurring workflow. |
 | minimap | Use when the user needs a compact read-only current-work view from Git state, recorded test evidence, and optional graph.yaml. |
 | next-best-action | Use when a project is between phases, the author asks what to do next, too many threads are open, or work needs re-entry. |
-| plan | Use when a user commits to a direction and asks to plan, brief, or research it; modes score, breakdown, shape, visual. |
-| plan-review | Use when a plan path or text is supplied for audit against the current codebase, or when tuning which plan-review questions fire. |
+| plan | Use when a user commits to a direction and asks to plan, brief, research, or operationalize it; or wants to enumerate designs, configurations, scenarios, and paths, audit a supplied plan, tune the review flow, or a plan-mode enforcement hook intercepts a plan review, or lock a greenfield architecture and interfaces. |
 | possible-worlds | Use when a design dispute has at least two live interpretations and the caller wants worlds made explicit or a plain-language recommendation. |
 | pov | Use when asked to judge whether to adopt, switch, reject, or revisit technology, library, pattern, or architecture, or a second opinion. |
 | readiness-assessment | Use when a user asks for a gut-check on a decision or action, or asks whether enough is known to proceed. |
@@ -70,7 +68,6 @@ Each row states when to reach for the skill. Invoke one as `/odin-planning:<name
 | todo-add | Use when a message contains `TODO ADD: <requirement>`. |
 | todos-enhance | Use when tasks are too vague, read as headings, or the user asks to sophisticate the todos. |
 | todos-update | Use when user asks to update todos, resync the task list, say what to do next, or plan and tree have drifted apart. |
-| waterfall-guide | Use when a user wants to lock greenfield architecture and interfaces early for coherent parallel execution. |
 | wayfinder | Use when a greenfield project or large feature build will not fit in a single agent session. |
 
 ## Workflows

@@ -57,7 +57,7 @@ Optional:
 
 A minimal Swift source fix committed with its reproducing snapshot (`<bug-slug>-pre.json`), pre-fix and post-fix screenshots, and a regression test that restores the pre-bug snapshot and asserts the post-fix behavior on a device or simulator. Terminal status is DONE with the verification evidence, or BLOCKED with the blocker and the attempts made.
 
-## Mode B — Declarative XcodeGen regeneration
+## Mode B: Declarative XcodeGen regeneration
 
 ### Contract
 

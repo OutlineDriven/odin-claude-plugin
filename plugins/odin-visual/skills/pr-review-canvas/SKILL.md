@@ -18,8 +18,8 @@ disable-model-invocation: true
 ## Inputs
 
 - `format`: `canvas` (default) or `html`.
-- Mode `canvas`: PR diff (required) — the unified diff of the pull request, supplied as a file path or piped content; PR metadata (optional) — title, description, and linked issue text, which improve hunk risk classification.
-- Mode `html`: a GitHub PR web URL or `owner/repo#<number>` (required) — the model extracts `{owner}`, `{repo}`, `{number}`; an installed, authenticated `gh` CLI.
+- Mode `canvas`: PR diff (required): the unified diff of the pull request, supplied as a file path or piped content; PR metadata (optional): title, description, and linked issue text, which improve hunk risk classification.
+- Mode `html`: a GitHub PR web URL or `owner/repo#<number>` (required): the model extracts `{owner}`, `{repo}`, `{number}`; an installed, authenticated `gh` CLI.
 
 ## Procedure
 
@@ -35,7 +35,7 @@ disable-model-invocation: true
 4. **Build a review block per hunk** containing the file path, hunk line range, diff text, and a risk annotation that explains the classification. Done when: every hunk has a review block with path, range, diff text, and risk annotation.
 5. **Assemble the artifact.**
    - Mode `canvas`: assemble the canvas document with a PR metadata summary, followed by risky hunk blocks and then safe hunk blocks, each block a distinct canvas section.
-   - Mode `html`: generate one complete self-contained HTML5 document directly — no scratch files, no renderer or template files read from the skill directory. Write the `<body>` content as HTML in whatever structure fits the PR: a header with title, PR number, author, and stats; a summary box explaining the PR in plain English; core file sections with annotations and diffs; boilerplate files collapsed by default; a review checklist at the bottom; `<div data-diff="<target>">` placeholders where diffs render. Embed CSS for risk callouts, diffs, and collapsed boilerplate, and JavaScript that maps each `data-diff` key to its patch text. Build the patch map in memory from the step-1 fetch and embed it as JSON with `<`, `>`, and `&` escaped so patch text cannot terminate the script element.
+   - Mode `html`: generate one complete self-contained HTML5 document directly: no scratch files, no renderer or template files read from the skill directory. Write the `<body>` content as HTML in whatever structure fits the PR: a header with title, PR number, author, and stats; a summary box explaining the PR in plain English; core file sections with annotations and diffs; boilerplate files collapsed by default; a review checklist at the bottom; `<div data-diff="<target>">` placeholders where diffs render. Embed CSS for risk callouts, diffs, and collapsed boilerplate, and JavaScript that maps each `data-diff` key to its patch text. Build the patch map in memory from the step-1 fetch and embed it as JSON with `<`, `>`, and `&` escaped so patch text cannot terminate the script element.
    Done when: the canvas document is assembled with metadata, risky blocks, then safe blocks; or the HTML document is complete with embedded CSS, JS, and safe JSON patch data.
 6. **Write and deliver.**
    - Mode `canvas`: write the canvas document to `<pr-identifier>.canvas` in the working directory, overwriting the file if it exists.
@@ -58,4 +58,4 @@ disable-model-invocation: true
 The procedure never writes a partial artifact. If it stops before the write step, it does not create or overwrite an artifact file.
 
 ## Output
-Mode `canvas`: a single `.canvas` file named after the PR identifier, with a header section (PR title, description, file count), risky hunk sections (path, range, diff, annotation), then safe hunk sections in the same format — local only, never published or pushed. Mode `html`: `/tmp/pr-review-<number>.html` (self-contained HTML with embedded CSS, JS, and safe JSON patch data) served at `http://127.0.0.1:8432/pr-review-<number>.html` (or the next available port), rendering the interactive risk-first review in the browser.
+Mode `canvas`: a single `.canvas` file named after the PR identifier, with a header section (PR title, description, file count), risky hunk sections (path, range, diff, annotation), then safe hunk sections in the same format: local only, never published or pushed. Mode `html`: `/tmp/pr-review-<number>.html` (self-contained HTML with embedded CSS, JS, and safe JSON patch data) served at `http://127.0.0.1:8432/pr-review-<number>.html` (or the next available port), rendering the interactive risk-first review in the browser.

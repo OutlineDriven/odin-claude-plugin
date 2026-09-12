@@ -10,7 +10,7 @@ supported client discovers them from that same layout, so nothing is copied or r
 Methodology: [outline-driven-development](https://github.com/OutlineDriven/outline-driven-development)
 · Site: [outlinedriven.github.io](https://outlinedriven.github.io)
 
-- 695 skills in 28 plugins, each authored once at `plugins/<plugin>/skills/<slug>/SKILL.md`
+- 657 skills in 28 plugins, each authored once at `plugins/<plugin>/skills/<slug>/SKILL.md`
 - Five harness surfaces from one tree: Claude Code, Codex, Cursor, Grok, and Kimi
 - No package manager for the tooling; every script is dependency-free Node ESM or standard-library Python
 - Six output styles in odin-core, each embedding the canonical doctrine byte-identically
@@ -30,7 +30,7 @@ Methodology: [outline-driven-development](https://github.com/OutlineDriven/outli
 
 ## What is this
 
-695 skills in 28 plugins. A skill is authored once, at
+657 skills in 28 plugins. A skill is authored once, at
 `plugins/<plugin>/skills/<slug>/SKILL.md`, and that path is its only home. The directory states
 which plugin owns the skill, so no registry has to answer that question. Every plugin and
 marketplace ships at one `releaseVersion`, currently 2.1.4, held in `catalog/plugins.json`.
@@ -170,7 +170,7 @@ Each name installs with the same command:
 /plugin install odin-security@odin-marketplace
 ```
 
-The largest plugins are `odin-native` at 147, `odin-git` at 46, and `odin-run` at 46.
+The largest plugins are `odin-native` at 138, `odin-run` at 46, and `odin-knowledge` at 41.
 Install one skill instead of a whole plugin with `gh skill install`, shown under Install above.
 
 ## Using the skills

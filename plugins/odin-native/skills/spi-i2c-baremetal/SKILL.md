@@ -1,6 +1,6 @@
 ---
 name: spi-i2c-baremetal
-description: 'Use when implementing SPI/I2C master transfers, register read/write protocols, I2C START/STOP, clock phase/polarity, or bus stalls on bare-metal MCUs. Not for Linux drivers: use bus-drivers-i2c-spi.'
+description: 'Use when implementing SPI/I2C master transfers, register read/write protocols, I2C START/STOP, clock phase/polarity, or bus stalls on bare-metal MCUs. Not for Linux drivers: use device-drivers.'
 ---
 
 # SPI and I2C on bare metal

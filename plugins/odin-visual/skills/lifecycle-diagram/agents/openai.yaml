@@ -1,3 +1,0 @@
-interface:
-  display_name: "Lifecycle Diagram"
-  short_description: "Use when states, waits, retries, decisions, transitions, and terminals need a lifecycle view."

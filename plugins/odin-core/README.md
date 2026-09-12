@@ -2,7 +2,7 @@
 
 Core ODIN gates every session runs: intent, scope, verification, and hand-off checks.
 
-8 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
+7 skills, category Coding. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -36,7 +36,6 @@ Each row states when to reach for the skill. Invoke one as `/odin-core:<name>` i
 | ai-collab-protocols | Use when the user describes an AI workflow gap or uses an ambiguous cross-session reference such as 'the PR Bob mentioned'. |
 | axiom-mode | Use when the user requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form. |
 | enforce-workflow-constraints | Use when any bounded workflow starts or reaches an action, path, proposal, or merge boundary. |
-| instruction-understanding-gate | Use when a request is long, bundled, high-stakes, or has ambiguous referents. |
 | necessary-work | Use when work is about to grow past the ask, the task may already be done, or the user requests only the minimum. |
 | post-change-check-gate | Use when an artifact or skill has just changed and is about to be called done, committed, or handed off. |
 | skill-gap-finder | Use when the user suspects no installed skill covers a task and wants proof. |

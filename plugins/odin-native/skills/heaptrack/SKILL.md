@@ -55,7 +55,7 @@ heaptrack (1.5.0 on the grounding host) intercepts `malloc`, `free`, `realloc`, 
 | `heaptrack -p` fails to attach | ptrace restricted | Run as the process owner or propose `CAP_SYS_PTRACE`; otherwise start the program under heaptrack |
 | Comparison shows every stack changed | Different workloads or non-deterministic addresses in symbols | Use identical inputs and `-m 1`; compare peak heap totals first |
 
-Massif reaches the same heap questions on platforms without heaptrack and at a much higher slowdown; `valgrind` covers it. Leak detection without profiling cost is LeakSanitizer through `address-sanitizer`.
+Massif reaches the same heap questions on platforms without heaptrack and at a much higher slowdown; `valgrind` covers it. Leak detection without profiling cost is LeakSanitizer through `sanitizers`.
 
 ## Output
 

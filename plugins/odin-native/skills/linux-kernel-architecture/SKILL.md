@@ -1,6 +1,6 @@
 ---
 name: linux-kernel-architecture
-description: 'Use when navigating kernel source, understanding boot flow, initcall levels, or major subsystems (VFS, scheduler, MM) in linux.git. Not for driver-model depth: use platform-device-model.'
+description: 'Use when navigating kernel source, understanding boot flow, initcall levels, or major subsystems (VFS, scheduler, MM) in linux.git. Not for driver-model depth: use device-drivers.'
 ---
 
 # Linux kernel architecture
@@ -47,7 +47,7 @@ description: 'Use when navigating kernel source, understanding boot flow, initca
    ```
 
    Done when: the command output names the defining file or the config state.
-6. Route the question when it crosses into implementation: `kernel-memory-management` for `mm/` depth, `platform-device-model` for the driver model, `device-tree` for hardware description, `virtual-memory-paging-and-tlb` for paging mechanics, `kernel-security` for hardening and mitigations. Done when: the delivered answer states the boundary and names the skill that owns the depth.
+6. Route the question when it crosses into implementation: `kernel-memory-management` for `mm/` depth, `device-drivers` for the driver model and hardware description, `virtual-memory-paging-and-tlb` for paging mechanics, `kernel-security` for hardening and mitigations. Done when: the delivered answer states the boundary and names the skill that owns the depth.
 
 ## Failure and recovery
 

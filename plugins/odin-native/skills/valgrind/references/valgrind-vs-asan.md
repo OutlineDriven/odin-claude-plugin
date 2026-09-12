@@ -16,7 +16,7 @@ Both find heap misuse. They differ in what they need from the build and in what 
 | Leak detection | Yes | Yes, through LeakSanitizer |
 | Works on unmodified third-party binaries | Yes | No |
 
-Pick AddressSanitizer when the build is under your control and the suite runs often: the speed lets it gate every commit, and it sees stack and global overflows Memcheck misses. Use `address-sanitizer` for that setup.
+Pick AddressSanitizer when the build is under your control and the suite runs often: the speed lets it gate every commit, and it sees stack and global overflows Memcheck misses. Use `sanitizers` for that setup.
 
 Pick Memcheck when the binary cannot be rebuilt, when the bug is a read of uninitialised memory, when the question is cache or call-graph or heap-growth profiling (Cachegrind, Callgrind, Massif have no sanitizer equivalent), or when the toolchain predates sanitizer support.
 
