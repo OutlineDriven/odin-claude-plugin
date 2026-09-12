@@ -22,9 +22,9 @@ description: 'Use when work units carrying declared dependencies must be ordered
 
 ## Procedure
 
-1. **Collect the units and their declared dependency edges.** Build the dependency graph from the supplied units and edges only. Reject any edge whose endpoint is not a supplied unit: name the edge and its missing endpoint in the rejection, and do not silently drop it. **Done when:** the graph contains exactly the supplied units and only edges whose both endpoints are supplied units, with every rejected edge named.
+1. **Collect the units and their declared dependency edges.** Build the dependency graph from the supplied units and edges only. Reject any edge whose endpoint is not a supplied unit: name the edge and its missing endpoint in the rejection, do not silently drop it, and stop the scheduling operation immediately. Emit the named failure response, leave the schedule artifact path unwritten, and do not continue to cycle detection or wave assignment. Resume only after every endpoint is supplied or the caller explicitly withdraws the invalid edge. **Done when:** the graph contains exactly the supplied units and only edges whose both endpoints are supplied units, with every rejected edge named; otherwise no schedule is produced.
 
-2. **Detect cycles before assigning any wave.** Run cycle detection over the graph. If a cycle exists, stop: name the participating units, emit no schedule, and leave the artifact path unwritten. A partial schedule that hides a cycle is worse than no schedule. **Done when:** the graph is shown acyclic, or the cycle members are named and no schedule is emitted.
+2. **Detect cycles before assigning any wave.** Run cycle detection over the validated graph only. If a cycle exists, stop: name the participating units, emit no schedule, and leave the artifact path unwritten. A partial schedule that hides a cycle is worse than no schedule. **Done when:** the graph is shown acyclic, or the cycle members are named and no schedule is emitted.
 
 3. **Assign each unit to the earliest wave after all its dependencies.** A unit's wave is one past the highest wave of its dependencies; units with no dependencies take wave one. Each unit lands in exactly one wave. **Done when:** every supplied unit is assigned to exactly one wave with all its dependencies in strictly earlier waves.
 
@@ -35,7 +35,7 @@ description: 'Use when work units carrying declared dependencies must be ordered
 ## Failure and recovery
 
 - Cycle detected: Name the participating units, emit no schedule, and leave the artifact path unwritten. Suggest the caller repair the declared edges, then re-run on the corrected set. Never emit a partial schedule for a cyclic graph.
-- Edge to an unknown unit: Reject the edge and name it with its missing endpoint. Do not silently drop it and do not guess a substitute unit. Re-run once the caller either supplies the missing unit or withdraws the edge.
+- Edge to an unknown unit: Reject the edge and name it with its missing endpoint. Stop the scheduling operation immediately, emit this failure response, leave the artifact path unwritten, and do not run cycle detection or assign waves. Do not silently drop it and do not guess a substitute unit. Resume only once the caller either supplies the missing unit or explicitly withdraws the edge.
 - Empty unit set: Report that there is nothing to schedule rather than emitting an empty artifact. Leave the artifact path unwritten.
 - Unreadable or duplicated unit names: Ask the caller to disambiguate before scheduling; duplicate names would place one unit in two waves and break the Done condition.
 
