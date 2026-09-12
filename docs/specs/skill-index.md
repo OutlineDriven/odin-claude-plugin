@@ -4,24 +4,21 @@
 | abi-and-calling-conventions | odin-native | Coding | Use when explaining System V AMD64, ARM AAPCS, RISC-V psABI, stack frames, variadic calls, or FFI register rules. |
 | abstract-well | odin-planning | Productivity | Use when the user wants to classify abstractions as useful, bad, or busy and keep one shallow level. |
 | adc-dac-baremetal | odin-native | Coding | Use when configuring ADC sampling time, DMA-driven ADC, calibration, or DAC channel setup on bare-metal MCUs. |
-| address-sanitizer | odin-fuzzing | Security | Use when building or running native code under AddressSanitizer, interpreting an existing ASan report, or debugging a memory-corruption failure. |
 | af-xdp | odin-native | Coding | Use when creating AF_XDP sockets, configuring UMEM and XSK rings, writing an XDP redirect program, or choosing copy versus zero-copy mode. |
 | agent-environment-retrospective | odin-agent | Productivity | Use when a completed session needs an agent-environment retrospective. |
 | agent-surface-forge | odin-skills | Productivity | Use when asked to audit or repair agent surfaces (plugins, agents, skills, CLAUDE.md/AGENTS.md, docs, prompts, commands, hooks) or improve one skill at depth. |
 | agent-transcript | odin-git | Coding | Use when a redacted, trimmed agent transcript must be appended to a GitHub PR or issue body, with human approval and preview. |
 | agents-md | odin-agent | Productivity | Use when a repo needs agent setup, AGENTS.md added or made lean, CLAUDE.md audited, or agent instructions scored or pruned. |
 | ai-collab-protocols | odin-core | Coding | Use when the user describes an AI workflow gap or uses an ambiguous cross-session reference such as 'the PR Bob mentioned'. |
-| all-scenarios-storm | odin-planning | Productivity | Use when a user wants to enumerate plausible designs, configurations, scenarios, and paths and diagram the field before choosing. |
 | analysis-artifacts | odin-infra | Infrastructure | Use when the user requests a deep dive, exploratory analysis, or data analysis on BigQuery. |
 | api-and-interface-design | odin-code | Coding | Use when asked to design or change a public API, route, CLI flag, or module boundary. |
 | append-run-log | odin-run | Coding | Use when a completed agent run must be recorded as durable, queryable evidence. |
 | apple-silicon | odin-native | Coding | Use when tuning or profiling native code on Apple M-series Macs: unified memory, 16 KiB pages, Accelerate and Metal for matrix work, xctrace and leaks, Rosetta 2, or sysctl hardware queries. |
 | architect | odin-code | Coding | Use when non-trivial code needs a design, codebase design or architecture needs improving, or one module needs targeted interface narrowing, seams, or testability. |
-| architecture-diagram | odin-visual | Design | Use when the user asks to visualize an architecture as a self-contained HTML artifact, or compare two architecture snapshots. |
 | arm-sve | odin-native | Coding | Use when writing or porting AArch64 SIMD to SVE or SVE2: arm_sve.h intrinsics, predicates, vector-length-agnostic loops, auto-vectorization, or SVE registers in GDB. |
 | articulate | odin-writing | Writing | Use when the user knows what they mean but cannot express it completely or clearly. |
 | artifact-arena | odin-run | Coding | Use when asked to run /artifact-arena to generate and judge competing artifact implementations. |
-| askme | odin-planning | Productivity | Use when a task is ambiguous or intent needs eliciting: exhaustive/collaborative/adversarial askme, batch questions, interview, ambiguity scan, or intent proposal. |
+| askme | odin-planning | Productivity | Use when eliciting intent/scope/referents or gating long/bundled/high-stakes/hard-to-undo work: exhaustive/collaborative/adversarial/gate/batch/interview/scan/proposal. |
 | assembly-arm | odin-native | Coding | Use when reading or writing AArch64 or AArch32 Thumb assembly, inline asm in C, AAPCS64 register roles, or NEON and SVE vector code. |
 | assembly-riscv | odin-native | Coding | Use when reading or writing RV32/RV64 assembly, inline asm in C, the RISC-V psABI, IMAFD extension naming, compressed instructions, or QEMU RISC-V debugging. |
 | assembly-x86 | odin-native | Coding | Use when reading GCC or Clang x86-64 assembly, writing inline asm, decoding AT&T syntax, or applying System V AMD64 register rules. |
@@ -44,7 +41,6 @@
 | baremetal-startup | odin-native | Coding | Use when writing reset-to-main startup code, vector tables, VTOR, .data/.bss init, stack setup, startup.s, or crt0 for Cortex-M/RISC-V. |
 | bazel | odin-native | Coding | Use when writing Bazel BUILD files with cc_library or cc_binary rules, Bzlmod dependencies, toolchain registration, remote execution, sandbox debugging, or bazel query and cquery graphs. |
 | behavior-validator | odin-testing | Coding | Use when asked to validate a web app, CLI, API, or generated artifact against a source-blind behavior contract. |
-| binary-hardening | odin-native | Coding | Use when enabling RELRO, PIE, stack canaries, FORTIFY_SOURCE, CET, CFI, or seccomp filters, or checking a binary with checksec. |
 | binutils | odin-native | Coding | Use when building static archives with ar, stripping or converting binaries, mapping crash addresses with addr2line, or demangling C++ symbols. |
 | blast-radius | odin-review | Coding | Use when asked to determine what a change could break before it ships. |
 | book-to-skill | odin-skills | Productivity | Use when the user names one book, course, paper, or source document and asks to distill it into a reusable skill. |
@@ -58,9 +54,7 @@
 | browser-qa | odin-testing | Coding | Use when the user runs /browser-qa for report-only QA results without entering a fix loop. |
 | browser-testing | odin-web | Coding | Use when building, debugging, or verifying browser-rendered code, or running browser tests for PR- or branch-affected pages. |
 | build-acceleration | odin-native | Coding | Use when reducing C/C++ compilation times with ccache, sccache, distcc, unity builds, precompiled headers, split DWARF, IWYU, or link time reduction. |
-| build-program-graph | odin-security | Security | Use when a multi-language program graph is needed for call paths, entrypoints, blast radius, or taint reachability. |
 | burpsuite-project-parser | odin-security | Security | Use when asked to analyze a Burp Suite .burp project for audit items, request/response metadata, or captured traffic. |
-| bus-drivers-i2c-spi | odin-native | Coding | Use when writing a Linux i2c_driver or spi_driver, doing bus register access, DMA-safe SPI transfers, or debugging -EREMOTEIO. |
 | buyer-objection-research | odin-product | Productivity | Use when product copy needs buyer-objection evidence collected through approved, consented outreach. |
 | buzzword-analysis | odin-product | Productivity | Use when the user wants the current jargon weather of a domain described without advocacy. |
 | buzzword-hijack | odin-product | Productivity | Use when a user wants to choose and execute a bounded positioning move that rides a jargon wave. |
@@ -68,7 +62,6 @@
 | c-security-review | odin-security | Security | Use when the user requests a userspace C or C++ security review with a threat model and severity filter and wants validated findings. |
 | can-i-help | odin-git | Coding | Use when the user asks "where to help", "contribution opportunities", or "find a good first issue". |
 | capstone | odin-learn | Productivity | Use when the learner is ready to apply cleared concepts in a real project. |
-| capture-isolated-patch | odin-git | Coding | Use when a candidate change must be produced without touching the working tree. |
 | carbon-lang | odin-native | Coding | Use when evaluating Carbon for a C++ code base, running the carbon toolchain from a nightly or Bazel build, or comparing Carbon with staying on C++. |
 | cargo-fuzz | odin-fuzzing | Security | Use when initializing, running, measuring coverage, or triaging a cargo-fuzz target in a Rust crate. |
 | cargo-workflows | odin-native | Coding | Use when managing Cargo workspaces, feature flags, build scripts, CI caching, dependency auditing, or Cargo.lock with Rust. |
@@ -93,10 +86,8 @@
 | code-simplification | odin-code | Coding | Use when the user asks to simplify, clean, or refine code. |
 | codeql-security-analysis | odin-security | Security | Use when building or reusing a CodeQL database, running CodeQL security analysis, or modeling project-specific sources and sinks. |
 | commit | odin-git | Coding | Use when asked to commit changes, create a typed branch, format history for a changelog, or rewrite messages of HEAD or an unpushed range. |
-| commit-push | odin-git | Coding | Use when asked to commit and push to a feature branch off the default branch, with no pull request. |
-| commit-push-current | odin-git | Coding | Use when a human explicitly asks to commit and push to the checked-out branch, with no branch creation and no pull request. |
-| commit-push-main | odin-git | Coding | Use when a human explicitly asks to commit and push directly to the default branch, with no feature branch and no pull request. |
-| commit-push-pr | odin-git | Coding | Use when asked to commit, push a feature branch, and open or update a pull request with gh in one pass. |
+| commit-push-current | odin-git | Coding | Use when a human explicitly asks to commit and push to the checked-out branch, including directly to the default branch, with no branch creation and no pull request. |
+| commit-push-pr | odin-git | Coding | Use when asked to commit and push a feature branch, with or without a pull request. |
 | competitor-feature-research | odin-product | Productivity | Use when asked to research a feature across competitor products or to analyze competitor release changelogs (mode: changelog), and publish a cited report. |
 | compile-3d-workflow | odin-visual | Design | Use when the user asks for direction and a compilable 3D workflow from an interview. |
 | compiler-frontend | odin-native | Coding | Use when building a lexer, Pratt or recursive-descent parser, AST, symbol table, type checker, or LLVM IR emitter for a language or DSL. |
@@ -105,7 +96,6 @@
 | compound | odin-knowledge | Productivity | Use when the user explicitly asks to save, curate, or consolidate what was learned, or closes a meaningful knowledge-work session. |
 | conan-vcpkg | odin-native | Coding | Use when adding C/C++ dependencies with Conan or vcpkg, managing binary compatibility, integrating with CMake via conanfile.txt or vcpkg.json, or choosing between Conan and vcpkg. |
 | concurrency-debugging | odin-native | Coding | Use when reading TSan race reports, debugging deadlocks with GDB thread inspection, analyzing Helgrind lock-order violations, or reviewing std::atomic and happens-before usage. |
-| confirmed-security-review | odin-security | Security | Use when the user asks for a security review, vulnerability audit, or review of injection, XSS, auth, or crypto. |
 | constant-time-analysis | odin-security | Security | Use when reviewing cryptographic code for timing side-channels, statically in compiled output or at runtime with statistical timing tests. |
 | constraint-driven-development | odin-code | Coding | Use when asked to implement under non-negotiable constraints: performance budgets, platform limits, legal or API rules. |
 | consult-deployment | odin-infra | Infrastructure | Use when the user asks to rank deployment platforms and stacks against their product with quantitative trade-offs. |
@@ -151,8 +141,6 @@
 | cut-new-release-candidate | odin-release | Coding | Use when the user asks to cut, trigger, or start a release candidate for a release branch. |
 | cybernetic-loop | odin-run | Coding | Use when the caller supplies a falsifiable out-of-happy-path invariant and a finite budget. |
 | cycle-memo | odin-run | Coding | Use when a build, QA pass, demo, user complaint, or abandoned attempt leaves the next pass needing lessons rather than code. |
-| dataflow-diagram | odin-visual | Design | Use when asked to visualize data movement, ETL or ELT, lineage, transformations, custody, governance, stores, sources, or consumers. |
-| datasheet-and-refmanual-reading | odin-native | Coding | Use when extracting pinouts, electrical limits, register maps, clock trees, timing, or errata from MCU datasheets and reference manuals. |
 | dbt-model-index | odin-infra | Infrastructure | Use when a human-curated dbt model index must guide BigQuery SQL for a warehouse question. |
 | debloat-respect-richness | odin-writing | Writing | Use when a user asks to tighten verbose-but-correct prose without a full rewrite. |
 | debug-optimized-builds | odin-native | Coding | Use when debugging RelWithDebInfo or -O2 release builds, using -Og for debuggable optimization, split-DWARF, GDB scheduler-locking, reading inlined frames, or understanding "value optimized out". |
@@ -172,11 +160,10 @@
 | deslop | odin-code | Coding | Use when the user says deslop, debloat, tidy, simplify, clean a diff, cleanup codebase, or deslop branch diff, or remove dead code or config. |
 | devcontainer-setup | odin-infra | Infrastructure | Use when adding a devcontainer or isolated dev environment to a repo that lacks one, for Python, Node/TypeScript, Rust, Go, or a combination. |
 | developer-experience-review | odin-product | Productivity | Use when dogfooding a developer-facing product or workflow to produce an evidence-backed DX scorecard. |
-| device-drivers | odin-native | Coding | Use when writing or fixing a Linux device driver: platform/i2c/spi probe and remove, char device lifecycle, threaded IRQs, DMA mappings, regmap, runtime PM, or udev rules. |
-| device-tree | odin-native | Coding | Use when writing DTS/DTSI, bindings, overlays, phandles, or debugging OF platform probe failures. |
+| device-drivers | odin-native | Coding | Use when writing or debugging Linux drivers: platform, I2C/SPI, device-tree, char-device, IRQ, DMA, regmap, PM, sysfs, udev, NACK, -EREMOTEIO, or probe failures. |
 | diagnose-loop-health | odin-run | Coding | Use when a configured loop misbehaves, produces unexpected results, or its setup soundness is questioned. |
 | diagnose-wave-stall | odin-run | Coding | Use when a dispatched agent wave has stopped progressing: a result that never arrives or one that exists but stays unconsumed, and the blocking node must be named. |
-| diagramming-code | odin-visual | Design | Use when asked for a call graph, class hierarchy, dependency map, containment or complexity view, or data-flow view. |
+| diagramming-code | odin-visual | Design | Use when asked for a call graph, class hierarchy, dependency map, containment or complexity view, a data-flow view, including attack-surface views, or to render an offline Mermaid diagram and embed it in a document. |
 | diamond-task | odin-run | Coding | Use when one issue or PR is too large for a worker and partitions into disjoint write sets. |
 | diff-scoped-browser-qa | odin-web | Coding | Use when asked to run branch-diff browser QA against a PR or branch. |
 | dimensional-analysis | odin-code | Coding | Use when code mixes units, fixed-point precisions, scaling factors, rates, prices, shares, or conversions. |
@@ -202,16 +189,13 @@
 | dwarf-expert | odin-native | Coding | Use when inspecting, searching, verifying, or parsing DWARF debug info: DIEs, DW_TAG_/DW_AT_ entries, .debug_* sections, line tables, or llvm-dwarfdump/readelf output. |
 | dx-audit | odin-review | Coding | Use when auditing the developer-facing surface of a CLI, SDK, library, or package: API contracts, errors, public types, onboarding, and config. |
 | dynamic-linking | odin-native | Coding | Use when debugging shared library load failures, setting RPATH or RUNPATH, applying soname versioning, writing dlopen plugins, or intercepting with LD_PRELOAD. |
-| ebpf | odin-native | Coding | Use when writing eBPF programs with libbpf or bpftrace, attaching kprobes, tracepoints, or XDP hooks, triaging verifier errors, choosing maps, or porting with CO-RE. |
-| ebpf-rust | odin-native | Coding | Use when writing eBPF programs in Rust with aya-ebpf and aya-log, declaring maps, sharing them with a tokio user-space loader, or debugging an Aya load failure. |
-| elf-inspection | odin-native | Coding | Use when examining ELF binaries with readelf, objdump, nm, or ldd: dependencies, symbols, sections, relocations, build IDs, or hardening. |
+| ebpf | odin-native | Coding | Use when writing eBPF programs with libbpf, bpftrace, or Rust with aya-ebpf and aya-log, attaching kprobes, tracepoints, or XDP hooks, declaring maps, sharing data with a Tokio loader, triaging verifier or Aya load errors, or porting with CO-RE. |
+| elf-inspection | odin-native | Coding | Use when examining ELF binaries with readelf, objdump, nm, or ldd: dependencies, symbols, sections, relocations, build IDs, or hardening, or when enabling RELRO, PIE, stack canaries, FORTIFY_SOURCE, CET, CFI, or seccomp filters, or checking a binary with checksec. |
 | eligibility-batch-organizer | odin-knowledge | Productivity | Use when the user asks to classify a batch of projects against eligibility rules and generate an approval preview before creating hierarchical child documents. |
-| embed-diagram | odin-visual | Design | Use when the user runs /embed-diagram to render a Mermaid diagram offline and embed it into a document. |
 | embedded-rust | odin-native | Coding | Use when writing no_std Cortex-M or RISC-V firmware in Rust with cortex-m-rt, probe-rs, defmt, RTIC, or a panic handler. |
 | enforce-workflow-constraints | odin-core | Coding | Use when any bounded workflow starts or reaches an action, path, proposal, or merge boundary. |
 | engineering-retrospective | odin-knowledge | Productivity | Use when a user requests an engineering retrospective for a period. |
 | entropy-assisted-planning | odin-planning | Productivity | Use when the user explicitly requests a Tarot draw or casually delegates an ambiguous choice among multiple valid approaches. |
-| entry-point-analyzer | odin-security | Security | Use when mapping state-changing external entry points in a smart-contract codebase by access level, auditing access control, or invoking an entry-points command. |
 | environment-contract-audit | odin-infra | Infrastructure | Use when environment-dependent code, templates, or deployment configuration changes, or when runtime configuration is missing. |
 | eslint-to-biome-migration | odin-typescript | Coding | Use when migrating a JavaScript or TypeScript project from ESLint, Prettier, Standard, or mixed legacy lint configuration to Biome 2.5. |
 | evaluation-leakage-audit | odin-testing | Coding | Use when reviewing an evaluation, benchmark, or scoring harness for leakage, or a validation result that looks self-confirming. |
@@ -219,15 +203,12 @@
 | explain-concept | odin-learn | Productivity | Use when a concept needs making clear rather than practising: explain simply, why does this exist, draw it, or simplify for a beginner. |
 | explainer-artifact | odin-learn | Productivity | Use when asked to create an explainer document for a concept, diff, idea, or work recap. |
 | explore | odin-code | Coding | Use when asked to explore the codebase to map structure, symbols, and dependencies. |
-| extremely-optimize | odin-code | Coding | Use when asked to run a performance campaign against a measured floor. |
 | f-star-effectful-verification | odin-formal | Coding | Use when effectful, security-sensitive code needs refinement-typed, SMT-backed verification in F*, in the HACL* or Project Everest style. |
 | fail-design | odin-planning | Productivity | Use when a user wants to define failure states, recovery actions, bypasses, and degraded modes for a component during design. |
 | fail-recover | odin-infra | Infrastructure | Use when the user asks to restore service from a known failure with a prescribed recovery operation. |
 | fastify-inject-testing | odin-typescript | Coding | Use when asked to test Fastify applications without network sockets. |
 | fastify-production-hardening | odin-typescript | Coding | Use when asked to prepare a Fastify service for production load and exposure. |
 | fastify-schema-first-service | odin-typescript | Coding | Use when building or extending a Fastify application: routes, plugins, hooks, database wiring. |
-| fastopt | odin-code | Coding | Use when optimizing suspected hot paths without waiting for benchmarks. |
-| fastopt-extreme | odin-code | Coding | Use when optimizing estimated hot and complexity-neutral cold paths while refusing complexity theater. |
 | feedback-pattern-sweep | odin-review | Coding | Use when recent resolved feedback may reveal a broader recurring defect pattern across the project surface. |
 | feedback-sweep | odin-run | Coding | Use when asked to /feedback-sweep [setup\|reconfigure] [mode:non-interactive]. |
 | figure-it-out | odin-run | Coding | Use when non-trivial work should run a matched playbook to verified real-surface completion, or a bespoke workflow when none fits. |
@@ -266,7 +247,7 @@
 | gha-security-review | odin-security | Security | Use when asked to review GitHub Actions for exploitable vulnerabilities, including prompt injection through Claude Code Action, Gemini CLI, or OpenAI Codex. |
 | git-branchless | odin-git | Coding | Use when asked for multi-commit stack edits, rebases, fixups, or stacked-PR publishing with branchless git idioms. |
 | git-cleanup | odin-git | Coding | Use when the user explicitly invokes branch or worktree cleanup for a repo with accumulated local branches. |
-| git-guardrails | odin-git | Coding | Use when a repository needs a guard against force-push, forced reset, clean, branch deletion, working-tree discard, stash drop, reflog expire, or gc prune. |
+| git-guardrails | odin-git | Coding | Use when a repository needs Git safety controls: guard destructive commands, set up gitignore or fix gitignore when untracked files keep appearing, or install or repair a repository-local pre-commit hook from project gates, including package-manager-native commit-time checks. |
 | git-history-analysis | odin-git | Coding | Use when the user asks about recent engineering work, what the team is working on, planning or roadmap material, or an explicitly requested Slack summary. |
 | git-workflow-and-versioning | odin-git | Coding | Use when the user asks for release, version bump, changelog, or branch workflow beyond a single commit. |
 | github-backlog-triage | odin-git | Coding | Use when the user invokes backlog triage for a GitHub repo's open issues and PRs. |
@@ -279,14 +260,12 @@
 | gpio-baremetal | odin-native | Coding | Use when configuring GPIO modes, alternate functions, pull resistors, or EXTI interrupts on STM32/nRF/ESP32-class MCUs. |
 | gpu-memory-model | odin-native | Coding | Use when analyzing warp divergence, memory coalescing, shared memory bank conflicts, cache behavior, atomics, or occupancy tradeoffs on NVIDIA and AMD GPUs. |
 | graph-backbone | odin-planning | Productivity | Use when defining, revising, or gate-replanning the project structural backbone in project-root graph.yaml. |
-| graph-evolution | odin-security | Security | Use when two refs or source snapshots need security-relevant structural comparison a line diff may miss. |
 | grill-with-docs | odin-knowledge | Productivity | Use when a repository decision needs an interview plus durable terminology and decision records. |
 | ground-latest | odin-research | Research | Use when starting or scaffolding a codebase or service, migrating, refactoring, or picking language, framework, or dependency, or latest, LTS, or modern way. |
 | guardrail-carve-run | odin-run | Coding | Use when guardrail-adjacent material (stealth, scraping, privacy, IP, policy, security) or mixed reversible/irreversible, sensitive work, or the user says "autobahn this". |
 | guillotine | odin-code | Coding | Use when dead, duplicate, superseded, or generated residue must leave more than one artifact class of a repo or subsystem, preserving behavior. |
 | gut-sync | odin-knowledge | Productivity | Use when a user resumes work and needs an orientation card without full human recall. |
 | handoff | odin-knowledge | Productivity | Use when work reaches a session boundary or the user asks to hand off, delegate, or get a clipboard-ready prompt. |
-| hardware-counters | odin-native | Coding | Use when measuring PMU events with perf stat -e or PAPI, computing IPC, miss rates, or MPKI, or attributing cache misses to source lines with perf annotate. |
 | hare-lang | odin-native | Coding | Use when building or evaluating a Hare program: hare build, run, or test, tagged-union error handling, or calling C through bodyless fn declarations and -l. |
 | harness-port-guide | odin-agent | Productivity | Use when the user asks to make the skills framework work in a new harness, IDE, or CLI. |
 | headed-browser-takeover | odin-web | Coding | Use when the user asks to open or take over a visible browser session by hand, for example to solve a CAPTCHA or authenticate. |
@@ -313,7 +292,6 @@
 | inits | odin-agent | Productivity | Use when onboarding to a repository, capturing costly conventions, constraints, or rationale, or improving AGENTS.md. |
 | insecure-default-discovery | odin-security | Security | Use when the user asks to audit a file, subtree, or repository for fallback secrets, default credentials, fail-open controls, weak primitives, or permissive access. |
 | instruction-phrasing-microtest | odin-skills | Productivity | Use when changing the wording of a rule in a skill, prompt template, or agent instruction where the change is meant to alter model output. |
-| instruction-understanding-gate | odin-core | Coding | Use when a request is long, bundled, high-stakes, or has ambiguous referents. |
 | intel-vtune-amd-uprof | odin-native | Coding | Use when profiling with Intel VTune or AMD uProf for hotspots, top-down pipeline stalls, memory-bound analysis, or roofline data. |
 | interactive-drop-selector | odin-git | Coding | Use when the user explicitly asks to choose which issues or pull requests to close interactively. |
 | interpreters | odin-native | Coding | Use when designing bytecode dispatch loops, choosing stack or register VM shapes, adding inline caches, or building a first JIT with mmap. |
@@ -348,14 +326,13 @@
 | leave-only-first-principle | odin-planning | Productivity | Use when asked to prune a design or codebase until only primitives remain, producing a first-principles map. |
 | libafl | odin-fuzzing | Security | Use when a LibAFL fuzzer needs an executor, observer, feedback, mutator, scheduler, or objective composed around a target. |
 | libfuzzer | odin-fuzzing | Security | Use when asked to build, run, or triage a coverage-guided C/C++ fuzz campaign on the libFuzzer or AFL++ engine. |
-| lifecycle-diagram | odin-visual | Design | Use when states, waits, retries, decisions, transitions, and terminals need a lifecycle view. |
 | lighter-checks | odin-testing | Coding | Use when verification is looping, would re-run untouched code, or duplicates an established proof. |
 | linkedin-ghostwriting | odin-writing | Writing | Use when a user gives a founder story or result and asks for a LinkedIn post with a chosen hook and humanized body. |
 | linker-scripts | odin-native | Coding | Use when writing a GNU ld script for a bare-metal target, placing code in a flash or RAM region, wiring .data and .bss startup, or fixing a region overflowed error. |
 | linkers-lto | odin-native | Coding | Use when choosing a linker, fixing link order or undefined symbol errors, enabling LTO or ThinLTO, or cutting dead code with --gc-sections. |
 | linux-kernel-architecture | odin-native | Coding | Use when navigating kernel source, understanding boot flow, initcall levels, or major subsystems (VFS, scheduler, MM) in linux.git. |
 | linux-kernel-modules | odin-native | Coding | Use when writing loadable kernel modules: Kbuild, module parameters, proc and sysfs entries, char devices, or ftrace debugging. |
-| linux-perf | odin-native | Coding | Use when collecting sampling profiles with perf record, reading perf report or perf annotate, or measuring counters with perf stat on Linux. |
+| linux-perf | odin-native | Coding | Use when collecting sampling profiles with perf record, reading perf report or perf annotate, measuring PMU counters with perf stat -e, or using PAPI instrumentation to interpret IPC, miss rates, MPKI, or memory bandwidth on Linux. |
 | lldb | odin-native | Coding | Use when debugging with LLDB on macOS, FreeBSD, or Linux-clang, mapping GDB commands to LLDB, Xcode or VS Code integration, LLDB Python scripting, or debugging Swift and Objective-C. |
 | llm-self-loop | odin-run | Coding | Use when a button click, dashboard check, or human verdict sits inside an iteration loop and needs an autonomous gate. |
 | llms-visibility | odin-web | Coding | Use when asked to make a site discoverable by LLM agents using llms.txt, Markdown content-negotiation, and alternate link headers. |
@@ -421,20 +398,18 @@
 | openmp | odin-native | Coding | Use when parallelizing loops or tasks with OpenMP: parallel for, schedules, reductions, data sharing, simd, target offload, OMP_* tuning, or false sharing. |
 | openocd-jtag | odin-native | Coding | Use when configuring OpenOCD for a JTAG or SWD target, flashing through it, attaching GDB to a bare-metal MCU, or setting hardware breakpoints and watchpoints. |
 | optimise-seo | odin-web | Coding | Use when asked to make a Next.js App Router app crawlable, indexable, and search-optimized for sitemaps, robots, canonicals, and Core Web Vitals. |
-| optimize | odin-code | Coding | Use when asked to optimize code, speed up a path, reduce allocations, repair a regression, or profile a target. |
+| optimize | odin-code | Coding | Use when asked to optimize code, make a path faster, make this as fast as possible, reduce allocations, repair a regression, profile a target, grill every inefficiency, or run a subsystem or repo-wide performance campaign against a measured floor; when a performance requirement, slowness report, Core Web Vitals miss, or profiling evidence identifies a bottleneck; or for an "extremely optimize" performance campaign, optimizing suspected hot paths without waiting for benchmarks, or estimating hot and complexity-neutral cold paths while refusing complexity theater. |
 | orchestration-patterns | odin-run | Coding | Use when work decomposes across subagents or role panels and needs coupling-based orchestration. |
 | os-dev-scratch | odin-native | Coding | Use when building a minimal x86-64 OS: boot protocols, long mode, page tables, IDT, PIC/APIC, serial and keyboard drivers, frame allocator, or context switching. |
 | oss-fuzz | odin-fuzzing | Security | Use when enrolling a project in OSS-Fuzz, running its helper workflow locally, or reproducing an OSS-Fuzz report. |
 | paced-explanation | odin-learn | Productivity | Use when asked to explain or teach a subsystem, module, pattern, or change in progressive layers from purpose to code depth. |
 | parallel-launch | odin-run | Coding | Use when work splits into independent sub-tasks or cross-domain research. |
 | partition-scopes-to-subagents | odin-run | Coding | Use when asked to partition non-overlapping scopes across subagents and drive each to completion. |
-| peripherals-from-datasheet | odin-native | Coding | Use when writing a register-level peripheral driver from an MCU reference manual: register map, init sequence, timing, bit definitions. |
+| peripherals-from-datasheet | odin-native | Coding | Use when reading MCU datasheets or reference manuals in documentation-reading mode for pinouts, electrical limits, register maps, clock trees, timing, or errata, or writing a register-level peripheral driver in driver-writing mode: source locations, init sequence, bit definitions, and bounded waits. |
 | perspective-complete-review | odin-review | Coding | Use when one named review viewpoint must run fix cycles until a fresh reviewer finds nothing. |
 | pgo | odin-native | Coding | Use when a C or C++ binary needs profile-guided optimization with GCC or Clang: instrumented or sampled profiles, merging, the two-stage build, or BOLT. |
 | plain-korean | odin-writing | Writing | Use when Plain English·Plain Language 원칙으로 한국어 작성·교정·검토, 쉽게 써 줘·명확하게 고쳐 줘·관료적인 표현 줄이기·쉬운 한국어/plain Korean·독자 중심 설명문·이메일·공지·README용, 의미·조건·전문용어 보존, 엄격 통제·절차는 ste-korean 우선, 원문보존·맞춤법만 요청 시 문체 유지 |
-| plan | odin-planning | Productivity | Use when a user commits to a direction and asks to plan, brief, or research it; modes score, breakdown, shape, visual. |
-| plan-review | odin-planning | Productivity | Use when a plan path or text is supplied for audit against the current codebase, or when tuning which plan-review questions fire. |
-| platform-device-model | odin-native | Coding | Use when implementing or debugging platform_driver probe/remove, sysfs attributes, device properties, or deferred probe on Linux. |
+| plan | odin-planning | Productivity | Use when a user commits to a direction and asks to plan, brief, research, or operationalize it; or wants to enumerate designs, configurations, scenarios, and paths, audit or tune a supplied plan path/text, or a plan-mode enforcement hook intercepts a plan review, or lock a greenfield architecture and interfaces. |
 | polished-web-prototype | odin-design | Design | Use when /polished-web-prototype runs or a user builds an artifact from a mockup, design plan, or brief. |
 | possible-worlds | odin-planning | Productivity | Use when a design dispute has at least two live interpretations and the caller wants worlds made explicit or a plain-language recommendation. |
 | possible-worlds-qa | odin-testing | Coding | Use when a product surface must be tested against extreme or hostile worlds. |
@@ -457,7 +432,7 @@
 | product-signal-pulse | odin-product | Productivity | Use when invoking /product-signal-pulse with an optional lookback window to query configured product signals. |
 | production-go | odin-native | Coding | Use when writing, reviewing, debugging, or architecting Go code. |
 | prohibit-bad-habits | odin-agent | Productivity | Use when a user wants to define patterns the agent should not do. |
-| project-findings-onto-graph | odin-security | Security | Use when SARIF, reviewer annotations, or third-party findings must be projected onto a program graph. |
+| project-findings-onto-graph | odin-security | Security | Use when graph-backed security analysis is needed: project SARIF or reviewer findings onto a program graph; build or query a multi-language graph; summarize Trailmark structure; map smart-contract entry points; compare two refs or snapshots; or hunt confirmed vulnerability variants with pattern or graph seeding. |
 | prompt-optimizer | odin-skills | Productivity | Use when asked to improve, optimize, rewrite, tune, or port a prompt, skill, or tool description. |
 | promql-cli | odin-infra | Infrastructure | Use when asked to execute or investigate a PromQL expression against a Prometheus server. |
 | proof-driven | odin-testing | Coding | Use when property-based testing, theorem proving, or formal proof tactics require zero unproven properties. |
@@ -490,9 +465,8 @@
 | reproduce-and-fix-issues | odin-code | Coding | Use when a trusted bug or performance report needs reproduction and fix. |
 | reproduce-bug-report | odin-testing | Coding | Use when a bug report or UI-visible defect exists. |
 | research | odin-research | Research | Use when researching a named library, framework, SDK, API, or service, or finding a migration guide. |
-| resolve | odin-git | Coding | Use when addressing review feedback: analyze mode classifies comment validity, reception mode applies accepted items with tests and drafts pushback. |
+| resolve | odin-git | Coding | Use when addressing review feedback in analyze or reception mode, or handling GitHub PR feedback in autonomous, interactive, or summary mode for a named PR target. |
 | resolve-merge-conflicts | odin-git | Coding | Use when a merge, rebase, cherry-pick, or stash pop stops on conflicts. |
-| resolve-pr-feedback | odin-git | Coding | Use when handling GitHub PR review feedback: autonomous fix-and-resolve, interactive per-comment walkthrough, or read-only severity summary. |
 | resource-optimization-lowend | odin-native | Coding | Use when reducing flash or RAM usage on constrained MCUs, analyzing stack depth, reading linker map files, or tuning -Os size-versus-speed tradeoffs on bare-metal and small RTOS images. |
 | respond-to-slack-thread | odin-run | Coding | Use when the user asks to reply to or follow up on a specific Slack thread. |
 | restart-keeping-lessons | odin-code | Coding | Use when an implementation has more workarounds than structure and another patch will not pay. |
@@ -515,41 +489,35 @@
 | rust-formal-verification | odin-formal | Coding | Use when Rust code, especially unsafe or panic-critical paths, needs a Kani, Verus, or Creusot harness written, run, and its failure read. |
 | rust-no-std | odin-native | Coding | Use when writing #![no_std] Rust crates, using core and alloc without std, selecting panic handlers, or testing no_std code on the host. |
 | rust-profiling | odin-native | Coding | Use when profiling Rust binaries with flamegraphs, cargo-bloat, cargo-llvm-lines, Criterion, perf, heaptrack, or DHAT. |
-| rust-sanitizers-miri | odin-native | Coding | Use when running AddressSanitizer, ThreadSanitizer, MemorySanitizer, UndefinedBehaviorSanitizer, or Miri on Rust code, interpreting sanitizer output, or validating unsafe code for undefined behaviour. |
 | rust-security | odin-native | Coding | Use when auditing Rust dependencies for vulnerabilities, enforcing license and source policies with cargo-deny, reviewing RUSTSEC advisories, or fuzzing and testing unsafe code for security. |
 | rust-security-review | odin-security | Security | Use when asked for a Rust security or correctness audit of a crate, service, or library with unsafe, FFI, concurrency, async, or untrusted-input code. |
 | rust-unsafe | odin-native | Coding | Use when writing, reviewing, or auditing unsafe Rust, or understanding raw pointers, transmute, UnsafeCell, and safe abstractions over unsafe code. |
 | rustc-basics | odin-native | Coding | Use when selecting RUSTFLAGS, configuring Cargo profiles, tuning release builds, reading assembly or MIR output, understanding monomorphization, or diagnosing compilation errors. |
 | ruzzy | odin-fuzzing | Security | Use when asked to set up and run coverage-guided fuzzing of Ruby code or C extensions with Ruzzy, producing crash reports or clean campaign summaries. |
 | saga | odin-run | Coding | Use when a user runs saga or asks to autonomously build a sizable feature. |
-| sanitizers | odin-native | Coding | Use when enabling or interpreting ASan, UBSan, TSan, MSan, LSan, or HWASan with GCC or Clang, or reading sanitizer reports. |
+| sanitizers | odin-native | Coding | Use when building, running, or interpreting ASan, UBSan, TSan, MSan, LSan, HWASan, or Miri for native or Rust code, including memory-corruption debugging, unsafe-code validation, and sanitizer CI wiring. |
 | sarif-parsing | odin-review | Coding | Use when a user supplies existing SARIF to inspect, filter, aggregate, deduplicate, diff, convert, or gate findings. |
 | save-md | odin-writing | Writing | Use when asked to save a URL, file, or pasted text as a .md file with frontmatter, without summarizing. |
-| scaffold-cli | odin-typescript | Coding | Use when asked to create a complete Node.js 24 TypeScript 7 command-line project. |
 | scaffold-exercises | odin-learn | Productivity | Use when a course needs numbered problem, solution, and explainer scaffolds. |
-| scaffold-nextjs | odin-typescript | Coding | Use when asked to scaffold a Next.js turborepo end to end and verify it. |
+| scaffold-nextjs | odin-typescript | Coding | Use when asked to scaffold a Next.js turborepo, Vercel app, or Node.js 24 TypeScript 7 CLI project, including scaffold-cli mode. |
 | schedule-dependency-waves | odin-run | Coding | Use when work units carrying declared dependencies must be ordered into execution waves before any dispatch, including detecting a dependency cycle. |
 | scheduler | odin-run | Coding | Use when asked to set, list, pause, update, or delete a reminder or local task that fires at a confirmed time or interval. |
 | scrape | odin-research | Research | Use when the user runs /scrape with a URL to extract page data and media through a browser and save assets with a manifest locally. |
 | secure-npm-package | odin-release | Coding | Use when creating or hardening an npm release with Trusted or Staged Publishing, including E404 packages sequenced after first publish. |
 | security-finding-verification | odin-security | Security | Use when a named security allegation needs a true-positive or false-positive verdict. |
 | security-hardening | odin-security | Security | Use when adding security controls for untrusted input, auth/authz, data storage, or external integrations. |
-| security-review | odin-security | Security | Use when changes touch auth, parsing, dependencies, network, or pre-release, or a diff or baseline needs regression review. |
+| security-review | odin-security | Security | Use when changes touch auth, parsing, dependencies, network, or pre-release, or a diff or baseline needs regression review, or the user asks for a security review, vulnerability audit, or OWASP review of a supplied file, diff, or component, covering injection, XSS, auth, or crypto, with high-confidence findings only (mode: confirmed), or an API, configuration schema, cryptographic interface, authentication surface, or library design is audited for misuse resistance or footguns at a caller-named target (mode: edges, inline or delegated specialist). |
 | seed-casebook | odin-run | Coding | Use when a user opens a build cycle in a repo with an iteration convention and wants the casebook seeded with real content. |
 | semgrep-rule-authoring | odin-security | Security | Use when a vulnerability or pattern and target language need a new Semgrep rule, or an existing rule needs porting to another language. |
 | semgrep-security-scan | odin-security | Security | Use when a user asks for a Semgrep security scan or fast pattern-based scan of a codebase. |
 | seo-aeo-audit | odin-web | Coding | Use when asked to improve SEO, optimize for search, fix meta tags, add structured data, or improve AEO visibility. |
-| sequence-diagram | odin-visual | Design | Use when a user asks to visualize a time-ordered interaction. |
 | session-share | odin-knowledge | Productivity | Use when the user asks to beam, publish, or share the current local coding session to an authenticated remote receiver. |
 | session-viewer | odin-knowledge | Productivity | Use when the user asks to view, export, or inspect a session transcript in a browser. |
 | setup | odin-agent | Productivity | Use when the user asks to set up the agent environment. |
-| setup-gitignore | odin-git | Coding | Use when the user says set up gitignore, fix gitignore, or untracked files keep appearing. |
-| setup-pre-commit | odin-git | Coding | Use when installing or repairing a repo-local pre-commit hook from the project gates, or when a repo needs package-manager-native commit-time checks. |
 | setup-repo-skills | odin-git | Coding | Use when the user wants one-time repository setup for tracker, triage labels, and domain conventions. |
 | setup-ts-deep-modules | odin-typescript | Coding | Use when asked to enforce boundaries, set up deep modules, stop deep imports, mutation-prove rules, or make entry-point packages. |
-| sharp-edges | odin-security | Security | Use when asked to audit a code surface for misuse resistance or security edge cases, including delegated specialist analysis with exploitability validation (mode: specialist). |
 | shipping | odin-release | Coding | Use when deploying to production, planning a feature release, setting up launch safeguards, or running a canary release. |
-| show-me | odin-visual | Design | Use when the user says show this or diagram this about the current topic. |
+| show-me | odin-visual | Design | Use when asked to show/diagram: comparison table, data record, metric card, stepper, mockup, numeric chart, interactive explainer. |
 | show-me-your-work | odin-run | Coding | Use when the user invokes it to append a structured decision record to an append-only TSV log, ending with an Attention section for reviewers. |
 | show-review | odin-review | Coding | Use when the user wants a per-finding visual walk through a diff or PR. |
 | show-way | odin-planning | Productivity | Use when the user asks for a flattened view of roadmaps and next actions. |
@@ -615,7 +583,6 @@
 | todos-update | odin-planning | Productivity | Use when user asks to update todos, resync the task list, say what to do next, or plan and tree have drifted apart. |
 | token-integration-analyzer | odin-security | Security | Use when a token implementation or integration needs standards, privilege, nonstandard-behavior, and defensive-integration analysis. |
 | toolchain-health | odin-infra | Infrastructure | Use when the user runs /toolchain-health and wants a trustworthy green/yellow/red verdict on the installed toolchain with ranked repairs. |
-| trailmark-structural | odin-security | Security | Use when a target needs a Trailmark summary of languages, entrypoints, dependencies, or a snapshot of hotspots, taint, blast radius, subgraphs. |
 | training-report | odin-writing | Writing | Use when a trainer wants a training session or workshop documented as a compte rendu with a final .docx. |
 | triage-security-finding | odin-security | Security | Use when exactly one concrete security finding with a source anchor needs a verdict before PoC work. |
 | triton-lang | odin-native | Coding | Use when writing Triton kernels with @triton.jit, tl.load and tl.store with masking, tl.atomic_add, autotuning, benchmarking, or integrating kernels into PyTorch. |
@@ -633,7 +600,6 @@
 | valgrind | odin-native | Coding | Use when running Valgrind Memcheck for heap errors, leaks, or uninitialised reads on an unmodified binary, or Cachegrind, Callgrind, or Massif profiling. |
 | validate-changes-match-specs | odin-review | Coding | Use when asked to compare implementation against repository specs, report mismatches, resolve by user decision, or check PR-review commitments. |
 | validation-first-driven | odin-testing | Coding | Use when protocols, workflows, concurrency, or lifecycle state need states, transitions, and temporal properties. |
-| variant-hunt | odin-security | Security | Use when a confirmed root cause must be searched across a codebase, turned into a search rule, or seeded from graph neighbors. |
 | vector-forge | odin-security | Security | Use when crypto implementations and a vector harness need mutation-driven cross-implementation test vector expansion. |
 | verification-before-completion | odin-core | Coding | Use when a task, feature, or fix is called done, complete, finished, or fixed, or before a commit, PR, or next task. |
 | verification-skill | odin-testing | Coding | Use when asked to create a project-local executable verification skill, or repair one whose commands, paths, or assertions drifted. |
@@ -645,7 +611,6 @@
 | visual-argument-diagram | odin-visual | Design | Use when a user wants a conceptual, workflow, or architecture diagram, a layout repair, or a PNG render of an existing .excalidraw file. |
 | visual-diagram | odin-visual | Design | Use when asked to diagram, or a tool or --quick flag renders a structured spec to HTML. |
 | visual-diff-review | odin-review | Coding | Use when asked to review a diff and produce a 7-section visual page. |
-| visualise-widget | odin-visual | Design | Use when a user requests a comparison table, data record, metric card, stepper, or mockup widget, a numeric chart, or an interactive explainer. |
 | vulnerability-triage-brocards | odin-security | Security | Use when a vulnerability report, CVE, bug-bounty submission, or automated finding needs triage before deep verification. |
 | wait-what | odin-learn | Productivity | Use when the user says "wait, what", "the explanation is unclear", "say that again", or asks to restate the last response in plain language. |
 | walk-with-me | odin-learn | Productivity | Use when the user wants to be walked through code, not handed a report: "walk through this", "guided code walk", or "explain this codebase". |
@@ -655,7 +620,6 @@
 | watch-for | odin-run | Coding | Use when monitoring a file, log, endpoint, or artifact for drift or errors, or polling a target until a predicate holds. |
 | watch-for-harness-mode | odin-run | Coding | Use when a proven watch pattern should become a reusable harness artifact with configurable inputs. |
 | watch-for-structured | odin-run | Coding | Use when the user wants to classify a surface state and page an on-call API when triggered. |
-| waterfall-guide | odin-planning | Productivity | Use when a user wants to lock greenfield architecture and interfaces early for coherent parallel execution. |
 | wayfinder | odin-planning | Productivity | Use when a greenfield project or large feature build will not fit in a single agent session. |
 | web-accessibility-audit | odin-design | Design | Use when the user requests an accessibility audit, a11y check, or WCAG compliance review. |
 | web-design-review | odin-design | Design | Use when the user runs /web-design-review with a URL to visually audit and fix a live UI. |
@@ -668,15 +632,13 @@
 | wontfix | odin-git | Coding | Use when the user wants to elicit refused directions, generalize them, and close matching tracker items as not planned. |
 | work | odin-run | Coding | Use when implementing from a plan, spec, clear build request, or settled ticket, orchestrated or standalone. |
 | work-records-summary | odin-knowledge | Productivity | Use when the user asks to discover, group, and summarize work records across multiple systems for a given period or project. |
-| workflow-diagram | odin-visual | Design | Use when a user asks to visualize a process, approval flow, runbook, CI/CD path, responsibility lanes, or tool calls. |
 | workflow-evidence-mining | odin-knowledge | Productivity | Use when authorized workflow history may contain a repeated process worth extracting and replay-testing. |
 | workflow-from-chats | odin-knowledge | Productivity | Use when a user asks to mine recent chats for workflow preferences. |
 | workflows-driven | odin-run | Coding | Use when work decomposes across subagents or phases: audits, migrations, research sweeps, or scale one context cannot hold. |
 | workspace-unfreeze | odin-agent | Productivity | Use when the user runs /workspace-unfreeze on a frozen path to make it editable again. |
-| worktree | odin-git | Coding | Use when work needs an isolated git worktree: new work, an existing ref, a gated feature workspace with baseline tests, or a manifest-tracked loop run. |
+| worktree | odin-git | Coding | Use when work needs an isolated git worktree: new work, an existing ref, a gated feature workspace, a manifest-tracked loop run, or a candidate patch captured without touching the current checkout (`capture-isolated-patch`). |
 | write-product-spec | odin-product | Productivity | Use when a user asks for a product spec with invariants, a tech spec, or a PRD. |
 | writing-beats | odin-writing | Writing | Use when a grounded piece needs user-selected beat-by-beat assembly of verbatim beats. |
-| writing-char-drivers | odin-native | Coding | Use when writing a Linux char driver: file_operations, cdev, copy_to_user, ioctl commands, device memory mmap, or poll. |
 | writing-for-agents | odin-skills | Productivity | Use when authoring or restructuring an agent-consumed document, a SKILL.md or skill directory, writing skills, or deciding a skill split-or-monolith disclosure question. |
 | writing-fragments | odin-writing | Writing | Use when exploration needs heterogeneous noticings captured before structure. |
 | writing-isabelle-proofs | odin-formal | Coding | Use when a proof needs Isabelle/HOL, its Sledgehammer automation, or an AFP session. |

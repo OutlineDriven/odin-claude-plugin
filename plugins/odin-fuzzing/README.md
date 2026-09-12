@@ -2,7 +2,7 @@
 
 ODIN workflows for fuzz harnesses, fuzzer setup, sanitizers, and coverage analysis.
 
-12 skills, category Security. Install the whole plugin below, or take a single skill with `gh skill install`.
+11 skills, category Security. Install the whole plugin below, or take a single skill with `gh skill install`.
 
 ## Install
 
@@ -33,7 +33,6 @@ Each row states when to reach for the skill. Invoke one as `/odin-fuzzing:<name>
 
 | Skill | Trigger |
 |---|---|
-| address-sanitizer | Use when building or running native code under AddressSanitizer, interpreting an existing ASan report, or debugging a memory-corruption failure. |
 | atheris | Use when a user needs coverage-guided fuzzing for Python code or a Python native extension using Atheris. |
 | cargo-fuzz | Use when initializing, running, measuring coverage, or triaging a cargo-fuzz target in a Rust crate. |
 | fuzz-harness-writing | Use when a user needs to create or improve a deterministic, engine-agnostic fuzz harness for raw or structured target inputs. |

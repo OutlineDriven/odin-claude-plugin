@@ -12,7 +12,7 @@ Copyright: Copyright (c) 2025 Every
 Local adaptations: autolearn, autopilot, brainstorm, changed-route-browser-testing, commit,
   compound, diff-scoped-browser-qa, doc-review, document-collaboration, explainer-artifact,
   feedback-sweep, model-retuning, optimize, plan, pov, product-signal-pulse,
-  recorded-feedback-analysis, release-promotion, resolve-pr-feedback, review, simplify,
+  recorded-feedback-analysis, release-promotion, resolve, review, simplify,
   strategy, subagent-driven, work, worktree, xcode-simulator-testing
 
 EveryInc/compound-knowledge-plugin
@@ -40,7 +40,7 @@ Copyright: Copyright (c) 2026 LilMGenius
 Local adaptations: autolearn, catchup, askme, clean-and-true, commit, cross-lens-converge,
   cross-run-playbook, cycle-memo, debloat-respect-richness, decision-rationale-gaps, deslop,
   evaluation-leakage-audit, fresh-reader-review, generalize, guardrail-carve-run,
-  instruction-understanding-gate, land-contribution, mutual-sync, next-best-action,
+  land-contribution, mutual-sync, next-best-action,
   post-change-check-gate, prism, release-gate, reorder, reorder-respect-deliberate,
   restart-keeping-lessons, rewrite-clean-v0, rewrite-denoise-v0, seed-casebook,
   size-the-run, ssotize-audit-fold, todos-update, unslop, upgrade-catalog, verify-both-ways
@@ -70,13 +70,13 @@ Local adaptations: audit-project, can-i-help, deslop, drift-detect, onboard, syn
 bentossell/visualise
 Source: https://github.com/bentossell/visualise/tree/35cd185b58af5db2f9d0fe13d9872b544a467483
 License: MIT (README declaration, no LICENSE file) (https://opensource.org/licenses/MIT)
-Local adaptations: visual-diagram, visualise-widget
+Local adaptations: visual-diagram, show-me
 
 cobusgreyling/loop-engineering
 Source: https://github.com/cobusgreyling/loop-engineering/tree/d03dcb92cc1e0efb59789a2557131c6ad5897ccc
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Cobus Greyling and contributors
-Local adaptations: append-run-log, audit-loop-scaffold, capture-isolated-patch,
+Local adaptations: append-run-log, audit-loop-scaffold,
   changelog-updates, ci-fix, corroborate-by-independent-reruns, dependency-sweeper,
   diagnose-loop-health, enforce-workflow-constraints, gate-proposed-change, goal-init,
   worktree, issue-triage, negotiate-run-budget, post-merge-cleanup, propose-external-change,
@@ -89,7 +89,7 @@ Copyright: Copyright (c) 2026 Lauren Tan
 Local adaptations: artifact-arena, automate-me, blast-radius, check-agent-compatibility,
   cli-for-agents, cloud-task-orchestrator, continual-learning, control-cli, control-ui,
   create-learning-path, create-plugin-scaffold, create-verification-skill, cursor-sdk,
-  docs-canvas, figure-it-out, resolve-pr-feedback, how, interrogate, learning-retrospective,
+  docs-canvas, figure-it-out, resolve, how, interrogate, learning-retrospective,
   maintain-verification-skill, make-bot-ui, make-pr-easy-to-review, new-branch-and-pr,
   no-comments, paced-explanation, pr-review-canvas, principles, why, recall, reflect,
   reproduce-and-fix-issues, review-and-ship, review-plugin-submission, run-smoke-tests,
@@ -116,7 +116,7 @@ Copyright: Copyright (c) 2026 Garry Tan
 Local adaptations: autoplan, browse, browser-cookie-store, browser-qa, canary-deploy,
   deployment-setup, design, design-variants, developer-experience-review, docs-update,
   docs-writing, engineering-retrospective, idea-to-design, ios-build-cleanup, ios-build-fix,
-  ios-visual-review, issue-intake, markdown-to-pdf, merge-and-deploy, plan-review,
+  ios-visual-review, issue-intake, markdown-to-pdf, merge-and-deploy, plan,
   polished-web-prototype, release-gate, release-landing-report, scrape, skill-benchmark,
   toolchain-health, web-design-review, workspace-unfreeze
 
@@ -134,7 +134,7 @@ Local adaptations: agent-environment-retrospective, answer-stub-questionnaire, a
   askme, design-it-twice, docs-and-adrs, domain-modeling, git-guardrails, grill-with-docs,
   handoff, implement-spec, journey-trace-wizard, loop-me, mutation-proven-boundaries,
   package-native-pre-commit, prototype, replace-unsafe-typescript-assertions, research,
-  resolve-merge-conflicts, review, scaffold-exercises, setup-pre-commit, setup-repo-skills,
+  resolve-merge-conflicts, review, scaffold-exercises, setup-repo-skills,
   setup-ts-deep-modules, sourced-learning-workspace, spec-driven, teach, to-questionnaire,
   to-spec, to-tickets, wait-what, wayfinder, wizard, writing-beats, writing-for-agents,
   writing-fragments, writing-shape
@@ -145,7 +145,7 @@ License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Matthew Blode
 Local adaptations: agents-md, autoship, ax-audit, copywriting, docs-writing, dx-audit, eli5,
   multi-tenant-architecture, optimise-seo, plan, presentation-creator, product-design,
-  save-md, scaffold-cli, scaffold-nextjs, typography-audit, ui-animation, ui-design
+  save-md, scaffold-nextjs, typography-audit, ui-animation, ui-design
 
 mcollina/skills
 Source: https://github.com/mcollina/skills/tree/856efd268ae85482d882f3d0bed869fd020b5c06
@@ -162,7 +162,7 @@ nicobailon/visual-explainer
 Source: https://github.com/nicobailon/visual-explainer/tree/7163c3e10660912e0b89e1af465db9f387282b88
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2025 Nico Bailon
-Local adaptations: lockstep-version-guard, plan-review, quick-spec-render, visual-diagram,
+Local adaptations: lockstep-version-guard, quick-spec-render, visual-diagram,
   visual-diff-review, verify-both-ways, plan, catchup, presentation-creator
 
 obra/superpowers
@@ -204,8 +204,7 @@ Source: https://github.com/tt-a1i/archify/tree/b36d79fdbc3aec3728744341485a7e79f
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 tt-a1i (Archify); Copyright (c) 2025 Cocoon AI (original
   architecture-diagram-generator)
-Local adaptations: architecture-diagram, dataflow-diagram, lifecycle-diagram, sequence-diagram,
-  workflow-diagram
+Local adaptations: visual-diagram
 
 vshulcz/deja-vu
 Source: https://github.com/vshulcz/deja-vu/tree/6f766fd4716edcaf24662c794368e420e5058f47
@@ -226,7 +225,7 @@ Source: https://github.com/warpdotdev/common-skills/tree/f589e224907eda566c13755
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Denver Technologies, Inc.
 Local adaptations: brand-authority, check-impl-against-spec, council, cross-critique,
-  pr-walkthrough, readout, reproduce-bug-report, resolve-pr-feedback, saga, skill-doctor,
+  pr-walkthrough, readout, reproduce-bug-report, resolve, saga, skill-doctor,
   spec-driven-implementation, subagent-survey-research, validate-changes-match-specs,
   write-feature-docs, create-pull-request, write-product-spec
 
@@ -254,15 +253,15 @@ License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 chessMan
 Local adaptations: abi-and-calling-conventions, adc-dac-baremetal, af-xdp, apple-silicon,
   arm-sve, assembly-arm, assembly-riscv, assembly-x86, baremetal-startup, bazel,
-  binary-hardening, binutils, bootloaders-embedded, branch-prediction-and-speculation,
-  build-acceleration, bus-drivers-i2c-spi, carbon-lang, cargo-workflows, clang, cmake,
+  binutils, bootloaders-embedded, branch-prediction-and-speculation,
+  build-acceleration, carbon-lang, cargo-workflows, clang, cmake,
   code-generation-and-backends, compiler-frontend, compiler-optimizations-deep, conan-vcpkg,
   concurrency-debugging, containers-internals, core-dumps, cpp-coroutines, cpp-modules,
   cpp-templates, cpu-cache-opt, cpu-pipelines-and-hazards, cross-gcc, cuda, cuda-debugging,
-  cuda-profiling, custom-allocators, datasheet-and-refmanual-reading, debug-optimized-builds,
-  device-drivers, device-tree, dma-baremetal, dpdk, dwarf-debug-format, dynamic-linking, ebpf,
-  ebpf-rust, elf-inspection, embedded-rust, flamegraphs, freertos, fuzzing, gcc, gdb,
-  gpio-baremetal, gpu-memory-model, hardware-counters, hare-lang, heaptrack, hip-rocm,
+  cuda-profiling, custom-allocators, debug-optimized-builds,
+  device-drivers, dma-baremetal, dpdk, dwarf-debug-format, dynamic-linking, ebpf,
+  elf-inspection, embedded-rust, flamegraphs, freertos, fuzzing, gcc, gdb,
+  gpio-baremetal, gpu-memory-model, hare-lang, heaptrack, hip-rocm,
   hypervisor-internals, include-what-you-use, intel-vtune-amd-uprof, interpreters,
   interrupts-and-exceptions-baremetal, io-uring, jit-compilation, kernel-concurrency,
   kernel-debugging, kernel-debugging-advanced, kernel-internals, kernel-memory-management,
@@ -270,14 +269,14 @@ Local adaptations: abi-and-calling-conventions, adc-dac-baremetal, af-xdp, apple
   linux-kernel-modules, linux-perf, lldb, llvm, llvm-ir-and-passes, llvm-passes,
   low-power-embedded, make, memory-hierarchy-and-caches, memory-model, meson, mlir,
   mmio-and-bit-manipulation, mpi, msvc-cl, ninja, numa-programming, openmp, openocd-jtag,
-  os-dev-scratch, peripherals-from-datasheet, pgo, platform-device-model, protocol-analysis,
+  os-dev-scratch, peripherals-from-datasheet, pgo, protocol-analysis,
   qemu-embedded-simulation, qemu-for-kernel-development, qemu-kvm, rdma-verbs,
   resource-optimization-lowend, reverse-engineering, riscv-privileged, rust-async-internals,
   rust-build-times, rust-cross, rust-debugging, rust-ffi, rust-no-std, rust-profiling,
-  rust-sanitizers-miri, rust-security, rust-unsafe, rustc-basics, sanitizers, simd-intrinsics,
+  rust-security, rust-unsafe, rustc-basics, sanitizers, simd-intrinsics,
   spi-i2c-baremetal, static-analysis, stm32-baremetal, strace-ltrace, timers-pwm-baremetal,
   triton-lang, uart-serial-baremetal, valgrind, verilog-basics-for-lowlevel,
-  virtual-memory-paging-and-tlb, wasm-emscripten, wasm-wasmtime, writing-char-drivers, zephyr,
+  virtual-memory-paging-and-tlb, wasm-emscripten, wasm-wasmtime, zephyr,
   zig-build-system, zig-cinterop, zig-compiler, zig-comptime, zig-cross, zig-debugging,
   zig-testing
 
@@ -323,7 +322,7 @@ Source: https://github.com/getsentry/skills/tree/c2f99a5b04b4cd992ec3022d7c2c3e2
 License: Apache-2.0 (https://www.apache.org/licenses/LICENSE-2.0)
 Copyright: Copyright 2025 Functional Software, Inc. dba Sentry
 Local adaptations: agents-md, blog-writing-guide, brand-guidelines, claude-settings-audit,
-  confirmed-security-review, create-branch, django-access-review, django-perf-review,
+  security-review, create-branch, django-access-review, django-perf-review,
   doc-coauthoring, document-api-endpoint, eligibility-batch-organizer, gh-review-requests,
   gha-security-review, infrastructure-mentor, create-pull-request, presentation-creator,
   prompt-optimizer, publish-pr, skill-scanner, skill-writer, typing-exclusion-worker,
@@ -353,28 +352,28 @@ trailofbits/skills
 Source: https://github.com/trailofbits/skills/tree/d1f1575cff97816e5cc08af66cd2506099c681d3
 License: CC-BY-SA-4.0 (https://creativecommons.org/licenses/by-sa/4.0/legalcode)
 Copyright: Made by Trail of Bits
-Local adaptations: address-sanitizer, agentic-actions-injection-audit, atheris,
+Local adaptations: sanitizers, agentic-actions-injection-audit, atheris,
   audit-context-building, burpsuite-project-parser, c-security-review, cargo-fuzz,
   chain-vulnerability-scanner, chrome-mcp-troubleshooting, codeql-security-analysis,
   constant-time-analysis, crypto-protocol-diagram, culture-burnout-detection,
   culture-conflict-mediation, culture-interview-debrief,
   culture-interview-profile-prediction, culture-manager-coaching, culture-onboarding-plan,
   devcontainer-setup, diagramming-code, security-review, dimensional-analysis, dwarf-expert,
-  entropy-assisted-planning, entry-point-analyzer, firebase-apk-scanner,
+  entropy-assisted-planning, project-findings-onto-graph, firebase-apk-scanner,
   function-audit-context-analyzer, fuzz-harness-writing, fuzzing-coverage-analysis,
   fuzzing-dictionary, fuzzing-obstacles, git-cleanup, github-backlog-triage,
-  goal-prompt-drafting, graph-evolution, insecure-default-discovery, libafl, libfuzzer,
+  goal-prompt-drafting, insecure-default-discovery, libafl, libfuzzer,
   mermaid-to-proverif, model-challenge, modern-cpp-practices, modern-python,
   mutation-campaign-configuration, mutation-triage-genotoxic, open-source-license-selection,
   open-source-readiness-audit, oss-fuzz, prepare-repository-for-public-release,
   property-test-authoring, rust-security-review, ruzzy, sarif-parsing,
   security-finding-verification, semgrep-rule-authoring, semgrep-rule-variant-creator,
-  semgrep-security-scan, sharp-edges, agent-surface-forge, slicing-code-context,
+  semgrep-security-scan, agent-surface-forge, slicing-code-context,
   smart-contract-audit-prep, smart-contract-guidelines-advisor,
   smart-contract-secure-workflow, spec-to-code-compliance, supply-chain-risk-auditor,
   testing-handbook-generator, token-integration-analyzer, trailmark-audit-augmentation,
   trailmark-code-graph, trailmark-finding-triage, trailmark-review-gate,
-  trailmark-structural, variant-hunt, vector-forge, vulnerability-triage-brocards,
+  vector-forge, vulnerability-triage-brocards,
   writing-lean-proofs, wycheproof, yara-rule-authoring, zeroize-audit
 
 The preceding material is attributed to Trail of Bits and was modified for ODIN 2.0. It is
