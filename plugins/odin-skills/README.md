@@ -53,7 +53,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-skills:<name>`
 | skill-scanner | Use when a user asks to scan, audit, or validate a skill for security issues. |
 | skills-visibility | Use when a publisher wants a discoverable, integrity-protected agent-skill catalog served from a domain they control. |
 | testing-handbook-generator | Use when the user asks to discover, generate, refresh, or validate skills from the Trail of Bits Testing Handbook or appsec.guide. |
-| writing-for-agents | Use when authoring or restructuring an agent-consumed document, a SKILL.md or skill directory, or deciding a skill split-or-monolith disclosure question. |
+| writing-for-agents | Use when authoring or restructuring an agent-consumed document, a SKILL.md or skill directory, writing skills, or deciding a skill split-or-monolith disclosure question. |
 
 ## Workflows
 

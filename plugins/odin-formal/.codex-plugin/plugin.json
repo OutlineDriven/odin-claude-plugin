@@ -1,6 +1,6 @@
 {
   "name": "odin-formal",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "description": "ODIN workflows for formal methods: model checking, SMT solving, deductive verification, and proof assistants.",
   "keywords": [
     "odin",
