@@ -24,8 +24,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   cutting the autoload catalog from 622 to 362; each stays reachable by
   `/skill:<slug>`.
 - Stale version pins corrected to the `<languages>` table: Rust edition 2024
-  (`rust-version = "1.85"`) in `cargo-workflows`, Python 3.14 in
-  `cpu-kernel-authoring` and `gate-file-completion`.
+  (`rust-version = "1.85"`, `resolver = "3"`) in `cargo-workflows`. The Python
+  floors in `cpu-kernel-authoring` and `gate-file-completion` stay at their
+  real requirements (3.11+ and 3.10+); the 3.14 pin is a generated-code target.
 
 ### Retired
 - `finish-it-now` → `do-it-now`
