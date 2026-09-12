@@ -1,3 +1,0 @@
-interface:
-  display_name: "Instruction Understanding Gate"
-  short_description: "Use when a request is long, bundled, high-stakes, or has ambiguous referents."
