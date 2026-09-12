@@ -11,8 +11,8 @@ description: 'Use when work units carrying declared dependencies must be ordered
 |---|---|
 | Trigger | Work units with declared dependencies must be ordered before dispatch, or a dependency set must be checked for cycles. |
 | Authority | Read-only on the work tree; writes only the named schedule artifact. Rollback is deleting that artifact. No remote mutation. Not a write-set partitioner and not a dispatcher. |
-| Side effect | One schedule artifact listing waves in topological order, plus the unscheduled set when a cycle exists. |
-| Done | Every supplied unit appears in exactly one wave with all its dependencies in earlier waves, or a cycle is reported with the participating units named and no schedule emitted. |
+| Side effect | One schedule artifact listing waves in topological order, or a chat failure report listing the cycle participants and unscheduled units when scheduling fails. |
+| Done | Every supplied unit appears in exactly one wave with all its dependencies in earlier waves, or a failure report names the cycle participants and unscheduled units with no schedule emitted. |
 
 ## Inputs
 
@@ -24,7 +24,7 @@ description: 'Use when work units carrying declared dependencies must be ordered
 
 1. **Collect the units and their declared dependency edges.** Build the dependency graph from the supplied units and edges only. Reject any edge whose endpoint is not a supplied unit: name the edge and its missing endpoint in the rejection, and do not silently drop it. **Done when:** the graph contains exactly the supplied units and only edges whose both endpoints are supplied units, with every rejected edge named.
 
-2. **Detect cycles before assigning any wave.** Run cycle detection over the graph. If a cycle exists, stop: name the participating units, emit no schedule, and leave the artifact path unwritten. A partial schedule that hides a cycle is worse than no schedule. **Done when:** the graph is shown acyclic, or the cycle members are named and no schedule is emitted.
+2. **Detect cycles before assigning any wave.** Run cycle detection over the graph. If a cycle exists, stop: in chat, name the participating units and every unscheduled unit, emit no schedule, and leave the artifact path unwritten. A partial schedule that hides a cycle is worse than no schedule. **Done when:** the graph is shown acyclic, or the failure report names the cycle members and unscheduled units with no schedule emitted.
 
 3. **Assign each unit to the earliest wave after all its dependencies.** A unit's wave is one past the highest wave of its dependencies; units with no dependencies take wave one. Each unit lands in exactly one wave. **Done when:** every supplied unit is assigned to exactly one wave with all its dependencies in strictly earlier waves.
 
@@ -34,7 +34,7 @@ description: 'Use when work units carrying declared dependencies must be ordered
 
 ## Failure and recovery
 
-- Cycle detected: Name the participating units, emit no schedule, and leave the artifact path unwritten. Suggest the caller repair the declared edges, then re-run on the corrected set. Never emit a partial schedule for a cyclic graph.
+- Cycle detected: Emit a chat failure report naming the participating units and unscheduled units, emit no schedule, and leave the artifact path unwritten. Suggest the caller repair the declared edges, then re-run on the corrected set. Never emit a partial schedule for a cyclic graph.
 - Edge to an unknown unit: Reject the edge and name it with its missing endpoint. Do not silently drop it and do not guess a substitute unit. Re-run once the caller either supplies the missing unit or withdraws the edge.
 - Empty unit set: Report that there is nothing to schedule rather than emitting an empty artifact. Leave the artifact path unwritten.
 - Unreadable or duplicated unit names: Ask the caller to disambiguate before scheduling; duplicate names would place one unit in two waves and break the Done condition.
