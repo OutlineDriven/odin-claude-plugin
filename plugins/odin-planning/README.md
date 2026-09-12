@@ -53,7 +53,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-planning:<name
 | loop-me | Use when the user says "loop me" or asks to design a recurring workflow. |
 | minimap | Use when the user needs a compact read-only current-work view from Git state, recorded test evidence, and optional graph.yaml. |
 | next-best-action | Use when a project is between phases, the author asks what to do next, too many threads are open, or work needs re-entry. |
-| plan | Use when a user commits to a direction and asks to plan, brief, research, or operationalize it; or wants to enumerate designs, configurations, scenarios, and paths, audit or tune a supplied plan path/text, or a plan-mode enforcement hook intercepts a plan review, or lock a greenfield architecture and interfaces. |
+| plan | Use when a user commits to a direction and asks to plan, brief, research, or operationalize it; or wants to enumerate designs, configurations, scenarios, and paths, audit a supplied plan, tune the review flow, or a plan-mode enforcement hook intercepts a plan review, or lock a greenfield architecture and interfaces. |
 | possible-worlds | Use when a design dispute has at least two live interpretations and the caller wants worlds made explicit or a plain-language recommendation. |
 | pov | Use when asked to judge whether to adopt, switch, reject, or revisit technology, library, pattern, or architecture, or a second opinion. |
 | readiness-assessment | Use when a user asks for a gut-check on a decision or action, or asks whether enough is known to proceed. |

@@ -19,11 +19,11 @@ Five mode names share one authority: reversible local writes to the resolved tar
 
 ## Inputs
 
-- **Mode (optional, exact values when supplied):** `full`, `extremely-optimize`, `quick`, `fastopt`, or `fastopt-extreme`. The mode selects exactly one route; do not combine a mutating route with a read-only route. When omitted, select from the trigger and evidence.
-- **Full or `extremely-optimize` mode (measured-floor campaign):** a named resolvable path, symbol, diff, or active local change, or no path only for an explicit repo-wide survey; repo-wide work is opt-in and never inferred. For a bare `extremely-optimize` invocation after that opt-in, profile the repository's own workload and work the ranked list. One representative runnable workload or benchmark command and repository-native verification commands are required. The workload must be supplied or constructed before measurement and must exercise the target for at least one second of wall time. The verifier must be supplied or discovered before any target lands. A supplied profile or named hotspot is optional. Optional controls are a performance budget, maximum gate attempts, maximum wall time, and minimum marginal speedup. An observable approximation is permitted only when the user's request authorizes it and the exact changed contract is confirmed before mutation. If the target or workload cannot be resolved without guessing, stop with exit 11.
-- **Quick mode:** a resolvable target, a performance symptom and the codebase under optimization, and repository-native verification commands. Existing measurements, profiling evidence, performance budgets, or Core Web Vitals targets are optional.
-- **`fastopt` mode:** one or more suspected hot paths named by the user (file, function, or call site) and the workload or input shape that makes each path hot. Prior measurements, profiling traces, and environment constraints are optional; absent measurements are unmeasured, not evidence of slowness.
-- **`fastopt-extreme` mode:** the target code region or module. Call frequencies, profiling data, or prior benchmark results are optional. If no code is supplied, request the target before proceeding.
+- Mode (optional, exact values when supplied): `full`, `extremely-optimize`, `quick`, `fastopt`, or `fastopt-extreme`. The mode selects exactly one route; do not combine a mutating route with a read-only route. When omitted, select from the trigger and evidence.
+- Full or `extremely-optimize` mode (measured-floor campaign): a named resolvable path, symbol, diff, or active local change, or no path only for an explicit repo-wide survey; repo-wide work is opt-in and never inferred. For a bare `extremely-optimize` invocation after that opt-in, profile the repository's own workload and work the ranked list. One representative runnable workload or benchmark command and repository-native verification commands are required. The workload must be supplied or constructed before measurement and must exercise the target for at least one second of wall time. The verifier must be supplied or discovered before any target lands. A supplied profile or named hotspot is optional. Optional controls are a performance budget, maximum gate attempts, maximum wall time, and minimum marginal speedup. An observable approximation is permitted only when the user's request authorizes it and the exact changed contract is confirmed before mutation. If the target or workload cannot be resolved without guessing, stop with exit 11.
+- Quick mode: a resolvable target, a performance symptom and the codebase under optimization, and repository-native verification commands. Existing measurements, profiling evidence, performance budgets, or Core Web Vitals targets are optional.
+- `fastopt` mode: one or more suspected hot paths named by the user (file, function, or call site) and the workload or input shape that makes each path hot. Prior measurements, profiling traces, and environment constraints are optional; absent measurements are unmeasured, not evidence of slowness.
+- `fastopt-extreme` mode: the target code region or module. Call frequencies, profiling data, or prior benchmark results are optional. If no code is supplied, request the target before proceeding.
 
 ## Mode selection
 
@@ -96,45 +96,54 @@ Work one target at a time. Half-rebuilt is the forbidden state: finish a target 
 
 Full and `extremely-optimize` intentionally share this measured-floor route. The exit map below is canonical for both names, rather than maintaining two procedures or two conflicting code maps.
 
-- **No workload (exit 10):** The target's cost cannot be reproduced on demand. Construct a runnable workload or stop; do not claim success.
-- **Baseline too noisy (exit 11):** Standard deviation exceeds 20% of median and cannot be cleared. Clear the noise or stop.
-- **No measurable hotspot (exit 11):** No path accounts for at least 5% of time or the workload is not measurable. Report the blocker and commit nothing.
-- **No headroom (exit 12):** Every hot unit is already within 2x of its floor. Report the terminal result and commit nothing.
-- **No candidate or integrated no-win (exit 13):** No candidate or integrated result clears the 1.05x gate. Revert the replacement or target patch and keep the original.
-- **No win or failed behavior/check gate (exit 13):** A candidate fails the campaign gate, or the repository checks fail. Revert the replacement or target patch and keep the original.
-- **Approximation unconfirmed (exit 14):** The request did not authorize the approximation or the changed contract was not confirmed. Discard that candidate and do not promote it.
-- **Divergence unclassified (exit 14):** Old behavior is neither folded in as essential nor cut as residue. Complete the step 6 walk before proceeding.
-- **Mixed optimization concerns (exit 15):** The proposed commit mixes concerns and must be split before retrying.
-- **Boundary cut without an answer (exit 15):** A published surface was destroyed on silence or after a no. Restore it and settle the question.
-- **Campaign stalled mid-target (exit 16):** A target is half old and half new. Finish it or revert it; never ship it.
-- **Scope exceeded (exit 17):** A repo-wide sweep ran off a named target. Revert the untargeted work.
-- **Stopping limit (exit 16) or failed verifier (exit 13):** Before commit, restore only the named target and remove only run-created candidate worktrees; retain append-only evidence, append the exact terminal class, commit nothing, and never revert an unrelated commit. Resume only through the fingerprint match and fresh-baseline agreement.
+| Terminal class | Recovery |
+|---|---|
+| No workload (exit 10) | The target's cost cannot be reproduced on demand. Construct a runnable workload or stop; do not claim success. |
+| Baseline too noisy (exit 11) | Standard deviation exceeds 20% of median and cannot be cleared. Clear the noise or stop. |
+| No measurable hotspot (exit 11) | No path accounts for at least 5% of time or the workload is not measurable. Report the blocker and commit nothing. |
+| No headroom (exit 12) | Every hot unit is already within 2x of its floor. Report the terminal result and commit nothing. |
+| No candidate or integrated no-win (exit 13) | No candidate or integrated result clears the 1.05x gate. Revert the replacement or target patch and keep the original. |
+| No win or failed behavior/check gate (exit 13) | A candidate fails the campaign gate, or the repository checks fail. Revert the replacement or target patch and keep the original. |
+| Approximation unconfirmed (exit 14) | The request did not authorize the approximation or the changed contract was not confirmed. Discard that candidate and do not promote it. |
+| Divergence unclassified (exit 14) | Old behavior is neither folded in as essential nor cut as residue. Complete the step 6 walk before proceeding. |
+| Mixed optimization concerns (exit 15) | The proposed commit mixes concerns and must be split before retrying. |
+| Boundary cut without an answer (exit 15) | A published surface was destroyed on silence or after a no. Restore it and settle the question. |
+| Campaign stalled mid-target (exit 16) | A target is half old and half new. Finish it or revert it; never ship it. |
+| Scope exceeded (exit 17) | A repo-wide sweep ran off a named target. Revert the untargeted work. |
+| Stopping limit (exit 16) or failed verifier (exit 13) | Before commit, restore only the named target and remove only run-created candidate worktrees; retain append-only evidence, append the exact terminal class, commit nothing, and never revert an unrelated commit. Resume only through the fingerprint match and fresh-baseline agreement. |
+
 Partial-result rule for full and `extremely-optimize`: a target that has not reached the done predicate is reverted to its pre-campaign state; no half-rebuilt target remains. Non-wins and untargeted work are reverted. Never swallow an error or pretend the done predicate holds.
 
 ### Quick mode
 
-- **Baseline unavailable:** Measurement tools are unavailable or the codebase cannot be profiled. Result: blocked. Do not proceed without baseline evidence.
-- **No bottleneck found:** Profiling reveals no measurable code-level bottleneck. Report uncertainty and whether environmental or statistical noise is suspected.
-- **Fix produces no measurable gain:** Improvement is within noise range of the baseline. Revert. Never keep a neutral change.
-- **Correctness regression:** Tests fail or behavior changes after the fix. Revert immediately. Correctness gates the metric.
-- **Fix exceeds available authority:** The bottleneck requires unavailable credentials, remote mutation, or infrastructure changes outside local write scope. Document the requirement and do not widen authority.
+| Failure | Response |
+|---|---|
+| Baseline unavailable | Measurement tools are unavailable or the codebase cannot be profiled. Result: blocked. Do not proceed without baseline evidence. |
+| No bottleneck found | Profiling reveals no measurable code-level bottleneck. Report uncertainty and whether environmental or statistical noise is suspected. |
+| Fix produces no measurable gain | Improvement is within noise range of the baseline. Revert. Never keep a neutral change. |
+| Correctness regression | Tests fail or behavior changes after the fix. Revert immediately. Correctness gates the metric. |
+| Fix exceeds available authority | The bottleneck requires unavailable credentials, remote mutation, or infrastructure changes outside local write scope. Document the requirement and do not widen authority. |
 
 Partial-result rule for quick mode: reverted code leaves no trace. Keep a ledger entry (baseline, fix applied, before/after measurement, and verdict) so discarded ideas are not re-profiled.
 
 ### `fastopt`
 
-- **Unmeasured path:** Mark the hypothesis unmeasured; do not infer slowness from absent data.
-- **Ambiguous hot path:** Ask the user to name the path and workload; stop rather than guess.
-- **Benchmark infeasible read-only:** State the blocking reason and the minimal mutation that would unblock measurement; do not perform it.
-- **No recovery widens authority:** `fastopt` never mutates files, VCS, credentials, or remote state; a blocked result is emitted as blocked, not as success.
+| Failure | Response |
+|---|---|
+| Unmeasured path | Mark the hypothesis unmeasured; do not infer slowness from absent data. |
+| Ambiguous hot path | Ask the user to name the path and workload; stop rather than guess. |
+| Benchmark infeasible read-only | State the blocking reason and the minimal mutation that would unblock measurement; do not perform it. |
+| No recovery widens authority | `fastopt` never mutates files, VCS, credentials, or remote state; a blocked result is emitted as blocked, not as success. |
 
 ### `fastopt-extreme`
 
-- **No code supplied:** Request the target code region or module; do not guess or analyze from memory.
-- **Path unclassifiable:** Label a path unclassified and exclude it from optimization proposals.
-- **Complexity theater detected:** Refuse the proposal and record its complexity cost and claimed gain. Do not emit it as a valid optimization.
-- **Partial result:** Emit obtained hypotheses and designs, and mark every unclassified or refused item so the done predicate is not falsely satisfied.
-- **Non-mutation:** No file, VCS, or remote change is made. Rollback is not applicable.
+| Failure | Response |
+|---|---|
+| No code supplied | Request the target code region or module; do not guess or analyze from memory. |
+| Path unclassifiable | Label a path unclassified and exclude it from optimization proposals. |
+| Complexity theater detected | Refuse the proposal and record its complexity cost and claimed gain. Do not emit it as a valid optimization. |
+| Partial result | Emit obtained hypotheses and designs, and mark every unclassified or refused item so the done predicate is not falsely satisfied. |
+| Non-mutation | No file, VCS, or remote change is made. Rollback is not applicable. |
 
 ## Output
 

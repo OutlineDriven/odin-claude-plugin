@@ -409,7 +409,7 @@
 | perspective-complete-review | odin-review | Coding | Use when one named review viewpoint must run fix cycles until a fresh reviewer finds nothing. |
 | pgo | odin-native | Coding | Use when a C or C++ binary needs profile-guided optimization with GCC or Clang: instrumented or sampled profiles, merging, the two-stage build, or BOLT. |
 | plain-korean | odin-writing | Writing | Use when Plain English·Plain Language 원칙으로 한국어 작성·교정·검토, 쉽게 써 줘·명확하게 고쳐 줘·관료적인 표현 줄이기·쉬운 한국어/plain Korean·독자 중심 설명문·이메일·공지·README용, 의미·조건·전문용어 보존, 엄격 통제·절차는 ste-korean 우선, 원문보존·맞춤법만 요청 시 문체 유지 |
-| plan | odin-planning | Productivity | Use when a user commits to a direction and asks to plan, brief, research, or operationalize it; or wants to enumerate designs, configurations, scenarios, and paths, audit or tune a supplied plan path/text, or a plan-mode enforcement hook intercepts a plan review, or lock a greenfield architecture and interfaces. |
+| plan | odin-planning | Productivity | Use when a user commits to a direction and asks to plan, brief, research, or operationalize it; or wants to enumerate designs, configurations, scenarios, and paths, audit a supplied plan, tune the review flow, or a plan-mode enforcement hook intercepts a plan review, or lock a greenfield architecture and interfaces. |
 | polished-web-prototype | odin-design | Design | Use when /polished-web-prototype runs or a user builds an artifact from a mockup, design plan, or brief. |
 | possible-worlds | odin-planning | Productivity | Use when a design dispute has at least two live interpretations and the caller wants worlds made explicit or a plain-language recommendation. |
 | possible-worlds-qa | odin-testing | Coding | Use when a product surface must be tested against extreme or hostile worlds. |
