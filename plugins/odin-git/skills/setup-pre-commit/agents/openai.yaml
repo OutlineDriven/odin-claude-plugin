@@ -1,3 +1,0 @@
-interface:
-  display_name: "Setup Pre Commit"
-  short_description: "Use when installing or repairing a repo-local pre-commit hook from the project gates, or when a repo needs package-manager-native commit-time checks."
