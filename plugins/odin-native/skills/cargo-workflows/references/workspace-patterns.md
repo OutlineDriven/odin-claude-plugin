@@ -38,7 +38,7 @@ serde = { workspace = true, features = ["derive"] }  # Can add features
 
 ## Feature resolution (resolver = "2")
 
-With `resolver = "2"` (required in edition 2021 workspaces):
+With `resolver = "2"` (required in edition 2024 workspaces):
 
 ```toml
 [workspace]
@@ -153,16 +153,16 @@ steps:
 
 ```toml
 [package]
-rust-version = "1.70"   # MSRV declaration
+rust-version = "1.85"   # MSRV declaration
 
 [workspace.package]
-rust-version = "1.70"
+rust-version = "1.85"
 ```
 
 ```bash
 # Test against MSRV
-rustup install 1.70
-cargo +1.70 check --workspace
+rustup install 1.85
+cargo +1.85 check --workspace
 ```
 
 ## Published crate checklist

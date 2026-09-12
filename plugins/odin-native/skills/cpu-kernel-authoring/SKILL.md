@@ -1,6 +1,7 @@
 ---
 name: cpu-kernel-authoring
 description: 'Use when writing, optimizing, or benchmarking a C++ CPU kernel with AVX2 or AVX512 intrinsics for the Hugging Face kernels ecosystem. Not for CUDA kernels: use cuda.'
+disable-model-invocation: true
 ---
 
 # CPU kernel authoring
@@ -21,7 +22,7 @@ description: 'Use when writing, optimizing, or benchmarking a C++ CPU kernel wit
 - Operation name (required): the plain name `analyze_op.py --op` looks up, for example `rms_norm`.
 - Input shapes (required): comma-separated shape strings for `analyze_op.py --shapes`, for example `"1024x4096,2048x8192"`.
 - Package and function path (required from step 5): the installed package name, for example `my_kernel`, and its callable as `package.function`, for example `my_kernel.rms_norm`. `benchmark_cpu.py` and `cpu_profiler.py` take this path as their `--op`; it is not the operation name above.
-- Toolchain (required): Python 3.11 or later (`validate_cpu_kernel.py` parses `build.toml` with the standard-library `tomllib`), `kernel-builder`, `pip`, PyYAML (imported by `scripts/config.py`), `numactl` (used by the pinned benchmark in step 8), a C++ compiler with AVX512 support, and PyTorch. `perf` is required only when `perf_stat_enabled` is true.
+- Toolchain (required): Python 3.14 (`validate_cpu_kernel.py` parses `build.toml` with the standard-library `tomllib`), `kernel-builder`, `pip`, PyYAML (imported by `scripts/config.py`), `numactl` (used by the pinned benchmark in step 8), a C++ compiler with AVX512 support, and PyTorch. `perf` is required only when `perf_stat_enabled` is true.
 
 The work has two phases. The correctness phase builds the tiers in order (generic ATen fallback, optional AVX2, AVX512) and each tier must pass correctness before the next starts. The performance phase iterates on the AVX512 tier through the trial tree until `max_trials` is exhausted or `early_stop_speedup` is exceeded.
 

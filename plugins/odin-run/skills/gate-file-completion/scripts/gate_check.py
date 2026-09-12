@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # gate_check.py : run the CHECK commands in gate files, flip boxes, record evidence.
-# Zero dependencies. Python 3.10+.
+# Zero dependencies. Python 3.14.
 # Python re-implementation of the upstream Node gate-checker from
 # https://github.com/Leonxlnx/unlazy (MIT, (c) 2026 Leonxlnx),
 # pinned commit ed9e8d2b5919698cf2c54bda270d507e10b69617.
