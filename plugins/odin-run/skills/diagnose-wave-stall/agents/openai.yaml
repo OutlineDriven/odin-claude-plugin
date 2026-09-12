@@ -1,3 +1,3 @@
 interface:
   display_name: "Diagnose Wave Stall"
-  short_description: "Use when a dispatched agent wave idles on a result that never arrives and the blocking node must be named."
+  short_description: "Use when a dispatched agent wave has stopped progressing — a result that never arrives or one that exists but stays unconsumed — and the blocking node must be named."

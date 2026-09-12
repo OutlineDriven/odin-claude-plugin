@@ -43,7 +43,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-run:<name>` in
 | cybernetic-loop | Use when the caller supplies a falsifiable out-of-happy-path invariant and a finite budget. |
 | cycle-memo | Use when a build, QA pass, demo, user complaint, or abandoned attempt leaves the next pass needing lessons rather than code. |
 | diagnose-loop-health | Use when a configured loop misbehaves, produces unexpected results, or its setup soundness is questioned. |
-| diagnose-wave-stall | Use when a dispatched agent wave idles on a result that never arrives and the blocking node must be named. |
+| diagnose-wave-stall | Use when a dispatched agent wave has stopped progressing — a result that never arrives or one that exists but stays unconsumed — and the blocking node must be named. |
 | diamond-task | Use when one issue or PR is too large for a worker and partitions into disjoint write sets. |
 | do-it-now | Use when the user says do it now, ship it now, no phases, or finish it now, or would defer work to phases, rollouts, follow-up PRs, or TODOs. |
 | duet | Use when the user invokes /duet, says pair on this, or faces aesthetic, architectural, or irreversible decisions. |
