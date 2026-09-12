@@ -1,6 +1,6 @@
 ---
 name: diagnose-wave-stall
-description: 'Use when a dispatched agent wave idles on a result that never arrives and the blocking node must be named and cleared. Not for a configured loop misbehaving: use diagnose-loop-health. Not for re-dispatching a known dead worker: use partition-scopes-to-subagents.'
+description: 'Use when a dispatched agent wave idles on a result that never arrives and the blocking node must be named. Not for a configured loop misbehaving: use diagnose-loop-health. Not for re-dispatching a known dead worker: use partition-scopes-to-subagents.'
 ---
 
 # Diagnose wave stall

@@ -14,8 +14,8 @@ import re
 import sys
 from pathlib import Path
 
-if sys.version_info < (3, 14):
-    sys.exit("validate_cpu_kernel.py needs Python 3.14 (tomllib in the standard library)")
+if sys.version_info < (3, 11):
+    sys.exit("validate_cpu_kernel.py needs Python 3.11+ (tomllib in the standard library)")
 
 import tomllib  # noqa: E402
 

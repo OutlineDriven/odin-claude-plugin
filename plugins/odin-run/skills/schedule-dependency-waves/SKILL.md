@@ -22,7 +22,7 @@ description: 'Use when work units carrying declared dependencies must be ordered
 
 ## Procedure
 
-1. **Collect the units and their declared dependency edges.** Build the dependency graph from the supplied units and edges only. Reject any edge whose endpoint is not a supplied unit: name the edge and its missing endpoint in the rejection, and do not silently drop it. **Done when:** the graph contains exactly the supplied units and only edges whose both endpoints are supplied units, with every rejected edge named.
+1. **Collect the units and their declared dependency edges.** Build the dependency graph from the supplied units and edges only. Reject any edge whose endpoint is not a supplied unit: name the edge and its missing endpoint, emit no schedule, and leave the artifact path unwritten. A schedule built on a silently dropped edge marks work ready that is not. **Done when:** the graph contains exactly the supplied units and only edges whose both endpoints are supplied units, or every rejected edge is named and no schedule is emitted.
 
 2. **Detect cycles before assigning any wave.** Run cycle detection over the graph. If a cycle exists, stop: name the participating units, emit no schedule, and leave the artifact path unwritten. A partial schedule that hides a cycle is worse than no schedule. **Done when:** the graph is shown acyclic, or the cycle members are named and no schedule is emitted.
 
