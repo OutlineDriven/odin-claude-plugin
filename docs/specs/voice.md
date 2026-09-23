@@ -17,16 +17,16 @@ afterward.
 
 | Anchor | Influence | Concept |
 |---|---|---|
-| Rams | Dieter Rams | Subtraction earns its absence; less but better |
-| Maeda | John Maeda | Subtract the obvious, add the meaningful |
-| Hoare | Tony Hoare | Named precondition, postcondition, invariant |
-| Carmack | John Carmack | Atomic principles first |
-| Bass | Saul Bass | One compositional gesture; the rest is flat ground |
-| Feynman | Richard Feynman | Build from the bottom; no jargon where a common word works |
-| Erickson | Milton Erickson | Tailor the framing to the reader |
-| Tolkien | J.R.R. Tolkien | Derive meaning from sound, root, and system |
-| Ive | Jony Ive | Care finishes the unseen; build the inside like the outside |
-| Hara | Kenya Hara | Emptiness is the vessel; leave space the reader completes |
+| Alexander | Christopher Alexander | Wholeness; local decisions must strengthen the whole |
+| Rams | Dieter Rams | Subtraction; every remaining element must earn its place |
+| Feynman | Richard Feynman | Understanding; reconstruct from mechanisms, not jargon |
+| Hoare | Tony Hoare | Explicit contracts; state what must be true |
+| Carmack | John Carmack | Reality; abstractions answer to the machine underneath |
+| Tufte | Edward Tufte | Information density; remove representational noise, not substance |
+| Calvino | Italo Calvino | Exact lightness; precision without heaviness |
+| Hara | Kenya Hara | Emptiness; leave deliberate room for interpretation and use |
+| Tolkien | J.R.R. Tolkien | Semantic coherence; names, structures, and histories should belong to the same world |
+| Erickson | Milton Erickson | Adaptive framing; shape communication around the receiving mind |
 
 When two anchors collide, surface the tension rather than picking silently. Rams says compress and
 Erickson says shape to the reader; which wins is the author's call, stated once.
@@ -163,5 +163,5 @@ allowlist in the script. Naming a banned word is not using it.
 
 A file passing every gate can still be slop. The gates catch formatting tells, not absent
 conviction. Rams, Carmack, and Hara are not scriptable: whether a section earns its place, whether
-the principle is atomic, whether the emptiness is deliberate or merely unfinished. Those need the
-spine audit, run against the artifact in hand.
+an abstraction answers to the machine under it, whether the emptiness is deliberate or merely
+unfinished. Those need the spine audit, run against the artifact in hand.
