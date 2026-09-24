@@ -4,32 +4,43 @@ The authoring register for every skill in this tree.
 
 Two sources define it. The ODIN doctrine in `system-prompt-baseline.md` sets the engineering
 register: opinion rather than options, special-case elimination, cleanup on the touched surface. The
-spine sets the taste register through ten influence-pegged anchors and a two-sided ban list.
+spine sets the taste register through sixteen ranked anchors and a two-sided ban list.
 
 The spine itself is user-private, at `~/.claude/skills/spine/`. It is read from this repository and
 never edited here. This document carries what a maintainer needs to author or rewrite a skill
 without loading it, and `scripts/check-voice.py` enforces the part a script can measure.
 
-## The ten anchors
+## The sixteen anchors
 
 Each anchor is a positive directive. Load them before producing; walk them against the artifact
-afterward.
+afterward. Rows run in rank order. An anchor that does not bear on the artifact is N/A, and it
+never becomes a reason to redesign the work.
 
-| Anchor | Influence | Concept |
-|---|---|---|
-| Alexander | Christopher Alexander | Wholeness; local decisions must strengthen the whole |
-| Rams | Dieter Rams | Subtraction; every remaining element must earn its place |
-| Feynman | Richard Feynman | Understanding; reconstruct from mechanisms, not jargon |
-| Hoare | Tony Hoare | Explicit contracts; state what must be true |
-| Carmack | John Carmack | Reality; abstractions answer to the machine underneath |
-| Tufte | Edward Tufte | Information density; remove representational noise, not substance |
-| Calvino | Italo Calvino | Exact lightness; precision without heaviness |
-| Hara | Kenya Hara | Emptiness; leave deliberate room for interpretation and use |
-| Tolkien | J.R.R. Tolkien | Semantic coherence; names, structures, and histories should belong to the same world |
-| Erickson | Milton Erickson | Adaptive framing; shape communication around the receiving mind |
+| # | Anchor | Influence | Concept |
+|---|---|---|---|
+| 1 | Alexander | Christopher Alexander | Wholeness; improve the relationships between parts, not only the parts |
+| 2 | Feynman | Richard Feynman | Intellectual honesty; the explanation must withstand scrutiny, your own first |
+| 3 | Shannon | Claude Shannon | Information and representation; know the messages, their uncertainty, and the channel's limits, never mistaking quantity for meaning |
+| 4 | Hoare | Tony Hoare | Explicit contracts; state the preconditions, guarantees, and invariants |
+| 5 | Rams | Dieter Rams | Earned simplicity; remove what contributes nothing, never what is useful or needed |
+| 6 | Parnas | David Parnas | Boundaries around change; hide each difficult or changeable decision behind an interface |
+| 7 | Tufte | Edward Tufte | Readable evidence; make comparisons easy and remove clutter, never inconvenient evidence |
+| 8 | Carmack | John Carmack | Contact with reality; abstractions must survive actual operating conditions |
+| 9 | Calvino | Italo Calvino | Exact lightness; remove unnecessary weight, never precision or clarity |
+| 10 | Simon | Herbert Simon | Judgment under limits; decide with the information and capacity at hand, never below the required quality |
+| 11 | Hara | Kenya Hara | Useful emptiness; leave room for the user's judgment, never withhold what they need to proceed |
+| 12 | Tolkien | J.R.R. Tolkien | Semantic coherence; names, sounds, histories, and rules belong to one world |
+| 13 | Dijkstra | Edsger W. Dijkstra | Manageable reasoning; build so that correctness is easy to establish |
+| 14 | Erickson | Milton Erickson | Adaptive framing; change the route of the explanation, never the facts or the person's agency |
+| 15 | Bass | Saul Bass | Compositional focus; one memorable formal idea, where emphasis is useful |
+| 16 | Aicher | Otl Aicher | Coherent variation; a shared grammar that permits different expressions, never identical execution |
 
-When two anchors collide, surface the tension rather than picking silently. Rams says compress and
-Erickson says shape to the reader; which wins is the author's call, stated once.
+When two anchors collide, read each one's limit first, the "never" or "where" clause in its
+concept. A limit can settle the conflict in favor of the lower-ranked anchor. A conflict that
+survives the limits takes the higher rank as its default, and both anchors are named; nothing is
+settled silently. Rams says compress and Erickson says shape to the reader: framing the reader
+needs is useful, so Rams' own limit keeps it, and framing the reader does not need goes, because
+Rams (5) outranks Erickson (14).
 
 ## Both failure modes, one root
 
