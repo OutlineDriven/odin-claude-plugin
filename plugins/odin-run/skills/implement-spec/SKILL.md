@@ -33,6 +33,12 @@ disable-model-invocation: true
 8. Preview the integration branch, commits, remote, target branch, draft pull-request title and body, and publication consequences. After explicit human approval, use the approved credentials to publish the branch and create the draft pull request; verify the remote pull request points to the reviewed commit and reports the required checks as passing.
 9. Preview the exact temporary worktrees and branches eligible for cleanup. After explicit human approval, remove only those whose commits are reachable from the published integration branch. Preserve any target containing unintegrated or uncommitted work and report it instead of deleting it.
 
+## Closing chain: Work -> Review-fix-loop -> Offensive Aggressive Simplify
+
+1. Work first. Complete this skill's own implementation path before any closing pass.
+2. Review-fix-loop with native gates. Run this skill's native review/fix gate — required checks plus review-clear on the integrated branch — to green. Bound it: max 3 fix cycles per unit, then stop as blocked or `non-converged`. Never widen scope to unrelated code.
+3. Offensive aggressive simplify last. Offense-first: re-derive the general case from contracts, delete old structure (no shims/aliases/flags), collapse special cases, migrate every caller in the same change, one concern per atomic commit. Ask first before removing any live consumer surface. Stay inside this skill's authority: the bounded execution set and each ticket's owned file scope. Run the native gate after each increment; revert the increment on red. Close with a simplify compression pass (dead branches, duplicate logic, one-use wrappers) with behavior preserved and the native gate green.
+
 ## Failure and recovery
 
 - `invalid-input`: the specification, DAG, ownership, repository, commands, or destination cannot be validated. Make no mutation.

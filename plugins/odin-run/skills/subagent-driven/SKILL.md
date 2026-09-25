@@ -43,6 +43,12 @@ Required: an ordered multi-task plan file. The plan defines task boundaries, fil
 5. **Final-review findings** dispatch one fix worker with the complete list, then re-review. Done when: the final review is resolved.
 6. **Ship via the atomic path**: sort work into atomic commits in detached HEAD, then publish with git-branchless `submit`. Done when: the branch is published.
 
+## Closing chain: Work -> Review-fix-loop -> Offensive Aggressive Simplify
+
+1. Work first. Complete the skill's own implementation path before any closing pass.
+2. Review-fix-loop with native gates. Run this skill's own review/fix gate to green: audit clean and verifier green per task, then the whole-branch review. Bound it: max 3 fix cycles per unit, then stop as blocked/non-converged. Never widen scope to unrelated code.
+3. Offensive aggressive simplify last. Offense-first: re-derive the general case from contracts, delete old structure (no shims/aliases/flags), collapse special cases, migrate every caller in the same change, one concern per atomic commit. Ask first before removing any live consumer surface. Stay inside this skill's authority. Run the skill's verifier after each increment; revert the increment on red. Close with a simplify compression pass (dead branches, dup logic, one-use wrappers) with behavior preserved and checks green.
+
 ## Failure modes
 
 - Mid-task worker death: recover from the ledger file (`scripts/sd-workspace` → `.outline/sdd/progress.md`): the commits it names exist in git. Trust the ledger and `git log` over recollection. `git clean -fdx` destroys the ledger; recover from `git log`.

@@ -58,6 +58,12 @@ description: 'Use when work decomposes across subagents or role panels and needs
 
 8. **Write only the synthesis.** Write the reconciled synthesis to the named local artifact. Remove any partial synthesis created during this run. Subagent artifacts may remain only when the synthesis cites them as evidence; otherwise discard them after reconciliation. Done when: the synthesis is written to the named path with all partial syntheses removed.
 
+## Closing chain: Work -> Review-fix-loop -> Offensive Aggressive Simplify
+
+1. **Work first.** Complete the skill's own implementation path before any closing pass.
+2. **Review-fix-loop with native gates.** Run this skill's own review/fix gate — owner-verify every artifact (Step 6), then reconcile verified artifacts (Step 7) — to green. Bound it: max 3 fix cycles per unit, then stop as blocked/non-converged. Never widen scope to unrelated code.
+3. **Offensive aggressive simplify last.** Offense-first: re-derive the general case from contracts, delete old structure (no shims/aliases/flags), collapse special cases, migrate every caller in the same change, one concern per atomic commit. Ask first before removing any live consumer surface. Stay inside this skill's authority. Run the skill's verifier after each increment; revert the increment on red. Close with a simplify compression pass (dead branches, dup logic, one-use wrappers) with behavior preserved and checks green.
+
 ## Failure and recovery
 
 - Subagent non-convergence: a subagent loops, returns no artifact, exceeds its bounded assignment, or produces an artifact that fails owner verification. Stop dependent work, name the failed unit and failed criterion, and do not write a synthesis.

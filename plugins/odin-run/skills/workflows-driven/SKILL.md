@@ -37,6 +37,12 @@ Required: the work item. Optional: any existing evidence ledger at the artifact 
 
 Detect the host environment and apply the matching fan-out primitive per `references/host-materialization.md` (Claude Code, oh-my-pi, or neither).
 
+## Closing chain: Work -> Review-fix-loop -> Offensive Aggressive Simplify
+
+1. Work first. Complete the skill's own implementation path before any closing pass.
+2. Review-fix-loop with native gates. Run this skill's own review/fix gate to green: the parent proof pass per wave and the circuit breaker. Bound it: max 3 fix cycles per unit, then stop as blocked/non-converged. Never widen scope to unrelated code.
+3. Offensive aggressive simplify last. Offense-first: re-derive the general case from contracts, delete old structure (no shims/aliases/flags), collapse special cases, migrate every caller in the same change, one concern per atomic commit. Ask first before removing any live consumer surface. Stay inside this skill's authority. Run the skill's verifier after each increment; revert the increment on red. Close with a simplify compression pass (dead branches, dup logic, one-use wrappers) with behavior preserved and checks green.
+
 ## Failure and recovery
 | Failure class | Response |
 |---|---|

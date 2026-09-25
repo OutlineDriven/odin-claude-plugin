@@ -59,6 +59,12 @@ A single settled ticket or spec is the narrow entry of the end-to-end pipeline. 
 
 Never reopen or redesign the plan during single-ticket execution. If the plan is ambiguous, contradictory, or missing a named seam, stop and report the gap; do not infer scope. If the implementation reopens a settled plan decision, revert the overreach and implement only what the plan names. If a named seam has no behavioural test, add it before local verification; do not defer. If scope widens beyond the plan, revert the unrelated changes and keep only the contracted work. Work never commits partial or complete results; the finalizer owns commit packaging. If the procedure cannot reach the done predicate, report the blocker and leave the partial diff for the caller to inspect or revert.
 
+## Closing chain: Work -> Review-fix-loop -> Offensive Aggressive Simplify
+
+1. Work first. Complete the skill's own implementation path before any closing pass.
+2. Review-fix-loop with native gates. Run this skill's own gates to green: the System-Wide Test Check from `references/execution-detail.md` plus local verification (project tests and lint for the changed surface), honoring the mode split — orchestrated stops at local verification; standalone hands finalization to review-and-ship. Bound it: max 3 fix cycles per unit, then stop as blocked/non-converged. Never widen scope to unrelated code.
+3. Offensive aggressive simplify last. Offense-first: re-derive the general case from contracts, delete old structure (no shims/aliases/flags), collapse special cases, migrate every caller in the same change, one concern per atomic increment (this skill commits nothing — the zero-commits rule stands). Ask first before removing any live consumer surface. Stay inside this skill's authority. Run the skill's verifier after each increment; revert the increment on red. Close with a simplify compression pass (dead branches, dup logic, one-use wrappers) with behavior preserved and checks green.
+
 ## Failure and recovery
 | Failure | Rule |
 |---|---|

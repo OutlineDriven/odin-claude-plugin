@@ -5,6 +5,15 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.5] - 2026-09-26
+### Changed
+- Eight orchestration skills gain one shared closing chain: Work, then the
+  skill's own Review-fix-loop to green (bounded at three fix cycles), then an
+  offense-first Aggressive Simplify pass. Covered: `subagent-driven`,
+  `workflows-driven`, `work`, `resolve`, `review-and-ship`, `implement-spec`,
+  `orchestration-patterns`, and `audit-project`. Each skill keeps its native
+  gates and authority; local-only skills stay local.
+
 ## [2.1.4] - 2026-09-12
 ### Added
 - `schedule-dependency-waves` (odin-run): orders work units carrying declared

@@ -47,6 +47,12 @@ description: 'Use when addressing review feedback in analyze or reception mode, 
 
 11. Report the mode-specific result. `analyze` returns each comment, status, evidence, and valid-issue solutions without an overall-PR summary. `reception` returns each item, classification, local action and test, or pushback-draft path. `summary` returns severity groups and ordered actions. `autonomous` returns counts, verdicts, fixer results, validation, commit SHA, replies, resolutions, and verification. `interactive` returns decisions, files, validation, commit or push status, `[ODIN Agent]` reply URLs, resolved threads, and remaining manual items. Done when: the requested report is delivered.
 
+## Closing chain: Work -> Review-fix-loop -> Offensive Aggressive Simplify
+
+1. Work first. Complete the skill's own implementation path before any closing pass.
+2. Review-fix-loop with native gates. Run this skill's own classify-fix-validate gate per item to green. Bound it: max 3 fix cycles per unit, then stop as blocked/non-converged. Never widen scope to unrelated code.
+3. Offensive aggressive simplify last. Offense-first: re-derive the general case from contracts, delete old structure (no shims/aliases/flags), collapse special cases, migrate every caller in the same change, one concern per atomic commit. Ask first before removing any live consumer surface. Stay inside this skill's authority: local modes stay local, and GitHub actions remain bound to the selected mode's authority. Run the skill's verifier after each increment; revert the increment on red. Close with a simplify compression pass (dead branches, dup logic, one-use wrappers) with behavior preserved and checks green.
+
 ## Failure and recovery
 
 | Failure class | Behavior |
