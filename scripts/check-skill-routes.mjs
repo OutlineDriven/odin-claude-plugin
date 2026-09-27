@@ -73,11 +73,11 @@ const skills = loadCatalog().entries.flatMap((entry) =>
 );
 
 // --- tiny structural YAML frontmatter parser (no dependency) ---
-// Returns { entries: [{ path, key, value, quoted, raw }], error } or null when
+// Returns { entries: [{ path, key, value, quote, raw }], error } or null when
 // there is no frontmatter block.  `path` is a dotted path (e.g. "metadata.short-description").
-// `quoted` is true when the scalar was single- or double-quoted.  Only handles the
-// flat + one-level-nested mapping shape used by SKILL.md frontmatter; flow styles,
-// multi-line scalars, and sequences are out of scope (frontmatter does not use them).
+// `quote` is the matching quote character (`'` or `"`), or null when the scalar is unquoted.
+// Only handles the flat + one-level-nested mapping shape used by SKILL.md frontmatter;
+// flow styles, multi-line scalars, and sequences are out of scope (frontmatter does not use them).
 function parseFrontmatterYaml(text) {
   if (!text.startsWith("---\n")) return null;
   const end = text.indexOf("\n---", 4);

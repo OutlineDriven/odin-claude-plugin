@@ -297,7 +297,7 @@ export function parseFrontmatter(text) {
   if (end === -1) return null;
   const out = {};
   for (const line of text.slice(4, end).split("\n")) {
-    const m = /^([a-zA-Z_]+):(.*)$/.exec(line);
+    const m = /^([a-zA-Z_-]+):(.*)$/.exec(line);
     if (m) out[m[1]] = parseScalar(m[2]);
   }
   return out;
@@ -386,8 +386,8 @@ export function renderPluginReadme(catalog, entry, skills) {
 
 // The root README states each plugin's category, and a hand-kept copy of the ledger drifts:
 // flipping a category in catalog/plugins.json used to leave the table stale with every gate
-// green. Only the table is generated. The prose around it is authored, so this returns the
-// current file with one region replaced rather than a whole rendered README.
+// green. The table, skills-count lines, and largest-plugin sentence are generated; the
+// surrounding prose is authored, so replace only those regions in the current README.
 const ROOT_README_TABLE = /(^## Plugins\n\n)(?:\|[^\n]*\n)+/m;
 
 export function renderRootReadme(catalog, current) {
