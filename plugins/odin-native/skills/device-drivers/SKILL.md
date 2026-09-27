@@ -206,6 +206,8 @@ disable-model-invocation: true
    ```c
 #include <linux/errno.h>
 #include <linux/slab.h>
+#include <linux/spi/spi.h>
+#include <linux/types.h>
 
 static int spi_probe(struct spi_device *spi)
 {

@@ -205,7 +205,7 @@ description: 'Use when a repository needs Git safety controls: guard destructive
 
       Set `pass_filenames: false` for whole-repository commands. Keep independent read-only checks parallel only when their tools do not edit the same files. Done when: the config is written with repository-native commands only.
 
-   e. Run the manager's all-files entry point: `pnpm exec lefthook run pre-commit` for pnpm, `bun run lefthook run pre-commit` for Bun, or `prek run --all-files`. If a formatter changes files, inspect the diff and repeat until the non-mutating gate passes. Done when: the all-files command passes with no uncommitted formatter changes.
+   e. Run the manager's all-files entry point: `pnpm exec lefthook run pre-commit` for pnpm, `bun run lefthook run pre-commit` for Bun, `lefthook run pre-commit` for Go, or `prek run --all-files`. If a formatter changes files, inspect the diff and repeat until the non-mutating gate passes. Done when: the all-files command passes with no uncommitted formatter changes.
 
    f. Prove enforcement without creating history. Add one temporary, reversible formatting violation inside an owned scratch file that the hook includes. Run the hook and require non-zero or an automatic repair followed by a dirty diff. Restore the scratch file, rerun the hook, and require zero. When the hook does not include a formatter, use the trivial-commit alternative: stage a trivial change (for example, add a blank line to a tracked file), run the hook, and require all configured checks to pass; then revert the staged change. Never weaken a command to make the probe pass. Done when: the failing probe blocks and the passing probe exits zero, or the trivial-commit probe passes all checks and is reverted.
 
