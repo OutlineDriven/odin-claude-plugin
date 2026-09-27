@@ -14,42 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `orchestration-patterns`, and `audit-project`. Each skill keeps its native
   gates and authority; local-only skills stay local.
 
-## [2.1.4] - 2026-09-12
-### Added
-- `schedule-dependency-waves` (odin-run): orders work units carrying declared
-  dependencies into execution waves and detects dependency cycles before
-  dispatch.
-- `diagnose-wave-stall` (odin-run): classifies a dispatched wave that idles on
-  a result that never arrives and names the blocking edge.
-- `from-perspective` (odin-critique): one skill taking the seat as an input.
-
-### Changed
-- `finish-it-now` is renamed `do-it-now`, restoring the retired name; the
-  procedure is unchanged and "finish it now" stays a trigger phrase.
-- `gate-file-completion`, `writing-for-agents`, `architect`, and `deslop`
-  regain the trigger words `unlazy`, `writing skills`, `codebase design`, and
-  `cleanup codebase`.
-- 252 cold skills are set slash-only with `disable-model-invocation: true`,
-  cutting the autoload catalog from 622 to 362; each stays reachable by
-  `/skill:<slug>`.
-- Stale version pins corrected to the `<languages>` table: Rust edition 2024
-  (`rust-version = "1.85"`, `resolver = "3"`) in `cargo-workflows`. The Python
-  floors in `cpu-kernel-authoring` and `gate-file-completion` stay at their
-  real requirements (3.11+ and 3.10+); the 3.14 pin is a generated-code target.
-
 ### Retired
-- `finish-it-now` → `do-it-now`
-- `from-breaking-perspective` → `from-perspective`
-- `from-business-perspective` → `from-perspective`
-- `from-career-perspective` → `from-perspective`
-- `from-codebase-perspective` → `from-perspective`
-- `from-human-perspective` → `from-perspective`
-- `from-impact-perspective` → `from-perspective`
-- `from-innovation-perspective` → `from-perspective`
-- `from-moat-perspective` → `from-perspective`
-- `from-rentseeking-perspective` → `from-perspective`
-- `from-skeptic-perspective` → `from-perspective`
-- `from-stability-perspective` → `from-perspective`
+
 - `instruction-understanding-gate` → `askme`
 - `commit-push` → `commit-push-pr`
 - `commit-push-main` → `commit-push-current`
@@ -88,6 +54,43 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `sequence-diagram` → `visual-diagram`
 - `workflow-diagram` → `visual-diagram`
 - `address-sanitizer` → `sanitizers`
+
+## [2.1.4] - 2026-09-12
+### Added
+- `schedule-dependency-waves` (odin-run): orders work units carrying declared
+  dependencies into execution waves and detects dependency cycles before
+  dispatch.
+- `diagnose-wave-stall` (odin-run): classifies a dispatched wave that idles on
+  a result that never arrives and names the blocking edge.
+- `from-perspective` (odin-critique): one skill taking the seat as an input.
+
+### Changed
+- `finish-it-now` is renamed `do-it-now`, restoring the retired name; the
+  procedure is unchanged and "finish it now" stays a trigger phrase.
+- `gate-file-completion`, `writing-for-agents`, `architect`, and `deslop`
+  regain the trigger words `unlazy`, `writing skills`, `codebase design`, and
+  `cleanup codebase`.
+- 252 cold skills are set slash-only with `disable-model-invocation: true`,
+  cutting the autoload catalog from 622 to 362; each stays reachable by
+  `/skill:<slug>`.
+- Stale version pins corrected to the `<languages>` table: Rust edition 2024
+  (`rust-version = "1.85"`, `resolver = "3"`) in `cargo-workflows`. The Python
+  floors in `cpu-kernel-authoring` and `gate-file-completion` stay at their
+  real requirements (3.11+ and 3.10+); the 3.14 pin is a generated-code target.
+
+### Retired
+- `finish-it-now` → `do-it-now`
+- `from-breaking-perspective` → `from-perspective`
+- `from-business-perspective` → `from-perspective`
+- `from-career-perspective` → `from-perspective`
+- `from-codebase-perspective` → `from-perspective`
+- `from-human-perspective` → `from-perspective`
+- `from-impact-perspective` → `from-perspective`
+- `from-innovation-perspective` → `from-perspective`
+- `from-moat-perspective` → `from-perspective`
+- `from-rentseeking-perspective` → `from-perspective`
+- `from-skeptic-perspective` → `from-perspective`
+- `from-stability-perspective` → `from-perspective`
 
 ## [2.1.3] - 2026-09-09
 ### Changed
@@ -525,7 +528,7 @@ gate set becomes unconditional.
 
 ### Added
 
-**15 skills ported from the `agent-sh` plugin marketplace**: re-homed as native, self-contained ODIN skills. All external dependencies (the `agent-analyzer` binary, `repo-intel.json` cache, editor shims, bespoke JS `lib/`, and opus/sonnet/haiku model routing) are replaced by native tooling: codegraph MCP, `git`/`ast-grep`/`git grep` recipes, repomix, generic ODIN agents, and the `ask` tool. Attribution in `skills/LICENSES.md`.
+**15 skills ported from the `agent-sh` plugin marketplace**: re-homed as native, self-contained ODIN skills. All external dependencies (the `agent-analyzer` binary, `repo-intel.json` cache, editor shims, bespoke JS `lib/`, and opus/sonnet/haiku model routing) are replaced by native tooling: codegraph MCP, `git`/`ast-grep`/`git grep` recipes, repomix, generic ODIN agents, and the `ask` tool. Attribution in `licenses/NOTICE`.
 
 - `repo-intel`: native repository intelligence (hotspots, coupling, bus factor, bugspots, ownership, entry points) from git history + codegraph; no cache, every signal recomputed on demand.
 - `agnix`: native agent-config lint pass (skill frontmatter, CLAUDE.md/AGENTS.md, hooks, MCP, plugin manifests, agent files) graded HIGH/MEDIUM/LOW.
