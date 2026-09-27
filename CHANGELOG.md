@@ -5,6 +5,21 @@ All notable changes to the ODIN Claude Plugin will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.6] - 2026-09-27
+
+### Fixed
+
+- Generator and gate scripts: sync-baseline is byte-exact and maps unhandled
+  exceptions to the hard-fail code; the manifest generator emits
+  `policy.allow_implicit_invocation: false` for human-only skills.
+- Release notes and attribution: the 38-skill consolidation map sits under
+  the entry that ships it; attribution references the live NOTICE.
+- Skill procedures from the review round: release-gate drafts file changes
+  until Q1, cold-path fixes land before the terminal record, the SPI,
+  seccomp, and PAPI examples fail closed, the libfuzzer AFL workflow uses
+  instance paths and input-mode replay, and the publish-branch and
+  commit-push-current triggers split on their request verbs.
+
 ## [2.1.5] - 2026-09-26
 ### Changed
 - Eight orchestration skills gain one shared closing chain: Work, then the
