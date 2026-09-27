@@ -68,7 +68,7 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
 
    ```bash
    DISPATCH_TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-   DISPATCH_URL=$(DISPATCH_URL=$(gh workflow run "$RC_WORKFLOW_NAME" --repo "$INTERNAL_REPO" --ref "$BRANCH_NAME"))
+   DISPATCH_URL=$(gh workflow run "$RC_WORKFLOW_NAME" --repo "$INTERNAL_REPO" --ref "$BRANCH_NAME")
    ```
 
    Done when: the workflow dispatch exits zero and the dispatch timestamp is recorded.
