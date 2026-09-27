@@ -1,3 +1,5 @@
 interface:
   display_name: "Workspace Unfreeze"
   short_description: "Use when the user runs /workspace-unfreeze on a frozen path to make it editable again."
+policy:
+  allow_implicit_invocation: false

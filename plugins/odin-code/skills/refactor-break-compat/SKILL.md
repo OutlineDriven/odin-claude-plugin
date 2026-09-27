@@ -30,7 +30,7 @@ disable-model-invocation: true
 ## Procedure
 
 1. Map the blast radius. Enumerate every file, module, and caller of the old shape using `ast-grep` or `rg`. This is the demolition manifest. **Done when**: the demolition manifest is complete.
-2. Preview and confirm the demolition. Present the demolition manifest and the consequences to the user: every file and caller that will be deleted or rewritten, which tests will change, and which flags or config will be removed. Wait for explicit human confirmation. Do not proceed without it. **Done when**: the user confirms the demolition.
+2. Preview and confirm the demolition. Present the demolition manifest and the consequences to the user: every file and caller that will be deleted or rewritten, which tests will change, and which flags or config will be removed. If the old or new shape crosses a persisted or externally consumed boundary (for example, database schemas, event/message formats, queues, or public contracts), include an explicit migration/backfill and rollback or compatibility plan in the manifest. Present that plan and obtain confirmation before changing the boundary; the demolition-first rules do not authorize stranding persisted data or existing consumers. Wait for explicit human confirmation. **Done when**: the user confirms the demolition.
 3. Delete the old path. Remove compat layers, adapters, legacy branches, and flags used only by the old path. Do not delete a flag that also controls the replacement or another live path. No commenting out. Delete. **Done when**: the old path is deleted from every file in the manifest.
 4. Rewrite every caller to the new contract. Migrate all references from step 1. After each batch, run the strongest static enumerator the project has (compiler or typechecker, including opt-in: `mypy`, `pyright`, `tsc --checkJs`, Sorbet). Never sufficient alone: no static pass sees reflective, dynamically dispatched, string-constructed, or generated references, nor code excluded from the build. Enumerate those by hand and name them in the report. **Done when**: every caller in the manifest is on the new contract and the static enumerator passes.
 5. Rewrite tests to the new truth. Update assertions to the new behavior. Delete tests whose entire purpose was the old behavior. Add tests for the new contract where coverage is now thin. **Done when**: tests assert the new behavior and the old-behavior tests are deleted.
@@ -40,7 +40,7 @@ disable-model-invocation: true
 
 ## Failure and recovery
 
-- Residue remains: old references survive in code, tests, docs, or config after step 8. Report the survivors and stop with exit 1 (residue). Do not widen scope beyond the demolition manifest.
+- Residue remains: after all in-scope step-4 fixes and a final step-8 search, old references still survive in code, tests, docs, or config. Report the survivors and stop with exit 1 (residue). Do not widen scope beyond the demolition manifest.
 - Build or tests broken: migration incomplete, callers or assertions not yet on the new shape. Fix forward if within scope; if scope is exhausted, report the exact blockers and stop.
 - Migration stalled: codebase is half old, half new. Finish or revert to version-control baseline; never ship the intermediate state.
 

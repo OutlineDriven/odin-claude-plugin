@@ -1,3 +1,5 @@
 interface:
   display_name: "Mermaid To Proverif"
   short_description: "Use when a crypto Mermaid sequenceDiagram needs a ProVerif model for secrecy, authentication, replay, or forward-secrecy checks."
+policy:
+  allow_implicit_invocation: false

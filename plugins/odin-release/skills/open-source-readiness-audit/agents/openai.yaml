@@ -1,3 +1,5 @@
 interface:
   display_name: "Open Source Readiness Audit"
   short_description: "Use when the user asks whether a repository is ready for public release or wants a gap assessment."
+policy:
+  allow_implicit_invocation: false

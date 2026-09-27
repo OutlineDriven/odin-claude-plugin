@@ -1,3 +1,5 @@
 interface:
   display_name: "Meaningful Test Coverage"
   short_description: "Use when a test surface needs behavior-guarding coverage raised to a configured target with mutation kill evidence."
+policy:
+  allow_implicit_invocation: false

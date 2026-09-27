@@ -59,7 +59,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-knowledge:<nam
 | keep-why-repo-structure | Use when project documentation needs a layout or a knowledge item needs one home. |
 | keep-why-repo-trust-boundary | Use when repo content crosses into working context or synthesized knowledge. |
 | keep-why-retrospective | Use when an existing repository needs its unexplained rationale recovered into topic files. |
-| keep-why-schema-migration | Use when a project context-schema differs from the installed entry format. |
+| keep-why-schema-migration | Use when a project context store is read or written, or when its context-schema differs from the installed entry format. |
 | knowledge-refresh | Use when a knowledge artifact needs review before sharing or execution. |
 | memory-clean | Use when a human asks to audit memory, find stale or duplicate memories, or needs tidy's ICM-state audit. |
 | memory-sanitize | Use when the user asks to sanitize memory for sharing, redact PII, or scan memory for credentials. |

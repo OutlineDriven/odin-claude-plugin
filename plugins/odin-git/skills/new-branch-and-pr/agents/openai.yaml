@@ -1,3 +1,5 @@
 interface:
   display_name: "New Branch And PR"
   short_description: "Use when a human explicitly asks to ship work through a clean branch and pull request."
+policy:
+  allow_implicit_invocation: false

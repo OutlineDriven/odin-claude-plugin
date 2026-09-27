@@ -1,3 +1,5 @@
 interface:
   display_name: "Strategy"
   short_description: "Use when defining product strategy, starting or redirecting a product, or repairing stale STRATEGY.md."
+policy:
+  allow_implicit_invocation: false

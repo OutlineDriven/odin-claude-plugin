@@ -1,3 +1,5 @@
 interface:
   display_name: "Post To Slack"
   short_description: "Use when the user explicitly asks to share a message on Slack through an incoming webhook."
+policy:
+  allow_implicit_invocation: false

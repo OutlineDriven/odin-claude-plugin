@@ -1,3 +1,5 @@
 interface:
   display_name: "Repo Health Triage"
   short_description: "Use when a scheduled or watcher tick requests a repository-health pass."
+policy:
+  allow_implicit_invocation: false

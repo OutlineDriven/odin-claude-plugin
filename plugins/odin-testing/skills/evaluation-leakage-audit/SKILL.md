@@ -58,3 +58,6 @@ Treat claims about hidden data, independent labels, or private procedures as unv
 
 ## Output
 A chat report with the audited scope and component map, verified independent ground-truth entry points, detected patterns with evidence and fix, blocked or non-converged tests with required evidence, and a terminal classification of `leak found`, `no leak found`, or `blocked`. Mode self-audit: the report also carries the bounded claim, the auditor self-audit result, the N=1 auditor comparison when available, one root independence failure, and a terminal verdict of `independent`, `not independent`, `non-independent audit`, or `blocked`.
+
+## Provenance
+Adapted from `LilMGenius/paperthin` at revision `3bca079a51bcfff5dafb53d1d7f9f523d66ee317`, source file `skills/depth/mandela/SKILL.md`. See `plugins/odin-testing/NOTICE` for the retained third-party attribution.

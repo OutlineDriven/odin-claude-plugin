@@ -1,3 +1,5 @@
 interface:
   display_name: "Competitor Feature Research"
   short_description: "Use when asked to research a feature across competitor products or to analyze competitor release changelogs (mode: changelog), and publish a cited report."
+policy:
+  allow_implicit_invocation: false

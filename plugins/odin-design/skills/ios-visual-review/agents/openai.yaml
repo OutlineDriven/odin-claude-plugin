@@ -1,3 +1,5 @@
 interface:
   display_name: "Ios Visual Review"
   short_description: "Use when the user invokes /ios-visual-review to audit an iOS app's visuals on a real device."
+policy:
+  allow_implicit_invocation: false

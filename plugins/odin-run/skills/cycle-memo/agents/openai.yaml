@@ -1,3 +1,5 @@
 interface:
   display_name: "Cycle Memo"
   short_description: "Use when a build, QA pass, demo, user complaint, or abandoned attempt leaves the next pass needing lessons rather than code."
+policy:
+  allow_implicit_invocation: false

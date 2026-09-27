@@ -1,3 +1,5 @@
 interface:
   display_name: "F Star Effectful Verification"
   short_description: "Use when effectful, security-sensitive code needs refinement-typed, SMT-backed verification in F*, in the HACL* or Project Everest style."
+policy:
+  allow_implicit_invocation: false

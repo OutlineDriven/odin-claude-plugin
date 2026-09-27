@@ -1,3 +1,5 @@
 interface:
   display_name: "Setup Repo Skills"
   short_description: "Use when the user wants one-time repository setup for tracker, triage labels, and domain conventions."
+policy:
+  allow_implicit_invocation: false

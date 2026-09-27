@@ -1,3 +1,5 @@
 interface:
   display_name: "Prepare Repository For Public Release"
   short_description: "Use when asked to prepare a repository for public launch or open source it."
+policy:
+  allow_implicit_invocation: false

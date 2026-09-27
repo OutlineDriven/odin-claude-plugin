@@ -1,3 +1,5 @@
 interface:
   display_name: "Model Retuning"
   short_description: "Use when asked to run /model-retuning to retune a skill corpus for a new model, measurement-first."
+policy:
+  allow_implicit_invocation: false

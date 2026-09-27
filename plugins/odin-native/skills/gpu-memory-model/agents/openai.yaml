@@ -1,3 +1,5 @@
 interface:
   display_name: "Gpu Memory Model"
   short_description: "Use when analyzing warp divergence, memory coalescing, shared memory bank conflicts, cache behavior, atomics, or occupancy tradeoffs on NVIDIA and AMD GPUs."
+policy:
+  allow_implicit_invocation: false

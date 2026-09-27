@@ -1,3 +1,5 @@
 interface:
   display_name: "Release Landing Report"
   short_description: "Use when the user runs /release-landing-report to summarize landed changes and return a landing summary report."
+policy:
+  allow_implicit_invocation: false

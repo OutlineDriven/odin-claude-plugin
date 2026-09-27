@@ -1,3 +1,5 @@
 interface:
   display_name: "Universal Invariant Baseline"
   short_description: "Use when invoked to apply an invariant-first, fail-fast, special-case-eliminating baseline."
+policy:
+  allow_implicit_invocation: false

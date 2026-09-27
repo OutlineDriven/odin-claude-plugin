@@ -1,3 +1,5 @@
 interface:
   display_name: "Chrome Extension"
   short_description: "Use when the user explicitly asks to build, modify, or publish a Manifest V3 Chrome extension."
+policy:
+  allow_implicit_invocation: false

@@ -1,3 +1,5 @@
 interface:
   display_name: "Save MD"
   short_description: "Use when asked to save a URL, file, or pasted text as a .md file with frontmatter, without summarizing."
+policy:
+  allow_implicit_invocation: false

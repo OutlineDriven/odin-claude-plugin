@@ -23,7 +23,7 @@
 | assembly-riscv | odin-native | Coding | Use when reading or writing RV32/RV64 assembly, inline asm in C, the RISC-V psABI, IMAFD extension naming, compressed instructions, or QEMU RISC-V debugging. |
 | assembly-x86 | odin-native | Coding | Use when reading GCC or Clang x86-64 assembly, writing inline asm, decoding AT&T syntax, or applying System V AMD64 register rules. |
 | ast-grep | odin-code | Coding | Use when asked to run AST-based structural search, lint, or rewrite of code when regex is too fragile. |
-| atheris | odin-fuzzing | Security | Use when a user needs coverage-guided fuzzing for Python code or a Python native extension using Atheris. |
+| atheris | odin-fuzzing | Security | Use when a user needs to run coverage-guided fuzzing with Atheris against Python code or a Python native extension. |
 | atomic-issues-prs | odin-git | Coding | Use when the user says "atomic PRs" or requests one issue or PR per logical change. |
 | attack-shape | odin-critique | Productivity | Use when the user wants adversarial stress-testing of a proposed architecture, structure, or shape. |
 | audit-loop-scaffold | odin-run | Coding | Use when loop scaffold files have drifted from their provenance-pinned templates. |
@@ -86,7 +86,7 @@
 | code-simplification | odin-code | Coding | Use when the user asks to simplify, clean, or refine code. |
 | codeql-security-analysis | odin-security | Security | Use when building or reusing a CodeQL database, running CodeQL security analysis, or modeling project-specific sources and sinks. |
 | commit | odin-git | Coding | Use when asked to commit changes, create a typed branch, format history for a changelog, or rewrite messages of HEAD or an unpushed range. |
-| commit-push-current | odin-git | Coding | Use when a human explicitly asks to commit and push to the checked-out branch, including directly to the default branch, with no branch creation and no pull request. |
+| commit-push-current | odin-git | Coding | Use when a human asks to commit and push, not publish, the checked-out branch, including directly to the default branch, with no branch creation and no pull request. |
 | commit-push-pr | odin-git | Coding | Use when asked to commit and push a feature branch, with or without a pull request. |
 | competitor-feature-research | odin-product | Productivity | Use when asked to research a feature across competitor products or to analyze competitor release changelogs (mode: changelog), and publish a cited report. |
 | compile-3d-workflow | odin-visual | Design | Use when the user asks for direction and a compilable 3D workflow from an interview. |
@@ -312,7 +312,7 @@
 | keep-why-repo-structure | odin-knowledge | Productivity | Use when project documentation needs a layout or a knowledge item needs one home. |
 | keep-why-repo-trust-boundary | odin-knowledge | Productivity | Use when repo content crosses into working context or synthesized knowledge. |
 | keep-why-retrospective | odin-knowledge | Productivity | Use when an existing repository needs its unexplained rationale recovered into topic files. |
-| keep-why-schema-migration | odin-knowledge | Productivity | Use when a project context-schema differs from the installed entry format. |
+| keep-why-schema-migration | odin-knowledge | Productivity | Use when a project context store is read or written, or when its context-schema differs from the installed entry format. |
 | kernel-concurrency | odin-native | Coding | Use when choosing kernel spinlocks versus mutexes, using RCU, seqlocks, completions, or memory barriers, or debugging scheduling-while-atomic. |
 | kernel-debugging | odin-native | Coding | Use when debugging the Linux kernel: kgdb and kdb, ftrace and kprobes, dynamic debug, kdump and crash analysis, or printk levels on a live or crashed target. |
 | kernel-debugging-advanced | odin-native | Coding | Use when tracing kernel functions with ftrace or trace-cmd, profiling with perf, kprobes, or dyndbg, or analyzing a vmcore with crash. |
@@ -398,7 +398,7 @@
 | openmp | odin-native | Coding | Use when parallelizing loops or tasks with OpenMP: parallel for, schedules, reductions, data sharing, simd, target offload, OMP_* tuning, or false sharing. |
 | openocd-jtag | odin-native | Coding | Use when configuring OpenOCD for a JTAG or SWD target, flashing through it, attaching GDB to a bare-metal MCU, or setting hardware breakpoints and watchpoints. |
 | optimise-seo | odin-web | Coding | Use when asked to make a Next.js App Router app crawlable, indexable, and search-optimized for sitemaps, robots, canonicals, and Core Web Vitals. |
-| optimize | odin-code | Coding | Use when asked to optimize code, make a path faster, make this as fast as possible, reduce allocations, repair a regression, profile a target, grill every inefficiency, or run a subsystem or repo-wide performance campaign against a measured floor; when a performance requirement, slowness report, Core Web Vitals miss, or profiling evidence identifies a bottleneck; or for an "extremely optimize" performance campaign, optimizing suspected hot paths without waiting for benchmarks, or estimating hot and complexity-neutral cold paths while refusing complexity theater. |
+| optimize | odin-code | Coding | Use when asked to optimize code, reduce allocations, profile a target, or investigate a performance regression or measured bottleneck. |
 | orchestration-patterns | odin-run | Coding | Use when work decomposes across subagents or role panels and needs coupling-based orchestration. |
 | os-dev-scratch | odin-native | Coding | Use when building a minimal x86-64 OS: boot protocols, long mode, page tables, IDT, PIC/APIC, serial and keyboard drivers, frame allocator, or context switching. |
 | oss-fuzz | odin-fuzzing | Security | Use when enrolling a project in OSS-Fuzz, running its helper workflow locally, or reproducing an OSS-Fuzz report. |
@@ -441,7 +441,7 @@
 | propose-issue | odin-git | Coding | Use when the user asks to propose an issue, file or open a bug report, or turn a reported defect into a tracked issue. |
 | protocol-analysis | odin-native | Coding | Use when decoding I2C, SPI, or UART captures with sigrok or PulseView, checking bus traffic against a datasheet, or post-processing captures in Python. |
 | prototype | odin-design | Design | Use when asked to prototype one design question through a cheap logic or UI experiment, including button-driven state-model checks. |
-| publish-branch | odin-git | Coding | Use when asked to publish the checked-out branch: commit and push it on whatever branch it is, the default branch included. |
+| publish-branch | odin-git | Coding | Use when a human asks to publish, not commit and push, the checked-out branch: commit and push it on whatever branch it is, the default branch included. |
 | punishing-practices | odin-critique | Productivity | Use when a workflow, plan, diff, or completed work cycle must be checked for practices that punish the project later. |
 | purge-slop-docs | odin-writing | Writing | Use when a human asks to purge stale docs, clean Markdown, or reorder the documentation hierarchy. |
 | qemu-embedded-simulation | odin-native | Coding | Use when running ARM or RISC-V bare-metal firmware in QEMU: machine selection, -kernel ELF loading, semihosting, or GDB debugging without hardware. |

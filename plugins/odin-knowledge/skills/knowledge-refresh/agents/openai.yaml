@@ -1,3 +1,5 @@
 interface:
   display_name: "Knowledge Refresh"
   short_description: "Use when a knowledge artifact needs review before sharing or execution."
+policy:
+  allow_implicit_invocation: false

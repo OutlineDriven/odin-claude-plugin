@@ -1,3 +1,5 @@
 interface:
   display_name: "Diff Scoped Browser QA"
   short_description: "Use when asked to run branch-diff browser QA against a PR or branch."
+policy:
+  allow_implicit_invocation: false

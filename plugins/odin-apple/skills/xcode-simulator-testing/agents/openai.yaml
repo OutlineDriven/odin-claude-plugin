@@ -1,3 +1,5 @@
 interface:
   display_name: "Xcode Simulator Testing"
   short_description: "Use when asked to run /xcode-simulator-testing with a scheme name or current to build and launch an iOS app in a simulator."
+policy:
+  allow_implicit_invocation: false

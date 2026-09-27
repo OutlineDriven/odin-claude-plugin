@@ -1,3 +1,5 @@
 interface:
   display_name: "Secure NPM Package"
   short_description: "Use when creating or hardening an npm release with Trusted or Staged Publishing, including E404 packages sequenced after first publish."
+policy:
+  allow_implicit_invocation: false

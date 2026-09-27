@@ -21,7 +21,7 @@ disable-model-invocation: true
 - Gate-only evaluation with no merge: use `gate-proposed-change`.
 - Review-only passes: this skill lands PRs.
 
-Neither this skill nor `resolve` can invoke the other, because both are `disable-model-invocation: true`. That is why the sweep reaches the sibling's scripts by path rather than firing the sibling skill.
+This queue-landing workflow uses the sibling `resolve` scripts by path to process review feedback without invoking the sibling skill.
 
 ## Inputs
 

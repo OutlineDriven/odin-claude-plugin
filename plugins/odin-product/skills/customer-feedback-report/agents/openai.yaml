@@ -1,3 +1,5 @@
 interface:
   display_name: "Customer Feedback Report"
   short_description: "Use when customer feedback, NPS, churn, email feedback, call transcripts, or voice-of-the-customer analysis needs a report over a time window."
+policy:
+  allow_implicit_invocation: false

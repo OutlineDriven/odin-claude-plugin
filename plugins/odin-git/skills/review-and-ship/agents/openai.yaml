@@ -1,3 +1,5 @@
 interface:
   display_name: "Review And Ship"
   short_description: "Use when a human directly requests review and publication of an existing diff or delegated work."
+policy:
+  allow_implicit_invocation: false

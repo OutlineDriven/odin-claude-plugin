@@ -1,3 +1,5 @@
 interface:
   display_name: "Cloud Task Orchestrator"
   short_description: "Use when a human explicitly runs /cloud-task-orchestrator for a large task across cloud agents to drain a verified task graph."
+policy:
+  allow_implicit_invocation: false

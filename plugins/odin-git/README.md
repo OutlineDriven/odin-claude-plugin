@@ -38,7 +38,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-git:<name>` in
 | can-i-help | Use when the user asks "where to help", "contribution opportunities", or "find a good first issue". |
 | close-done | Use when the user wants to batch-close resolved or outdated tracker items. |
 | commit | Use when asked to commit changes, create a typed branch, format history for a changelog, or rewrite messages of HEAD or an unpushed range. |
-| commit-push-current | Use when a human explicitly asks to commit and push to the checked-out branch, including directly to the default branch, with no branch creation and no pull request. |
+| commit-push-current | Use when a human asks to commit and push, not publish, the checked-out branch, including directly to the default branch, with no branch creation and no pull request. |
 | commit-push-pr | Use when asked to commit and push a feature branch, with or without a pull request. |
 | create-branch | Use when the user asks to create a new branch or start work on one. |
 | create-pull-request | Use when asked to create or update a PR, revise its description, or link issue references to its body. |
@@ -64,7 +64,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-git:<name>` in
 | post-daily-new-issues | Use when a human explicitly requests the daily on-call issue digest from a named issue tracker for a configured Slack channel. |
 | post-merge-cleanup | Use when a landed merge, release, or completed change needs its cleanup surface reconciled. |
 | propose-issue | Use when the user asks to propose an issue, file or open a bug report, or turn a reported defect into a tracked issue. |
-| publish-branch | Use when asked to publish the checked-out branch: commit and push it on whatever branch it is, the default branch included. |
+| publish-branch | Use when a human asks to publish, not commit and push, the checked-out branch: commit and push it on whatever branch it is, the default branch included. |
 | repo-health-triage | Use when a scheduled or watcher tick requests a repository-health pass. |
 | resolve | Use when addressing review feedback in analyze or reception mode, or handling GitHub PR feedback in autonomous, interactive, or summary mode for a named PR target. |
 | resolve-merge-conflicts | Use when a merge, rebase, cherry-pick, or stash pop stops on conflicts. |

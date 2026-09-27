@@ -1,3 +1,5 @@
 interface:
   display_name: "Summarize Document Set"
   short_description: "Use when the user asks to summarize a set of documents, identify themes and conflicts across multiple files, or synthesize internal docs."
+policy:
+  allow_implicit_invocation: false

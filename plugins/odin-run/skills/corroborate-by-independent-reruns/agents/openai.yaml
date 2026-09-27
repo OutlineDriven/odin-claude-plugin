@@ -1,3 +1,5 @@
 interface:
   display_name: "Corroborate By Independent Reruns"
   short_description: "Use when a candidate patch or answer needs independent corroboration before it is trusted."
+policy:
+  allow_implicit_invocation: false

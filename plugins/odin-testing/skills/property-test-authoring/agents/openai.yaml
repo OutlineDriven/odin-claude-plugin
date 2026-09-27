@@ -1,3 +1,5 @@
 interface:
   display_name: "Property Test Authoring"
   short_description: "Use when authoring property tests, assessing PBT fit for a code path, reviewing existing property tests, or triaging a failing counterexample."
+policy:
+  allow_implicit_invocation: false

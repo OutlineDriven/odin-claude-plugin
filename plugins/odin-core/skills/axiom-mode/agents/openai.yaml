@@ -1,3 +1,5 @@
 interface:
   display_name: "Axiom Mode"
   short_description: "Use when the user requests axiom, axiom-mode, axiom-compact, formal-logic, or compact form."
+policy:
+  allow_implicit_invocation: false

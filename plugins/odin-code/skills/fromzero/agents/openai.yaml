@@ -1,3 +1,5 @@
 interface:
   display_name: "Fromzero"
   short_description: "Use when replacing a greenfield attempt with a clean pad of verified requirements."
+policy:
+  allow_implicit_invocation: false

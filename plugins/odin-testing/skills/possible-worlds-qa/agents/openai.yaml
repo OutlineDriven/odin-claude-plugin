@@ -1,3 +1,5 @@
 interface:
   display_name: "Possible Worlds QA"
   short_description: "Use when a product surface must be tested against extreme or hostile worlds."
+policy:
+  allow_implicit_invocation: false

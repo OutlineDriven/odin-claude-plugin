@@ -1,3 +1,5 @@
 interface:
   display_name: "Cargo Fuzz"
   short_description: "Use when initializing, running, measuring coverage, or triaging a cargo-fuzz target in a Rust crate."
+policy:
+  allow_implicit_invocation: false

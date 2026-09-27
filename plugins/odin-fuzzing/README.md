@@ -33,7 +33,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-fuzzing:<name>
 
 | Skill | Trigger |
 |---|---|
-| atheris | Use when a user needs coverage-guided fuzzing for Python code or a Python native extension using Atheris. |
+| atheris | Use when a user needs to run coverage-guided fuzzing with Atheris against Python code or a Python native extension. |
 | cargo-fuzz | Use when initializing, running, measuring coverage, or triaging a cargo-fuzz target in a Rust crate. |
 | fuzz-harness-writing | Use when a user needs to create or improve a deterministic, engine-agnostic fuzz harness for raw or structured target inputs. |
 | fuzzing | Use when planning an end-to-end fuzzing program for a project: engine and target selection, corpus management, and CI or nightly wiring. |

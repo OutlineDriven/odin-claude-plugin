@@ -1,3 +1,5 @@
 interface:
   display_name: "Analysis Artifacts"
   short_description: "Use when the user requests a deep dive, exploratory analysis, or data analysis on BigQuery."
+policy:
+  allow_implicit_invocation: false

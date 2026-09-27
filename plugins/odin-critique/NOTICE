@@ -65,7 +65,7 @@ agent-sh
 Source: https://github.com/agent-sh
 License: MIT (https://opensource.org/licenses/MIT)
 Copyright: Copyright (c) 2026 Avi Fenesh
-Local adaptations: audit-project, can-i-help, deslop, drift-detect, onboard, sync-docs
+Local adaptations: repo-intel, agnix, deslop, sync-docs, banthis, drift-detect, audit-project, onboard, can-i-help, learn, system-prompt-curator, skillers, agent-surface-forge, perf-investigate, next-task
 
 bentossell/visualise
 Source: https://github.com/bentossell/visualise/tree/35cd185b58af5db2f9d0fe13d9872b544a467483

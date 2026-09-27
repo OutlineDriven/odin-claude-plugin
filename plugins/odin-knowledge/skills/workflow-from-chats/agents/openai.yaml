@@ -1,3 +1,5 @@
 interface:
   display_name: "Workflow From Chats"
   short_description: "Use when a user asks to mine recent chats for workflow preferences."
+policy:
+  allow_implicit_invocation: false

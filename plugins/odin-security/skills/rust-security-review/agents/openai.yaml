@@ -1,3 +1,5 @@
 interface:
   display_name: "Rust Security Review"
   short_description: "Use when asked for a Rust security or correctness audit of a crate, service, or library with unsafe, FFI, concurrency, async, or untrusted-input code."
+policy:
+  allow_implicit_invocation: false

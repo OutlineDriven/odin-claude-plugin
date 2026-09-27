@@ -1,3 +1,5 @@
 interface:
   display_name: "Substack Ghostwriting"
   short_description: "Use when asked to ghostwrite Substack newsletters and web posts from structured intake."
+policy:
+  allow_implicit_invocation: false

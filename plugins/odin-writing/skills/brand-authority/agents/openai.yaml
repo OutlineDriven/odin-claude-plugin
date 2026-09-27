@@ -1,3 +1,5 @@
 interface:
   display_name: "Brand Authority"
   short_description: "Use when the user asks for branded or style-governed output."
+policy:
+  allow_implicit_invocation: false

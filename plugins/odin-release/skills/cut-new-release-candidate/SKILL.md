@@ -68,34 +68,25 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
 
    ```bash
    DISPATCH_TS=$(date -u +%Y-%m-%dT%H:%M:%SZ)
-   gh workflow run "$RC_WORKFLOW_NAME" --repo "$INTERNAL_REPO" --ref "$BRANCH_NAME"
+   DISPATCH_URL=$(DISPATCH_URL=$(gh workflow run "$RC_WORKFLOW_NAME" --repo "$INTERNAL_REPO" --ref "$BRANCH_NAME"))
    ```
 
    Done when: the workflow dispatch exits zero and the dispatch timestamp is recorded.
 
-6. Fetch this dispatch's run and share its `url`, `status`, and `conclusion`; do not watch or wait for completion. A run list taken right after dispatch can still show the previous run, so poll until the newest run's `createdAt` is at or after the dispatch timestamp (ISO-8601 UTC strings compare lexicographically), up to ten tries ten seconds apart:
+6. Fetch this dispatch's run and share its `url`, `status`, and `conclusion`; do not watch or wait for completion. Use the URL captured in `DISPATCH_URL` from step 5 to identify this run; do not infer identity from a timestamp or recent run-list order. Extract the run ID from that URL and query the exact ID. If the dispatch returned no URL or no run ID can be extracted, leave `RUN_URL` empty and use the existing “Dispatched but no run URL” failure path without notification. Done when: that exact run’s URL, status, and conclusion are fetched and shared.
 
    ```bash
-   RUN_JSON=""
-   for i in $(seq 1 10); do
-     RUN_JSON=$(gh run list \
-       --repo "$INTERNAL_REPO" \
-       --workflow "$RC_WORKFLOW_NAME" \
-       --branch "$BRANCH_NAME" \
-       --limit 1 \
-       --json url,status,conclusion,createdAt \
-       --jq '.[0] // empty')
-     CREATED=$(jq -r '.createdAt // empty' <<<"$RUN_JSON")
-     if [ -n "$CREATED" ] && [ ! "$CREATED" \< "$DISPATCH_TS" ]; then
-       break
-     fi
-     RUN_JSON=""
-     sleep 10
-   done
-   RUN_URL=$(jq -r '.url // empty' <<<"$RUN_JSON")
+RUN_ID=$(sed -nE 's#^.*/actions/runs/([0-9]+)(/.*)?$#\1#p' <<<"$DISPATCH_URL")
+if [ -n "$RUN_ID" ]; then
+  RUN_JSON=$(gh run view "$RUN_ID" --repo "$INTERNAL_REPO" --json url,status,conclusion)
+  RUN_URL=$(jq -r '.url // empty' <<<"$RUN_JSON")
+else
+  RUN_JSON=""
+  RUN_URL=""
+fi
    ```
 
-   Guards: `// empty` keeps an empty run list from printing the literal `null`, which would otherwise pass `-n` and compare greater than any timestamp; the `! ... \<` comparison accepts a run created in the same second as the dispatch. A run whose `createdAt` predates the dispatch timestamp is the previous run, not this one. After the loop, verify `RUN_URL` is non-empty and not `null` before posting anything: an empty or `null` URL means this dispatch's run never appeared, which is the "Dispatched but no run URL" failure below, never a notification. Done when: the URL, `status`, and `conclusion` for this dispatch's run are fetched and shared.
+   Guards: this uses only the URL returned by step 5, so a previous or concurrent run is never substituted. If no run URL or run ID is returned, leave `RUN_URL` empty and take the existing “Dispatched but no run URL” failure path; never notify on an unidentified run. Done when: the URL, status, and conclusion for this dispatch's run are fetched and shared.
 
 7. Post the status notification carrying the branch name and run URL. Use the destination the user named. If the user gave no destination, stop and ask for one. Send the notification through the configured endpoint:
 

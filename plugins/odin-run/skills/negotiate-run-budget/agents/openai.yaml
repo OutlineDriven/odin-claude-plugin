@@ -1,3 +1,5 @@
 interface:
   display_name: "Negotiate Run Budget"
   short_description: "Use when a high-priority run reaches at least 90% of its budget and requests an extension."
+policy:
+  allow_implicit_invocation: false

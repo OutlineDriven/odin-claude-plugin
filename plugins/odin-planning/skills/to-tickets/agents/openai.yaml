@@ -1,3 +1,5 @@
 interface:
   display_name: "To Tickets"
   short_description: "Use when a settled plan needs implementation tickets published as blocker-linked slices, tracer bullets, or expand-contract sequencing."
+policy:
+  allow_implicit_invocation: false

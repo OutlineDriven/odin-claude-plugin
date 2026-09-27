@@ -194,10 +194,10 @@ description: 'Use when a repository needs Git safety controls: guard destructive
 
    b. If none exists, select one manager: Lefthook for a pnpm, Bun, or Go repository; prek for Python, Rust, or OCaml. In a mixed repository, select the manager already represented by its lockfile or task runner. Ask only when two choices remain equally supported by repository evidence. Done when: the manager is selected or the user is asked.
 
-   c. Install through the current project toolchain: `pnpm add -D lefthook @biomejs/biome && pnpm exec lefthook install` for JavaScript or TypeScript; `go install github.com/evilmartians/lefthook@latest && lefthook install` for Go; `uv tool install prek && prek install` for Python, Rust, or OCaml. Do not install ESLint, Prettier, Black, isort, mypy, or a second package manager. Done when: the manager is installed.
+   c. Install through the selected project toolchain: for pnpm JavaScript/TypeScript, run `pnpm add -D lefthook` and `pnpm exec lefthook install`; for Bun JavaScript/TypeScript, run `bun add --dev lefthook` and `bun run lefthook install`; for Go, run `go install github.com/evilmartians/lefthook@latest && lefthook install`; for Python, Rust, or OCaml, run `uv tool install prek && prek install`. Do not install Biome unless the repository already declares and configures it. Do not install ESLint, Prettier, Black, isort, mypy, or a second package manager. Done when: the manager is installed.
 
    d. Write only commands the repository can execute:
-      - JavaScript or TypeScript Lefthook: `pnpm exec biome check --write --no-errors-on-unmatched .`, the declared type-check script, and the declared targeted-test script.
+      - JavaScript or TypeScript Lefthook: include only format, lint, type-check, or test commands already declared by repository scripts or committed tool configuration; run them with the detected package manager, such as `pnpm run <script>` or `bun run <script>`. Use Biome only when already declared and configured; do not add a checker.
       - Python prek local hooks: `uv run ruff check --fix .`, `uv run ruff format --check .`, `uv run pyright`, and the declared targeted pytest command.
       - Go Lefthook: fail when `gofmt -l .` returns a path, then run `go vet ./...` and `go test ./...`.
       - Rust prek local hooks: `cargo fmt --check`, `cargo clippy --all-targets -- -D warnings`, and the repository test command, preferring `cargo nextest run` when configured.
@@ -205,7 +205,7 @@ description: 'Use when a repository needs Git safety controls: guard destructive
 
       Set `pass_filenames: false` for whole-repository commands. Keep independent read-only checks parallel only when their tools do not edit the same files. Done when: the config is written with repository-native commands only.
 
-   e. Run the manager's all-files entry point: `pnpm exec lefthook run pre-commit` or `prek run --all-files`. If a formatter changes files, inspect the diff and repeat until the non-mutating gate passes. Done when: the all-files command passes with no uncommitted formatter changes.
+   e. Run the manager's all-files entry point: `pnpm exec lefthook run pre-commit` for pnpm, `bun run lefthook run pre-commit` for Bun, or `prek run --all-files`. If a formatter changes files, inspect the diff and repeat until the non-mutating gate passes. Done when: the all-files command passes with no uncommitted formatter changes.
 
    f. Prove enforcement without creating history. Add one temporary, reversible formatting violation inside an owned scratch file that the hook includes. Run the hook and require non-zero or an automatic repair followed by a dirty diff. Restore the scratch file, rerun the hook, and require zero. When the hook does not include a formatter, use the trivial-commit alternative: stage a trivial change (for example, add a blank line to a tracked file), run the hook, and require all configured checks to pass; then revert the staged change. Never weaken a command to make the probe pass. Done when: the failing probe blocks and the passing probe exits zero, or the trivial-commit probe passes all checks and is reverted.
 

@@ -1,3 +1,5 @@
 interface:
   display_name: "Fail Recover"
   short_description: "Use when the user asks to restore service from a known failure with a prescribed recovery operation."
+policy:
+  allow_implicit_invocation: false

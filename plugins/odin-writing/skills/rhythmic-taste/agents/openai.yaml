@@ -1,3 +1,5 @@
 interface:
   display_name: "Rhythmic Taste"
   short_description: "Use when the user says \"give this rhythm\", \"vary the structure\", or \"the sections all read the same\"."
+policy:
+  allow_implicit_invocation: false

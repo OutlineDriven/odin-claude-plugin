@@ -1,3 +1,5 @@
 interface:
   display_name: "Deep Research"
   short_description: "Use when the user asks to research a topic and produce a thorough sourced report."
+policy:
+  allow_implicit_invocation: false

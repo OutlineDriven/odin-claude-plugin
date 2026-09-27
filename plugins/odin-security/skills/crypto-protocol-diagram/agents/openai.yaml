@@ -1,3 +1,5 @@
 interface:
   display_name: "Crypto Protocol Diagram"
   short_description: "Use when asked for a sequence diagram of cryptographic protocol semantics from code, prose, RFCs, papers, ProVerif, or Tamarin, or for code/spec divergence."
+policy:
+  allow_implicit_invocation: false

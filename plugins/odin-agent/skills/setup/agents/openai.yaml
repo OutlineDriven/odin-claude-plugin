@@ -1,3 +1,5 @@
 interface:
   display_name: "Setup"
   short_description: "Use when the user asks to set up the agent environment."
+policy:
+  allow_implicit_invocation: false

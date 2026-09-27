@@ -1,3 +1,5 @@
 interface:
   display_name: "History Sync"
   short_description: "Use when the user requests memory transfer to or from a named peer."
+policy:
+  allow_implicit_invocation: false

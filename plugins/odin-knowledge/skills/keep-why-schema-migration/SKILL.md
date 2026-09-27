@@ -1,7 +1,6 @@
 ---
 name: keep-why-schema-migration
-description: 'Use when a project context-schema differs from the installed entry format. Not for remote, publish, deploy, or irreversible changes.'
-disable-model-invocation: true
+description: 'Use when a project context store is read or written, or when its context-schema differs from the installed entry format. Not for remote, publish, deploy, or irreversible changes.'
 ---
 
 # Keep why schema migration

@@ -1,3 +1,5 @@
 interface:
   display_name: "Check Agent Compatibility"
   short_description: "Use when a human explicitly asks for a full repository agent-compatibility pass returning a scored report with prioritized fixes."
+policy:
+  allow_implicit_invocation: false

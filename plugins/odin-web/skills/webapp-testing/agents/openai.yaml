@@ -1,3 +1,5 @@
 interface:
   display_name: "Webapp Testing"
   short_description: "Use when asked to verify frontend or UI behavior, or capture browser screenshots and console logs."
+policy:
+  allow_implicit_invocation: false

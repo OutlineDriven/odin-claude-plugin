@@ -1,3 +1,5 @@
 interface:
   display_name: "History Health"
   short_description: "Use when a user asks to audit what recall fed agents."
+policy:
+  allow_implicit_invocation: false

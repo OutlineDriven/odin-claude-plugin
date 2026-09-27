@@ -1,3 +1,5 @@
 interface:
   display_name: "Protocol Analysis"
   short_description: "Use when decoding I2C, SPI, or UART captures with sigrok or PulseView, checking bus traffic against a datasheet, or post-processing captures in Python."
+policy:
+  allow_implicit_invocation: false

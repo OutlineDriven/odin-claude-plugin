@@ -1,3 +1,5 @@
 interface:
   display_name: "Automatic Cybernetic Flow Design"
   short_description: "Use when the user wants a cybernetic flow design document for an interactive system."
+policy:
+  allow_implicit_invocation: false

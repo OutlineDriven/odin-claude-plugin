@@ -1,3 +1,5 @@
 interface:
   display_name: "Audit Loop Scaffold"
   short_description: "Use when loop scaffold files have drifted from their provenance-pinned templates."
+policy:
+  allow_implicit_invocation: false

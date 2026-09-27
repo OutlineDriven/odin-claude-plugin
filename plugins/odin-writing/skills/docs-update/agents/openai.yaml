@@ -1,3 +1,5 @@
 interface:
   display_name: "Docs Update"
   short_description: "Use when documentation has drifted from code changes and the user asks to synchronize."
+policy:
+  allow_implicit_invocation: false

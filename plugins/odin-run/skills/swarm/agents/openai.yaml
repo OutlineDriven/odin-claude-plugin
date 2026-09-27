@@ -1,3 +1,5 @@
 interface:
   display_name: "Swarm"
   short_description: "Use when asked to run partitioned parallel coverage or races across isolated workers."
+policy:
+  allow_implicit_invocation: false
