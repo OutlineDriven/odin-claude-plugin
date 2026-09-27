@@ -25,7 +25,9 @@ whole tree on every commit no matter which files were touched. Expect the full s
 seconds.
 
 The scripts need no package manager. Every `.mjs` imports `node:` builtins only and every `.py`
-imports the standard library only, so each one runs directly when `prek` or `just` is absent:
+imports the standard library only. `sync-outline-skills.mjs` and `check-voice.py` also invoke the
+external `git` executable when querying the repository index, so those runs require Git on `PATH`.
+The commands below run directly when `prek` or `just` is absent:
 
 ```shell
 node scripts/check-plugin-surfaces.mjs
@@ -52,7 +54,9 @@ rule and the fixtures catch that without touching a live carrier.
 ### render-skill-manifests.mjs
 
 Derives `plugins/<plugin>/skills/<slug>/agents/openai.yaml` from each `SKILL.md` frontmatter. The
-file carries two fields under `interface`:
+file carries two fields under `interface` and, when the frontmatter sets
+`disable-model-invocation: true`, a top-level `policy.allow_implicit_invocation: false` entry so
+Codex keeps the skill available for explicit invocation without implicit model injection:
 
 | Field | Derivation |
 |---|---|
@@ -218,15 +222,14 @@ Each failure class reports its first five instances and a total.
 
 ### check-skill-frontmatter.py
 
-Proves each frontmatter parses under a strict YAML parser, using the standard library only. The
-manifest generator brackets single-quoted scalars with `lastIndexOf("'")`, so an unescaped
-apostrophe passes it silently and then fails `gh skill publish` with `yaml: did not find expected
-key`. This gate closes that hole.
+Checks each frontmatter with a hand-written strict-scalar checker for the repository's closed
+frontmatter subset rather than a general YAML parser. The manifest generator brackets single-quoted
+scalars with `lastIndexOf("'")`, so an unescaped apostrophe passes it silently and then fails `gh skill
+publish` with `yaml: did not find expected key`. This gate closes that hole.
 
-It does so without reimplementing YAML, because the frontmatter shape is closed: one flat mapping,
-keys from a fixed set, each value a plain or quoted scalar on one line. Anything outside that shape
-fails and names what it saw, so an author introducing a new value form is told to extend the checker
-rather than passing unnoticed.
+The supported shape is one flat mapping with keys from a fixed set and each value a plain or quoted
+scalar on one line. Anything outside that shape fails and names what it saw, so an author introducing
+a new value form is told to extend the checker rather than passing unnoticed.
 
 | Rule | Detail |
 |---|---|

@@ -222,7 +222,7 @@ From a local clone (Tier 1, sources: `source.ts` and `marketplace.ts`, verified 
 - `*/SKILL.md` at root level
 - `plugins/{scope}/skills/*/SKILL.md`
 
-`gh skill install --help` states discovery follows the agentskills.io `skills/*/SKILL.md` convention "including when the `skills/` directory is nested under a prefix", and that an exact repository path "avoids a full tree traversal of the repository" (Tier 1, source: `gh skill install --help`, verified). The traversal shortcut matters for a repository with 605 skills.
+`gh skill install --help` states discovery follows the agentskills.io `skills/*/SKILL.md` convention "including when the `skills/` directory is nested under a prefix", and that an exact repository path "avoids a full tree traversal of the repository" (Tier 1, source: `gh skill install --help`, verified). The traversal shortcut matters for a repository with 657 skills.
 
 ### Publish validation
 
