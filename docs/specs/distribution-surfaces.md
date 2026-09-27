@@ -277,7 +277,7 @@ The current layout satisfies all five surfaces from one tree (Tier 1, source: re
 │       ├── .grok-plugin/plugin.json     # Grok manifest
 │       ├── .kimi-plugin/plugin.json     # Kimi manifest, skills declared
 │       ├── mcp.json                     # optional; only odin-core ships one
-│       └── skills/<slug>/SKILL.md       # 543 skills total
+│       └── skills/<slug>/SKILL.md       # 657 skills total
 ├── catalog/                             # registry and membership data
 ├── scripts/                             # dependency-free Node ESM and stdlib Python
 ├── Justfile                             # render, check, validate-skills, verify

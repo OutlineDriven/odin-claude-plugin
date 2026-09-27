@@ -83,7 +83,7 @@ description: 'Use when a user wants agent setup graded from conversation history
 
 8. **Verify report.**
    - Confirm report.html exists in the output directory.
-   - Confirm it contains the score summary. Require at least one finding and one suggestion unless the session was too short or had no history (the early-termination minimal report), or every scored sub-score is at maximum (the full report contains the score summary but no findings or suggestions).
+   - Confirm it contains the score summary. Require at least one finding and one suggestion unless the session was too short or had no history (the early-termination minimal report), the transcript was unparseable and no turns were decoded (the parsing-error report), or every scored sub-score is at maximum (the full report contains the score summary but no findings or suggestions).
    Done when: report.html exists and contains the required sections.
 
 ## Failure and recovery

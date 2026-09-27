@@ -25,9 +25,11 @@ whole tree on every commit no matter which files were touched. Expect the full s
 seconds.
 
 The scripts need no package manager. Every `.mjs` imports `node:` builtins only and every `.py`
-imports the standard library only. `sync-outline-skills.mjs` and `check-voice.py` also invoke the
-external `git` executable when querying the repository index, so those runs require Git on `PATH`.
-The commands below run directly when `prek` or `just` is absent:
+imports the standard library only. `sync-outline-skills.mjs`, `check-voice.py`, and
+`check-skill-scripts.py` invoke the external `git` executable when querying the repository index
+or tracked files, so those runs require Git on `PATH`. `check-skill-scripts.py` also runs
+`bash -n` over tracked shell scripts, so it requires Bash on `PATH`. The commands below run directly
+when `prek` or `just` is absent:
 
 ```shell
 node scripts/check-plugin-surfaces.mjs
@@ -191,7 +193,7 @@ The name-parity rule exists because Codex resolves a plugin's namespace from the
 alone. Five manifests with different names load one plugin's components under another's namespace,
 and nothing else reports it.
 
-Passing output: `plugin surfaces ok: 28 plugins, 543 skills`.
+Passing output: `plugin surfaces ok: 28 plugins, 657 skills`.
 
 ### check-skill-routes.mjs
 
