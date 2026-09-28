@@ -66,7 +66,8 @@ description: 'Use when asked to build, run, or triage a coverage-guided C/C++ fu
 
 7. **Reproduce the crash.** libfuzzer: re-run the binary directly on the artifact: `<binary> ./crash-<hash>`. Mode `afl`: replay each crash using the input mode recorded for the campaign: for stdin targets, `./fuzz < <instance_dir>/crashes/<id>`; for file targets, replace `@@` in the campaign target command with `<instance_dir>/crashes/<id>` (for example, `./fuzz <instance_dir>/crashes/<id>`). Verify the same sanitizer error or signal recurs. If it does not, check for non-determinism in the harness or target (remove random-number generators and uninitialized-memory reads). Done when: the crash reproduces with identical sanitizer output or signal, or non-determinism is identified.
 
-8. **Minimize and report.** Mode `afl`: minimize the corpus to unique coverage with ````
+8. **Minimize and report.** Mode `afl`: minimize the corpus to unique coverage with:
+```
 afl-cmin -i out/default/queue -o minimized_corpus -- <target-command>
 ```
 in single-core mode, or `afl-cmin -i state/primary/queue -o minimized_corpus -- <target-command>` in the multi-core mode; use the same stdin/`@@` target-command form as step 5.`, then stop only the recorded campaign PIDs from step 5. Both engines: state the artifact path, the sanitizer violation type or signal, and whether reproduction succeeded. Done when: the report states artifact path, violation type, and reproduction result, and afl processes are stopped.
