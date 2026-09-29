@@ -1,3 +1,5 @@
 interface:
   display_name: "Reproduce Bug Report"
   short_description: "Use when a bug report or UI-visible defect exists."
+policy:
+  allow_implicit_invocation: false

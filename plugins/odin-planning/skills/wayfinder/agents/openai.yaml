@@ -1,3 +1,5 @@
 interface:
   display_name: "Wayfinder"
   short_description: "Use when a greenfield project or large feature build will not fit in a single agent session."
+policy:
+  allow_implicit_invocation: false

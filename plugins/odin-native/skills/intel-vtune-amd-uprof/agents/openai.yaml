@@ -1,3 +1,5 @@
 interface:
   display_name: "Intel Vtune Amd Uprof"
   short_description: "Use when profiling with Intel VTune or AMD uProf for hotspots, top-down pipeline stalls, memory-bound analysis, or roofline data."
+policy:
+  allow_implicit_invocation: false

@@ -1,3 +1,5 @@
 interface:
   display_name: "Multi Tenant Architecture"
   short_description: "Use when a request concerns multi-tenant scaffolding, tenant isolation, domain wiring, or SaaS architecture on Cloudflare or Vercel."
+policy:
+  allow_implicit_invocation: false

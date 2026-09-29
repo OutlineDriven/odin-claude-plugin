@@ -1,3 +1,5 @@
 interface:
   display_name: "Behavior Validator"
   short_description: "Use when asked to validate a web app, CLI, API, or generated artifact against a source-blind behavior contract."
+policy:
+  allow_implicit_invocation: false

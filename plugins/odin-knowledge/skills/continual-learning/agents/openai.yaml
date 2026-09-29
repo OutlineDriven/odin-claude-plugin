@@ -1,3 +1,5 @@
 interface:
   display_name: "Continual Learning"
   short_description: "Use when asked to mine prior chats on a scheduled or watcher tick and maintain project memory."
+policy:
+  allow_implicit_invocation: false

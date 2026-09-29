@@ -58,9 +58,10 @@ description: 'Use when collecting sampling profiles with perf record, reading pe
        for (int i = 0; i < 4; i++)
            if (PAPI_add_event(set, events[i]) != PAPI_OK) return 1;
 
-       PAPI_start(set);
+       if (PAPI_start(set) != PAPI_OK) return 1;
        do_work();
-       PAPI_stop(set, values);
+       if (PAPI_stop(set, values) != PAPI_OK) return 1;
+       if (values[1] == 0) return 1;
 
        printf("IPC %.2f  L2 misses %lld  branch mispredicts %lld\n",
               (double)values[0] / values[1], values[2], values[3]);

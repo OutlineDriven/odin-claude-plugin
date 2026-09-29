@@ -1,3 +1,5 @@
 interface:
   display_name: "Burpsuite Project Parser"
   short_description: "Use when asked to analyze a Burp Suite .burp project for audit items, request/response metadata, or captured traffic."
+policy:
+  allow_implicit_invocation: false

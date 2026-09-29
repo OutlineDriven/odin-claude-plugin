@@ -1,3 +1,5 @@
 interface:
   display_name: "Land Contribution"
   short_description: "Use when a maintainer or collaborator explicitly asks to review and land one external pull request."
+policy:
+  allow_implicit_invocation: false

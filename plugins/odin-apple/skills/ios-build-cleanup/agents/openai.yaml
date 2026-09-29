@@ -1,3 +1,5 @@
 interface:
   display_name: "Ios Build Cleanup"
   short_description: "Use when the user wants a clean Xcode rebuild by deleting DerivedData and build artifacts."
+policy:
+  allow_implicit_invocation: false

@@ -1,3 +1,5 @@
 interface:
   display_name: "Rust Formal Verification"
   short_description: "Use when Rust code, especially unsafe or panic-critical paths, needs a Kani, Verus, or Creusot harness written, run, and its failure read."
+policy:
+  allow_implicit_invocation: false

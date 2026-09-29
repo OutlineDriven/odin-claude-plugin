@@ -1,3 +1,5 @@
 interface:
   display_name: "Multi Agent Tournament Scorecard"
   short_description: "Use when agent strategies need a reproducible finite tournament under a frozen evaluation protocol."
+policy:
+  allow_implicit_invocation: false

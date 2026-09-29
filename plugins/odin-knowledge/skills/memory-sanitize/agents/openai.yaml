@@ -1,3 +1,5 @@
 interface:
   display_name: "Memory Sanitize"
   short_description: "Use when the user asks to sanitize memory for sharing, redact PII, or scan memory for credentials."
+policy:
+  allow_implicit_invocation: false

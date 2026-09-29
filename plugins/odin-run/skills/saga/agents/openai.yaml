@@ -1,3 +1,5 @@
 interface:
   display_name: "Saga"
   short_description: "Use when a user runs saga or asks to autonomously build a sizable feature."
+policy:
+  allow_implicit_invocation: false

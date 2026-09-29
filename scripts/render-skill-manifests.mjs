@@ -3,6 +3,7 @@
 //   display_name      = title-cased frontmatter name with an in-script acronym table
 //   short_description = first sentence of the description, emitted whole so it reads
 //                       as a complete phrase ending in terminal punctuation.
+//   policy.allow_implicit_invocation = false when disable-model-invocation is true.
 // The 64-char ceiling the generator once imposed is a local choice, not an Agent Plugins
 // requirement: the Codex skill parser (codex-rs/skills/src/interface.rs) resolves
 // interface.short_description against MAX_DESCRIPTION_LEN = 1024 and only warns above
@@ -112,10 +113,15 @@ function renderManifest(slug) {
   if (!fm.name) throw new Error(`${slug}: frontmatter has no name`);
   const display_name = titleCaseName(fm.name);
   const short_description = shortDescriptionFrom(fm.description);
+  const policy =
+    fm["disable-model-invocation"] === "true"
+      ? `policy:\n  allow_implicit_invocation: false\n`
+      : "";
   const yaml =
     `interface:\n` +
     `  display_name: ${JSON.stringify(display_name)}\n` +
-    `  short_description: ${JSON.stringify(short_description)}\n`;
+    `  short_description: ${JSON.stringify(short_description)}\n` +
+    policy;
   return { slug, dir, display_name, short_description, yaml };
 }
 

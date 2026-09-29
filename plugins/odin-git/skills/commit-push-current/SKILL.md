@@ -1,6 +1,6 @@
 ---
 name: commit-push-current
-description: 'Use when a human explicitly asks to commit and push to the checked-out branch, including directly to the default branch, with no branch creation and no pull request. Not for a feature branch off the default: use commit-push-pr in its no-PR mode.'
+description: 'Use when a human asks to commit and push, not publish, the checked-out branch, including directly to the default branch, with no branch creation and no pull request. Not for a feature branch off the default: use commit-push-pr in its no-PR mode.'
 disable-model-invocation: true
 ---
 

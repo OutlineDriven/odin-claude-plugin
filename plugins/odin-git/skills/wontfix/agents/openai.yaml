@@ -1,3 +1,5 @@
 interface:
   display_name: "Wontfix"
   short_description: "Use when the user wants to elicit refused directions, generalize them, and close matching tracker items as not planned."
+policy:
+  allow_implicit_invocation: false

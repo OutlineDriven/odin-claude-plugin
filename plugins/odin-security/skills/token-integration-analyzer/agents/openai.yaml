@@ -1,3 +1,5 @@
 interface:
   display_name: "Token Integration Analyzer"
   short_description: "Use when a token implementation or integration needs standards, privilege, nonstandard-behavior, and defensive-integration analysis."
+policy:
+  allow_implicit_invocation: false

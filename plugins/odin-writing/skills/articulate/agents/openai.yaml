@@ -1,3 +1,5 @@
 interface:
   display_name: "Articulate"
   short_description: "Use when the user knows what they mean but cannot express it completely or clearly."
+policy:
+  allow_implicit_invocation: false

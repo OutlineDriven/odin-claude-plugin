@@ -1,3 +1,5 @@
 interface:
   display_name: "Scheduler"
   short_description: "Use when asked to set, list, pause, update, or delete a reminder or local task that fires at a confirmed time or interval."
+policy:
+  allow_implicit_invocation: false

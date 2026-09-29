@@ -1,3 +1,5 @@
 interface:
   display_name: "Catchup"
   short_description: "Use when the human returns after a gap, cannot follow the project, asks what happened, or wants a visual HTML recap page."
+policy:
+  allow_implicit_invocation: false

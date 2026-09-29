@@ -7,42 +7,71 @@ copy cannot be replaced by a pointer -- it has to be embedded, and therefore gen
 
 The cascade starts at the file's SECOND `<role>` line: the first opens the persona voice,
 the second opens the canonical charter.
-"""
 
-from __future__ import annotations
+Byte-exact throughout: text-mode reads translate platform newlines, so a CRLF-only change
+would compare equal to the expected bytes and survive a rewrite. Every read, compare, and
+write uses raw bytes; each raw input is decoded once to keep strict UTF-8 validation.
+"""
 
 import argparse
 import sys
+import traceback
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 CANONICAL = REPO_ROOT / "system-prompt-baseline.md"
 STYLES_DIR = REPO_ROOT / "plugins" / "odin-core" / "output-styles"
-ROLE_LINE = "<role>"
+ROLE_LINE = b"<role>"
 
 
 class CascadeError(Exception):
     """A style file does not have the structure the generator requires."""
 
 
-def split_preamble(path: Path) -> str:
+def read_utf8_bytes(path: Path) -> bytes:
+    """Return the file's raw bytes, failing on invalid UTF-8."""
+    raw = path.read_bytes()
+    raw.decode("utf-8")
+    return raw
+
+
+def split_preamble(path: Path) -> bytes:
     """Return everything before the style's cascade region.
 
     Raises CascadeError when the file lacks the two `<role>` lines the layout requires,
     rather than silently emitting a file with no persona or a doubled charter.
     """
-    lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
-    role_indices = [i for i, line in enumerate(lines) if line.rstrip("\r\n") == ROLE_LINE]
+    lines = read_utf8_bytes(path).splitlines(keepends=True)
+    role_indices = [i for i, line in enumerate(lines) if line.rstrip(b"\r\n") == ROLE_LINE]
     if len(role_indices) < 2:
         raise CascadeError(
-            f"{path.relative_to(REPO_ROOT)}: found {len(role_indices)} '{ROLE_LINE}' line(s), "
+            f"{path.relative_to(REPO_ROOT)}: found {len(role_indices)} '<role>' line(s), "
             "need at least 2 (persona voice, then canonical charter)"
         )
-    return "".join(lines[: role_indices[1]])
+    return b"".join(lines[: role_indices[1]])
 
 
-def render(path: Path, canonical: str) -> str:
+def render(path: Path, canonical: bytes) -> bytes:
     return split_preamble(path) + canonical
+
+
+def drifted_from_canonical(path: Path, canonical: bytes) -> bool:
+    """Return True when one style's bytes differ from the expected cascade."""
+    return read_utf8_bytes(path) != render(path, canonical)
+
+
+def check_one(path: Path, canonical: bytes) -> bool:
+    """Report drift for one style without writing."""
+    return drifted_from_canonical(path, canonical)
+
+
+def sync_one(path: Path, canonical: bytes) -> bool:
+    """Rewrite one style when it drifted. Return True when it differed."""
+    if not drifted_from_canonical(path, canonical):
+        return False
+    path.write_bytes(render(path, canonical))
+    print(f"synced {path.relative_to(REPO_ROOT)}")
+    return True
 
 
 def main() -> int:
@@ -64,7 +93,7 @@ def main() -> int:
         print(f"error: canonical baseline missing at {CANONICAL}", file=sys.stderr)
         return 2
     try:
-        canonical = CANONICAL.read_text(encoding="utf-8")
+        canonical = read_utf8_bytes(CANONICAL)
     except (OSError, UnicodeDecodeError) as err:
         # A crashed run must not share the rewrite exit 1, which the
         # render recipe treats as success.
@@ -80,18 +109,14 @@ def main() -> int:
     drifted: list[str] = []
     for path in targets:
         try:
-            expected = render(path, canonical)
-            drifted_now = path.read_text(encoding="utf-8") != expected
-            if drifted_now and not args.check:
-                path.write_text(expected, encoding="utf-8")
-                print(f"synced {path.relative_to(REPO_ROOT)}")
+            changed = check_one(path, canonical) if args.check else sync_one(path, canonical)
+            if changed:
+                drifted.append(str(path.relative_to(REPO_ROOT)))
         except (CascadeError, OSError, UnicodeDecodeError) as err:
             # A crashed run must not share the rewrite exit 1, which the
             # render recipe treats as success.
             print(f"error: {err}", file=sys.stderr)
             return 2
-        if drifted_now:
-            drifted.append(str(path.relative_to(REPO_ROOT)))
 
     if not drifted:
         return 0
@@ -108,4 +133,10 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    try:
+        sys.exit(main())
+    except Exception:
+        # Exit 1 is the re-stage convention; an unhandled exception must never
+        # share it, so convert every crash to the hard-fail code the recipe rejects.
+        traceback.print_exc()
+        sys.exit(2)

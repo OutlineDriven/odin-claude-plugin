@@ -31,7 +31,7 @@ The claim or artifact under pressure must be supplied. Candidate failure modes m
 
 ## Failure and recovery
 - Duplicate failure modes: merge the lenses before running. Never run two lenses over the same failure mode and present their agreement as independent confirmation.
-- No disagreement: do not manufacture disagreement to look thorough. If every lens agrees, set the resolving question to none; if only cannot-decide lenses remain, set it to the question from step 6 that lets them decide.
+- No disagreement: do not manufacture disagreement to look thorough. If every lens agrees, set the resolving question to none; if no lens disagrees and at least one lens cannot-decide, set it to the question from step 6 that lets them decide.
 - A lens cannot decide: record cannot-decide with its reason. Do not coerce it into agrees or disagrees.
 - A lens does not complete: return the partial picture, name the lens that did not complete, and mark its verdict cannot-decide. This skill reads only; on any error, it returns the partial picture and never edits the artifact or any file.
 

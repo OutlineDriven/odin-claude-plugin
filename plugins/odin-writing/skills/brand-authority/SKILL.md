@@ -29,7 +29,7 @@ disable-model-invocation: true
 5. In the delivered result, state the material brand constraints that shaped the output (e.g., a specific palette, type scale, voice rule, or naming convention that determined a choice). Done when: the material constraints are stated in the result.
 
 ## Failure and recovery
-- Authority unreachable or empty: state that the canonical brand authority was unavailable and ask the user whether to proceed with best-effort guidance or to retry the fetch. Do not fabricate brand rules and present them as authoritative.
+- Authority unreachable or empty: state that the canonical brand authority was unavailable and ask the user to retry the fetch or provide another authority source. Do not produce a branded deliverable until the authority has been fetched; do not fabricate brand rules and present them as authoritative.
 - Ambiguous deliverable request: ask for clarification before writing; do not guess scope.
 - **Partial result:** never ship a deliverable that claims brand authority it did not actually fetch. If you extracted only some guidance, apply only that guidance and note the gap.
 - Non-mutation: the hosted or local authority is read-only; recovery from a wrong local deliverable is overwrite or delete of that local file only.

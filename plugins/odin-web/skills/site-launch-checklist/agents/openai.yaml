@@ -1,3 +1,5 @@
 interface:
   display_name: "Site Launch Checklist"
   short_description: "Use when a user says a site or app is ready to ship and wants a decision-gated pre-launch readiness pass."
+policy:
+  allow_implicit_invocation: false

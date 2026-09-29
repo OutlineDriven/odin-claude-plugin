@@ -1,3 +1,5 @@
 interface:
   display_name: "Close Done"
   short_description: "Use when the user wants to batch-close resolved or outdated tracker items."
+policy:
+  allow_implicit_invocation: false

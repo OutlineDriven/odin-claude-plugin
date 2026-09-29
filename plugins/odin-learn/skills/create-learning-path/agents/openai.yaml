@@ -1,3 +1,5 @@
 interface:
   display_name: "Create Learning Path"
   short_description: "Use when asked to create a multi-session learning plan."
+policy:
+  allow_implicit_invocation: false

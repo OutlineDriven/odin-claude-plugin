@@ -41,4 +41,4 @@ disable-model-invocation: true
 
 ## Output
 
-A terminal classification (`success`, `capped`, `stalled`, `blocked`, `exhausted`, or `pending`) plus the per-target frame-time, CPU, GPU, and memory evidence from both consecutive runs, the sampling window, comparability rules, and the run receipt.
+A terminal classification (`success`, `capped`, `stalled`, or `blocked`) plus the per-target frame-time, CPU, GPU, and memory evidence from both consecutive runs, the sampling window, comparability rules, and the run receipt.

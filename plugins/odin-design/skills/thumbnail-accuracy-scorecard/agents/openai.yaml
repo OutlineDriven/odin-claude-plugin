@@ -1,3 +1,5 @@
 interface:
   display_name: "Thumbnail Accuracy Scorecard"
   short_description: "Use when thumbnail concepts need real-size, accuracy-first scoring without misleading claims."
+policy:
+  allow_implicit_invocation: false

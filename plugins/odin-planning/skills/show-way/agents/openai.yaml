@@ -1,3 +1,5 @@
 interface:
   display_name: "Show Way"
   short_description: "Use when the user asks for a flattened view of roadmaps and next actions."
+policy:
+  allow_implicit_invocation: false

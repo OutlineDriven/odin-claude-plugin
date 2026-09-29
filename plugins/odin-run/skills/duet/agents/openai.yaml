@@ -1,3 +1,5 @@
 interface:
   display_name: "Duet"
   short_description: "Use when the user invokes /duet, says pair on this, or faces aesthetic, architectural, or irreversible decisions."
+policy:
+  allow_implicit_invocation: false

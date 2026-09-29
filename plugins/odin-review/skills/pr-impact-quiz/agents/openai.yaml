@@ -1,3 +1,5 @@
 interface:
   display_name: "PR Impact Quiz"
   short_description: "Use when the user invokes this skill to generate targeted questions proving the author understands the change's codebase effect."
+policy:
+  allow_implicit_invocation: false

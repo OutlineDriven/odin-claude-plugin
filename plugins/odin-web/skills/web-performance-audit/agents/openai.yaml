@@ -1,3 +1,5 @@
 interface:
   display_name: "Web Performance Audit"
   short_description: "Use when asked to audit, profile, or debug page load performance, Lighthouse scores, or site speed."
+policy:
+  allow_implicit_invocation: false

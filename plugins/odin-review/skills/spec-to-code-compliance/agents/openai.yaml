@@ -1,3 +1,5 @@
 interface:
   display_name: "Spec To Code Compliance"
   short_description: "Use when implementation must be checked against an authoritative specification, or during PR review for spec drift against checked-in specs."
+policy:
+  allow_implicit_invocation: false

@@ -1,3 +1,5 @@
 interface:
   display_name: "Keep Why Repo Structure"
   short_description: "Use when project documentation needs a layout or a knowledge item needs one home."
+policy:
+  allow_implicit_invocation: false

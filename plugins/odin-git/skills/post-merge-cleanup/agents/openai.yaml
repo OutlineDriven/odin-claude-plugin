@@ -1,3 +1,5 @@
 interface:
   display_name: "Post Merge Cleanup"
   short_description: "Use when a landed merge, release, or completed change needs its cleanup surface reconciled."
+policy:
+  allow_implicit_invocation: false

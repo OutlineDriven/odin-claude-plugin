@@ -1,3 +1,5 @@
 interface:
   display_name: "Insecure Default Discovery"
   short_description: "Use when the user asks to audit a file, subtree, or repository for fallback secrets, default credentials, fail-open controls, weak primitives, or permissive access."
+policy:
+  allow_implicit_invocation: false

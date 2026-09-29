@@ -1,3 +1,5 @@
 interface:
   display_name: "Cascade Dedup"
   short_description: "Use when prompt-doctrine is duplicated, drifted, or conflicting across output-style embeds and external harness AGENTS files."
+policy:
+  allow_implicit_invocation: false

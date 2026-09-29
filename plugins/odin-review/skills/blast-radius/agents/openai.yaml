@@ -1,3 +1,5 @@
 interface:
   display_name: "Blast Radius"
   short_description: "Use when asked to determine what a change could break before it ships."
+policy:
+  allow_implicit_invocation: false

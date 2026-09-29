@@ -1,3 +1,5 @@
 interface:
   display_name: "Keep Why Maintenance"
   short_description: "Use when contradictions, revisit conditions, or duplicates appear in knowledge entries."
+policy:
+  allow_implicit_invocation: false

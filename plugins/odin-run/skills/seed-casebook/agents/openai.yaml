@@ -1,3 +1,5 @@
 interface:
   display_name: "Seed Casebook"
   short_description: "Use when a user opens a build cycle in a repo with an iteration convention and wants the casebook seeded with real content."
+policy:
+  allow_implicit_invocation: false

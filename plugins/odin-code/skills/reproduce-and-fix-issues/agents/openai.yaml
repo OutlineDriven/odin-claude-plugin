@@ -1,3 +1,5 @@
 interface:
   display_name: "Reproduce And Fix Issues"
   short_description: "Use when a trusted bug or performance report needs reproduction and fix."
+policy:
+  allow_implicit_invocation: false

@@ -1,3 +1,5 @@
 interface:
   display_name: "Device Drivers"
   short_description: "Use when writing or debugging Linux drivers: platform, I2C/SPI, device-tree, char-device, IRQ, DMA, regmap, PM, sysfs, udev, NACK, -EREMOTEIO, or probe failures."
+policy:
+  allow_implicit_invocation: false

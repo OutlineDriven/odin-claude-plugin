@@ -1,3 +1,5 @@
 interface:
   display_name: "History Notes"
   short_description: "Use when the user says remember this or settles one durable fact."
+policy:
+  allow_implicit_invocation: false

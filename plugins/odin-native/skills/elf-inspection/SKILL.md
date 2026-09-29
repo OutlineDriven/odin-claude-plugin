@@ -177,20 +177,34 @@ Done when: the link succeeds with LTO or the incompatible code is identified.
 
 ```c
 #include <seccomp.h>
-
-void apply_seccomp_filter(void) {
+int apply_seccomp_filter(void) {
+    int ret;
     scmp_filter_ctx ctx = seccomp_init(SCMP_ACT_KILL_PROCESS);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(read), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(write), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(exit_group), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(brk), 0);
-    seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(mmap), 0);
-    seccomp_load(ctx);
+    if (ctx == NULL)
+        return -1;
+    ret = seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(read), 0);
+    if (ret != 0)
+        goto out;
+    ret = seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(write), 0);
+    if (ret != 0)
+        goto out;
+    ret = seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(exit_group), 0);
+    if (ret != 0)
+        goto out;
+    ret = seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(brk), 0);
+    if (ret != 0)
+        goto out;
+    ret = seccomp_rule_add(ctx, SCMP_ACT_ALLOW, SCMP_SYS(mmap), 0);
+    if (ret != 0)
+        goto out;
+    ret = seccomp_load(ctx);
+out:
     seccomp_release(ctx);
+    return ret;
 }
 ```
 
-Build the allowlist from measurement, not guesswork: `strace -c ./prog` counts the syscalls actually used, and `strace ./prog` confirms nothing dies with SIGSYS after the filter lands. Done when: the program runs its real workload under the filter.
+Call `apply_seccomp_filter()` after initialization and abort startup if it returns nonzero; do not continue without the filter. Build the allowlist from measurement, not guesswork: `strace -c ./prog` counts the syscalls actually used, and `strace ./prog` confirms nothing dies with SIGSYS after the filter lands. Done when: the program runs its real workload under the filter.
 
 ## Failure and recovery
 

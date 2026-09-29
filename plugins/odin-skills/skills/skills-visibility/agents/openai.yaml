@@ -1,3 +1,5 @@
 interface:
   display_name: "Skills Visibility"
   short_description: "Use when a publisher wants a discoverable, integrity-protected agent-skill catalog served from a domain they control."
+policy:
+  allow_implicit_invocation: false

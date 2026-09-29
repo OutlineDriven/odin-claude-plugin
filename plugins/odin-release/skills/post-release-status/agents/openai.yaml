@@ -1,3 +1,5 @@
 interface:
   display_name: "Post Release Status"
   short_description: "Use when a user asks to post, update, or check cherry-pick status for a release as a single Slack Block Kit board."
+policy:
+  allow_implicit_invocation: false

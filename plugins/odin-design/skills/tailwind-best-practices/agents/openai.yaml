@@ -1,3 +1,5 @@
 interface:
   display_name: "Tailwind Best Practices"
   short_description: "Use when writing, editing, cleaning, or refactoring Tailwind classes, components, or configuration."
+policy:
+  allow_implicit_invocation: false

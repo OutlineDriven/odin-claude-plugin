@@ -1,3 +1,5 @@
 interface:
   display_name: "Entropy Assisted Planning"
   short_description: "Use when the user explicitly requests a Tarot draw or casually delegates an ambiguous choice among multiple valid approaches."
+policy:
+  allow_implicit_invocation: false

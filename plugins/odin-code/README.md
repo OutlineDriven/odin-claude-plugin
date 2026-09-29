@@ -54,7 +54,7 @@ Each row states when to reach for the skill. Invoke one as `/odin-code:<name>` i
 | minimalism-driven | Use when writing or restructuring code, before adding a helper, wrapper, config key, or dependency, or when the user asks for minimal or DRY code. |
 | no-comments | Use when asked to audit comments in code files and propose structural replacements or deletions with per-candidate approval. |
 | offense | Use when a human says "overhaul", "rebuild this subsystem", or "rewrite it from scratch". |
-| optimize | Use when asked to optimize code, make a path faster, make this as fast as possible, reduce allocations, repair a regression, profile a target, grill every inefficiency, or run a subsystem or repo-wide performance campaign against a measured floor; when a performance requirement, slowness report, Core Web Vitals miss, or profiling evidence identifies a bottleneck; or for an "extremely optimize" performance campaign, optimizing suspected hot paths without waiting for benchmarks, or estimating hot and complexity-neutral cold paths while refusing complexity theater. |
+| optimize | Use when asked to optimize code, reduce allocations, profile a target, or investigate a performance regression or measured bottleneck. |
 | principles | Use when a request names a working principle (subtract before you add, idempotent operations, never block on the human) or asks which principle applies. |
 | refactor-break-compat | Use when modernizing APIs, removing compat shims, killing feature flags, or rewriting a subsystem cleanly. |
 | reproduce-and-fix-issues | Use when a trusted bug or performance report needs reproduction and fix. |

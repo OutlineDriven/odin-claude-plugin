@@ -1,3 +1,5 @@
 interface:
   display_name: "AI Collab Protocols"
   short_description: "Use when the user describes an AI workflow gap or uses an ambiguous cross-session reference such as 'the PR Bob mentioned'."
+policy:
+  allow_implicit_invocation: false

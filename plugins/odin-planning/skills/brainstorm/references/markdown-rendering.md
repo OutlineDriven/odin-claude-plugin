@@ -82,15 +82,15 @@ The agent picks more elaborate or simpler shapes based on what each specific art
 
 ## Diagrams
 
-When the section contract calls for a diagram (architecture, sequence, flowchart, state machine, swim lane, data-flow), author it per the `diagramming-code` skill: a Mermaid source in `assets/` beside the document, rendered to a committed SVG and embedded with a caption.
+When the section contract calls for a diagram (architecture, sequence, flowchart, state machine, swim lane, data-flow), author it per the `diagramming-code` skill: write Mermaid source and rendered artifacts to the selected output directory, then embed the SVG with a caption.
 
 ````markdown
-![Approval path from draft to publish](assets/approval-path.svg)
+![Approval path from draft to publish](diagrams/approval-path.svg)
 
 > A draft needs one reviewer; anything touching billing needs two.
 ````
 
-The source that produced it lives at `assets/approval-path.noml` and is committed with the SVG.
+The source that produced it lives at `diagrams/approval-path.mmd` alongside the rendered SVG and PNG.
 
 Markdown's diagram affordances are limited compared to HTML. For quantitative comparisons (bar charts, scatter plots) markdown has no native equivalent, use a table with the data and let prose or caption carry the interpretation. The richer visualization happens in the HTML rendering.
 

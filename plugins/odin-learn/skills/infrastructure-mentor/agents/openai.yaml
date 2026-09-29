@@ -1,3 +1,5 @@
 interface:
   display_name: "Infrastructure Mentor"
   short_description: "Use when a user, especially a new hire, asks for mentoring, guidance, or explanation of infrastructure or engineering practices."
+policy:
+  allow_implicit_invocation: false

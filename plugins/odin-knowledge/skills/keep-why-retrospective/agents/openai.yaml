@@ -1,3 +1,5 @@
 interface:
   display_name: "Keep Why Retrospective"
   short_description: "Use when an existing repository needs its unexplained rationale recovered into topic files."
+policy:
+  allow_implicit_invocation: false

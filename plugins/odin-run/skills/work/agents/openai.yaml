@@ -1,3 +1,5 @@
 interface:
   display_name: "Work"
   short_description: "Use when implementing from a plan, spec, clear build request, or settled ticket, orchestrated or standalone."
+policy:
+  allow_implicit_invocation: false

@@ -1,3 +1,5 @@
 interface:
   display_name: "Linkedin Ghostwriting"
   short_description: "Use when a user gives a founder story or result and asks for a LinkedIn post with a chosen hook and humanized body."
+policy:
+  allow_implicit_invocation: false

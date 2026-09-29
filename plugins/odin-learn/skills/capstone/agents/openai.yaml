@@ -1,3 +1,5 @@
 interface:
   display_name: "Capstone"
   short_description: "Use when the learner is ready to apply cleared concepts in a real project."
+policy:
+  allow_implicit_invocation: false

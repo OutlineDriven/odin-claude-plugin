@@ -1,3 +1,5 @@
 interface:
   display_name: "Review Speedread"
   short_description: "Use when a human asks for the change shape before reading a diff."
+policy:
+  allow_implicit_invocation: false

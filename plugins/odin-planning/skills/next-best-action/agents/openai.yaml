@@ -1,3 +1,5 @@
 interface:
   display_name: "Next Best Action"
   short_description: "Use when a project is between phases, the author asks what to do next, too many threads are open, or work needs re-entry."
+policy:
+  allow_implicit_invocation: false

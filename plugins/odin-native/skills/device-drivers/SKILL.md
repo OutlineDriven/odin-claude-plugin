@@ -204,30 +204,41 @@ disable-model-invocation: true
    For SPI, set mode, word size, and transfer settings from the datasheet, call `spi_setup`, build a `spi_message`, call `spi_sync`, check its return, and register with `module_spi_driver`. Keep bulk-transfer buffers DMA-safe and `kmalloc`ed rather than on the stack. The SPI core may bounce small or non-DMA-safe buffers, but that adds a copy.
 
    ```c
-   static int spi_probe(struct spi_device *spi)
-   {
-       int ret;
-       u8 tx[2] = { 0 };
-       u8 rx[2];
-       struct spi_transfer transfer = {
-           .tx_buf = tx,
-           .rx_buf = rx,
-           .len = ARRAY_SIZE(tx),
-       };
-       struct spi_message message;
+#include <linux/errno.h>
+#include <linux/slab.h>
+#include <linux/spi/spi.h>
+#include <linux/types.h>
 
-       spi->mode = SPI_MODE_0;
-       spi->bits_per_word = 8;
-       ret = spi_setup(spi);
-       if (ret)
-           return ret;
-       spi_message_init(&message);
-       spi_message_add_tail(&transfer, &message);
-       ret = spi_sync(spi, &message);
-       if (ret)
-           return ret;
-       return 0;
-   }
+static int spi_probe(struct spi_device *spi)
+{
+    int ret;
+    u8 *tx = kmalloc(2, GFP_KERNEL);
+    u8 *rx = kmalloc(2, GFP_KERNEL);
+    struct spi_transfer transfer = {
+        .tx_buf = tx,
+        .rx_buf = rx,
+        .len = 2,
+    };
+    struct spi_message message;
+
+    if (!tx || !rx) {
+        ret = -ENOMEM;
+        goto out;
+    }
+    tx[0] = tx[1] = 0;
+    spi->mode = SPI_MODE_0;
+    spi->bits_per_word = 8;
+    ret = spi_setup(spi);
+    if (ret)
+        goto out;
+    spi_message_init(&message);
+    spi_message_add_tail(&transfer, &message);
+    ret = spi_sync(spi, &message);
+out:
+    kfree(rx);
+    kfree(tx);
+    return ret;
+}
    ```
 
 

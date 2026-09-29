@@ -1,3 +1,5 @@
 interface:
   display_name: "Watch For Structured"
   short_description: "Use when the user wants to classify a surface state and page an on-call API when triggered."
+policy:
+  allow_implicit_invocation: false

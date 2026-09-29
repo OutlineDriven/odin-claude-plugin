@@ -1,3 +1,5 @@
 interface:
   display_name: "Humansense2system"
   short_description: "Use when the user wants to compile taste and \"this feels wrong\" signals into machine-consumable tokens, rules, forbidden combinations, and examples."
+policy:
+  allow_implicit_invocation: false

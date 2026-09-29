@@ -1,3 +1,5 @@
 interface:
   display_name: "New Space"
   short_description: "Use when a user starts a new work session and asks to split human decisions from agent execution."
+policy:
+  allow_implicit_invocation: false

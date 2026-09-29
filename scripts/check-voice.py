@@ -37,7 +37,9 @@ from carriers import CARRIERS
 # senses in this tree, so the pattern targets only the filler sense:
 #   leverage  - the verb ("leverage the framework"), never Ousterhout's noun ("high leverage
 #               through a small interface"), which codebase-design uses as vocabulary
-#   underscore - the verb ("this underscores the point"), never the character name
+#   underscore - the verb ("this underscores the point"), never the character name; the
+#     plural counts only in verb shape (followed by a determiner, pronoun, or
+#     complement word), unlike leverage, whose objects stay determiner-headed
 # holistic and synergy join them: no sense of either earns a place here. robust stays out, because
 # Robustness is a finding-category label, and paradigm stays out, because the doctrine's design
 # block writes "Paradigms: Post-minimalism | Neo-brutalism" as its own vocabulary.
@@ -45,7 +47,7 @@ BANNED = re.compile(
     r"\b(delve[sd]?|delving"
     r"|leverages|leveraging|leverage(?=\s+(?:the|a|an|this|that|these|those|our|your|its|their|existing)\b)"
     r"|seamless(?:ly)?"
-    r"|underscores|underscoring|underscored"
+    r"|underscores(?=\s+(?:the|a|an|this|that|these|those|our|your|its|their|existing|it|them|each|every|both|how|why|whether|what)\b)|underscoring|underscored"
     r"|holistic(?:ally)?"
     r"|synerg(?:y|ies|istic))\b",
     re.I,
@@ -343,6 +345,10 @@ D1 = "**Discipline (defend at boundaries, trust interior, fail fast; ban slop, k
 D2 = "**Security (OWASP Top 10:2025, CWE Top 25 2025):**\n"
 S1 = "**Scope**: what this covers.\n"
 S2 = "**Response language:** All English.\n"
+U1 = "This underscores the point of the rule.\n"
+U2 = "The finding was underscored by two reviewers.\n"
+U3 = "Replace separators with underscores; strip dots, underscores, and hyphens.\n"
+U4 = "This underscores how the rule survives refactors.\n"
 
 SELF_TEST = (
     ("colon-bearing label with an internal colon is caught", D1 + D2, (True, "label")),
@@ -387,6 +393,16 @@ SELF_TEST = (
     ("two over-long colon-bearing labels are caught as a label run",
      "".join(f"**{w} {'padding ' * 18}:** value {i}.\n" for i, w in enumerate(("Scope", "Domain"))),
      (True, "label")),
+)
+
+# Vocabulary cases, driven against the compiled BANNED pattern so a later
+# refactor cannot silently trade the noun exemption for the verb ban.
+# Each case is (name, prose, want_caught).
+VOCAB_TEST = (
+    ("underscore verb with a determiner is caught", U1, True),
+    ("underscore passive verb is caught", U2, True),
+    ("underscore plural character name is clean", U3, False),
+    ("underscore verb with a complement clause is caught", U4, True),
 )
 
 
@@ -498,12 +514,19 @@ def self_test():
         detail = f"kind={kind}" if caught else "not caught"
         want = f"{want_kind} at its threshold" if want_caught else "clean"
         print(f"{'PASS' if ok else 'FAIL'}: {name} ({detail}, expected {want})")
+    for name, text, want_caught in VOCAB_TEST:
+        caught = any(True for _ in BANNED.finditer(prose_only(text)))
+        ok = caught == want_caught
+        failed += not ok
+        print(f"{'PASS' if ok else 'FAIL'}: {name} "
+              f"({'caught' if caught else 'not caught'}, "
+              f"expected {'caught' if want_caught else 'clean'})")
     for name, select, holds in TARGET_CASES:
         got = select()
         ok = holds(got)
         failed += not ok
         print(f"{'PASS' if ok else 'FAIL'}: {name} ({len(got)} path(s) selected)")
-    total = len(SELF_TEST) + len(TARGET_CASES)
+    total = len(SELF_TEST) + len(VOCAB_TEST) + len(TARGET_CASES)
     print(f"check-voice self-test: {total - failed}/{total} passed",
           file=sys.stderr if failed else sys.stdout)
     return 1 if failed else 0

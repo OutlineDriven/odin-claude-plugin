@@ -1,3 +1,5 @@
 interface:
   display_name: "To Questionnaire"
   short_description: "Use when user wants an async questionnaire, a discovery questionnaire, or a knowledge gap needs answers outside the repo."
+policy:
+  allow_implicit_invocation: false

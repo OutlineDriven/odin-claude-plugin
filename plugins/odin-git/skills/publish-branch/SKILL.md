@@ -1,6 +1,6 @@
 ---
 name: publish-branch
-description: 'Use when asked to publish the checked-out branch: commit and push it on whatever branch it is, the default branch included. Not for creating branches, PRs, force pushes, or pushing any other branch; when the request excludes the default branch, use commit-push-current.'
+description: 'Use when a human asks to publish, not commit and push, the checked-out branch: commit and push it on whatever branch it is, the default branch included. Not for creating branches, PRs, force pushes, or pushing any other branch.'
 disable-model-invocation: true
 ---
 
@@ -10,7 +10,7 @@ disable-model-invocation: true
 
 | Field | Bound contract |
 |---|---|
-| Trigger | User asks to commit and push to the branch currently checked out, including the default branch. |
+| Trigger | User asks to publish the branch currently checked out, including the default branch (not merely to commit and push it). |
 | Authority | Remote: pushes local commits to `origin/<current-branch>`; requires explicit human invocation. Invoking on the checked-out branch (including `main`/`master`) is explicit authorization to push to that branch. Preview the push target and consequence before pushing. |
 | Side effect | Creates local commits and pushes them to `origin/<current-branch>`. No branch creation, no branch switch, no force push, no PR. |
 | Done | Current branch is committed and pushed, or detached/diverged/no-origin state is reported without unsafe recovery. |

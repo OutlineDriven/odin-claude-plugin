@@ -1,3 +1,5 @@
 interface:
   display_name: "Review Plugin Submission"
   short_description: "Use when asked to review a plugin for marketplace readiness via a read-only audit of published quality gates."
+policy:
+  allow_implicit_invocation: false

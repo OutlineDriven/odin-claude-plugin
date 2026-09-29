@@ -8,8 +8,7 @@ comment. A PR with none of those skips the gate entirely.
 Every relative path here is written against the skill directory,
 `plugins/odin-git/skills/gate-and-merge/`, matching the convention in
 `plugins/odin-git/skills/resolve/SKILL.md`, which owns the merged review-feedback workflow.
-This file sits one level down in `references/`, so a reader who takes `../resolve/` as file-relative
-resolves it to the sibling skill directory.
+This file sits one level down in `references/`; read relative to this file, `../resolve/` points to the nonexistent `gate-and-merge/resolve/`, not the sibling `plugins/odin-git/skills/resolve/`.
 
 ## Enumerate before judging
 

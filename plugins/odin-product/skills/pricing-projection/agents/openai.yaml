@@ -1,3 +1,5 @@
 interface:
   display_name: "Pricing Projection"
   short_description: "Use when projecting cost, estimating BYO cost or spend, or sizing a deal."
+policy:
+  allow_implicit_invocation: false

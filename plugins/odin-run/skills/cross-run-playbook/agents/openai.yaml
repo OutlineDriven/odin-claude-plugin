@@ -1,3 +1,5 @@
 interface:
   display_name: "Cross Run Playbook"
   short_description: "Use when a long agentic project needs each cycle to end in a learning memo and a keep/iterate/restart decision."
+policy:
+  allow_implicit_invocation: false
