@@ -38,7 +38,8 @@ from carriers import CARRIERS
 #   leverage  - the verb ("leverage the framework"), never Ousterhout's noun ("high leverage
 #               through a small interface"), which codebase-design uses as vocabulary
 #   underscore - the verb ("this underscores the point"), never the character name; the
-#     plural counts only in verb shape (followed by a determiner), as with leverage
+#     plural counts only in verb shape (followed by a determiner, pronoun, or
+#     complement word), unlike leverage, whose objects stay determiner-headed
 # holistic and synergy join them: no sense of either earns a place here. robust stays out, because
 # Robustness is a finding-category label, and paradigm stays out, because the doctrine's design
 # block writes "Paradigms: Post-minimalism | Neo-brutalism" as its own vocabulary.
@@ -46,7 +47,7 @@ BANNED = re.compile(
     r"\b(delve[sd]?|delving"
     r"|leverages|leveraging|leverage(?=\s+(?:the|a|an|this|that|these|those|our|your|its|their|existing)\b)"
     r"|seamless(?:ly)?"
-    r"|underscores(?=\s+(?:the|a|an|this|that|these|those|our|your|its|their|existing)\b)|underscoring|underscored"
+    r"|underscores(?=\s+(?:the|a|an|this|that|these|those|our|your|its|their|existing|it|them|each|every|both|how|why|whether|what)\b)|underscoring|underscored"
     r"|holistic(?:ally)?"
     r"|synerg(?:y|ies|istic))\b",
     re.I,
@@ -347,6 +348,7 @@ S2 = "**Response language:** All English.\n"
 U1 = "This underscores the point of the rule.\n"
 U2 = "The finding was underscored by two reviewers.\n"
 U3 = "Replace separators with underscores; strip dots, underscores, and hyphens.\n"
+U4 = "This underscores how the rule survives refactors.\n"
 
 SELF_TEST = (
     ("colon-bearing label with an internal colon is caught", D1 + D2, (True, "label")),
@@ -400,6 +402,7 @@ VOCAB_TEST = (
     ("underscore verb with a determiner is caught", U1, True),
     ("underscore passive verb is caught", U2, True),
     ("underscore plural character name is clean", U3, False),
+    ("underscore verb with a complement clause is caught", U4, True),
 )
 
 
