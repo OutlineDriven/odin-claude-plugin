@@ -73,7 +73,7 @@ If `INTERNAL_REPO` or `NOTIFICATION_TOKEN` is unset, stop and ask before running
 
    Done when: the workflow dispatch exits zero and the dispatch timestamp is recorded.
 
-6. Fetch this dispatch's run and share its `url`, `status`, and `conclusion`; do not watch or wait for completion. Use the URL captured in `DISPATCH_URL` from step 5 to identify this run; do not infer identity from a timestamp or recent run-list order. Extract the run ID from that URL and query the exact ID. If the dispatch returned no URL or no run ID can be extracted, leave `RUN_URL` empty and use the existing “Dispatched but no run URL” failure path without notification. Done when: that exact run’s URL, status, and conclusion are fetched and shared.
+6. Fetch this dispatch's run and share its `url`, `status`, and `conclusion`; do not watch or wait for completion. Use the URL captured in `DISPATCH_URL` from step 5 to identify this run; do not infer identity from a timestamp or recent run-list order. Extract the run ID from that URL and query the exact ID. If the dispatch returned no URL or no run ID can be extracted, leave `RUN_URL` empty and use the existing "Dispatched but no run URL" failure path without notification. Done when: that exact run's URL, status, and conclusion are fetched and shared.
 
    ```bash
 RUN_ID=$(sed -nE 's#^.*/actions/runs/([0-9]+)(/.*)?$#\1#p' <<<"$DISPATCH_URL")
@@ -86,7 +86,7 @@ else
 fi
    ```
 
-   Guards: this uses only the URL returned by step 5, so a previous or concurrent run is never substituted. If no run URL or run ID is returned, leave `RUN_URL` empty and take the existing “Dispatched but no run URL” failure path; never notify on an unidentified run. Done when: the URL, status, and conclusion for this dispatch's run are fetched and shared.
+   Guards: this uses only the URL returned by step 5, so a previous or concurrent run is never substituted. If no run URL or run ID is returned, leave `RUN_URL` empty and take the existing "Dispatched but no run URL" failure path; never notify on an unidentified run. Done when: the URL, status, and conclusion for this dispatch's run are fetched and shared.
 
 7. Post the status notification carrying the branch name and run URL. Use the destination the user named. If the user gave no destination, stop and ask for one. Send the notification through the configured endpoint:
 
