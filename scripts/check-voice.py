@@ -37,7 +37,8 @@ from carriers import CARRIERS
 # senses in this tree, so the pattern targets only the filler sense:
 #   leverage  - the verb ("leverage the framework"), never Ousterhout's noun ("high leverage
 #               through a small interface"), which codebase-design uses as vocabulary
-#   underscore - the verb ("this underscores the point"), never the character name
+#   underscore - the verb ("this underscores the point"), never the character name; the
+#     plural counts only in verb shape (followed by a determiner), as with leverage
 # holistic and synergy join them: no sense of either earns a place here. robust stays out, because
 # Robustness is a finding-category label, and paradigm stays out, because the doctrine's design
 # block writes "Paradigms: Post-minimalism | Neo-brutalism" as its own vocabulary.
@@ -45,7 +46,7 @@ BANNED = re.compile(
     r"\b(delve[sd]?|delving"
     r"|leverages|leveraging|leverage(?=\s+(?:the|a|an|this|that|these|those|our|your|its|their|existing)\b)"
     r"|seamless(?:ly)?"
-    r"|underscores|underscoring|underscored"
+    r"|underscores(?=\s+(?:the|a|an|this|that|these|those|our|your|its|their|existing)\b)|underscoring|underscored"
     r"|holistic(?:ally)?"
     r"|synerg(?:y|ies|istic))\b",
     re.I,
